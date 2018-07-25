@@ -13,7 +13,7 @@ const jimp = require("jimp");
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
-client.user.setGame(`ζ͜͡Golden.`,"http://twitch.tv/S-F")
+client.user.setGame(`.A-GAYS`,"http://twitch.tv/S-F")
   console.log('')
   console.log('')
   console.log('╔[═════════════════════════════════════════════════════════════════]╗')
@@ -40,7 +40,7 @@ client.user.setGame(`ζ͜͡Golden.`,"http://twitch.tv/S-F")
 
 
 client.on('voiceStateUpdate', (old, now) => {
-  const channel = client.channels.get('468604127874646027');
+  const channel = client.channels.get('471810322601345024');
   const currentSize = channel.guild.members.filter(m => m.voiceChannel).size;
   const size = channel.name.match(/\[\s(\d+)\s\]/);
   if (!size) return channel.setName(`Voice Online: ${currentSize}`);
@@ -106,17 +106,11 @@ client.on("message", message => {
  
  ❖ $moveall  ➾ لسحب كل الناس الي رومك (تحذير : هذه الخاصيه يستخدمها فقط الاونر )
  
- ❖ $helprole  ➾ لتحكم في الرولات
+ ❖ $helprole  ➾ لرؤية اوامر الرولات
  
 ╔[❖════════════❖]╗
             General  Commands
 ╚[❖════════════❖]╝
-
- ❖ $level  ➾ لرؤيك لفلك
- 
-  ❖ $credit  ➾ رؤية الكريدت
-  
-  ❖ $daily  ➾ لرؤيك الدايلي
 
  ❖ $ping  ➾ لعرض سرعة الاتصال
 
@@ -466,6 +460,7 @@ function timeCon(time) {
 client.on('message', function(msg) {
 	const prefix = '$'
     if(msg.content.startsWith (prefix  + 'server')) {
+	    if(!message.guild.member(message.author).hasPermission("MANAGE_MSERVER"))
       let embed = new Discord.RichEmbed()
       .setColor('RANDOM')
       .setThumbnail(msg.guild.iconURL)
@@ -907,8 +902,9 @@ client.on('message', message => {
 .addField('     **اوامر الرولات** ' ,' **ــــــــــــــــــــــــــــ** ')
 .addField('     **$role <mention> <role name>** ' ,' **لاعطاء الرتبه للشخص** ')
 .addField('     **$roleRemove <mention> <role name>** ' ,' **الأيزالة الرتبه** ')
+.addField('     **$role humans <role name>** ' ,' **لعطاء الاشخاص رتبه** ')
+.addField('     **$role bots <role name>** ' ,' **لعطاء البوتات رتبه** ')
 .addField('     **$role all <role name> ** ' ,' **لاعطاء رتبه للكل** ')
-.addField('     **$role bots** ' ,' **لعطاء البوتات رتبه** ')
 .setColor('RANDOM')
   message.channel.sendEmbed(embed);
     }
@@ -1220,57 +1216,7 @@ client.on("message", message => {
 
 
 
-//كردت ودايلي
-const credits = JSON.parse(fs.readFileSync("./creditsCode.json", "utf8"));
-const coolDown = new Set();
 
-client.on('message',async message => {
-    
-if(message.author.bot) return;
-if(!credits[message.author.id]) credits[message.author.id] = {
-    credits: 50
-};
-
-let userData = credits[message.author.id];
-let m = userData.credits;
-
-fs.writeFile("./creditsCode.json", JSON.stringify(credits), (err) => {
-    if (err) console.error(err);
-  });
-  credits[message.author.id] = {
-      credits: m + 0.5,
-  }
-  
-    if(message.content.startsWith(prefix + "credit" || prefix + "credits")) {
-message.channel.send(`**${message.author.username}, your :credit_card: balance is \`\`${userData.credits}\`\`.**`);
-}
-});
-
-client.on('message', async message => {
-    let amount = 250;
-    if(message.content.startsWith(prefix + "daily")) {
-    if(message.author.bot) return;
-    if(coolDown.has(message.author.id)) return message.channel.send(`**:stopwatch: | ${message.author.username}, your daily :yen: credits refreshes in \`\`1 Day\`\`.**`);
-    
-    let userData = credits[message.author.id];
-    let m = userData.credits + amount;
-    credits[message.author.id] = {
-    credits: m
-    };
-
-    fs.writeFile("./creditsCode.json", JSON.stringify(userData.credits + amount), (err) => {
-    if (err) console.error(err);
-    });
-    
-    message.channel.send(`**:atm: | ${message.author.username}, you received your :yen: ${amount} credits!**`).then(() => {
-        coolDown.add(message.author.id);
-    });
-    
-    setTimeout(() => {
-       coolDown.remove(message.author.id);
-    },86400000);
-    }
-});
 
 
 
@@ -1363,7 +1309,7 @@ client.on('message', message => {
     if(!message.channel.guild) return message.channel.send('**هذا الأمر فقط للسيرفرات**').then(m => m.delete(5000));
   if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('**للأسف لا تمتلك صلاحية** `ADMINISTRATOR`' );
     let args = message.content.split(" ").join(" ").slice(2 + prefix.length);
-    let copy = "ζ͜͡Golden Community";
+    let copy = ".A-GAYS";
     if (!args) return message.reply('**يجب عليك كتابة كلمة او جملة لإرسال البرودكاست**');message.channel.send(`**هل أنت متأكد من إرسالك البرودكاست؟ \nمحتوى البرودكاست:** \` ${args}\``).then(msg => {
     msg.react('✅')
     .then(() => msg.react('❌'))
@@ -1672,7 +1618,7 @@ client.on("message", m =>{
 //الترحيب علي الخاص
 client.on("guildMemberAdd", member => {
   member.createDM().then(function (channel) {
-  return channel.send(`:rose:  ولكم نورت السيرفر:rose: 
+  return channel.send(`:rose: .A-GAYS ولكم نورت سيرفر  :rose: 
 :crown:اسم العضو  ${member}:crown:  
 انت العضو رقم ${member.guild.memberCount} `) 
 }).catch(console.error)
@@ -1725,6 +1671,7 @@ client.on('message', async msg => { // eslint-disable-line
 	command = command.slice(PREFIX.length)
 
 	if (command === `play`) {
+		if (message.member.hasPermission("MANAGE_MESSAGES"))
 		const voiceChannel = msg.member.voiceChannel;
 		if (!voiceChannel) return msg.channel.send('أنا آسف ولكن عليك أن تكون في قناة صوتية لتشغيل الموسيقى!');
 		const permissions = voiceChannel.permissionsFor(msg.client.user);
@@ -1752,7 +1699,7 @@ client.on('message', async msg => { // eslint-disable-line
 			} catch (error) {
 				try {
 					var videos = await youtube.searchVideos(searchString, 5);
-					let copy = "ζ͜͡Golden.";
+					let copy = ".A-GAYS";
 					let index = 0;
 					const embed1 = new Discord.RichEmbed()
 			        .setDescription(`**اختار رقم المقطع** :
@@ -1781,23 +1728,27 @@ ${videos.map(video2 => `[**${++index} **] \`${video2.title}\``).join('\n')}`)
 			return handleVideo(video, msg, voiceChannel);
 		}
 	} else if (command === `skip`) {
+		if (message.member.hasPermission("MANAGE_MESSAGES"))
 		if (!msg.member.voiceChannel) return msg.channel.send('You are not in a voice channel!');
 		if (!serverQueue) return msg.channel.send('There is nothing playing that I could skip for you.');
 		serverQueue.connection.dispatcher.end('Skip command has been used!');
 		return undefined;
 	} else if (command === `stop`) {
+		if (message.member.hasPermission("MANAGE_MESSAGES"))
 		if (!msg.member.voiceChannel) return msg.channel.send('You are not in a voice channel!');
 		if (!serverQueue) return msg.channel.send('There is nothing playing that I could stop for you.');
 		serverQueue.songs = [];
 		serverQueue.connection.dispatcher.end('Stop command has been used!');
 		return undefined;
 	} else if (command === `s`) {
+		if (message.member.hasPermission("MANAGE_MESSAGES"))
 		if (!msg.member.voiceChannel) return msg.channel.send('You are not in a voice channel!');
 		if (!serverQueue) return msg.channel.send('There is nothing playing that I could stop for you.');
 		serverQueue.songs = [];
 		serverQueue.connection.dispatcher.end('Stop command has been used!');
 		return undefined;
 	} else if (command === `vol`) {
+		if (message.member.hasPermission("MANAGE_MESSAGES"))
 		if (!msg.member.voiceChannel) return msg.channel.send('You are not in a voice channel!');
 		if (!serverQueue) return msg.channel.send('There is nothing playing.');
 		if (!args[1]) return msg.channel.send(`:loud_sound: Current volume is **${serverQueue.volume}**`);
@@ -1805,6 +1756,7 @@ ${videos.map(video2 => `[**${++index} **] \`${video2.title}\``).join('\n')}`)
 		serverQueue.connection.dispatcher.setVolumeLogarithmic(args[1] / 5);
 		return msg.channel.send(`:speaker: تم تغير الصوت الي **${args[1]}**`);
 	} else if (command === `now`) {
+		if (message.member.hasPermission("MANAGE_MESSAGES"))
 		if (!serverQueue) return msg.channel.send('لا يوجد شيء حالي ف العمل.');
 		const embedNP = new Discord.RichEmbed()
 	.setDescription(`:notes: الان يتم تشغيل: **${serverQueue.songs[0].title}**`)
@@ -1819,6 +1771,7 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title}`).join('\n')}
 **الان يتم تشغيل** ${serverQueue.songs[0].title}`)
 		return msg.channel.sendEmbed(embedqu);
 	} else if (command === `pause`) {
+		if (message.member.hasPermission("MANAGE_MESSAGES"))
 		if (serverQueue && serverQueue.playing) {
 			serverQueue.playing = false;
 			serverQueue.connection.dispatcher.pause();
@@ -1826,6 +1779,7 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title}`).join('\n')}
 		}
 		return msg.channel.send('There is nothing playing.');
 	} else if (command === "unpause") {
+		if (message.member.hasPermission("MANAGE_MESSAGES"))
 		if (serverQueue && !serverQueue.playing) {
 			serverQueue.playing = true;
 			serverQueue.connection.dispatcher.resume();
