@@ -64,48 +64,49 @@ client.on("message", message => {
              Admin Commands
 ╚[❖════════════❖]╝
 
- ❖ $warn <mention><Reason>  ➾ لاعطاء ورن لشخص 
- ❖ $ban <mention > ➾ لتبنيد العضو
- ❖ $kick <mention > ➾ لطرد العضو
- ❖ $clear <namber > ➾ لمسح الشات
- ❖ $mute < mention > <time> ➾ لاعطاء ميوت كتابي
- ❖ $unmute <mention> ➾ لازالة الميوت الكتابي
- ❖ $ct <name> ➾ لانشاء شات كتابي
- ❖ $cv <name> لانشاء روم صوتي
- ❖ $delete <name> ➾ لمسح شات او روم صوتي
- ❖ $mutechat ➾ لاقفال الشات
- ❖ $unmutechat ➾ لفتح الشات
- ❖ $hidechat ➾ لاخفاء الشات
- ❖ $showchat ➾ لاظهار الشات
- ❖ $bc <message> ➾ لارسال رساله الاعضاء السيرفر
- ❖ $brole  ➾ لارسال رساله لرتبه معينه
- ❖ $member ➾ لعرض معلومان الاعضاء
- ❖ $server  ➾ لعرض معلومات السيرفر
- ❖ $move <mention> ➾ لسحب الاشخاص 
- ❖ $moveall  ➾ لسحب كل الناس الي رومك (تحذير : هذه الخاصيه يستخدمها فقط الاونر )
- ❖ $helprole  ➾ لرؤية اوامر الرولات
- 
+ ❖ !warn <mention><Reason>  ➾ لاعطاء ورن لشخص 
+ ❖ !ban <mention > ➾ لتبنيد العضو
+ ❖ !kick <mention > ➾ لطرد العضو
+ ❖ !clear <namber > ➾ لمسح الشات
+ ❖ !mute < mention > <time> ➾ لاعطاء ميوت كتابي
+ ❖ !unmute <mention> ➾ لازالة الميوت الكتابي
+ ❖ !ct <name> ➾ لانشاء شات كتابي
+ ❖ !cv <name> لانشاء روم صوتي
+ ❖ !delete <name> ➾ لمسح شات او روم صوتي
+ ❖ !mutechat ➾ لاقفال الشات
+ ❖ !unmutechat ➾ لفتح الشات
+ ❖ !hidechat ➾ لاخفاء الشات
+ ❖ !showchat ➾ لاظهار الشات
+ ❖ !bc <message> ➾ لارسال رساله الاعضاء السيرفر
+ ❖ !brole  ➾ لارسال رساله لرتبه معينه
+ ❖ !member ➾ لعرض معلومان الاعضاء
+ ❖ !server  ➾ لعرض معلومات السيرفر
+ ❖ !move <mention> ➾ لسحب الاشخاص 
+ ❖ !moveall  ➾ لسحب كل الناس الي رومك (تحذير : هذه الخاصيه يستخدمها فقط الاونر )
+ ❖ !helprole  ➾ لرؤية اوامر الرولات
+ ❖ !roles  ➾ لعرض الرتب
+
 ╔[❖════════════❖]╗
        MUSIC Commands
 ╚[❖════════════❖]╝
 
- ❖ $play <name > <url> ➾ لتبنيد العض
- ❖ $stop ➾ لايقاف الاغنيه نهايا
- ❖ $skip ➾ لتخطب الاغنية الحاليه وتشغيل التاليه
- ❖ $now ➾ لمعرفة الاغنيه المشغله الان
- ❖ $pause ➾ لايقاف الاغنيه مؤقتا
- ❖ $unpause ➾ لاتشغيل الاغنيه المتوقفه
+ ❖ !play <name > <url> ➾ لتبنيد العض
+ ❖ !stop ➾ لايقاف الاغنيه نهايا
+ ❖ !skip ➾ لتخطب الاغنية الحاليه وتشغيل التاليه
+ ❖ !now ➾ لمعرفة الاغنيه المشغله الان
+ ❖ !pause ➾ لايقاف الاغنيه مؤقتا
+ ❖ !unpause ➾ لاتشغيل الاغنيه المتوقفه
 
 ╔[❖════════════❖]╗
             MEMBERS  Commands
 ╚[❖════════════❖]╝
 
- ❖ $ping  ➾ لعرض سرعة الاتصال
- ❖ $id  ➾ لاظهار ادي حقق
- ❖ $user  ➾ لاظهار معلومات حسابك
- ❖ $time  ➾ لتحديد الوقت كمؤقت
- ❖ $avatar  ➾ لعرض صورة حسابك
- ❖ $link  ➾ لاخذ رابط انفايت لسيرفر
+ ❖ !ping  ➾ لعرض سرعة الاتصال
+ ❖ !id  ➾ لاظهار ادي حقق
+ ❖ !user  ➾ لاظهار معلومات حسابك
+ ❖ !time  ➾ لتحديد الوقت كمؤقت
+ ❖ !avatar  ➾ لعرض صورة حسابك
+ ❖ !link  ➾ لاخذ رابط انفايت لسيرفر
  
 **
 `)
@@ -137,21 +138,21 @@ client.on("message", message => {
  -----------------------------------------
  
  
-$playing
+!playing
 
-$streming
+!streming
 
-$watching
+!watching
 
-$listening
+!listening
 
-$namebot
+!namebot
  
-$setname
+!setname
 
-$setavatar
+!setavatar
 
-$data
+!data
 
 ah'gu fvhdh;gf
  
@@ -880,14 +881,23 @@ client.on("message", message => {
 	} 
 });
 client.on('message', message => {
+    if (message.content === '!roles') {
+        var roles = message.guild.roles.map(roles => `${roles.name}, `).join(' ')
+        const embed = new Discord.RichEmbed()
+        .setColor('RANDOM')
+        .addField('الرتب:',`**[${roles}]**`)
+        message.channel.sendEmbed(embed);
+    }
+});
+client.on('message', message => {
             if (message.content.startsWith("$helprole")) {
      let embed = new Discord.RichEmbed()
 .addField('     **اوامر الرولات** ' ,' **ــــــــــــــــــــــــــــ** ')
-.addField('     **$role <mention> <role name>** ' ,' **لاعطاء الرتبه للشخص** ')
-.addField('     **$roleRemove <mention> <role name>** ' ,' **الأيزالة الرتبه** ')
-.addField('     **$role humans <role name>** ' ,' **لعطاء الاشخاص رتبه** ')
-.addField('     **$role bots <role name>** ' ,' **لعطاء البوتات رتبه** ')
-.addField('     **$role all <role name> ** ' ,' **لاعطاء رتبه للكل** ')
+.addField('     **!role <mention> <role name>** ' ,' **لاعطاء الرتبه للشخص** ')
+.addField('     **!roleRemove <mention> <role name>** ' ,' **الأيزالة الرتبه** ')
+.addField('     **!role humans <role name>** ' ,' **لعطاء الاشخاص رتبه** ')
+.addField('     **!role bots <role name>** ' ,' **لعطاء البوتات رتبه** ')
+.addField('     **!role all <role name> ** ' ,' **لاعطاء رتبه للكل** ')
 .setColor('RANDOM')
   message.channel.sendEmbed(embed);
     }
