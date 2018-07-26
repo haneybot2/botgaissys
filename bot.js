@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const prefix = '$'
+const prefix = '!'
 
 const ms = require("ms");
 const fs = require('fs');
@@ -61,83 +61,50 @@ client.on("message", message => {
       .setDescription(`
  **
 ╔[❖════════════❖]╗
-             Prefix = ' $ '
-╚[❖════════════❖]╝
-
-╔[❖════════════❖]╗
              Admin Commands
 ╚[❖════════════❖]╝
 
  ❖ $warn <mention><Reason>  ➾ لاعطاء ورن لشخص 
-
  ❖ $ban <mention > ➾ لتبنيد العضو
- 
  ❖ $kick <mention > ➾ لطرد العضو
- 
  ❖ $clear <namber > ➾ لمسح الشات
- 
  ❖ $mute < mention > <time> ➾ لاعطاء ميوت كتابي
- 
  ❖ $unmute <mention> ➾ لازالة الميوت الكتابي
- 
  ❖ $ct <name> ➾ لانشاء شات كتابي
- 
  ❖ $cv <name> لانشاء روم صوتي
- 
  ❖ $delete <name> ➾ لمسح شات او روم صوتي
- 
  ❖ $mutechat ➾ لاقفال الشات
- 
  ❖ $unmutechat ➾ لفتح الشات
- 
  ❖ $hidechat ➾ لاخفاء الشات
-
  ❖ $showchat ➾ لاظهار الشات
-
  ❖ $bc <message> ➾ لارسال رساله الاعضاء السيرفر
- 
  ❖ $brole  ➾ لارسال رساله لرتبه معينه
- 
  ❖ $member ➾ لعرض معلومان الاعضاء
- 
  ❖ $server  ➾ لعرض معلومات السيرفر
- 
  ❖ $move <mention> ➾ لسحب الاشخاص 
- 
  ❖ $moveall  ➾ لسحب كل الناس الي رومك (تحذير : هذه الخاصيه يستخدمها فقط الاونر )
- 
  ❖ $helprole  ➾ لرؤية اوامر الرولات
  
 ╔[❖════════════❖]╗
        MUSIC Commands
 ╚[❖════════════❖]╝
 
-❖ $play <name > <url> ➾ لتبنيد العضو
-
-❖ $stop ➾ لايقاف الاغنيه نهايا
-
-❖ $skip ➾ لتخطب الاغنية الحاليه وتشغيل التاليه
-
-❖ $now ➾ لمعرفة الاغنيه المشغله الان
-
-❖ $pause ➾ لايقاف الاغنيه مؤقتا
-
-❖ $unpause ➾ لاتشغيل الاغنيه المتوقفه
+ ❖ $play <name > <url> ➾ لتبنيد العض
+ ❖ $stop ➾ لايقاف الاغنيه نهايا
+ ❖ $skip ➾ لتخطب الاغنية الحاليه وتشغيل التاليه
+ ❖ $now ➾ لمعرفة الاغنيه المشغله الان
+ ❖ $pause ➾ لايقاف الاغنيه مؤقتا
+ ❖ $unpause ➾ لاتشغيل الاغنيه المتوقفه
 
 ╔[❖════════════❖]╗
-            General  Commands
+            MEMBERS  Commands
 ╚[❖════════════❖]╝
 
  ❖ $ping  ➾ لعرض سرعة الاتصال
-
  ❖ $id  ➾ لاظهار ادي حقق
- 
  ❖ $user  ➾ لاظهار معلومات حسابك
-
  ❖ $time  ➾ لتحديد الوقت كمؤقت
-
  ❖ $avatar  ➾ لعرض صورة حسابك
-
  ❖ $link  ➾ لاخذ رابط انفايت لسيرفر
  
 **
@@ -381,7 +348,7 @@ client.on('message', async message => {
 
 //تغير اسم البوت
 client.on('message', async (message) => {
-    if(message.content.startsWith('$namebot')) {
+    if(message.content.startsWith('!namebot')) {
 	    if (message.author.id !== '454527533279608852') return message.reply('** ليس مسموح لك باستخدام هذا الامر **')
          let args = message.content.split(' ').slice(1);
   try {
@@ -422,7 +389,7 @@ client.on('message', async (message) => {
 
 //معلومات البوت
 client.on('message', message => {
-  if (message.content.startsWith("$data")) {
+  if (message.content.startsWith("!data")) {
 	  if (message.author.id !== '454527533279608852') return message.reply('** ليس مسموح لك باستخدام هذا الامر **')
     message.channel.send({
 embed: new Discord.RichEmbed() 
@@ -454,7 +421,7 @@ function timeCon(time) {
 //ping
       client.on('message', message => {
                                 if(!message.channel.guild) return;
-                        if (message.content.startsWith('$ping')) {
+                        if (message.content.startsWith('!ping')) {
                             if(!message.channel.guild) return;
                             var msg = `${Date.now() - message.createdTimestamp}`
                             var api = `${Math.round(client.ping)}`
@@ -474,7 +441,7 @@ function timeCon(time) {
 
 
 client.on('message', function(msg) {
-	const prefix = '$'
+	const prefix = '!'
     if(msg.content.startsWith (prefix  + 'server')) {
 	    if(!message.guild.member(message.author).hasPermission("MANAGE_MSERVER"))
       let embed = new Discord.RichEmbed()
@@ -548,7 +515,7 @@ client.on('message', message => {
   
 //لانشاء شات ورومات
 client.on("message", message => {
-           if (message.content.startsWith("$ct")) {
+           if (message.content.startsWith("!ct")) {
              if(!message.channel.guild) return message.reply('هذا الأمر للسيرفرات فقط')
                        if (!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply("انت لا تمتلك صلاحيه `MANAGE_CHANNELS`");
                    let args = message.content.split(" ").slice(1).join(" ")
@@ -559,7 +526,7 @@ client.on("message", message => {
            }
            });
 client.on("message", (message) => {
-           if (message.content.startsWith("$cv")) {
+           if (message.content.startsWith("!cv")) {
              if(!message.channel.guild) return message.reply('هذا الأمر للسيرفرات فقط')
                        if (!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply("انت لا تمتلك صلاحيه `MANAGE_CHANNELS`");
                   let args = message.content.split(" ").slice(1).join(" ")
@@ -573,7 +540,7 @@ client.on("message", (message) => {
  
  //لمسح الشات او الروم
  client.on("message", (message) => {
-                 if (message.content.startsWith('$delete')) {
+                 if (message.content.startsWith('!delete')) {
 if(!message.channel.guild) return message.reply('هذا الأمر للسيرفرات فقط')
                      if (!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply("انت لا تمتلك صلاحيه `MANAGE_CHANNELS`");
 
@@ -621,7 +588,7 @@ setTimeout(function(){
 client.on('message', message => {
 
 if (message.author.bot) return;
-    if (message.content === "$mutechat") {
+    if (message.content === "!mutechat") {
                         if(!message.channel.guild) return message.reply(' This command only for servers');
 
 if(!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply(' ليس لديك صلاحيات');
@@ -632,7 +599,7 @@ if(!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply(' لي
                message.reply("تم تقفيل الشات ✅ ")
            });
              }
-if (message.content === "$unmutechat") {
+if (message.content === "!unmutechat") {
     if(!message.channel.guild) return message.reply(' This command only for servers');
 
 if(!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply('ليس لديك صلاحيات');
@@ -652,7 +619,7 @@ if(!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply('لي�
 client.on('message', message => {
 
 if (message.author.bot) return;
-    if (message.content === "$hidechat") {
+    if (message.content === "!hidechat") {
                         if(!message.channel.guild) return message.reply(' This command only for servers');
 
 if(!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply(' ليس لديك صلاحيات');
@@ -665,7 +632,7 @@ if(!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply(' لي
                message.reply("تم اخفاء الشات")
            });
              }
-if (message.content === "$showchat") {
+if (message.content === "!showchat") {
     if(!message.channel.guild) return message.reply(' This command only for servers');
 
 if(!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply('ليس لديك صلاحيات');
@@ -726,7 +693,7 @@ message.channel.send(`**✅ ${user.tag} banned from the server ! ✈ **  `)
 
   let args = message.content.split(" ").slice(1);
 
-  if (command == "kik") {
+  if (command == "kick") {
                if(!message.channel.guild) return message.reply('** This command only for servers**');
          
   if(!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return message.reply("**انت لا تملك الصلاحيات المطلوبه**");
@@ -842,7 +809,8 @@ if (message.member.voiceChannel == null) return message.channel.send(`**الرج
  //امر الممبر لعرض الناس
 client.on('message', message => {
               if (!message.channel.guild) return;
-      if(message.content =='$member')
+      if(message.content =='!member')
+	      if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES"))
       var IzRo = new Discord.RichEmbed()
       .setFooter(message.author.username) 
       .setTitle('🌷| Members info')
@@ -967,7 +935,7 @@ client.on('message', msg => {
 //لاعطاء ميوت وازالة ميوت
 client.on("message", message => {
   let command = message.content.split(" ")[0];
-  if (command === "$mute") {
+  if (command === "!mute") {
           if(!message.channel.guild) return message.reply('**:x: اسف لكن هذا الامر للسيرفرات فقط **');
                   if (!message.member.hasPermission('MANAGE_ROLES')) return message.reply("** لا يوجد لديك برمشن 'Manage Roles' **");
   let user = message.mentions.users.first();
@@ -995,7 +963,7 @@ client.on("message", message => {
   }
 
 };
-    if (command === "$unmute") {
+    if (command === "!unmute") {
           if(!message.channel.guild) return message.reply('**:x: اسف لكن هذا الامر للسيرفرات فقط **');         
         if (!message.member.hasPermission('MANAGE_ROLES')) return message.reply("** لا يوجد لديك برمشن 'Manage Roles' **");
   let user = message.mentions.users.first();
@@ -1044,7 +1012,7 @@ client.on("message", message => {
 
 //تغير الحله للبوت
 client.on('message', message => {
-    var prefix = "$";
+    var prefix = "!";
 
       if (!message.content.startsWith(prefix)) return;
       var args = message.content.split(' ').slice(1);
@@ -1071,7 +1039,7 @@ client.on('message', message => {
 
 //تغير الحله للبوت
 const devs = ['454527533279608852' , '' , '' , ''];
-const adminprefix = "$";
+const adminprefix = "!";
 client.on('message', message => {
     var argresult = message.content.split(` `).slice(1).join(' ');
       if (!devs.includes(message.author.id)) return;
@@ -1110,7 +1078,7 @@ message.channel.send(`${user} has ${inviteCount} invites.`);
 
 
     client.on('message', message => {
-     if (message.content === "$id") {
+     if (message.content === "!id") {
      let embed = new Discord.RichEmbed()
   .setThumbnail(message.author.avatarURL)  
   .setAuthor(message.author.username)
@@ -1132,7 +1100,7 @@ message.channel.send(`${user} has ${inviteCount} invites.`);
 
 //معلومات الشخص
 client.on('message', message => {
-	const prefix = '$'
+	const prefix = '!'
 var args = message.content.split(" ").slice(1);    
 if(message.content.startsWith(prefix + 'user')) {
 var year = message.author.createdAt.getFullYear()
@@ -1321,7 +1289,7 @@ client.on('message' , message => {
 //لارسال برودكسات لاعضاء السيرفر
 client.on('message', message => {
               if(!message.channel.guild) return;
-    if(message.content.startsWith('$bc')) {
+    if(message.content.startsWith('!bc')) {
     if(!message.channel.guild) return message.channel.send('**هذا الأمر فقط للسيرفرات**').then(m => m.delete(5000));
   if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('**للأسف لا تمتلك صلاحية** `ADMINISTRATOR`' );
     let args = message.content.split(" ").join(" ").slice(2 + prefix.length);
@@ -1431,7 +1399,7 @@ client.on('message', message => {
 
 
 client.on('message', message => {
-    if (message.content.startsWith("$avatar")) {
+    if (message.content.startsWith("!avatar")) {
         var mentionned = message.mentions.users.first();
     var x5bzm;
       if(mentionned){
@@ -1619,7 +1587,7 @@ client.on('message', message => {
  
  //لاخراج البوت
 client.on("message", m =>{
-    if(m.content == "$h'gu dh ;gf"){
+    if(m.content == "!h'gu dh ;gf"){
   m.guild.leave()
       .then(g => console.log(`Left the guild ${g}`))
       .catch(console.error);
