@@ -443,7 +443,6 @@ function timeCon(time) {
 client.on('message', function(msg) {
 	const prefix = '!'
     if(msg.content.startsWith (prefix  + 'server')) {
-	    if(!message.guild.member(message.author).hasPermission("MANAGE_MSERVER"));
       let embed = new Discord.RichEmbed()
       .setColor('RANDOM')
       .setThumbnail(msg.guild.iconURL)
