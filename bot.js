@@ -1123,7 +1123,7 @@ message.channel.send(`${user} has ${inviteCount} invites.`);
         } else {
             h = message.member
         }
-               moment.locale('ar-TN');
+               moment.locale('ar-TN')
       var id = new  Discord.RichEmbed()
       .setAuthor(message.author.username, message.author.avatarURL) 
     .setColor("#707070")
