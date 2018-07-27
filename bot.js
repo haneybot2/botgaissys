@@ -1653,7 +1653,7 @@ client.on("guildMemberAdd", member => {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const { Client, Util } = require('discord.js');
-const { PREFIX, GOOGLE_API_KEY } = require('./config1');
+const { PREFIX, GOOGLE_API_KEY } = require('./config');
 const YouTube = require('simple-youtube-api');
 const ytdl = require('ytdl-core');
 
