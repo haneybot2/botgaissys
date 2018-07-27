@@ -1248,7 +1248,16 @@ client.on('ready', () => {
             }
 }); 
 
+client.on('ready', () => {
+  console.log(`Logged in as ${client.user.tag}!`);
+});
+         client.on('message', message => {
+            if (message.content === 'ولكم') {
+              message.channel.sendFile("./welcome.png");
+               
 
+            }
+});
 
 
 
