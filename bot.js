@@ -1227,26 +1227,37 @@ client.on("message", message => {
 
 
 
-
-
-//الرد
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
-         client.on('message', message => {
-            if (message.content === 'hi') {
-              message.channel.send('Welcome :heart: ');
-            }
-}); 
+
+client.on('message', msg => {
+  if (msg.content === '.') {
+    msg.reply('فديت الي ينقط');
+  }
+});
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
-         client.on('message', message => {
-            if (message.content === 'ping') {
-              message.channel.send('pong ');
-            }
-}); 
+
+client.on('message', msg => {
+  if (msg.content === '..') {
+    msg.reply('فديت الي ينقط');
+  }
+});
+
+client.on('ready', () => {
+  console.log(`Logged in as ${client.user.tag}!`);
+});
+
+client.on('message', msg => {
+  if (msg.content === '...') {
+    msg.reply('فديت الي ينقط');
+  }
+});
+
+
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
