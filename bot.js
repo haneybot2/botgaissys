@@ -1653,7 +1653,7 @@ client.on("guildMemberAdd", member => {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const { Client, Util } = require('discord.js');
-const { PREFIX, GOOGLE_API_KEY } = require('./config');
+const { PREFIX, GOOGLE_API_KEY } = require('./config1');
 const YouTube = require('simple-youtube-api');
 const ytdl = require('ytdl-core');
 
@@ -1661,32 +1661,6 @@ const ytdl = require('ytdl-core');
 const youtube = new YouTube(GOOGLE_API_KEY);
 
 const queue = new Map();
-
-client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}!`);
-client.user.setGame(`.A-GUYS`,"http://twitch.tv/S-F")
-  console.log('')
-  console.log('')
-  console.log('╔[═════════════════════════════════════════════════════════════════]╗')
-  console.log(`[Start] ${new Date()}`);
-  console.log('╚[═════════════════════════════════════════════════════════════════]╝')
-  console.log('')
-  console.log('╔[════════════════════════════════════]╗');
-  console.log(`Logged in as * [ " ${client.user.username} " ]`);
-  console.log('')
-  console.log('Informations :')
-  console.log('')
-  console.log(`servers! [ " ${client.guilds.size} " ]`);
-  console.log(`Users! [ " ${client.users.size} " ]`);
-  console.log(`channels! [ " ${client.channels.size} " ]`);
-  console.log('╚[════════════════════════════════════]╝')
-  console.log('')
-  console.log('╔[════════════]╗')
-  console.log(' Bot Is Online')
-  console.log('╚[════════════]╝')
-  console.log('')
-  console.log('')
-});
 
 
 client.on('warn', console.warn);
