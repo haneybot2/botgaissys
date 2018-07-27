@@ -1226,7 +1226,7 @@ client.on("message", message => {
 
 
 
-
+//الردود بمن شن
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
@@ -1236,7 +1236,6 @@ client.on('message', msg => {
     msg.reply('فديت الي ينقط');
   }
 });
-
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
@@ -1246,7 +1245,6 @@ client.on('message', msg => {
     msg.reply('فديت الي ينقط');
   }
 });
-
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
@@ -1256,9 +1254,19 @@ client.on('message', msg => {
     msg.reply('فديت الي ينقط');
   }
 });
+client.on('ready', () => {
+  console.log(`Logged in as ${client.user.tag}!`);
+});
+
+client.on('message', msg => {
+  if (msg.content === 'ping') {
+    msg.reply('pong!');
+  }
+});
 
 
 
+//الردود بالصوره
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
