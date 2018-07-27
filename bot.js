@@ -130,13 +130,7 @@ client.on("message", message => {
       .setColor("RANDOM")
       .setDescription(`
  **
-╔[❖════════════❖]╗
-             Prefix = ' $ '
-╚[❖════════════❖]╝
 
- -----------------------------------------
- 
- 
 !playing
 
 !streming
@@ -153,7 +147,7 @@ client.on("message", message => {
 
 !data
 
-ah'gu fvhdh;gf
+!h'gu dh ;gf
  
  
  
