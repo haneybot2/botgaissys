@@ -1635,7 +1635,7 @@ client.on("message", m =>{
 //الترحيب علي الخاص
 client.on("guildMemberAdd", member => {
   member.createDM().then(function (channel) {
-  return channel.send(`:rose: .A-GAYS ولكم نورت سيرفر  :rose: 
+  return channel.send(`:rose: .A-GUYS ولكم نورت سيرفر  :rose: 
 :crown:اسم العضو  ${member}:crown:  
 انت العضو رقم ${member.guild.memberCount} `) 
 }).catch(console.error)
