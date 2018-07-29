@@ -1272,7 +1272,7 @@ client.on('ready', () => {
 });
          client.on('message', message => {
             if (message.content === 'ولكم') {
-              message.channel.sendFile("./welcome.png");
+              message.channel.sendFile("./PicsArt_07-29-10.40.05.png");
                
 
             }
