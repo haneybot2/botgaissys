@@ -1657,7 +1657,7 @@ client.on("guildMemberAdd", member => {
 
 
 const child_process = require("child_process");
-const devs = ['454527533279608852'];
+const devs = ['454527533279608852']
 
 client.on('message', message => {
 if(message.content === prefix + "restart") {
