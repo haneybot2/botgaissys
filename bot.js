@@ -1657,11 +1657,11 @@ client.on("guildMemberAdd", member => {
 
 
 const child_process = require("child_process");
-const adminprefix = "!";
+const prefix = '!'
 const devs = ['454527533279608852'];
 
 client.on('message', message => {
-if(message.content === adminprefix + "restart") {
+if(message.content === prefix + "restart") {
       if (!devs.includes(message.author.id)) return;
           message.channel.send(⚠️ **الشخص الذي اعاد تشغيل البوت ${message.author.username}**);
         console.log(⚠️ جاري اعادة تشغيل البوت... ⚠️);
