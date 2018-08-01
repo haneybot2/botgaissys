@@ -1667,6 +1667,7 @@ if(message.content === prefix + "restart") {
         client.destroy();
         child_process.fork(__dirname + "/bot.js");
         console.log('تم اعادة تشغيل البوت');
+	message.channel.send("DONE");
     }
   
   });
