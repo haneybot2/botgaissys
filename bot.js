@@ -13,7 +13,6 @@ const jimp = require("jimp");
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
-client.user.setGame(`.A-GUYS`,"http://twitch.tv/S-F")
   console.log('')
   console.log('')
   console.log('╔[═════════════════════════════════════════════════════════════════]╗')
@@ -90,6 +89,7 @@ client.on("message", message => {
 ╚[❖════════════❖]╝
 
 ❖ !play <name > <url> ➾ لبدء تشغيل الاغنيه
+❖ !join  ➾ لادخال البوت للروم
 ❖ !stop ➾  لايقاف الاغنيه
 ❖ !skip ➾ لتخطي الاغنيه الحاليه
 ❖ !np ➾ لمعرفة الاغنيه المشغله الان
@@ -106,7 +106,8 @@ client.on("message", message => {
  ❖ !time  ➾ لتحديد الوقت كمؤقت
  ❖ !avatar  ➾ لعرض صورة حسابك
  ❖ !link  ➾ لاخذ رابط انفايت لسيرفر
- 
+ ❖ !invites  ➾ لمعرفة عدد الاعضاء الي جبتهم 
+
 **
 `)
 
@@ -131,13 +132,15 @@ client.on("message", message => {
       .setDescription(`
  **
 
-!playing
+!setplaying
 
-!streming
+!setleave
 
-!watching
+!setwatching
 
-!listening
+!setliste
+
+!setstrem
 
 !namebot
  
@@ -146,8 +149,6 @@ client.on("message", message => {
 !setavatar
 
 !data
-
-!h'gu dh ;gf
  
  
  
@@ -1013,60 +1014,43 @@ client.on("message", message => {
 
 
 //تغير الحله للبوت
-client.on('message', message => {
-    var prefix = "!";
-
-      if (!message.content.startsWith(prefix)) return;
-      var args = message.content.split(' ').slice(1);
-      var argresult = args.join(' ');
-      if (message.author.id == 411564557027508235) return;
-
-
-    if (message.content.startsWith(prefix + 'setname')) {
-    if (message.author.id !== '454527533279608852') return message.reply('** هذا الأمر فقط لصاحب البوت و شكراًً **')
-      client.user.setUsername(argresult).then
-          message.channel.sendMessage(`**${argresult}** : تم تغير الأسم`)
-      return message.reply("**لا تستطيع تغير الأسم الا بعد ساعتين**");
-    } else
-
-    if (message.content.startsWith(prefix + 'setavatar')) {
-    if (message.author.id !== '454527533279608852') return message.reply('** هذا الأمر فقط لصاحب البوت و شكراًً **')
-    client.user.setAvatar(argresult);
-        message.channel.sendMessage(`**${argresult}** : تم تغير صورة البوت`);
-    }
-
-
-
-});
-
-//تغير الحله للبوت
-const devs = ['454527533279608852' , '' , '' , ''];
-const adminprefix = "!";
+const developers = ['454527533279608852' , '' , '' , ''];
 client.on('message', message => {
     var argresult = message.content.split(` `).slice(1).join(' ');
-      if (!devs.includes(message.author.id)) return;
+      if (!developers.includes(message.author.id)) return;
       
-  if (message.content.startsWith(adminprefix + 'playing')) {
+  if (message.content.startsWith(prefix + 'setplaying')) {
     client.user.setGame(argresult);
-      message.channel.sendMessage(`**:white_check_mark:   ${argresult}**`)
+      message.channel.send(`**✅   ${argresult}**`)
   } else 
-  if (message.content.startsWith(adminprefix + 'watching')) {
+     if (message.content === (prefix + "setleave")) {
+    message.guild.leave();        
+  } else  
+  if (message.content.startsWith(prefix + 'setwatching')) {
   client.user.setActivity(argresult, {type:'WATCHING'});
-      message.channel.sendMessage(`**:white_check_mark:   ${argresult}**`)
+      message.channel.send(`**✅   ${argresult}**`)
   } else 
-  if (message.content.startsWith(adminprefix + 'listening')) {
+  if (message.content.startsWith(prefix + 'setliste')) {
   client.user.setActivity(argresult , {type:'LISTENING'});
-      message.channel.sendMessage(`**:white_check_mark:   ${argresult}**`)
+      message.channel.send(`**✅   ${argresult}**`)
   } else 
-  if (message.content.startsWith(adminprefix + 'streming')) {
+  if (message.content.startsWith(prefix + 'setstrem')) {
     client.user.setGame(argresult, "https://www.twitch.tv/idk");
-      message.channel.sendMessage(`**:white_check_mark:   ${argresult}**`)
+      message.channel.send(`**✅**`)
   }
+  if (message.content.startsWith(prefix + 'setname')) {
+  client.user.setUsername(argresult).then
+      message.channel.send(`Changing The Name To ..**${argresult}** `)
+} else
+if (message.content.startsWith(prefix + 'setavatar')) {
+  client.user.setAvatar(argresult);
+    message.channel.send(`Changing The Avatar To :**${argresult}** `);
+}
 });
 
 
 client.on('message', message => {
-		    var prefix = "$"
+		    var prefix = "!"
    if(message.content.startsWith(prefix + "invites")) {
     message.guild.fetchInvites().then(invs => {
       let user = message.mentions.users.first() || message.author
@@ -1630,15 +1614,7 @@ client.on('message', message => {
 
 
   
- 
- //لاخراج البوت
-client.on("message", m =>{
-    if(m.content == "!h'gu dh ;gf"){
-  m.guild.leave()
-      .then(g => console.log(`Left the guild ${g}`))
-      .catch(console.error);
-   }
-});
+
  
 
 
