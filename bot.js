@@ -1642,7 +1642,6 @@ if(message.content === prefix + "restart") {
         console.log('restarting now');
         client.destroy();
         child_process.fork(__dirname + "/bot.js");
-        console.log('تم اعادة تشغيل البوت');
 	message.channel.send("DONE");
     }
   
