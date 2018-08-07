@@ -1640,7 +1640,6 @@ client.on('message', message => {
 if(message.content === user + "restart") {
       if (!id.includes(message.author.id)) return;
            message.channel.send("Restarting");
-        console.log('restarting now');
         client.destroy();
         child_process.fork(__dirname + "/bot.js");
 	   message.channel.send("Done");
