@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = '!'
-const id = ['454527533279608852' , '396984110700167168' , '' , ''];
+const id = ['454527533279608852' , '' , '' , ''];
 
 const ms = require("ms");
 const fs = require('fs');
