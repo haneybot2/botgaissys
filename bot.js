@@ -1642,7 +1642,6 @@ if(message.content === user + "restart") {
            message.channel.send("Restarting");
         client.destroy();
         child_process.fork(__dirname + "/bot.js");
-	   message.channel.send("Done");
     }
   
   });
