@@ -1640,10 +1640,10 @@ client.on('message', message => {
 if(message.content === user + "restart") {
       if (!id.includes(message.author.id)) return;
           message.channel.send(`**الشخص الذي اعاد تشغيل البوت ${message.author.username}**`);
-        console.log(⚠️ جاري اعادة تشغيل البوت... ⚠️);
+        console.log(`⚠️ جاري اعادة تشغيل البوت... ⚠️`);
         client.destroy();
         child_process.fork(__dirname + "/bot.js");
-        console.log(تم اعادة تشغيل البوت);
+        console.log(`تم اعادة تشغيل البوت`);
     }
   
   });
