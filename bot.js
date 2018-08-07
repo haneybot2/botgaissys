@@ -908,7 +908,7 @@ client.on('message', message =>{
 });
 
 client.on('message', message => {
-            if (message.content.startsWith("$helprole")) {
+            if (message.content.startsWith("!helprole")) {
      let embed = new Discord.RichEmbed()
 .addField('     **اوامر الرولات** ' ,' **ــــــــــــــــــــــــــــ** ')
 .addField('     **!role <mention> <role name>** ' ,' **لاعطاء الرتبه للشخص** ')
