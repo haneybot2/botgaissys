@@ -1638,11 +1638,11 @@ const id = ['454527533279608852']
 client.on('message', message => {
 if(message.content === prefix + "restart") {
       if (!id.includes(message.author.id)) return;
-           message.channel.send("restarting now");
+           message.channel.send("Restarting");
         console.log('restarting now');
         client.destroy();
         child_process.fork(__dirname + "/bot.js");
-	message.channel.send("DONE");
+	   message.channel.send("Done");
     }
   
   });
