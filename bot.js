@@ -1651,7 +1651,6 @@ if(message.content === user + "restart") {
         client.destroy();
         child_process.fork(__dirname + "/bot.js");
         console.log(`تم اعادة تشغيل البوت`);
-	        return message.reply(`**Restarting**`)
     }
   
   });
