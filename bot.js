@@ -78,7 +78,7 @@ client.on("message", message => {
  ❖ !hidechat ➾ لاخفاء الشات
  ❖ !showchat ➾ لاظهار الشات
  ❖ !bc <message> ➾ لارسال رساله الاعضاء السيرفر
- ❖ !rolebc <mention> <message>  ➾ لارسال رساله لرتبه معينه
+ ❖ !brole <mention> <message>  ➾ لارسال رساله لرتبه معينه
  ❖ !member ➾ لعرض معلومان الاعضاء
  ❖ !server  ➾ لعرض معلومات السيرفر
  ❖ !move <mention> ➾ لسحب الاشخاص 
@@ -1280,16 +1280,16 @@ client.on('ready', () => {
           var prefix = "!";
           if(najzx.author.bot) return;
          
-          if(najzx.content.startsWith(prefix + "bcrole")) {
+          if(najzx.content.startsWith(prefix + "brole")) {
             if (!najzx.member.hasPermission("ADMINISTRATOR"))  return;
             let args = najzx.content.split(" ").slice(1);
          
             if(!args[0]) {
-              najzx.channel.send("قم بمنشنة الرتبة | +rolebc @everyone الرساله")
+              najzx.channel.send("قم بمنشنة الرتبة | !brole @everyone الرساله")
                 return;
             }
             if(!args[1]) {
-              najzx.channel.send("قم بكتابة الرسالة | +rolebc @everyone الرساله")
+              najzx.channel.send("قم بكتابة الرسالة | !brole @everyone الرساله")
                 return;
             }
          
