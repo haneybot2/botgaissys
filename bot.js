@@ -78,7 +78,7 @@ client.on("message", message => {
  ❖ !hidechat ➾ لاخفاء الشات
  ❖ !showchat ➾ لاظهار الشات
  ❖ !bc <message> ➾ لارسال رساله الاعضاء السيرفر
- ❖ !brole  ➾ لارسال رساله لرتبه معينه
+ ❖ !rolebc <mention> <message>  ➾ لارسال رساله لرتبه معينه
  ❖ !member ➾ لعرض معلومان الاعضاء
  ❖ !server  ➾ لعرض معلومات السيرفر
  ❖ !move <mention> ➾ لسحب الاشخاص 
@@ -1276,53 +1276,63 @@ client.on('ready', () => {
 
 
 //لارسال رساله لرتبه معينه
-client.on('message' , message => {
-  var prefix = "$";
-  if(message.author.bot) return;
-  if(message.content.startsWith(prefix + "brole")) {
-	 if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('**للأسف لا تمتلك صلاحية** ' );
-    let args = message.content.split(" ").slice(1);
-
-    if(!args[0]) {
-      message.channel.send("قم بمنشنة الرتبة | $bcrole @everyone رساله");
-        return;
-    }
-    if(!args[1]) {
-      message.channel.send("قم بمنشنة الرتبة | $bcrole @everyone رساله");
-        return;
-    }
-
-      if(args[0] == "@everyone") {
-        message.channel.send(`لقد تم ارسال هذه الرسالة الى ${message.guild.memberCount} اعضاء`);
-        message.guild.members.forEach(mi => {
-          mi.send(
-          "الرسالة :" + "\n" +
-         "**" + `${args[1]}` + "**"
-          );
-        });
-        return;
-      }
-          var role = message.mentions.roles.first();
-            if(!role) {
-              message.reply("لا توجد رتبة بهذا الاسم");
+    client.on('message' , najzx => {
+          var prefix = "!";
+          if(najzx.author.bot) return;
+         
+          if(najzx.content.startsWith(prefix + "rolebc")) {
+            if (!najzx.member.hasPermission("ADMINISTRATOR"))  return;
+            let args = najzx.content.split(" ").slice(1);
+         
+            if(!args[0]) {
+              najzx.channel.send("قم بمنشنة الرتبة | +rolebc @everyone الرساله")
                 return;
             }
-        message.guild.members.filter(m => m.roles.get(role.id)).forEach(sa => {
-        sa.send(
-          "الرسالة :" + "\n" +
-        "**" + `${args[1]}` + "**"
-          );
+            if(!args[1]) {
+              najzx.channel.send("قم بكتابة الرسالة | +rolebc @everyone الرساله")
+                return;
+            }
+         
+              if(args[0] == "@everyone") {
+                najzx.channel.send(`لقد تم ارسال هذه الرسالة الى ${najzx.guild.memberCount} اعضاء`)
+                najzx.guild.members.forEach(m => {
+                  m.send(
+                  "**" + "السيرفر :" + "\n" +
+                  `${najzx.guild.name}` + "\n" +
+                  "المرسل :" + "\n" +
+                  `${najzx.author.tag}` + "\n" +
+                  "الرسالة :" + "\n" +
+                  `${args[1]}` + "**"
+                  )
+                })
+                return;
+              }
+         
+                  var role = najzx.mentions.roles.first();
+                    if(!role) {
+                      najzx.reply("لا توجد رتبة بهذا الاسم")
+                        return;
+                    }
+                najzx.guild.members.filter(m => m.roles.get(role.id)).forEach(n => {
+                  n.send(
+                  "**" + "السيرفر :" + "\n" +
+                  `${najzx.guild.name}` + "\n" +
+                  "المرسل :" + "\n" +
+                  `${najzx.author.tag}` + "\n" +
+                  "الرسالة :" + "\n" +
+                  `${args[1]}` + "**"
+                  )
+                })
+                najzx.channel.send(`لقد تم ارسال هذه الرسالة الى ${najzx.guild.members.filter(m => m.roles.get(role.id)).size} عضو`)
+            }
         });
-      message.channel.send(`**لقد تم ارسال هذه الرسالة الى ${message.guild.members.filter(m => m.roles.get(role.id)).size} عظو**`);
-    }
-});
 
 //لارسال برودكسات لاعضاء السيرفر
 client.on('message', message => {
               if(!message.channel.guild) return;
     if(message.content.startsWith('!bc')) {
     if(!message.channel.guild) return message.channel.send('**هذا الأمر فقط للسيرفرات**').then(m => m.delete(5000));
-  if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('**للأسف لا تمتلك صلاحية** `ADMINISTRATOR`' );
+  if(!message.member.hasPermission('ADMINISTRATOR')) return ;
     let args = message.content.split(" ").join(" ").slice(2 + prefix.length);
     let copy = ".A-GAYS";
     if (!args) return message.reply('**يجب عليك كتابة كلمة او جملة لإرسال البرودكاست**');message.channel.send(`**هل أنت متأكد من إرسالك البرودكاست؟ \nمحتوى البرودكاست:** \` ${args}\``).then(msg => {
