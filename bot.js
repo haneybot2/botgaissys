@@ -1645,8 +1645,8 @@ const user = "!";
 const id = ['454527533279608852'];
 
 client.on('message', message => {
-if(message.content === adminprefix + "restart") {
-      if (!devs.includes(message.author.id)) return;
+if(message.content === user + "restart") {
+      if (!id.includes(message.author.id)) return;
         return message.reply(`**Restarting**`)
         console.log(`⚠️ جاري اعادة تشغيل البوت... ⚠️`);
         client.destroy();
