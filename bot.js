@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = '!'
+const id = ['454527533279608852' , '396984110700167168' , '' , ''];
 
 const ms = require("ms");
 const fs = require('fs');
@@ -125,7 +126,7 @@ message.author.sendEmbed(embed)
 
 client.on("message", message => {
  if (message.content === prefix + "ahelp") {
-	 if (message.author.id !== '454527533279608852') return message.reply('** ليس مسموح لك باستخدام هذا الامر **')
+	       if (!id.includes(message.author.id)) return;
  message.channel.send(":white_check_mark: ")
   const embed = new Discord.RichEmbed()
       .setColor("RANDOM")
@@ -344,7 +345,7 @@ client.on('message', async message => {
 //تغير اسم البوت
 client.on('message', async (message) => {
     if(message.content.startsWith('!namebot')) {
-	    if (message.author.id !== '454527533279608852') return message.reply('** ليس مسموح لك باستخدام هذا الامر **')
+	       if (!id.includes(message.author.id)) return;
          let args = message.content.split(' ').slice(1);
   try {
     if (args.length > 0) {
@@ -1014,10 +1015,9 @@ client.on("message", message => {
 
 
 //تغير الحله للبوت
-const developers = ['454527533279608852' , '' , '' , ''];
 client.on('message', message => {
     var argresult = message.content.split(` `).slice(1).join(' ');
-      if (!developers.includes(message.author.id)) return;
+      if (!id.includes(message.author.id)) return;
       
   if (message.content.startsWith(prefix + 'setplaying')) {
     client.user.setGame(argresult);
@@ -1642,7 +1642,7 @@ client.on("guildMemberAdd", member => {
 
 const child_process = require("child_process");
 const user = "!";
-const id = ['454527533279608852'];
+
 
 client.on('message', message => {
 if(message.content === user + "restart") {
