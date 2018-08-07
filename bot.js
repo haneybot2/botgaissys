@@ -1462,13 +1462,7 @@ client.on('message', message => {
 
 
 
-client.on('message', message => {
-    var args = message.content.split(/[ ]+/)
-    if(message.content.includes('discordapp.com')){
-        message.delete()
-    return message.reply(`**لايمكن نشر روابط  ادخال البوتات**`)
-    }
-});
+
 client.on('message', message => {
     var args = message.content.split(/[ ]+/)
     if(message.content.includes('discord.gg')){
