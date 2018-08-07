@@ -1280,7 +1280,7 @@ client.on('ready', () => {
           var prefix = "!";
           if(najzx.author.bot) return;
          
-          if(najzx.content.startsWith(prefix + "rolebc")) {
+          if(najzx.content.startsWith(prefix + "bcrole")) {
             if (!najzx.member.hasPermission("ADMINISTRATOR"))  return;
             let args = najzx.content.split(" ").slice(1);
          
