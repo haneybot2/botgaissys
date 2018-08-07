@@ -1633,10 +1633,11 @@ client.on("guildMemberAdd", member => {
 
 
 const child_process = require("child_process");
+const user = '!'
 const id = ['454527533279608852']
 
 client.on('message', message => {
-if(message.content === prefix + "restart") {
+if(message.content === user + "restart") {
       if (!id.includes(message.author.id)) return;
            message.channel.send("Restarting");
         console.log('restarting now');
