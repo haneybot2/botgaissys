@@ -235,7 +235,7 @@ client.on('message', async message => {
   let user = message.mentions.users.first();
   let reason = message.content.split(" ").slice(2).join(" ");
 
-  if (message.mentions.users.size < 1) return message.reply("**$warn <mention><Reason>**");
+  if (message.mentions.users.size < 1) return message.reply("**!warn <mention><Reason>**");
   if(!reason) return message.reply ("**$warn <mention><Reason>**");
 
   
