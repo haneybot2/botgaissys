@@ -37,6 +37,19 @@ client.on('ready', () => {
   console.log('')
 });
 
+const child_process = require("child_process");
+const user = "!";
+client.on('message', message => {
+if(message.content === user + "restart") {
+      if (!id.includes(message.author.id)) return;
+        console.log(`⚠️ جاري اعادة تشغيل البوت... ⚠️`);
+        client.destroy();
+        child_process.fork(__dirname + "/bot.js");
+        console.log(`تم اعادة تشغيل البوت`);
+    }
+  
+  });
+
 
 
 client.on('voiceStateUpdate', (old, now) => {
@@ -46,6 +59,8 @@ client.on('voiceStateUpdate', (old, now) => {
   if (!size) return channel.setName(`Voice Online: [${currentSize}]`);
   if (currentSize !== size) channel.setName(`Voice Online: [${currentSize}]`);
 });
+
+
 
 
 
@@ -702,7 +717,45 @@ message.channel.send(`**✅ ${user.tag} kicked from the server ! ✈ **  `)
 
 
 
+//صور فقط
+client.on('message', ( message ) => {
+  if(message.author.bot) return;
 
+  if(message.channel.id !== '471715491430531073') return;
+
+
+  let types = [
+    'jpg',
+    'jpeg',
+    'png'
+  ]
+
+  if (message.attachments.size <= 0) {
+    message.delete();
+    message.channel.send(`${message.author}, This channel for Pic 🖼️ Only`) // 
+    .then(msg => {
+      setTimeout(() => {
+        msg.delete();
+      }, 5000)
+  })
+  return;
+}
+
+  if(message.attachments.size >= 1) {
+    let filename = message.attachments.first().filename
+    console.log(filename);
+    if(!types.some( type => filename.endsWith(type) )) {
+      message.delete();
+      message.channel.send(`${message.author}, This channel for Pic 🖼️ Only`)
+      .then(msg => {
+        setTimeout(() => {
+          msg.delete();
+        }, 5000)
+      })
+    }
+  }
+
+});
 
 
 
@@ -1645,20 +1698,7 @@ client.on("guildMemberAdd", member => {
 
 
 
-const child_process = require("child_process");
-const user = "!";
 
-
-client.on('message', message => {
-if(message.content === user + "restart") {
-      if (!id.includes(message.author.id)) return;
-        console.log(`⚠️ جاري اعادة تشغيل البوت... ⚠️`);
-        client.destroy();
-        child_process.fork(__dirname + "/bot.js");
-        console.log(`تم اعادة تشغيل البوت`);
-    }
-  
-  });
 
 
 
