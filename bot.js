@@ -487,25 +487,6 @@ client.on('message', function(msg) {
 
 
 
-client.on('message', message => {
-            if (message.content.startsWith("قوانين")) {
-     let embed = new Discord.RichEmbed()
-.setThumbnail(message.author.avatarURL) 
-.setThumbnail(message.author.username)
-.addField('     **اولا** ' ,' **ممنوع السب** ')
-.addField('     **ثانيا** ' ,' **لا تسوي سبام ** ')
-.addField('     **ثالثا** ' ,' **لا تزعج الاخرين** ')
-.addField('    **رابعا**' ,' **ممنوع الاعلانات** ')
-.addField('    **خامسا**' ,' **احترم الاخرين** ')
-.addField('    **سادسا**' ,' **لا تنشر في الشات او بل خاص** ')
-.addField('    **سابعا**' ,' **لا تنشر روابط!** ')
-.addField('    **ثامنا**' ,' **لا تسوي سبام ايموجي** ')
-.addField('    **تاسعا**' ,' **لا تطلب رتبه الاداره !** ')
-.setColor('#7d2dbe')
-  message.channel.sendEmbed(embed);
-    }
-});
-  
   
   
   
@@ -624,7 +605,7 @@ if (message.author.bot) return;
     if (message.content === "!hidechat") {
                         if(!message.channel.guild) return message.reply(' This command only for servers');
 
-if(!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply(' ليس لديك صلاحيات');
+if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply(' ليس لديك صلاحيات');
            message.channel.overwritePermissions(message.guild.id, {
          SEND_MESSAGES: false ,
 	 READ_MESSAGES: false
@@ -637,7 +618,7 @@ if(!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply(' لي
 if (message.content === "!showchat") {
     if(!message.channel.guild) return message.reply(' This command only for servers');
 
-if(!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply('ليس لديك صلاحيات');
+if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply('ليس لديك صلاحيات');
            message.channel.overwritePermissions(message.guild.id, {
          SEND_MESSAGES: true,
 	 READ_MESSAGES: true
@@ -899,9 +880,9 @@ client.on("message", message => {
 	var msg = message.content.toLowerCase();
 	if( !message.guild ) return;
 	if( !msg.startsWith( prefix + 'role' ) ) return;
-	 if (!message.member.hasPermission('MANAGE_ROLES')) return message.reply("** لا يوجد لديك برمشن 'Manage Roles' **");
+	 if (!message.member.hasPermission('MANAGE_ROLES')) return ;
 	if( msg.toLowerCase().startsWith( prefix + 'roleremove' ) ){
-		if (!message.member.hasPermission('MANAGE_ROLES')) return message.reply("** لا يوجد لديك برمشن 'Manage Roles' **");
+		if (!message.member.hasPermission('MANAGE_ROLES')) return ;
 		if( !args[0] ) return message.reply( '**:x: يرجى وضع الشخص المراد سحب منه الرتبة**' );
 		if( !args[1] ) return message.reply( '**:x: يرجى وضع الرتبة المراد سحبها من الشخص**' );
 		var role = msg.split(' ').slice(2).join(" ").toLowerCase(); 
@@ -911,15 +892,15 @@ client.on("message", message => {
 			return message.reply('**:white_check_mark: [ '+role1.name+' ] رتبة [ '+args[0]+' ] تم سحب من **');
 		}
 		if( args[0].toLowerCase() == "all" ){
-			if (!message.member.hasPermission('MANAGE_ROLES')) return message.reply("** لا يوجد لديك برمشن 'Manage Roles' **");
+			if (!message.member.hasPermission('MANAGE_ROLES')) return ;
 			message.guild.members.forEach(m=>m.removeRole( role1 ))
 			return	message.reply('**:white_check_mark: [ '+role1.name+' ] تم سحب من الكل رتبة**');
 		} else if( args[0].toLowerCase() == "bots" ){
-			if (!message.member.hasPermission('MANAGE_ROLES')) return message.reply("** لا يوجد لديك برمشن 'Manage Roles' **");
+			if (!message.member.hasPermission('MANAGE_ROLES')) return ;
 			message.guild.members.filter(m=>m.user.bot).forEach(m=>m.removeRole(role1))
 			return	message.reply('**:white_check_mark: [ '+role1.name+' ] تم سحب من البوتات رتبة**');
 		} else if( args[0].toLowerCase() == "humans" ){
-			 if (!message.member.hasPermission('MANAGE_ROLES')) return message.reply("** لا يوجد لديك برمشن 'Manage Roles' **");
+			 if (!message.member.hasPermission('MANAGE_ROLES')) return ;
 			message.guild.members.filter(m=>!m.user.bot).forEach(m=>m.removeRole(role1))
 			return	message.reply('**:white_check_mark: [ '+role1.name+' ] تم سحب من البشريين رتبة**');
 		} 	
@@ -933,11 +914,11 @@ client.on("message", message => {
 			return message.reply('**:white_check_mark: [ '+role1.name+' ] رتبة [ '+args[0]+' ] تم اعطاء **');
 		}
 		if( args[0].toLowerCase() == "all" ){
-			if (!message.member.hasPermission('MANAGE_ROLES')) return message.reply("** لا يوجد لديك برمشن 'Manage Roles' **");
+			if (!message.member.hasPermission('MANAGE_ROLES')) return ;
 			message.guild.members.forEach(m=>m.addRole( role1 ))
 			return	message.reply('**:white_check_mark: [ '+role1.name+' ] تم اعطاء الكل رتبة**');
 		} else if( args[0].toLowerCase() == "bots" ){
-			if (!message.member.hasPermission('MANAGE_ROLES')) return message.reply("** لا يوجد لديك برمشن 'Manage Roles' **");
+			if (!message.member.hasPermission('MANAGE_ROLES')) return ;
 			message.guild.members.filter(m=>m.user.bot).forEach(m=>m.addRole(role1))
 			return	message.reply('**:white_check_mark: [ '+role1.name+' ] تم اعطاء البوتات رتبة**');
 		} else if( args[0].toLowerCase() == "humans" ){
@@ -950,6 +931,7 @@ var AsciiTable = require('ascii-data-table').default
 client.on('message', message =>{
 
     if(message.content == "!roles"){
+	    if (!message.member.hasPermission('MANAGE_ROLES')) return ;
         var 
         ros=message.guild.roles.size,
         data = [['Rank', 'RoleName']]
@@ -965,6 +947,8 @@ client.on('message', message =>{
 
 client.on('message', message => {
             if (message.content.startsWith("!helprole")) {
+		    if (!message.member.hasPermission('MANAGE_ROLES')) return ;
+		    
      let embed = new Discord.RichEmbed()
 .addField('     **اوامر الرولات** ' ,' **ــــــــــــــــــــــــــــــ** ')
 .addField('     **!role <mention> <role name>** ' ,' **لاعطاء الرتبه للشخص** ')
@@ -1107,6 +1091,9 @@ if (message.content.startsWith(prefix + 'setavatar')) {
 
 
 
+
+
+
 //invite
 client.on('message', message => {
    if(message.content.startsWith(prefix + "invites")) {
@@ -1184,6 +1171,8 @@ client.on('message',message =>{
 
 
 
+
+
 //معلومات الشخص
 client.on('message', message => {
 var args = message.content.split(" ").slice(1);    
@@ -1236,6 +1225,10 @@ message.channel.send({embed});
 }
 
 });
+
+
+
+
 
 
 
@@ -1333,7 +1326,7 @@ client.on('ready', () => {
 
 client.on('message', msg => {
   if (msg.content === '.') {
-    msg.reply('فديت الي ينقط');
+    msg.reply('`يعيني الي ينقط  ♥`');
   }
 });
 client.on('ready', () => {
@@ -1342,7 +1335,7 @@ client.on('ready', () => {
 
 client.on('message', msg => {
   if (msg.content === '..') {
-    msg.reply('فديت الي ينقط');
+    msg.reply('`يعيني الي ينقط  ♥`');
   }
 });
 client.on('ready', () => {
@@ -1351,7 +1344,7 @@ client.on('ready', () => {
 
 client.on('message', msg => {
   if (msg.content === '...') {
-    msg.reply('فديت الي ينقط');
+    msg.reply('`يعيني الي ينقط  ♥`');
   }
 });
 client.on('ready', () => {
@@ -1743,8 +1736,7 @@ client.on('message', message => {
 //الترحيب علي الخاص
 client.on("guildMemberAdd", member => {
   member.createDM().then(function (channel) {
-  return channel.send(`:rose: .A-GUYS ولكم نورت سيرفر  :rose: 
-:crown:اسم العضو  ${member}:crown:  
+  return channel.send(`:rose: .A-GUYS ولكم نورت سيرفر ${member} :rose: 
 انت العضو رقم ${member.guild.memberCount} `) 
 }).catch(console.error)
 })
