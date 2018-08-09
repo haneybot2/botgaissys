@@ -38,9 +38,8 @@ client.on('ready', () => {
 });
 
 const child_process = require("child_process");
-const user = "!";
 client.on('message', message => {
-if(message.content === user + "restart") {
+if(message.content === prefix + "restart") {
       if (!id.includes(message.author.id)) return;
         console.log(`⚠️ جاري اعادة تشغيل البوت... ⚠️`);
         client.destroy();
@@ -76,7 +75,7 @@ client.on("message", message => {
       .setDescription(`
  **
 ╔[❖════════════❖]╗
-             Admin Commands
+   Admin Commands
 ╚[❖════════════❖]╝
 
  ❖ !warn <mention><Reason>  ➾ لاعطاء ورن لشخص 
@@ -101,7 +100,7 @@ client.on("message", message => {
  ❖ !helprole  ➾ لرؤية اوامر الرولات
 
 ╔[❖════════════❖]╗
-       MUSIC Commands
+   MUSIC Commands
 ╚[❖════════════❖]╝
 
 ❖ !play <name > <url> ➾ لبدء تشغيل الاغنيه
@@ -114,7 +113,7 @@ client.on("message", message => {
 ❖ !resume ➾ لاتشغيل الاغنيه المتوقفه
 
 ╔[❖════════════❖]╗
-            MEMBERS  Commands
+   MEMBERS  Commands
 ╚[❖════════════❖]╝
 
  ❖ !ping  ➾ لعرض سرعة الاتصال
@@ -124,6 +123,7 @@ client.on("message", message => {
  ❖ !avatar  ➾ لعرض صورة حسابك
  ❖ !link  ➾ لاخذ رابط انفايت لسيرفر
  ❖ !invites  ➾ لمعرفة عدد الاعضاء الي جبتهم 
+ ❖ !top  ➾ لمعرفة التوب انفايت
 
 **
 `)
@@ -151,7 +151,7 @@ client.on("message", message => {
 
 !setplaying
 
-!setleave
+!leveserver
 
 !setwatching
 
@@ -453,7 +453,6 @@ function timeCon(time) {
 
 
 client.on('message', function(msg) {
-	const prefix = '!'
     if(msg.content.startsWith (prefix  + 'server')) {
       let embed = new Discord.RichEmbed()
       .setColor('RANDOM')
@@ -717,6 +716,10 @@ message.channel.send(`**✅ ${user.tag} kicked from the server ! ✈ **  `)
 
 
 
+
+
+
+
 //صور فقط
 client.on('message', ( message ) => {
   if(message.author.bot) return;
@@ -766,7 +769,6 @@ client.on('message', ( message ) => {
 
  //سحب الناس
 client.on('message', message => {
-	const prefix = '$'
 if(!message.channel.guild) return;
 if(message.content.startsWith(prefix + 'move')) {
  if (message.member.hasPermission("MOVE_MEMBERS")) {
@@ -801,7 +803,7 @@ message.react("❌")
  
  //سحب كل الناس الي روم واحد
 client.on('message', message => {
-if(message.content.startsWith(prefix + 'moveall')) {
+if(message.content.startsWith(prefix + 'move all')) {
 	if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('**للأسف لا تمتلك صلاحية** ' );
 if (message.member.voiceChannel == null) return message.channel.send(`**الرجاء الدخول لروم صوتي**`)
  var author = message.member.voiceChannelID;
@@ -964,7 +966,7 @@ client.on('message', message =>{
 client.on('message', message => {
             if (message.content.startsWith("!helprole")) {
      let embed = new Discord.RichEmbed()
-.addField('     **اوامر الرولات** ' ,' **ــــــــــــــــــــــــــــ** ')
+.addField('     **اوامر الرولات** ' ,' **ــــــــــــــــــــــــــــــ** ')
 .addField('     **!role <mention> <role name>** ' ,' **لاعطاء الرتبه للشخص** ')
 .addField('     **!roleRemove <mention> <role name>** ' ,' **الأيزالة الرتبه** ')
 .addField('     **!role humans <role name>** ' ,' **لعطاء الاشخاص رتبه** ')
@@ -1077,7 +1079,7 @@ client.on('message', message => {
     client.user.setGame(argresult);
       message.channel.send(`**✅   ${argresult}**`)
   } else 
-     if (message.content === (prefix + "setleave")) {
+     if (message.content === (prefix + "leveserver")) {
     message.guild.leave();        
   } else  
   if (message.content.startsWith(prefix + 'setwatching')) {
@@ -1103,8 +1105,10 @@ if (message.content.startsWith(prefix + 'setavatar')) {
 });
 
 
+
+
+//invite
 client.on('message', message => {
-		    var prefix = "!"
    if(message.content.startsWith(prefix + "invites")) {
     message.guild.fetchInvites().then(invs => {
       let user = message.mentions.users.first() || message.author
@@ -1115,6 +1119,32 @@ message.channel.send(`${user} has ${inviteCount} invites.`);
   }
 });
 
+client.on('message',message =>{
+    if(message.content.startsWith(prefix + 'top')) {
+  message.guild.fetchInvites().then(i =>{
+  var invites = [];
+   
+  i.forEach(inv =>{
+    var [invs,i]=[{},null];
+     
+    if(inv.maxUses){
+        invs[inv.code] =+ inv.uses+"/"+inv.maxUses;
+    }else{
+        invs[inv.code] =+ inv.uses;
+    }
+        invites.push(`invite: ${inv.url} inviter: ${inv.inviter} \`${invs[inv.code]}\`;`);
+   
+  });
+  var embed = new Discord.RichEmbed()
+  .setColor("#000000")
+  .setDescription(`${invites.join(`\n`)+'\n\n**By:** '+message.author}`)
+  .setThumbnail("https://i.imgur.com/OM00xyh.png")
+           message.channel.send({ embed: embed });
+   
+  });
+   
+    }
+  });
 
 
 
@@ -1156,7 +1186,6 @@ message.channel.send(`${user} has ${inviteCount} invites.`);
 
 //معلومات الشخص
 client.on('message', message => {
-	const prefix = '!'
 var args = message.content.split(" ").slice(1);    
 if(message.content.startsWith(prefix + 'user')) {
 var year = message.author.createdAt.getFullYear()
@@ -1212,36 +1241,69 @@ message.channel.send({embed});
 
 
 //لفل اب
-let points = JSON.parse(fs.readFileSync("./points.json", "utf8"));
-client.on("message", message => {
-  if (!message.content.startsWith(prefix)) return;
-  if (message.author.bot) return;
+client.on('message', async message =>{
+    let messageArray = message.content.split(" ");
+    let cmd = messageArray[0];
+    let args = messageArray.slice(1);
+    let xp = require("./xp.json");
 
-  if (!points[message.author.id]) points[message.author.id] = {
-    points: 0,
-    level: 0
-  };
-  let userData = points[message.author.id];
-  userData.points++;
+  let xpAdd = Math.floor(Math.random() * 7) + 8;
+  console.log(xpAdd);
 
-  let curLevel = Math.floor(0.1 * Math.sqrt(userData.points));
-  if (curLevel > userData.level) {
-    // Level up!
-    userData.level = curLevel;
-     message.reply(`**لقد وصلت الى المستوى ${curLevel}**`).then(m => m.delete(100000));
+  if(!xp[message.author.id]){
+    xp[message.author.id] = {
+      xp: 0,
+      level: 1
+    };
   }
 
-  if (message.content.startsWith(prefix + "level")) {
-    
-      message.reply(` ** انت في المستوى ${userData.level}  مع ${userData.points} نقاط . ** `).then(m => m.delete(100000));
 
+  let curxp = xp[message.author.id].xp;
+  let curlvl = xp[message.author.id].level;
+  let nxtLvl = xp[message.author.id].level * 300;
+  xp[message.author.id].xp =  curxp + xpAdd;
+  if(nxtLvl <= xp[message.author.id].xp){
+    xp[message.author.id].level = curlvl + 1;
+    let lvlup = new Discord.RichEmbed()
+    .setTitle("Level Up!")
+    .setColor(#070707)
+    .addField("New Level", curlvl + 1);
+
+    message.channel.send(lvlup).then(msg => {msg.delete(5000)});
   }
-  fs.writeFile("./points.json", JSON.stringify(points), (err) => {
-    if (err) console.error(err)
+  fs.writeFile("./xp.json", JSON.stringify(xp), (err) => {
+    if(err) console.log(err)
   });
-
 });
-
+client.on('message', message => {
+    let messageArray = message.content.split(" ");
+    let cmd = messageArray[0];
+    let args = messageArray.slice(0);
+    let prefix = '!';
+    let xp = require("./xp.json");
+    
+if(cmd === `${prefix}level`) {
+if(!xp[message.author.id]){
+    xp[message.author.id] = {
+      xp: 0,
+      level: 1
+   };
+ }
+   let curxp = xp[message.author.id].xp;
+   let curlvl = xp[message.author.id].level;
+   let nxtLvlXp = curlvl * 300;
+   let difference = nxtLvlXp - curxp;
+ 
+   let lvlEmbed = new Discord.RichEmbed()
+   .setAuthor(message.author.username)
+   .setColor(#070707)
+   .addField("Level", curlvl, true)
+   .addField("XP", curxp, true)
+   .setFooter(`${difference} XP til level up`, message.author.displayAvatarURL);
+ 
+   message.channel.send(lvlEmbed).then(msg => {msg.delete(5000)});
+}
+});
 
 
 
@@ -1330,7 +1392,6 @@ client.on('ready', () => {
 
 //لارسال رساله لرتبه معينه
     client.on('message' , najzx => {
-          var prefix = "!";
           if(najzx.author.bot) return;
          
           if(najzx.content.startsWith(prefix + "brole")) {
