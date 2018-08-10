@@ -189,14 +189,6 @@ message.author.sendEmbed(embed)
 
 
 
-
-
-
-
-
-
-
-
 client.on("ready", () => {
     var guild;
     while (!guild)
@@ -229,13 +221,20 @@ client.on("guildMemberAdd", (member) => {
             var Inv = Invite.code;
             if (dat[Inv])
                 if (dat[Inv] < Invite.uses) {
- channel.send(`تم دعوته بواسطة  ${Invite.inviter} `) ;        
+ channel.send(تم دعوته بواسطة  ${Invite.inviter}) ;
  }
             dat[Inv] = Invite.uses;
-       
+
        });
     });
 });
+
+
+
+
+
+
+
 
 
 
