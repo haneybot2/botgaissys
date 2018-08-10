@@ -1516,6 +1516,8 @@ client.on('message', message => {
 
 
 //لاخذ رابط السيرفر
+const misaka = new Set();
+var prefix = '!';
     client.on('message', async msg => {
   if(msg.content.startsWith("رابط")) {
   if (misaka.has(msg.author.id)) {
@@ -1536,19 +1538,19 @@ client.on('message', message => {
         maxAge: 86400,
   }).then(invite =>
    msg.author.sendMessage(`
-   
-   
-         ** عدد استخدامات الرابط : 10**
-		 
-		 
-		 
- ${invite.url}`)
+** عدد استخدامات الرابط : 10**
+
+
+
+${invite.url}
+`)
   )
-    msg.channel.send(`**:link:  تم أرسال الرابط برسالة خاصة **`)
+    msg.channel.send(`**:link: Invite Linke Sent In DM Successfully**`)
   }
     setTimeout(() => {
     },86400000);
     })
+
  
  
 
