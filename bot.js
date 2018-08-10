@@ -197,7 +197,7 @@ message.author.sendEmbed(embed)
 
 
 client.on("guildMemberAdd", function(member) {
-    const wc = member.guild.channels.find("name", "welcome")
+    let wcChannel = member.guild.channels.find("name", "welcome")
         const embed = new Discord.RichEmbed()
         .setColor('363940')
         .setAuthor(member.user.tag, member.user.avatarURL)
@@ -205,7 +205,7 @@ client.on("guildMemberAdd", function(member) {
     .setThumbnail(member.avatarURL)
     .setImage('https://cdn.pg.sa/qNWHDjgnh7.jpg')
 
-        return wc.sendEmbed(embed);
+        return wcChannel.sendEmbed(embed);
         
 });
 var dat = JSON.parse("{}");
@@ -215,7 +215,7 @@ function forEachObject(obj, func) {
 client.on("ready", () => {
     var guild;
     while (!guild)
-        guild = client.guilds.get("471700216278548480");
+        guild = client.guilds.get("462406850088796164");
     guild.fetchInvites().then((data) => {
         data.forEach((Invite, key, map) => {
             var Inv = Invite.code;
@@ -227,7 +227,7 @@ client.on("ready", () => {
 
 
 client.on("guildMemberAdd", (member) => {
-    let channel = member.guild.channels.get("471715321800032285");
+    let channel = member.guild.channels.get("464096645374803968");
     if (!channel) {
         console.log("!the channel id it's not correct");
         return;
@@ -238,7 +238,7 @@ client.on("guildMemberAdd", (member) => {
     console.log('-');
     var guild;
     while (!guild)
-        guild = client.guilds.get("471700216278548480");
+        guild = client.guilds.get("462406850088796164");
     guild.fetchInvites().then((data) => {
         data.forEach((Invite, key, map) => {
             var Inv = Invite.code;
