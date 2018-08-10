@@ -122,7 +122,6 @@ client.on("message", message => {
  ❖ !user  ➾ لاظهار معلومات حسابك
  ❖ !time  ➾ لتحديد الوقت كمؤقت
  ❖ !avatar  ➾ لعرض صورة حسابك
- ❖ !link  ➾ لاخذ رابط انفايت لسيرفر
  ❖ !invites  ➾ لمعرفة عدد الاعضاء الي جبتهم 
  ❖ !top  ➾ لمعرفة التوب انفايت
 
@@ -1176,7 +1175,6 @@ client.on('message',message =>{
 
 
 //id
-
 client.on('message', message => {
    if (message.content === "!id") {
    let embed = new Discord.RichEmbed()
