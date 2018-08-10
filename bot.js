@@ -196,6 +196,18 @@ message.author.sendEmbed(embed)
 
 
 
+client.on("guildMemberAdd", function(member) {
+    const wc = member.guild.channels.find("name", "welcome")
+        const embed = new Discord.RichEmbed()
+        .setColor('363940')
+        .setAuthor(member.user.tag, member.user.avatarURL)
+
+    .setThumbnail(member.avatarURL)
+    .setImage('https://cdn.pg.sa/qNWHDjgnh7.jpg')
+
+        return wc.sendEmbed(embed);
+        
+});
 var dat = JSON.parse("{}");
 function forEachObject(obj, func) {
     Object.keys(obj).forEach(function (key) { func(key, obj[key]) });
@@ -240,6 +252,8 @@ message.channel.send(`**${member}
        });
     });
 });
+
+
 
 
 
