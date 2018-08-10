@@ -1516,7 +1516,6 @@ client.on('message', message => {
 
 
 //لاخذ رابط السيرفر
-
     client.on('message', async msg => {
   if(msg.content.startsWith("رابط")) {
   if (misaka.has(msg.author.id)) {
@@ -1550,43 +1549,9 @@ client.on('message', message => {
     setTimeout(() => {
     },86400000);
     })
-//لاخذ رابط السيرفر
-    client.on('message', async msg => {
-  if(msg.content.startsWith("link")) {
-  if (misaka.has(msg.author.id)) {
-    let misakaemb = new Discord.RichEmbed()
-    .setDescription(`يجب عليك الانتظار 24 ساعه!`)
-    .setColor(`RED`)
-    return msg.channel.send(misakaemb).then(message => {
-     message.delete(10000) 
-    })
-    
-    }
-    misaka.add(msg.author.id);
-
-  
-   msg.channel.createInvite({
-        thing: true,
-        maxUses: 10,
-        maxAge: 86400,
-  }).then(invite =>
-   msg.author.sendMessage(`
-   
-   
-         ** عدد استخدامات الرابط : 10**
-		 
-		 
-		 
-      [${invite.url}]`)
-  )
-    msg.channel.send(`**:link:  تم أرسال الرابط برسالة خاصة **`)
-  }
-    setTimeout(() => {
-    },86400000);
-    })
-
  
  
+
 
 
 
