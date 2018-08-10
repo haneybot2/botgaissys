@@ -1517,7 +1517,6 @@ client.on('message', message => {
 
 //لاخذ رابط السيرفر
 const misaka = new Set();
-var prefix = '!';
     client.on('message', async msg => {
   if(msg.content.startsWith("رابط")) {
   if (misaka.has(msg.author.id)) {
