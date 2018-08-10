@@ -1544,7 +1544,7 @@ const misaka = new Set();
 ${invite.url}
 `)
   )
-    msg.channel.send(`**:link: Invite Linke Sent In DM Successfully**`)
+    msg.channel.send(`**:link:  تم أرسال الرابط برسالة خاصة **`)
   }
     setTimeout(() => {
     },86400000);
@@ -1600,7 +1600,7 @@ client.on('message', message => {
 client.on('message', message => {
     var args = message.content.split(/[ ]+/)
     if(message.content.includes('discord.gg')){
-      if(!message.member.hasPermission('ADMINISTRATOR'))
+		 if (!message.member.hasPermission("ADMINISTRATOR"))  return;
         message.delete()
     return message.reply(`** No Invite Links :angry: ! **`)
     }
