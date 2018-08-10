@@ -1542,7 +1542,7 @@ client.on('message', message => {
 		 
 		 
 		 
-      [${invite.url}]`)
+ ${invite.url}`)
   )
     msg.channel.send(`**:link:  تم أرسال الرابط برسالة خاصة **`)
   }
