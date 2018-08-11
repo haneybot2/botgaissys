@@ -806,7 +806,7 @@ client.on("message", message => {
         color: 0x06DF00,
         description: "تم مسح الرسائل ",
         footer: {
-          text: "©KBOOSHDev"
+          text: ".A-GUYS"
         }
       }}).then(msg => {msg.delete(3000)});
                           }
@@ -828,7 +828,7 @@ client.on("message", message => {
         color: 0x06DF00,
         description: "تم مسح الرسائل ",
         footer: {
-          text: "©KBOOSHDev"
+          text: ".A-GUYS"
         }
       }}).then(msg => {msg.delete(3000)});
                           }
@@ -850,7 +850,7 @@ client.on("message", message => {
         color: 0x06DF00,
         description: "تم مسح الرسائل ",
         footer: {
-          text: "©KBOOSHDev"
+          text: ".A-GUYS"
         }
       }}).then(msg => {msg.delete(3000)});
                           }
@@ -859,6 +859,9 @@ client.on("message", message => {
 });
  
  
+
+
+
 
 
 
