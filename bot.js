@@ -1316,8 +1316,15 @@ if(!xp[message.author.id]){
 
 
 
-
-
+//الردوت العاديه
+client.on('ready', () => {
+  console.log(`Logged in as ${client.user.tag}!`);
+});
+         client.on('message', message => {
+            if (message.content === 'الوان') {
+              message.channel.send('لأختيار اللون اكتب ( لون < والرقم اللي اخترته> )  مثال :  لون 55');
+            }
+});
 
 
 
@@ -1378,6 +1385,17 @@ client.on('ready', () => {
 
             }
 });
+client.on('ready', () => {
+  console.log(`Logged in as ${client.user.tag}!`);
+});
+         client.on('message', message => {
+            if (message.content === 'الوان') {
+              message.channel.sendFile("./colors.png");
+               
+
+            }
+});
+
 
 
 
