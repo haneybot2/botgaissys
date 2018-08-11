@@ -1322,7 +1322,7 @@ client.on('ready', () => {
 });
          client.on('message', message => {
             if (message.content === 'الوان') {
-              message.channel.send('لأختيار اللون اكتب ( لون < والرقم اللي اخترته> )  مثال :  لون 55');
+              message.channel.send('لأختيار اللون اكتب ( لون `رقم الون`)  مثال :  لون 55');
             }
 });
 
