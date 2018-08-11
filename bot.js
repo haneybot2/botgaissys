@@ -1311,7 +1311,27 @@ if(!xp[message.author.id]){
 
 
 
+//الردود بالصوره
+client.on('ready', () => {
+  console.log(`Logged in as ${client.user.tag}!`);
+});
+         client.on('message', message => {
+            if (message.content === 'ولكم') {
+              message.channel.sendFile("./PicsArt_07-29-10.40.05.png");
+               
 
+            }
+});
+client.on('ready', () => {
+  console.log(`Logged in as ${client.user.tag}!`);
+});
+         client.on('message', message => {
+            if (message.content === 'الوان') {
+              message.channel.sendFile("./colors.png");
+               
+
+            }
+});
 
 
 
@@ -1374,27 +1394,7 @@ client.on('message', msg => {
 
 
 
-//الردود بالصوره
-client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}!`);
-});
-         client.on('message', message => {
-            if (message.content === 'ولكم') {
-              message.channel.sendFile("./PicsArt_07-29-10.40.05.png");
-               
 
-            }
-});
-client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}!`);
-});
-         client.on('message', message => {
-            if (message.content === 'الوان') {
-              message.channel.sendFile("./colors.png");
-               
-
-            }
-});
 
 
 
