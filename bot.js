@@ -767,8 +767,71 @@ message.channel.send("``لا تستطيع سحب "+ message.mentions.members.fir
 } else {
 message.react("❌")
  }}});	
+client.on('message', message => {
+if(!message.channel.guild) return;
+if(message.content.startsWith('اسحب')) {
+ if (message.member.hasPermission("MOVE_MEMBERS")) {
+ if (message.mentions.users.size === 0) {
+ return message.channel.send("``لاستخدام الأمر اكتب هذه الأمر : " +prefix+ "move [USER]``")
+}
+if (message.member.voiceChannel != null) {
+ if (message.mentions.members.first().voiceChannel != null) {
+ var authorchannel = message.member.voiceChannelID;
+ var usermentioned = message.mentions.members.first().id;
+var embed = new Discord.RichEmbed()
+ .setTitle("Succes!")
+ .setColor("#000000")
+ .setDescription(`لقد قمت بسحب <@${usermentioned}> الى الروم الصوتي الخاص بك:white_check_mark: `)
+var embed = new Discord.RichEmbed()
+.setTitle(`You are Moved in ${message.guild.name}`)
+ .setColor("#000000")
+.setDescription(`<@${message.author.id}> moved you to his channel!\nServer => ${message.guild.name}`)
+ message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => message.channel.send(embed))
+message.guild.members.get(usermentioned).send(embed)
+} else {
+message.channel.send("``لا تستطيع سحب "+ message.mentions.members.first() +" `يجب ان يكون هذه العضو في روم صوتي`")
+}
+} else {
+ message.channel.send("``يجب ان تكون في روم صوتي لكي تقوم بسحب العضو أليك``")
+}
+} else {
+message.react("❌")
+ }}});	
+client.on('message', message => {
+if(!message.channel.guild) return;
+if(message.content.startsWith('سحب')) {
+ if (message.member.hasPermission("MOVE_MEMBERS")) {
+ if (message.mentions.users.size === 0) {
+ return message.channel.send("``لاستخدام الأمر اكتب هذه الأمر : " +prefix+ "move [USER]``")
+}
+if (message.member.voiceChannel != null) {
+ if (message.mentions.members.first().voiceChannel != null) {
+ var authorchannel = message.member.voiceChannelID;
+ var usermentioned = message.mentions.members.first().id;
+var embed = new Discord.RichEmbed()
+ .setTitle("Succes!")
+ .setColor("#000000")
+ .setDescription(`لقد قمت بسحب <@${usermentioned}> الى الروم الصوتي الخاص بك:white_check_mark: `)
+var embed = new Discord.RichEmbed()
+.setTitle(`You are Moved in ${message.guild.name}`)
+ .setColor("#000000")
+.setDescription(`<@${message.author.id}> moved you to his channel!\nServer => ${message.guild.name}`)
+ message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => message.channel.send(embed))
+message.guild.members.get(usermentioned).send(embed)
+} else {
+message.channel.send("``لا تستطيع سحب "+ message.mentions.members.first() +" `يجب ان يكون هذه العضو في روم صوتي`")
+}
+} else {
+ message.channel.send("``يجب ان تكون في روم صوتي لكي تقوم بسحب العضو أليك``")
+}
+} else {
+message.react("❌")
+ }}});	
+
 
  
+
+
  
  //سحب كل الناس الي روم واحد
 client.on('message', message => {
@@ -1023,6 +1086,65 @@ client.on("message", message => {
 
 };
     if (command === "!unmute") {
+          if(!message.channel.guild) return message.reply('**:x: اسف لكن هذا الامر للسيرفرات فقط **');         
+        if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply("** هذه الخاصيه للاداره فقط**");
+  let user = message.mentions.users.first();
+  let modlog = client.channels.find('name', 'log');
+  let muteRole = client.guilds.get(message.guild.id).roles.find('name', 'Muted');
+  if (!muteRole) return message.reply("** لا يوجد رتبة الميوت 'Muted' **");
+  if (!modlog) return message.reply("**لا يوجد الروم المراد ارسال المعلومات له 'console'**");
+  if (message.mentions.users.size < 1) return message.reply('** يجب عليك المنشن اولاً **');
+  const embed = new Discord.RichEmbed()
+    .setColor(0x00AE86)
+    .addField('UnMute ', ' | :white_check_mark: |')
+    .addField('تم فك الميوت عن', `${user.username}#${user.discriminator} `)
+    .addField('بواسطة:', `${message.author.username}#${message.author.discriminator}`)
+   message.channel.send({embed: embed});
+
+  if (!message.guild.member(client.user).hasPermission('MANAGE_ROLES_OR_PERMISSIONS')) return message.reply('** هذه الخاصيه للاداره فقط**');
+
+  if (message.guild.member(user).removeRole(muteRole.id)) {
+      client.channels.get(modlog.id).send({embed});
+  } else {
+    message.guild.member(user).removeRole(muteRole).then(() => {
+      client.channels.get(modlog.id).send({embed});
+    });
+  }
+
+};
+
+
+});
+client.on("message", message => {
+  let command = message.content.split(" ")[0];
+  if (command === "اسكت") {
+          if(!message.channel.guild) return message.reply('**:x: اسف لكن هذا الامر للسيرفرات فقط **');
+                  if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply("**هذه الخاصيه للاداره فقط**");
+  let user = message.mentions.users.first();
+  let modlog = client.channels.find('name', 'log');
+  let muteRole = client.guilds.get(message.guild.id).roles.find('name', 'Muted');
+  if (!muteRole) return message.reply("** لا يوجد رتبة الميوت 'Muted' **").catch(console.error);
+  if (!modlog) return message.reply("**لا يوجد الروم المراد ارسال المعلومات له 'Log'**");
+  if (message.mentions.users.size < 1) return message.reply('** يجب عليك المنشن اولاً **');
+  const embed = new Discord.RichEmbed()
+    .setColor(0x00AE86)
+    .addField(' Mute ', ' | :white_check_mark: |')
+    .addField('تم اعطاء الميوت ل', `${user.username}#${user.discriminator} `)
+    .addField('بواسطة:', `${message.author.username}#${message.author.discriminator}`)
+   message.channel.send({embed: embed});
+
+  if (!message.guild.member(client.user).hasPermission('MANAGE_ROLES_OR_PERMISSIONS')) return message.reply('** هذه الخاصيه للاداره فقط**').catch(console.error);
+
+  if (message.guild.member(user).roles.has(muteRole.id)) {
+      client.channels.get(modlog.id).send({embed}).catch(console.error);
+  } else {
+    message.guild.member(user).addRole(muteRole).then(() => {
+      client.channels.get(modlog.id).send({embed}).catch(console.error);
+    });
+  }
+
+};
+    if (command === "تكلم") {
           if(!message.channel.guild) return message.reply('**:x: اسف لكن هذا الامر للسيرفرات فقط **');         
         if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply("** هذه الخاصيه للاداره فقط**");
   let user = message.mentions.users.first();
@@ -1314,27 +1436,7 @@ if(!xp[message.author.id]){
 
 
 
-//الردود بالصوره
-client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}!`);
-});
-         client.on('message', message => {
-            if (message.content === 'ولكم') {
-              message.channel.sendFile("./PicsArt_07-29-10.40.05.png");
-               
 
-            }
-});
-client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}!`);
-});
-         client.on('message', message => {
-            if (message.content === 'الوان') {
-              message.channel.sendFile("./colors.png");
-               
-
-            }
-});
 
 
 
@@ -1396,7 +1498,27 @@ client.on('message', msg => {
 });
 
 
+//الردود بالصوره
+client.on('ready', () => {
+  console.log(`Logged in as ${client.user.tag}!`);
+});
+         client.on('message', message => {
+            if (message.content === 'ولكم') {
+              message.channel.sendFile("./PicsArt_07-29-10.40.05.png");
+               
 
+            }
+});
+client.on('ready', () => {
+  console.log(`Logged in as ${client.user.tag}!`);
+});
+         client.on('message', message => {
+            if (message.content === 'الوان') {
+              message.channel.sendFile("./colors.png");
+               
+
+            }
+});
 
 
 
