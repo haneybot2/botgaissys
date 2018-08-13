@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = '!'
-const id = ['454527533279608852' , '' , '' , ''];
+const id = ['454527533279608852' , '416643173239226388' , '347788375018700802' , ''];
 
 const ms = require("ms");
 const fs = require('fs');
@@ -1024,7 +1024,7 @@ client.on('message', message =>{
     }
 });
 client.on('guildMemberAdd', member=> {
-    member.addRole(member.guild.roles.find("name",".GUYS"));
+    member.addRole(member.guild.roles.find("name",".AG"));
     });
 client.on('message', message => {
             if (message.content.startsWith("!helprole")) {
