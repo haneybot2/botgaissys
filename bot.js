@@ -1023,7 +1023,9 @@ client.on('message', message =>{
         message.channel.send(`**\`\`\`xl\n${res}\`\`\`**`);
     }
 });
-
+client.on('guildMemberAdd', member=> {
+    member.addRole(member.guild.roles.find("name",".GUYS"));
+    });
 client.on('message', message => {
             if (message.content.startsWith("!helprole")) {
 		    if (!message.member.hasPermission('MANAGE_ROLES')) return ;
