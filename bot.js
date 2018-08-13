@@ -1516,7 +1516,7 @@ client.on('ready', () => {
 });
          client.on('message', message => {
             if (message.content === 'الوان') {
-              message.channel.sendFile("./colors.png");
+              message.channel.sendFile("./color.png");
                
 
             }
