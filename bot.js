@@ -559,7 +559,7 @@ client.on('message', async message => {
   if(message.author.bot) return;
    if(!temp[message.guild.id]) temp[message.guild.id] = {
     time: "3000",
-     category : 'click here',
+     category : 'Temporary Channels',
       channel : 'click here'
        }
         if(message.content.startsWith('!temp on')){
@@ -578,7 +578,7 @@ client.on('message', async message => {
                      });
                       const time = temp[message.guild.id].time
                        client.on('message' , message => {
-                        if (message.content.startsWith(prefix + "temptime")) {
+                        if (message.content.startsWith(prefix + "temp time")) {
                          if(!message.member.hasPermission(`MANAGE_GUILD`)) return;
                           let newTime= message.content.split(' ').slice(1).join(" ")
                           if(!newTime) return message.reply(`**${prefix}temptime <time>  \`1000 = 1s\`**`)
