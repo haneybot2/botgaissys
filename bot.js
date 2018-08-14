@@ -553,27 +553,27 @@ if(!message.channel.guild) return message.reply('هذا الأمر للسيرف�
  
 
 //الرومات المئقتة
- const temp = {};
+const temp = {};
 client.on('message', async message => {
  if(message.channel.type === "dm") return;
   if(message.author.bot) return;
    if(!temp[message.guild.id]) temp[message.guild.id] = {
     time: "3000",
      category : 'Temporary Channels',
-      channel : 'Temporary Channels'
+      channel : 'click here'
        }
         if(message.content.startsWith('!temp on')){
          if(!message.member.hasPermission(`MANAGE_GUILD`)) return;
-          var ggg= message.guild.createChannel('click here', 'category').then(cg => {
+          var ggg= message.guild.createChannel('Temporary Channels', 'category').then(cg => {
            var ccc =message.guild.createChannel('click here', 'voice').then(ch => {
             ch.setParent(cg)
-             message.channel.send('**Done ,**')
+             message.channel.send('**:white_check_mark:  Done ,**')
               client.on('message' , message => {
                if(message.content === '!temp off') {
                 if(!message.member.hasPermission(`MANAGE_GUILD`)) return;
                  cg.delete()
                   ch.delete()
-                   message.channel.send('**Done ,**')
+                   message.channel.send('**:white_check_mark:  Done ,**')
                     }
                      });
                       const time = temp[message.guild.id].time
@@ -628,6 +628,8 @@ client.on('message', async message => {
            })
           }
       });
+
+
 
 
 
