@@ -189,45 +189,6 @@ message.author.sendEmbed(embed)
 
 
 
-//الترحيب الولكم
-client.on('guildMemberAdd', member => {
-     const welcomer =  member.guild.channels.find('name', 'a-guys');
-    if(!welcomer) return;
-      if(welcomer) {
-         moment.locale('ar-ly');
-         var m = member.user;
-        let yumz = new Discord.RichEmbed()
-        .setColor('RANDOM')
-        .setThumbnail(m.avatarURL)
-        .setAuthor(m.username,m.avatarURL)
-        .addField(': تاريخ دخولك الدسكورد',`${moment(member.user.createdAt).format('D/M/YYYY h:mm a')} **\n** \`${moment(member.user.createdAt).fromNow()}\``,true)            
-      
-         .setFooter(`${m.tag}`,"https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif")
-     welcomer.send({embed:yumz});          
-         
-    
-
-
-
-const w = ['./wel member.png'];
-
-         let Image = Canvas.Image,
-            canvas = new Canvas(400, 200),
-            ctx = canvas.getContext('2d');
-        fs.readFile(`${w[Math.floor(Math.random() * w.length)]}`, function (err, Background) {
-            if (err) return console.log(err);
-            let BG = Canvas.Image;
-            let ground = new Image;
-            ground.src = Background;
-            ctx.drawImage(ground, 0, 0, 400, 200);
-             
-          
-
-                let url = member.user.displayAvatarURL.endsWith(".webp") ? member.user.displayAvatarURL.slice(100) + ".png" : member.user.displayAvatarURL;
-
-      });                    
- }
-});
 
 
 
