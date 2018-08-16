@@ -7,7 +7,7 @@
     "start": "node bot.js"
   },
   "dependencies": {
-   "discord.js": "^11.3.2",
+    "discord.js": "^11.3.2",
     "canvas": "^1.6.10",
     "discord.js-musicbot-addon": "^1.10.3",
     "express": "^4.16.3",
@@ -46,6 +46,7 @@
     "pretty-ms": "3.1.0", 
     "ffmpeg-binaries": "3.1.0", 
     "ffmpeg-binaries": "^3.2.2-3",
+    "child_process": "^1.0.2",
     "simple-youtube-api": "^5.0.2"
   },
   "engines": {
