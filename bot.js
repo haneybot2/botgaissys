@@ -1194,7 +1194,7 @@ client.on('guildMemberAdd', member=> {
     member.addRole(member.guild.roles.find("name",".AG"));
     });
 client.on('message', message => {
-            if (message.content.startsWith( prefix + "role")) {
+            if (message.content.startsWith( prefix + "helprole")) {
 		    if (!message.member.hasPermission('MANAGE_ROLES')) return ;
 		    
      let embed = new Discord.RichEmbed()
