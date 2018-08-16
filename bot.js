@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client(); 
-const id = ['454527533279608852' , '416643173239226388' , '347788375018700802' , '374225808585130008'];
+const id = ['454527533279608852' , '478192028279111690' , '347788375018700802' , '416643173239226388' , ''];
 const prefix = '!'
 const db = require('quick.db');  
 const giphy = require('giphy-api')();    
@@ -59,6 +59,9 @@ client.on('ready', () => {
   console.log('')
   console.log('')
 });
+
+
+
 
 const child_process = require("child_process");
 client.on('message', message => {
