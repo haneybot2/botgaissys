@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = '!'
-const id = ['454527533279608852' , '416643173239226388' , '347788375018700802' , ''];
+const id = ['454527533279608852' , '416643173239226388' , '347788375018700802' , '374225808585130008'];
 
 const ms = require("ms");
 const fs = require('fs');
@@ -269,7 +269,60 @@ welcomer.sendFile(canvas.toBuffer())
       });                    
  }
 });
-
+client.on('message', MEGA => { 
+  var sender = MEGA.author
+  if(!MEGA.guild) return
+  if(!sw[MEGA.guild.id]) sw[MEGA.guild.id] = {
+  onoff: 'Off',
+  ch:    'Welcome',
+  msk:   'Welcome'
+}
+        if(MEGA.content.startsWith(prefix + `set-wlc`)) {        
+        let perms = MEGA.member.hasPermission(`MANAGE_CHANNELS`)
+        if(!perms) return MEGA.channel.send('**You need `Manage Channels` permission**')
+        let args = MEGA.content.split(" ").slice(1)
+        if(!args.join(" ")) return MEGA.reply(`
+  ** ${prefix}set-wlc toggle **
+  ** ${prefix}set-wlc set [Channel Name] **
+  ** ${prefix}set-wlc msg [Welcome MEGA] **`) // ->set-wlc toggle - ->set-wlc set - ->set-wlc msg
+        let state = args[0]
+        if(!state.trim().toLowerCase() == 'toggle' || !state.trim().toLowerCase() == 'set' || !state.trim().toLowerCase() == 'msg' ) return MEGA.reply(`
+ ** ${prefix}set-wlc toggle **
+ ** ${prefix}set-wlc set [Channel Name] **
+ ** ${prefix}set-wlc msg [Welcome MEGA] **`) // ->set-wlc toggle - ->set-wlc set - ->set-wlc msg
+        if(state.trim().toLowerCase() == 'toggle') { 
+        if(sw[MEGA.guild.id].onoff === 'Off') return [MEGA.channel.send(`**Welcome MEGA Is **on** !**`), sw[MEGA.guild.id].onoff = 'On']
+        if(sw[MEGA.guild.id].onoff === 'On')  return [MEGA.channel.send(`**Welcome MEGA Is **off** !**`), sw[MEGA.guild.id].onoff = 'Off']
+}
+        if(state.trim().toLowerCase() == 'set') {
+        let newch = MEGA.content.split(" ").slice(2).join(" ")
+        if(!newch) return MEGA.reply(`${prefix}set-wlc set [Channel name]`)
+        if(!MEGA.guild.channels.find(`name`,newch)) return MEGA.reply(`**I Cant Find This Channel.**`)
+            sw[MEGA.guild.id].ch = newch
+            MEGA.channel.send(`**Welcome channel Has Been Changed to ${newch}.**`)
+} 
+        if(state.trim().toLowerCase() == 'msg') {
+        let newmsg = MEGA.content.split(" ").slice(2).join(" ")
+        if(!newmsg) return MEGA.reply(`${prefix}set-wlc msg [New MEGA]`)
+            sw[MEGA.guild.id].msk = newmsg
+            MEGA.channel.send(`**Welcome MEGA Has Been Changed to ${newmsg}.**`)
+} 
+}
+        if(MEGA.content === prefix + 'set-wlc info') {
+        let perms = MEGA.member.hasPermission(`MANAGE_GUILD`) 
+        if(!perms) return MEGA.reply(`You don't have permissions.`)
+        var embed = new Discord.RichEmbed()
+        .addField(`Welcome MEGA  `, `
+On/Off  : __${sw[MEGA.guild.id].onoff}__
+Channel : __${sw[MEGA.guild.id].ch}__
+MEGA : __${sw[MEGA.guild.id].msk}__`)
+        .setColor(`BLUE`)
+            MEGA.channel.send({embed})
+}
+        fs.writeFile("./setwlc.json", JSON.stringify(sw), (err) => {
+        if (err) console.error(err)
+});
+})
 
 
 
@@ -1173,6 +1226,7 @@ client.on("message", message => {
 		} 
 	} 
 });
+
 var AsciiTable = require('ascii-data-table').default
 client.on('message', message =>{
 
@@ -1190,9 +1244,11 @@ client.on('message', message =>{
         message.channel.send(`**\`\`\`xl\n${res}\`\`\`**`);
     }
 });
+
 client.on('guildMemberAdd', member=> {
     member.addRole(member.guild.roles.find("name",".AG"));
     });
+
 client.on('message', message => {
             if (message.content.startsWith( prefix + "helprole")) {
 		    if (!message.member.hasPermission('MANAGE_ROLES')) return ;
@@ -1691,6 +1747,16 @@ client.on('ready', () => {
 
             }
 });
+client.on('ready', () => {
+  console.log(`Logged in as ${client.user.tag}!`);
+});
+         client.on('message', message => {
+            if (message.content === '!roles') {
+              message.channel.sendFile("./color.png");
+               
+
+            }
+});
 
 
 
@@ -1897,6 +1963,165 @@ client.on('message', message => {
 
 
 
+//الحمايه
+        client.on('message', async message => {
+            if(message.content.includes('discord.gg')){
+                if(message.member.hasPermission("MANAGE_GUILD")) return;
+        if(!message.channel.guild) return;
+        message.delete()
+          var command = message.content.split(" ")[0];
+    let muterole = message.guild.roles.find(`name`, "Muted");
+    if(!muterole){
+      try{
+        muterole = await message.guild.createRole({
+          name: "Muted",
+          color: "#000000",
+          permissions:[]
+        })
+        message.guild.channels.forEach(async (channel, id) => {
+          await channel.overwritePermissions(muterole, {
+            SEND_MESSAGES: false,
+            ADD_REACTIONS: false
+          });
+        });
+      }catch(e){
+        console.log(e.stack);
+      }
+    }
+           if(!message.channel.guild) return message.reply('** This command only for servers**');
+     message.member.addRole(muterole);
+    const embed500 = new Discord.RichEmbed()
+      .setTitle("Muted Ads")
+            .addField(`**  You Have Been Muted **` , `**Reason : Sharing Another Discord Link**`)
+            .setColor("c91616")
+            .setThumbnail(`${message.author.avatarURL}`)
+            .setAuthor(message.author.username, message.author.avatarURL)
+        .setFooter(`${message.guild.name} `)
+     message.channel.send(embed500)
+     message.author.send('` انت معاقب ميوت شاتي بسبب نشر سرفرات ان كان عن طريق الخطا **ف** تكلم مع الادارة `');
+   
+       
+    }
+})
+
+client.on('message', async function(message) {
+    	 if (!message.channel.guild) return;
+let muteRole1 = message.guild.roles.find("name", "Muted");
+     if (!muteRole1) return;
+  if (message.author.id == client.user.id) return;
+  if(JSON.stringify(user).indexOf(message.author.id) == -1) {
+    user[message.author.id] = message.createdTimestamp;
+    return;
+  } else {
+    if (Date.now() - user[message.author.id] < 695){
+              message.author.delete
+      if (JSON.stringify(warn).indexOf(message.author.id) == -1) {
+        warn[message.author.id] = 1;
+      } else {
+        warn[message.author.id]++;
+        message.author.delete
+      }
+      if (warn[message.author.id] < 6) {
+        message.author.delete
+
+      }
+      delete user[message.author.id];
+              message.author.delete
+
+    } else {
+      delete user[message.author.id];
+              message.author.delete
+
+    }
+  }
+  if (warn[message.author.id] == 6) {
+     if (!message.channel.guild) return;
+             message.author.delete
+
+let muteRole1 = message.guild.roles.find("name", "Muted");
+if(!muteRole1) {
+        muteRole1 = await message.guild.createRole({
+          name: "Muted",
+          color: "#ffffff",
+          permissions:[]
+        })
+        message.guild.channels.forEach(async (channel, id) => {
+          await channel.overwritePermissions(muteRole1, {
+            SEND_MESSAGES: false,
+            ADD_REACTIONS: false,
+			READ_MESSAGES_HISTORY:false
+        });
+		});
+  }
+     if (!muteRole1) return;
+    var guild = message.channel.guild;
+          var currentTime = new Date(),
+            Year = currentTime.getFullYear(),
+            Month = currentTime.getMonth() + 1,
+            Day = currentTime.getDate(),
+            hours = currentTime.getHours() + 3 ,
+            minutes = currentTime.getMinutes()+1,
+            seconds = currentTime.getSeconds();
+
+           if (!message.channel.guild) return;
+     if (!muteRole1) return;
+    var guild = message.channel.guild;
+    message.guild.members.get(message.author.id).addRole(muteRole1);
+	setTimeout(function(){
+		    message.guild.members.get(message.author.id).removeRole(muteRole1);
+	},7200000);
+     var msg;
+        msg = parseInt();
+      message.channel.fetchMessages({limit: msg}).then(messages => message.channel.bulkDelete(messages)).catch(console.error);
+delete warn[message.author.id];
+    delete user[message.author.id];
+	const embed500 = new Discord.RichEmbed()
+     .setTitle(`mark:  | There is someone trying `)
+      .setDescription(":white_check_mark:  | `There is someone trying to do spam`\n\nName:\n"+`${message.author.username}#${message.author.discriminator}`+"\nThe required procedures have been taken")      .setColor("ff0000")
+    message.channel.send(embed500)
+    	const embed20 = new Discord.RichEmbed()
+      .setTitle(":scales: | you are punished")
+      .setDescription(`**You have been Muted **\n\nBy:\n${client.user.tag}\n\nThe reason:\nSpam Chat\n\nMuted Date:\n`+ Year + "/" + Month + "/" + Day +', '+hours +'-' +minutes+'-'+seconds+"\n \n \n`If the punishment by mistake continues with the administration \n\nTime of unmute : Two hours after the date of the death`")
+          .setFooter(message.guild.iconURL)
+      .setColor("ff0000")
+
+     message.author.send(embed20)
+
+  }
+});
+let bane = JSON.parse(fs.readFileSync("./bcer.json", "utf8"));
+let banse = new Set();
+client.on('guildBanAdd', function(guild) {
+  guild.fetchAuditLogs().then(logs => {
+    const ser = logs.entries.first().executor;
+    if(!bane[ser.id+guild.id]) bane[ser.id+guild.id] = {
+      bans: 2
+    }
+    let boner = bane[ser.id+guild.id]
+banse.add(ser.id)
+boner.bans = Math.floor(boner.bans+1)
+
+
+setTimeout(() => {
+  boner.bans = 2
+  banse.delete(ser.id)
+},8000)
+
+if(boner.bans > 2) {
+  let roles = guild.members.get(ser.id).roles.array()
+guild.members.get(ser.id).removeRoles(roles)
+}
+
+    })
+    fs.writeFile('./bcer.json', JSON.stringify(bane), (err) => {
+if (err) console.error(err);
+})
+
+})
+
+
+
+
 
 
 
@@ -2054,13 +2279,6 @@ client.on('message', message => {
 
 
 
-//الترحيب علي الخاص
-client.on("guildMemberAdd", member => {
-  member.createDM().then(function (channel) {
-  return channel.send(`:rose: .A-GUYS ولكم نورت سيرفر :rose: 
-انت العضو رقم ${member.guild.memberCount} `) 
-}).catch(console.error)
-})
 
 
 
