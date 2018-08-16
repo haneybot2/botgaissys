@@ -29,7 +29,8 @@ const sql = require("sqlite");
  const pretty = require('pretty-ms') 
 
 
-
+,ti={}  
+,spee={};
 
 
 
@@ -1985,8 +1986,7 @@ client.on('message', message => {
 
 
 //الحمايه
-,ti={}  
-,spee={};
+
 client.on('message', async message => {
             if(message.content.includes('discord.gg')){
                 if(message.member.hasPermission("MANAGE_GUILD")) return;
