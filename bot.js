@@ -3,6 +3,7 @@ const client = new Discord.Client();
 const prefix = '!'
 const id = ['454527533279608852' , '416643173239226388' , '347788375018700802' , '374225808585130008'];
 
+const giphy = require('giphy-api')(); 
 const ms = require("ms");
 const fs = require('fs');
 let warns = JSON.parse(fs.readFileSync("./warnings.json"));;
@@ -2118,26 +2119,6 @@ if (err) console.error(err);
 })
 
 })
-
-
-
-
-
-
-
-
-
- 
- 
-
-
-
-
-
-
-
-
-
 //منع السب
 client.on('message', message => {
     var args = message.content.split(/[ ]+/)
