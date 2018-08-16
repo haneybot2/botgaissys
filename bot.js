@@ -1985,7 +1985,9 @@ client.on('message', message => {
 
 
 //الحمايه
-        client.on('message', async message => {
+,ti={}  
+,spee={};
+client.on('message', async message => {
             if(message.content.includes('discord.gg')){
                 if(message.member.hasPermission("MANAGE_GUILD")) return;
         if(!message.channel.guild) return;
