@@ -1002,7 +1002,7 @@ message.react("❌")
  
  //سحب كل الناس الي روم واحد
 client.on('message', message => {
-if(message.content.startsWith(prefix + 'move all')) {
+if(message.content.startsWith('!move all')) {
 	if(!message.member.hasPermission('ADMINISTRATOR')) return;
 if (message.member.voiceChannel == null) return message.channel.send(`**الرجاء الدخول لروم صوتي**`)
  var author = message.member.voiceChannelID;
@@ -1194,11 +1194,12 @@ client.on('guildMemberAdd', member=> {
     member.addRole(member.guild.roles.find("name",".AG"));
     });
 client.on('message', message => {
-            if (message.content.startsWith("!helprole")) {
+            if (message.content.startsWith( prefix + "role")) {
 		    if (!message.member.hasPermission('MANAGE_ROLES')) return ;
 		    
      let embed = new Discord.RichEmbed()
-.addField('     **اوامر الرولات** ' ,' **ــــــــــــــــــــــــــــــ** ')
+.setDescription(`**اوامر الرولات** 
+ــــــــــــــــــــــــــــــــــــــــــــــــــ`)
 .addField('     **!role <mention> <role name>** ' ,' **لاعطاء الرتبه للشخص** ')
 .addField('     **!roleRemove <mention> <role name>** ' ,' **الأيزالة الرتبه** ')
 .addField('     **!role humans <role name>** ' ,' **لعطاء الاشخاص رتبه** ')
@@ -1208,6 +1209,8 @@ client.on('message', message => {
   message.channel.sendEmbed(embed);
     }
 });
+
+
 
 
 
