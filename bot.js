@@ -11,8 +11,7 @@ const Canvas = require("canvas");
 const jimp = require("jimp");
 
 
-,ti={}  
-,spee={};
+
 
 
 
