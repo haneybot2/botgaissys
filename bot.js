@@ -46,7 +46,7 @@ client.on('ready', () => {
 //restart
 const child_process = require("child_process");
 client.on('message', message => {
-if(message.content === prefix + "restart") {
+if(message.content === owner + "restart") {
       if (!id.includes(message.author.id)) return;
         console.log(`⚠️ جاري اعادة تشغيل البوت... ⚠️`);
         client.destroy();
