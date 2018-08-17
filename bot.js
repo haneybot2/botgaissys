@@ -884,16 +884,7 @@ client.on("message", message => {
 	 if (!message.member.hasPermission('MANAGE_ROLES')) return ;
 	if( msg.toLowerCase().startsWith( prefix + 'roleremove' ) ){
 		if (!message.member.hasPermission('MANAGE_ROLES')) return ;
-		if( !args[0] ) return      let embed = new Discord.RichEmbed()
-.setDescription(`**اوامر الرولات** 
-ــــــــــــــــــــــــــــــــــــــــــــــــــ`)
-.addField('     **!role <mention> <role name>** ' ,' **لاعطاء الرتبه للشخص** ')
-.addField('     **!roleRemove <mention> <role name>** ' ,' **الأيزالة الرتبه** ')
-.addField('     **!role humans <role name>** ' ,' **لعطاء الاشخاص رتبه** ')
-.addField('     **!role bots <role name>** ' ,' **لعطاء البوتات رتبه** ')
-.addField('     **!role all <role name> ** ' ,' **لاعطاء رتبه للكل** ')
-.setColor('RANDOM')
-  message.channel.sendEmbed(embed);
+		
 		var role = msg.split(' ').slice(2).join(" ").toLowerCase(); 
 		var role1 = message.guild.roles.filter( r=>r.name.toLowerCase().indexOf(role)>-1 ).first(); 
 		if( !role1 ) return message.reply( '**:x: يرجى وضع الرتبة المراد سحبها من الشخص**' );if( message.mentions.members.first() ){
