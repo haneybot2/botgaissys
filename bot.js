@@ -1,23 +1,15 @@
 const Discord = require('discord.js');
 const client = new Discord.Client(); 
 const prefix = '!'
-const id = ['454527533279608852' , '478192028279111690' , '347788375018700802' , '416643173239226388' , ''];
-
+const owner = ['454527533279608852'];
+const id = ['454527533279608852' , '' , '' , '' , ''];
 const ms = require("ms");
 const fs = require('fs');
 let warns = JSON.parse(fs.readFileSync("./warnings.json"));;
 //id
 const Canvas = require("canvas");
 const jimp = require("jimp");
-
- 
- 
- 
- 
- 
-
-
-
+//log
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
   console.log('')
@@ -42,10 +34,7 @@ client.on('ready', () => {
   console.log('')
   console.log('')
 });
-
-
-
-
+//restart
 const child_process = require("child_process");
 client.on('message', message => {
 if(message.content === prefix + "restart") {
@@ -57,9 +46,7 @@ if(message.content === prefix + "restart") {
     }
   
   });
-
-
-
+//voise online
 client.on('voiceStateUpdate', (old, now) => {
   const channel = client.channels.get('471810322601345024');
   const currentSize = channel.guild.members.filter(m => m.voiceChannel).size;
@@ -67,15 +54,7 @@ client.on('voiceStateUpdate', (old, now) => {
   if (!size) return channel.setName(`Voice Online: [${currentSize}]`);
   if (currentSize !== size) channel.setName(`Voice Online: [${currentSize}]`);
 });
-
-
-
-
-
-
-
-
-
+//help
 client.on("message", message => {
  if (message.content === prefix + "help") {
  message.channel.send(":white_check_mark: ")
@@ -142,13 +121,7 @@ message.author.sendEmbed(embed)
 
 }
 });
-
-
-
-
-
-
-
+//help-admin
 client.on("message", message => {
  if (message.content === prefix + "ahelp") {
 	       if (!id.includes(message.author.id)) return;
@@ -159,8 +132,6 @@ client.on("message", message => {
  **
 
 !setplaying
-
-!leveserver
 
 !setwatching
 
@@ -186,22 +157,7 @@ message.author.sendEmbed(embed)
 
 }
 });
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
+//welcome-member-join
 client.on('guildMemberAdd', member => {
      const welcomer =  member.guild.channels.find('name', 'a-guys');
     if(!welcomer) return;
@@ -277,24 +233,7 @@ welcomer.sendFile(canvas.toBuffer())
       });                    
  }
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//warn
 client.on('message', async message => {
 
   if (message.author.x5bz) return;
@@ -423,65 +362,10 @@ client.on('message', async message => {
 
 }
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//تغير اسم البوت
-client.on('message', async (message) => {
-    if(message.content.startsWith('!namebot')) {
-	       if (!id.includes(message.author.id)) return;
-         let args = message.content.split(' ').slice(1);
-  try {
-    if (args.length > 0) {
-      await message.guild.me.setNickname(args.join(' '));
-
-      message.channel.send({
-        embed: {
-          color: message.colors.GREEN,
-          description: `${message.user.username}'s nick is now set to **${args.join(' ')}** on this guild.`
-        }
-      }).catch(e => {
-        message.log.error(e);
-      });
-    }
-    else {
-      await message.guild.me.setNickname('');
-
-      message.channel.send({
-        embed: {
-          color: message.colors.GREEN,
-          description: `${message.user.username}'s nick has been reset on this guild.`
-        }
-      }).catch(e => {
-        message.log.error(e);
-      });
-    }
-  }
-  catch (e) {
-    message.log.error(e);
-  }
-}
-});
-
-
-
-
-
 //معلومات البوت
 client.on('message', message => {
   if (message.content.startsWith("!data")) {
-	  if (message.author.id !== '454527533279608852') return message.reply('** ليس مسموح لك باستخدام هذا الامر **')
+     if (!owner.includes(message.author.id)) return;
     message.channel.send({
 embed: new Discord.RichEmbed() 
   .setColor('RED')
@@ -503,12 +387,6 @@ function timeCon(time) {
   seconds = seconds > 9 ? seconds : '0' + seconds
   return `${days > 0 ? `${days}:` : ''}${(hours || days) > 0 ? `${hours}:` : ''}${minutes}:${seconds}`
 };
-
-
-
-
-
-
 //ping
       client.on('message', message => {
                                 if(!message.channel.guild) return;
@@ -525,58 +403,32 @@ function timeCon(time) {
          message.channel.send({embed:embed});
                         }
 });
+//server-data 
+ client.on('message', message => {
+	 var prefix ="!";
+ if(message.content.startsWith(prefix +"server")){
+if(!message.channel.guild) return message.reply(' ');
+const millis = new Date().getTime() - message.guild.createdAt.getTime();
+const now = new Date();
+dateFormat(now, 'dddd, mmmm dS, yyyy, h:MM:ss TT');
+const verificationLevels = ['None', 'Low', 'Medium', 'Insane', 'Extreme'];
+const days = millis / 1000 / 60 / 60 / 24;
+let roles = client.guilds.get(message.guild.id).roles.map(r => r.name);
+var embed  = new Discord.RichEmbed()
+.setAuthor(message.guild.name, message.guild.iconURL)
+.addField("**🆔 Server ID:**", message.guild.id,true)
+.addField("**📅 Created On**", message.guild.createdAt.toLocaleString(),true)
+.addField("**👑 Owned by**",`${message.guild.owner.user.username}#${message.guild.owner.user.discriminator}`)
+.addField("👥 Members ",`[${message.guild.memberCount}]`,true)
+.addField('**💬 Channels **',`**${message.guild.channels.filter(m => m.type === 'text').size}**` + ' text | Voice  '+ `**${message.guild.channels.filter(m => m.type === 'voice').size}** `,true)
+.addField("**🌍 Others **" , message.guild.region,true)
+.addField("** 🔐 Roles **",`**[${message.guild.roles.size}]** Role `,true)
+.setColor('#000000')
+message.channel.sendEmbed(embed)
 
-
-
-
-
-
-client.on('message', function(msg) {
-    if(msg.content.startsWith (prefix  + 'server')) {
-	      if(!msg.guild.member(msg.author).hasPermission("MANAGE_SERVER")) return msg.reply("**هذه الخاصيه للاداره فقط**");
-      let embed = new Discord.RichEmbed()
-      .setColor('RANDOM')
-      .setThumbnail(msg.guild.iconURL)
-      .setTitle(`Showing Details Of  **${msg.guild.name}*`)
-      .addField(':globe_with_meridians:** نوع السيرفر**',`[** __${msg.guild.region}__ **]`,true)
-      .addField(':medal:** __الرتب__**',`[** __${msg.guild.roles.size}__ **]`,true)
-      .addField(':red_circle:**__ عدد الاعضاء__**',`[** __${msg.guild.memberCount}__ **]`,true)
-      .addField(':large_blue_circle:**__ عدد الاعضاء الاونلاين__**',`[** __${msg.guild.members.filter(m=>m.presence.status == 'online').size}__ **]`,true)
-      .addField(':pencil:**__ الرومات الكتابية__**',`[** __${msg.guild.channels.filter(m => m.type === 'text').size}__** ]`,true)
-      .addField(':microphone:**__ رومات الصوت__**',`[** __${msg.guild.channels.filter(m => m.type === 'voice').size}__ **]`,true)
-      .addField(':crown:**__ الأونـر__**',`**${msg.guild.owner}**`,true)
-      .addField(':id:**__ ايدي السيرفر__**',`**${msg.guild.id}**`,true)
-      .addField(':date:**__ تم عمل السيرفر في__**',msg.guild.createdAt.toLocaleString())
-      msg.channel.send({embed:embed});
-    }
-  });
-
-
-
-
-
-
-
-
-  
-  
-  
-  
-  
-  
-
-
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-//لانشاء شات ورومات
+}
+});
+//chanels-seteng:!ct-!cv-!delete
 client.on("message", message => {
            if (message.content.startsWith("!ct")) {
              if(!message.channel.guild) return message.reply('هذا الأمر للسيرفرات فقط')
@@ -599,9 +451,6 @@ client.on("message", (message) => {
 
            }
  });
-
- 
- //لمسح الشات او الروم
  client.on("message", (message) => {
                  if (message.content.startsWith('!delete')) {
 if(!message.channel.guild) return message.reply('هذا الأمر للسيرفرات فقط')
@@ -614,11 +463,7 @@ if(!message.channel.guild) return message.reply('هذا الأمر للسيرف�
                      message.channel.sendMessage('❌ تـم حـذف الـروم الـصوتـي او الـشـات الـكـتـابـي')
                  }
 });
- 
- 
- 
-
-//الرومات المئقتة
+//Temporary Channels
 const temp = {};
 client.on('message', async message => {
  if(message.channel.type === "dm") return;
@@ -694,21 +539,7 @@ client.on('message', async message => {
            })
           }
       });
-
-
-
-
-
-
- 
- 
- 
- 
- 
- 
- 
- 
- //تايم
+ //time
 client.on('message' , async (message) => {
     if (message.content.startsWith(prefix + 'time')) {
          let args = message.content.split(" ").slice(1);
@@ -726,10 +557,7 @@ setTimeout(function(){
 }, ms(Timer));
 } 
 }); 
- 
-
-
-//فتح وقفل الشات
+//settingchat:!mutechat-!unmutechat-!hidechat-!showchat
 client.on('message', message => {
 
 if (message.author.bot) return;
@@ -759,8 +587,6 @@ if(!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply('لي�
 
 
 });
-
-// لايخفاء الشات
 client.on('message', message => {
 
 if (message.author.bot) return;
@@ -793,13 +619,7 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply('ليس 
 
 
 });
-
-
-
-
-
-
-//ban
+//ban-kick
   client.on('message', message => {
   if (message.author.codes) return;
   if (!message.content.startsWith(prefix)) return;
@@ -827,8 +647,6 @@ message.channel.send(`**✅ ${user.tag} banned from the server ! ✈ **  `)
 
 }
 });
-
-//kik
   client.on('message', message => {
   if (message.author.codes) return;
   if (!message.content.startsWith(prefix)) return;
@@ -856,14 +674,7 @@ message.channel.send(`**✅ ${user.tag} kicked from the server ! ✈ **  `)
 
 }
 });
-
-
-
-
-
-
-
-//صور فقط
+//chat-pic
 client.on('message', ( message ) => {
   if(message.author.bot) return;
 
@@ -902,15 +713,7 @@ client.on('message', ( message ) => {
   }
 
 });
-
-
-
-
-
-
-
-
- //سحب الناس
+//move-members
 client.on('message', message => {
 if(!message.channel.guild) return;
 if(message.content.startsWith(prefix + 'move')) {
@@ -941,6 +744,7 @@ message.channel.send("``لا تستطيع سحب "+ message.mentions.members.fir
 } else {
 message.react("❌")
  }}});	
+
 client.on('message', message => {
 if(!message.channel.guild) return;
 if(message.content.startsWith('اسحب')) {
@@ -971,43 +775,7 @@ message.channel.send("``لا تستطيع سحب "+ message.mentions.members.fir
 } else {
 message.react("❌")
  }}});	
-client.on('message', message => {
-if(!message.channel.guild) return;
-if(message.content.startsWith('سحب')) {
- if (message.member.hasPermission("MOVE_MEMBERS")) {
- if (message.mentions.users.size === 0) {
- return message.channel.send("``لاستخدام الأمر اكتب هذه الأمر : " +prefix+ "move [USER]``")
-}
-if (message.member.voiceChannel != null) {
- if (message.mentions.members.first().voiceChannel != null) {
- var authorchannel = message.member.voiceChannelID;
- var usermentioned = message.mentions.members.first().id;
-var embed = new Discord.RichEmbed()
- .setTitle("Succes!")
- .setColor("#000000")
- .setDescription(`لقد قمت بسحب <@${usermentioned}> الى الروم الصوتي الخاص بك:white_check_mark: `)
-var embed = new Discord.RichEmbed()
-.setTitle(`You are Moved in ${message.guild.name}`)
- .setColor("#000000")
-.setDescription(`<@${message.author.id}> moved you to his channel!\nServer => ${message.guild.name}`)
- message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => message.channel.send(embed))
-message.guild.members.get(usermentioned).send(embed)
-} else {
-message.channel.send("``لا تستطيع سحب "+ message.mentions.members.first() +" `يجب ان يكون هذه العضو في روم صوتي`")
-}
-} else {
- message.channel.send("``يجب ان تكون في روم صوتي لكي تقوم بسحب العضو أليك``")
-}
-} else {
-message.react("❌")
- }}});	
 
-
- 
-
-
- 
- //سحب كل الناس الي روم واحد
 client.on('message', message => {
 if(message.content.startsWith('!move all')) {
 	if(!message.member.hasPermission('ADMINISTRATOR')) return;
@@ -1022,17 +790,12 @@ if (message.member.voiceChannel == null) return message.channel.send(`**الرج
 
  }
 });
-   
-   
-   
- 
- 
- //لمسح الشات
+ //clere-chat
 client.on("message", message => {
     var prefix = "!";
  
             var args = message.content.substring(prefix.length).split(" ");
-            if (message.content.startsWith("مسح")) {
+            if (message.content.startsWith(prefix + "clear")) {
    if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('⚠ | **لا يوجد لديك صلاحية لمسح الشات**');
         var msg;
         msg = parseInt();
@@ -1054,7 +817,7 @@ client.on("message", message => {
     var prefix = "!";
  
             var args = message.content.substring(prefix.length).split(" ");
-            if (message.content.startsWith(prefix + "clear")) {
+            if (message.content.startsWith("مسح")) {
    if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('⚠ | **لا يوجد لديك صلاحية لمسح الشات**');
         var msg;
         msg = parseInt();
@@ -1094,19 +857,7 @@ client.on("message", message => {
 
      
 });
- 
- 
-
-
-
-
-
-
-
-
- 
- 
- //امر الممبر لعرض الناس
+ //members
 client.on('message', message => {
               if (!message.channel.guild) return;
       if(message.content =='!member')
@@ -1124,10 +875,7 @@ client.on('message', message => {
       message.channel.send(IzRo);
 	
     });
-
-
-
-//اوامر الرول
+//role-command
 client.on("message", message => {
 	var args = message.content.split(' ').slice(1); 
 	var msg = message.content.toLowerCase();
@@ -1136,8 +884,16 @@ client.on("message", message => {
 	 if (!message.member.hasPermission('MANAGE_ROLES')) return ;
 	if( msg.toLowerCase().startsWith( prefix + 'roleremove' ) ){
 		if (!message.member.hasPermission('MANAGE_ROLES')) return ;
-		if( !args[0] ) return message.reply( '**:x: يرجى وضع الشخص المراد سحب منه الرتبة**' );
-		if( !args[1] ) return message.reply( '**:x: يرجى وضع الرتبة المراد سحبها من الشخص**' );
+		if( !args[0] ) return      let embed = new Discord.RichEmbed()
+.setDescription(`**اوامر الرولات** 
+ــــــــــــــــــــــــــــــــــــــــــــــــــ`)
+.addField('     **!role <mention> <role name>** ' ,' **لاعطاء الرتبه للشخص** ')
+.addField('     **!roleRemove <mention> <role name>** ' ,' **الأيزالة الرتبه** ')
+.addField('     **!role humans <role name>** ' ,' **لعطاء الاشخاص رتبه** ')
+.addField('     **!role bots <role name>** ' ,' **لعطاء البوتات رتبه** ')
+.addField('     **!role all <role name> ** ' ,' **لاعطاء رتبه للكل** ')
+.setColor('RANDOM')
+  message.channel.sendEmbed(embed);
 		var role = msg.split(' ').slice(2).join(" ").toLowerCase(); 
 		var role1 = message.guild.roles.filter( r=>r.name.toLowerCase().indexOf(role)>-1 ).first(); 
 		if( !role1 ) return message.reply( '**:x: يرجى وضع الرتبة المراد سحبها من الشخص**' );if( message.mentions.members.first() ){
@@ -1180,12 +936,10 @@ client.on("message", message => {
 		} 
 	} 
 });
-
 var AsciiTable = require('ascii-data-table').default
 client.on('message', message =>{
 
     if(message.content == "!roles"){
-	    if (!message.member.hasPermission('MANAGE_ROLES')) return ;
         var 
         ros=message.guild.roles.size,
         data = [['Rank', 'RoleName']]
@@ -1198,7 +952,7 @@ client.on('message', message =>{
         message.channel.send(`**\`\`\`xl\n${res}\`\`\`**`);
     }
 });
-
+ 
 client.on('guildMemberAdd', member=> {
     member.addRole(member.guild.roles.find("name",".AG"));
     });
