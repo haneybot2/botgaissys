@@ -48,7 +48,7 @@ client.user.setGame(`.A-GUYS`,"http://twitch.tv/S-F")
 client.on('message', message => {
 if(message.content === prefix + "restart") {
       if (!owner.includes(message.author.id)) return message.channel.send(':x:');
-	   message.channel.send('**Restarting**:arrows_counterclockwise: ');
+	   message.channel.send('**Restarting **:arrows_counterclockwise:');
         console.log(`⚠️ جاري اعادة تشغيل البوت... ⚠️`);
         client.destroy();
         child_process.fork(__dirname + "/bot.js");
