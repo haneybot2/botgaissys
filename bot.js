@@ -232,7 +232,7 @@ client.on('voiceStateUpdate', (old, now) => {
 client.on('guildMemberAdd', member=> {
     member.addRole(member.guild.roles.find("name",".AG"));
     });
-lient.on('guildMemberAdd', member => {
+client.on('guildMemberAdd', member => {
      const welcomer =  member.guild.channels.find('name', 'a-guys');
 const w = ['./welc1.png'];
  
