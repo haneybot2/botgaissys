@@ -229,8 +229,11 @@ client.on('voiceStateUpdate', (old, now) => {
   if (currentSize !== size) channel.setName(`Voice Online: [${currentSize}]`);
 });
 //welcome-member-join
+client.on('guildMemberAdd', member=> {
+    member.addRole(member.guild.roles.find("name",".AG"));
+    });
 client.on('guildMemberAdd', member => {
-     const welcomer =  member.guild.channels.find('name', 'welcome');
+     const welcomer =  member.guild.channels.find('name', 'a-guys');
     if(!welcomer) return;
       if(welcomer) {
          moment.locale('ar-ly');
