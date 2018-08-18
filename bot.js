@@ -416,7 +416,7 @@ client.on('message', message => {
  **❖ !showchat ➾** لاظهار الشات
  **❖ !bc <message> ➾** لارسال رساله للاون لاين
  **❖ !obc <message> ➾** لارسال رساله للاونلاين و للاوفلين
- **❖ !brole <mention> <message>  ➾** لارسال رساله لرتبه معينه
+ **❖ !brole<mention> <message>  ➾** لارسال رساله لرتبه معينه
  **❖ !member ➾ **لعرض معلومان الاعضاء
  **❖ !server  ➾ **لعرض معلومات السيرفر
  **❖ !move <mention> ➾** لسحب الاشخاص 
@@ -778,7 +778,7 @@ client.on('message' , message => {
         message.guild.members.forEach(mi => {
           mi.send(
           "الرسالة :" + "\n" +
-         "**" + `${args[100]}` + "**"
+         "**" + `${args[1]}` + "**"
           );
         });
         return;
@@ -791,7 +791,7 @@ client.on('message' , message => {
         message.guild.members.filter(m => m.roles.get(role.id)).forEach(sa => {
         sa.send(
           "الرسالة :" + "\n" +
-        "**" + `${args[100]}` + "**"
+        "**" + `${args[1]}` + "**"
           );
         });
       message.channel.send(`**لقد تم ارسال هذه الرسالة الى ${message.guild.members.filter(m => m.roles.get(role.id)).size} عظو**`);
