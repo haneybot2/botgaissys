@@ -1587,7 +1587,7 @@ client.on('ready', () => {
 });
          client.on('message', message => {
             if (message.content === 'الوان') {
-              message.channel.send('لأختيار اللون اكتب ( لون `رقم الون`)  مثال :  لون 55');
+              message.channel.send('لأختيار اللون اكتب ( لون `رقم الون`)  مثال :  لون 1');
             }
 });
 //الردود بمن شن
@@ -1643,7 +1643,7 @@ client.on('ready', () => {
 });
          client.on('message', message => {
             if (message.content === 'الوان') {
-              message.channel.sendFile("./color.png");
+              message.channel.sendFile("./color1.png");
                
 
             }
