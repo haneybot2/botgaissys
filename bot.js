@@ -233,7 +233,7 @@ client.on('guildMemberAdd', member=> {
     });
 lient.on('guildMemberAdd', member => {
      const welcomer =  member.guild.channels.find('name', 'a-guys');
-const w = ['./w1.png'];
+const w = ['./welc1.png'];
  
          let Image = Canvas.Image,
             canvas = new Canvas(400, 200),
