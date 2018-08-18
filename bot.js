@@ -347,6 +347,8 @@ client.on('message', message => {
  message.author.sendMessage(`
  
 
+
+
 ╔[❖═════════════════❖]╗
     **MEMBERS  Commands**
 ╚[❖═════════════════❖]╝
@@ -362,6 +364,8 @@ client.on('message', message => {
  **❖ !short  ➾ ** أختصار الروابط 
 
  
+
+
 `);
 
     }
@@ -369,9 +373,11 @@ client.on('message', message => {
 client.on('message', message => {
     if (message.author.bot) return;
      if (message.content === prefix + "help") {
-		 
+		   if(!message.member.hasPermission('MANAGE_MESSAGES')) return; 
  message.author.sendMessage(`
  
+
+
  
 ╔[❖══════════════❖]╗
     **Admin Commands**
@@ -413,6 +419,8 @@ client.on('message', message => {
  **❖ !resume ➾** لاتشغيل الاغنيه المتوقفه
 
  
+
+
 `);
 
     }
@@ -420,9 +428,12 @@ client.on('message', message => {
 client.on('message', message => {
     if (message.author.bot) return;
      if (message.content === prefix + "help") {
-
+      if (!id.includes(message.author.id)) return;
  message.author.sendMessage(`
  
+
+
+
  ╔[❖═══════════════❖]╗
     **PRIVET Commands**
  ╚[❖═══════════════❖]╝
