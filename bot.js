@@ -1061,7 +1061,7 @@ if (message.content.startsWith('!server')) {
 
 
 }
-})
+});
 //warn
 client.on('message', message =>{
     let messageArray = message.content.split(" ");
