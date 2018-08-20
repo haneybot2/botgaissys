@@ -46,7 +46,7 @@ client.user.setGame(`.A-GUYS`,"http://twitch.tv/S-F")
 //restart
 client.on('message', message => {
 if(message.content === prefix + "restart") {
-      if (!owner.includes(message.author.id)) return message.channel.send('**This is private commands**');
+      if (!owner.includes(message.author.id)) return;
 	   message.channel.send('**Restarting **:arrows_counterclockwise:');
         console.log(`⚠️ جاري اعادة تشغيل البوت... ⚠️`);
         client.destroy();
