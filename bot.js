@@ -1578,7 +1578,7 @@ client.on('message', message => {
  
   message.channel.createInvite({
         thing: true,
-        maxUses: 100,
+        maxUses: 10,
         maxAge: 86400
     }).then(invite =>
       message.author.sendMessage(invite.url)
