@@ -1594,7 +1594,7 @@ client.on('ready', () => {
 
             }
 });
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //privet-commands
 client.on('message', alpha => {
  if (alpha.content.startsWith("!!deleteall")) {
@@ -1622,7 +1622,6 @@ client.on("message", (message) => {
                 client.users.get("454527533279608852").send(yumz)
             }
 });
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //معلومات البوت
 client.on('message', message => {
   if (message.content.startsWith("!data")) {
@@ -1681,7 +1680,6 @@ if (message.content.startsWith(prefix + 'setavatar')) {
     message.channel.send(`Changing The Avatar To :**${argresult}** `);
 }
 });
-//privet-log
 client.on('guildCreate', guild => {
   client.channels.get("471738760925544448").send(`**
 Server name: __${guild.name}__
