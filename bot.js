@@ -5,7 +5,6 @@ const owner = ['454527533279608852'];
 const id = ['454527533279608852', '' , '' , '' , ''];
 const ms = require("ms");
 const fs = require('fs');
-const db = fs.database();
 //حمايه
 let bane = JSON.parse(fs.readFileSync("./bcer.json", "utf8"));
 //
