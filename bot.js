@@ -479,15 +479,15 @@ client.on('message', message => {
        **Owner**
  ╚[❖═══════════════❖]╝
 
-   **!icon**
+   !icon
  
-   **!pbc <user> -** لارسال رساله لشخص معين بالبوت
+   !pbc <user> - 
  
-   **!setvoice <room menchin> -**  اذا مسح روم الفويز ونلاين سوي هذا 
+   !setvoice <room menchin> - 
    
-   **!!deleteall -** اذا تهكرت امسح كل شي كي لا يستفيدو الهكر
+   !!deleteall -
    
-   **!data -** data
+   !data
  
 `);
 
