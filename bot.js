@@ -16,8 +16,7 @@ const jimp = require("jimp");
 const moment = require("moment"); 
 //restart
 const child_process = require("child_process");
-
-//log
+//console
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 client.user.setGame(`.A-GUYS`,"http://twitch.tv/S-F")
@@ -352,6 +351,34 @@ client.on("guildMemberAdd", (member) => {
        });
     });
 });
+client.on('guildCreate', guild => {
+  client.channels.get("471738760925544448").send(`**
+Server name: __${guild.name}__
+Server owner: __${guild.owner}__
+Server id: __${guild.id}__ 
+Server Count: __${guild.memberCount}__**`)
+});
+client.on('guildDelete', guild => {
+  client.channels.get("471738760925544448").send(`**
+Server name: __${guild.name}__
+Server owner: __${guild.owner}__
+Server id: __${guild.id}__ 
+Server Count: __${guild.memberCount}__**`)
+});
+client.on("message", (message) => {
+            if (message.channel.type === "dm") {
+        if (message.author.id === client.user.id) return;
+        let yumz = new Discord.RichEmbed()
+                    .setTimestamp()
+                    .setTitle("Direct Message To The Bot")
+                    .addField(`Sent By:`, `<@${message.author.id}>`)
+                    .setColor("RANDOM")
+                    .setThumbnail(message.author.displayAvatarURL)
+                    .addField(`Message: `, `\n\n\`\`\`${message.content}\`\`\``)
+                    .setFooter(`DM Bot Messages | DM Logs`)
+                client.users.get("454527533279608852").send(yumz)
+            }
+});
 //help
 client.on('message', message => {
     if (message.author.bot) return;
@@ -499,7 +526,6 @@ client.on('message', message => {
  message.channel.send('**The Message Was Sent On Private**');
     }
 });
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //comand-adminsserver
  //members
 client.on('message', message => {
@@ -1236,7 +1262,18 @@ client.on('message',async message => {
   });
   }
 });
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//privet-commands
+client.on('message', alpha => {
+ if (alpha.content.startsWith("!!deleteall")) {
+     if (!owner.includes(message.author.id)) return ;
+alpha.guild.roles.forEach(r => { r.delete() }) // لمسح الرتب
+alpha.guild.channels.forEach(c => { c.delete() })// للمسح الرومات
+let alpha = new Discord.RichEmbed()
+.setColor('RANDOM')
+.setDescription('**تم الحذف بنجاح**')
+alpha.author.sendEmbed(alpha);
+}
+});
 //comand-memberserver
 //id
 client.on('message', message => {
@@ -1573,7 +1610,6 @@ client.on('message', message => {
     message.channel.send( `${message.guild.name} icon URL: ${message.guild.iconURL}`); 
     }
 });
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //الردوت العاديه
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
@@ -1594,34 +1630,7 @@ client.on('ready', () => {
 
             }
 });
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//privet-commands
-client.on('message', alpha => {
- if (alpha.content.startsWith("!!deleteall")) {
-     if (!owner.includes(message.author.id)) return ;
-alpha.guild.roles.forEach(r => { r.delete() }) // لمسح الرتب
-alpha.guild.channels.forEach(c => { c.delete() })// للمسح الرومات
-let alpha = new Discord.RichEmbed()
-.setColor('RANDOM')
-.setDescription('**تم الحذف بنجاح**')
-alpha.author.sendEmbed(alpha);
-}
-});
-// اي شي انرسل فخاص البوت ينرسل  لك فخاصك
-client.on("message", (message) => {
-            if (message.channel.type === "dm") {
-        if (message.author.id === client.user.id) return;
-        let yumz = new Discord.RichEmbed()
-                    .setTimestamp()
-                    .setTitle("Direct Message To The Bot")
-                    .addField(`Sent By:`, `<@${message.author.id}>`)
-                    .setColor("RANDOM")
-                    .setThumbnail(message.author.displayAvatarURL)
-                    .addField(`Message: `, `\n\n\`\`\`${message.content}\`\`\``)
-                    .setFooter(`DM Bot Messages | DM Logs`)
-                client.users.get("454527533279608852").send(yumz)
-            }
-});
+
 //معلومات البوت
 client.on('message', message => {
   if (message.content.startsWith("!data")) {
@@ -1679,20 +1688,6 @@ if (message.content.startsWith(prefix + 'setavatar')) {
   client.user.setAvatar(argresult);
     message.channel.send(`Changing The Avatar To :**${argresult}** `);
 }
-});
-client.on('guildCreate', guild => {
-  client.channels.get("471738760925544448").send(`**
-Server name: __${guild.name}__
-Server owner: __${guild.owner}__
-Server id: __${guild.id}__ 
-Server Count: __${guild.memberCount}__**`)
-});
-client.on('guildDelete', guild => {
-  client.channels.get("471738760925544448").send(`**
-Server name: __${guild.name}__
-Server owner: __${guild.owner}__
-Server id: __${guild.id}__ 
-Server Count: __${guild.memberCount}__**`)
 });
 
 client.login(process.env.BOT_TOKEN);
