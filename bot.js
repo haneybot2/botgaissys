@@ -5,6 +5,7 @@ const owner = ['454527533279608852'];
 const id = ['454527533279608852', '' , '' , '' , ''];
 const ms = require("ms");
 const fs = require('fs');
+const db = fs.database();
 //حمايه
 let bane = JSON.parse(fs.readFileSync("./bcer.json", "utf8"));
 //
@@ -1624,7 +1625,6 @@ client.on("message", (message) => {
                 client.users.get("454527533279608852").send(yumz)
             }
 });
-const db = fs.database();
 client.oN("message", message => {
         if (message.content === "!setprefix") {
        if (!owner.includes(message.author.id)) return;
