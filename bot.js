@@ -1574,27 +1574,32 @@ client.on('message', message => {
 });
 //link
 client.on('message', message => {
-     if (message.author.bot) return;
     if (message.content.startsWith("رابط")) {
-        message.channel.createInvite({
+ 
+  message.channel.createInvite({
         thing: true,
-        maxUses: 10,
-        maxAge: 86400,
+        maxUses: 100,
+        maxAge: 86400
     }).then(invite =>
       message.author.sendMessage(invite.url)
     )
     const embed = new Discord.RichEmbed()
         .setColor("RANDOM")
-          .setDescription(" تم أرسال الرابط برسالة خاصة ")
-           .setAuthor(client.user.username, client.user.avatarURL)
-                 .setAuthor(client.user.username, client.user.avatarURL)
-                .setFooter('طلب بواسطة: ' + message.author.tag)
-
+        .setDescription("| :white_check_mark:  | :heart:  تم ارسال الرابط على الخاص  ")
       message.channel.sendEmbed(embed).then(message => {message.delete(10000)})
               const Embed11 = new Discord.RichEmbed()
         .setColor("RANDOM")
-		.addField("**مدة الرابط**", '**يوم**',true)
-		.addField("**عدد استخدامات الرابط**",  '**10 اشخاص**',true)
+                .setAuthor(message.guild.name, message.guild.iconURL)
+        .setDescription(`
+**
+
+  مدة الرابط : يـوم 
+ عدد استخدامات الرابط : 10
+
+
+[${message.guild.name}]
+
+**`)
       message.author.sendEmbed(Embed11)
     }
 });
