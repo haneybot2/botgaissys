@@ -487,8 +487,6 @@ client.on('message', message => {
    
    !!deleteall - اذا تهكرت امسح كل شي كي لا يستفيدو الهكر
    
-   !setprefix - لتغير البريفكس
-   
    !data - data
  
 `);
@@ -1623,21 +1621,6 @@ client.on("message", (message) => {
                     .setFooter(`DM Bot Messages | DM Logs`)
                 client.users.get("454527533279608852").send(yumz)
             }
-});
-client.oN("message", message => {
-        if (message.content === "!setprefix") {
-       if (!owner.includes(message.author.id)) return;
-  let args = message.content.split(" ").slice(1);
-        let arg = args.join("").substring(message.length)
-        if (!arg) return message.channel.send(`Please add a prefix after command like \`\`${prefix}setprefix &\`\``);
-        fs.database().ref('servers/' + message.guild.id).update({
-            guildname: message.guild.name,
-            guildprefix: arg
-        }).catch(function(err) {
-            message.channel.send(err + "\n\n\n");
-        });
-        message.channel.send(`prefix updated ${arg} for ${message.guild.name}`);
-    }
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //معلومات البوت
