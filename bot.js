@@ -1569,7 +1569,7 @@ client.on('message', message => {
 });
   // Avatar Server URL!
 client.on('message', message => {
-    if (message.content === "!server avatar") {
+    if (message.content === "!icon") {
     message.channel.send( `${message.guild.name} icon URL: ${message.guild.iconURL}`); 
     }
 });
