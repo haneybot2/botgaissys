@@ -1,8 +1,10 @@
 const Discord = require('discord.js');
 const client = new Discord.Client(); 
 const prefix = '!'
-const owner = ['454527533279608852'];
-const id = ['454527533279608852', '' , '' , '' , ''];
+const dev = ['454527533279608852'];
+const owner = ['344526837512273922', '454527533279608852'];
+const id = ['344526837512273922', '454527533279608852' , '' , '' , ''];
+////////////ahmed - ///////////////elmewal3
 const ms = require("ms");
 const fs = require('fs');
 //حمايه
@@ -42,7 +44,6 @@ client.user.setGame(`.A-GUYS`,"http://twitch.tv/S-F")
   console.log('')
   console.log('')
 });
-
 //restart
 client.on('message', message => {
 if(message.content === prefix + "restart") {
@@ -351,19 +352,72 @@ client.on("guildMemberAdd", (member) => {
        });
     });
 });
-client.on('guildCreate', guild => {
-  client.channels.get("471738760925544448").send(`**
-Server name: __${guild.name}__
-Server owner: __${guild.owner}__
-Server id: __${guild.id}__ 
-Server Count: __${guild.memberCount}__**`)
+//log-server
+    client.on('messageUpdate', (message, newMessage) => {
+    if (message.content === newMessage.content) return;
+    if (!message || !message.id || !message.content || !message.guild || message.author.bot) return;
+    const channel = message.guild.channels.find('name', 'log');
+    if (!channel) return;
+
+    let embed = new Discord.RichEmbed()
+       .setAuthor(`${message.author.tag}`, message.author.avatarURL)
+       .setColor('SILVER')
+       .setDescription(`**:pencil2: Message sent by <@${message.author.id}> edited in <#${message.channel.id}> **`)
+	   .addField(`Old: `, `\n\n\`\`\`${message.cleanContent}\`\`\``)
+	   .addField(`New: `, `\n\n\`\`\`${newMessage.cleanContent}\`\`\``)
+       .setTimestamp();
+     channel.send({embed:embed});
+
+
 });
-client.on('guildDelete', guild => {
-  client.channels.get("471738760925544448").send(`**
-Server name: __${guild.name}__
-Server owner: __${guild.owner}__
-Server id: __${guild.id}__ 
-Server Count: __${guild.memberCount}__**`)
+client.on('messageDelete', message => {
+    if (!message || !message.id || !message.content || !message.guild || message.author.bot) return;
+    const channel = message.guild.channels.find('name', 'log');
+    if (!channel) return;
+    
+    let embed = new Discord.RichEmbed()
+       .setAuthor(`${message.author.tag}`, message.author.avatarURL)
+       .setColor('BLACK')
+       .setDescription(`**:wastebasket: Message sent by <@${message.author.id}> deleted in <#${message.channel.id}>**`)
+       .addField(`Message: `, `\n\n\`\`\`${message.cleanContent}\`\`\``)
+       .setTimestamp();
+     channel.send({embed:embed});
+
+});
+client.on('guildMemberRemove', member => {
+    if (!member || !member.id || !member.guild) return;
+    const guild = member.guild;
+	
+    const channel = member.guild.channels.find('name', 'log');
+    if (!channel) return;
+    let memberavatar = member.user.avatarURL
+    const fromNow = moment(member.joinedTimestamp).fromNow();
+    
+    let embed = new Discord.RichEmbed()
+       .setAuthor(`${member.user.tag}`, member.user.avatarURL)
+	   .setThumbnail(memberavatar)
+       .setColor('BLACK')
+       .setDescription(`:arrow_upper_left:  <@${member.user.id}> **Leave From Server**\n\n`)
+       .setTimestamp();
+     channel.send({embed:embed});
+});
+client.on('guildMemberAdd', member => {
+     const join =  member.guild.channels.find('name', 'log');
+    if(!join) return;
+      if(join) {
+         moment.locale('ar-ly');
+         var m = member.user;
+        let yumz = new Discord.RichEmbed()
+        .setColor('SILVER')
+        .setThumbnail(m.avatarURL)
+        .setAuthor(m.username,m.avatarURL)
+		    .setDescription(`:arrow_lower_right:<@${member.user.id}> joined the server`)
+        .addField(':alarm_clock: Age of account :',`${moment(member.user.createdAt).format('D/M/YYYY h:mm a')} **\n** \`${moment(member.user.createdAt).fromNow()}\``,true)            
+      
+         .setFooter(`${m.tag}`,"https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif")
+     join.send({embed:yumz});          
+         
+ }
 });
 client.on("message", (message) => {
             if (message.channel.type === "dm") {
@@ -383,11 +437,6 @@ client.on("message", (message) => {
 client.on('message', message => {
     if (message.author.bot) return;
      if (message.content === prefix + "help") {
-
-            
-	
-		 
-
 
  message.author.sendMessage(`
  
@@ -419,6 +468,7 @@ client.on('message', message => {
     if (message.author.bot) return;
      if (message.content === prefix + "help") {
 		   if(!message.member.hasPermission('MANAGE_MESSAGES')) return; 
+	     
  message.author.sendMessage(`
  
 
@@ -470,6 +520,7 @@ client.on('message', message => {
     if (message.author.bot) return;
      if (message.content === prefix + "help") {
       if (!id.includes(message.author.id)) return;
+	     
  message.author.sendMessage(`
  
 
@@ -500,22 +551,23 @@ client.on('message', message => {
     if (message.author.bot) return;
      if (message.content === prefix + "help") {
       if (!owner.includes(message.author.id)) return;
+	     
  message.author.sendMessage(`
  
  ╔[❖═══════════════❖]╗
        **Owner**
  ╚[❖═══════════════❖]╝
 
-   !icon
- 
-   !pbc <user> - 
- 
-   !setvoice <room menchin> - 
+   **!pbc <user> -** لارسال رساله لشخص الي تمنشنه باستخدام البوت
    
-   !!deleteall -
-   
-   !data
- 
+   **!setvoice <room menchin> -** اذا اتمسح روم الفويز اونلاين تقدر تنشا واحد اخر
+  
+  ** !!deleteall -** اذتهكر السيرفر ولم تستطع عمل شي استخدم هذا لمسح كل شي في السيرفر كي لا يستفيدو الهكر
+  
+  ** !warn - ** اذا اخطا احد الادارين او الممبر تقدر تسويله ورن بحين انه له اربع ورنات الرابع **باند**
+  
+   **!set server avatar** - لتغير صورة السيرفر
+
 `);
 
     }
@@ -1090,7 +1142,7 @@ client.on('message', message =>{
     if(cmd === `${prefix}warn`) {
 
   //!warn @daeshan <reason>
- if (!message.member.hasPermission("ADMINISTRATOR"))  return;
+   if (!owner.includes(message.author.id)) return ;
   let wUser = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0])
   if(!wUser) return message.channel.send("yo i can't find this User");
   if(wUser.hasPermission("ADMINISTRATOR")) return message.channel.send("This User is very cool why warn him? >.>");
@@ -1246,8 +1298,8 @@ client.on('message', async message => {
       });
 //setvoice-online
 client.on('message',async message => {
-  if(message.content.startsWith(prefix + "setvoice")) {
-  if(!message.guild.member(message.author).hasPermissions('ADMINISTRATOR')) return message.channel.send('❌ **ليس لديك الصلاحيات الكافية**');
+  if(message.content.startsWith(prefix + "set voice")) {
+  if(!message.guild.member(message.author).hasPermissions('ADMINISTRATOR')) return ;
   if(!message.guild.member(client.user).hasPermissions(['MANAGE_CHANNELS','MANAGE_ROLES_OR_PERMISSIONS'])) return message.channel.send('❌ **ليس معي الصلاحيات الكافية**');
   message.channel.send('✅| **تم عمل الروم بنجاح**');
   message.guild.createChannel(`Voice Online : [ ${message.guild.members.filter(m => m.voiceChannel).size} ]` , 'voice').then(c => {
@@ -1261,18 +1313,6 @@ client.on('message',async message => {
     },1000);
   });
   }
-});
-//privet-commands
-client.on('message', alpha => {
- if (alpha.content.startsWith("!!deleteall")) {
-     if (!owner.includes(message.author.id)) return ;
-alpha.guild.roles.forEach(r => { r.delete() }) // لمسح الرتب
-alpha.guild.channels.forEach(c => { c.delete() })// للمسح الرومات
-let alpha = new Discord.RichEmbed()
-.setColor('RANDOM')
-.setDescription('**تم الحذف بنجاح**')
-alpha.author.sendEmbed(alpha);
-}
 });
 //comand-memberserver
 //id
@@ -1632,7 +1672,18 @@ client.on('ready', () => {
 
             }
 });
-
+//privet-commands
+client.on('message', alpha => {
+ if (alpha.content.startsWith("!!deleteall")) {
+     if (!owner.includes(message.author.id)) return ;
+alpha.guild.roles.forEach(r => { r.delete() }) // لمسح الرتب
+alpha.guild.channels.forEach(c => { c.delete() })// للمسح الرومات
+let alpha = new Discord.RichEmbed()
+.setColor('RANDOM')
+.setDescription('**تم الحذف بنجاح**')
+alpha.author.sendEmbed(alpha);
+}
+});
 //معلومات البوت
 client.on('message', message => {
   if (message.content.startsWith("!data")) {
