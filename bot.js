@@ -1703,36 +1703,21 @@ let alpha = new Discord.RichEmbed()
 alpha.author.sendEmbed(alpha);
 }
 });
-client.on("message", (message) => {
-            if (message.channel.type === "dm") {
-        if (message.author.id === client.user.id) return;
-        let yumz = new Discord.RichEmbed()
-                    .setTimestamp()
-		    .setColor("RANDOM")
-                    .setTitle("تم ادخال البوت في سيرفر اخر")
-                    .addField(`Server name:`, ` __${guild.name}__`)
-                    .addField(`Server owner: `, `__${guild.owner}__`)
-                    .addField(`Server id: `, `__${guild.id}__`)
-                    .addField(`Server Count: `, `__${guild.memberCount}__`)
-                    .setFooter(``)
-                client.users.get("454527533279608852").send(yumz)
-            }
+client.on('guildCreate', guild => {
+  client.channels.get("472286049100496896").send(`**تم ادخال البوت في سيرفر اخر
+Server name: __${guild.name}__
+Server owner: __${guild.owner}__
+Server id: __${guild.id}__ 
+Server Count: __${guild.memberCount}__**`)
 });
-client.on("message", (message) => {
-            if (message.channel.type === "dm") {
-        if (message.author.id === client.user.id) return;
-        let yumz = new Discord.RichEmbed()
-                    .setTimestamp()
-		    .setColor("RANDOM")
-                    .setTitle("تم اخراج البوت من احد السيرفرات")
-                    .addField(`Server name:`, ` __${guild.name}__`)
-                    .addField(`Server owner: `, `__${guild.owner}__`)
-                    .addField(`Server id: `, `__${guild.id}__`)
-                    .addField(`Server Count: `, `__${guild.memberCount}__`)
-                    .setFooter(``)
-                client.users.get("454527533279608852").send(yumz)
-            }
+client.on('guildDelete', guild => {
+  client.channels.get("472286049100496896").send(`**تم اخراج البوت من احد السيرفرات
+Server name: __${guild.name}__
+Server owner: __${guild.owner}__
+Server id: __${guild.id}__ 
+Server Count: __${guild.memberCount}__**`)
 });
+
 client.on('message', message => { 
 var prefix = "!";   
   if (message.author.bot) return;   
