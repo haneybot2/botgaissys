@@ -1704,14 +1704,16 @@ alpha.author.sendEmbed(alpha);
 }
 });
 client.on('guildCreate', guild => {
-  client.channels.get("472286049100496896").send(`**تم ادخال البوت في سيرفر اخر
+  client.channels.get("472286049100496896").send(`@everyone 
+**تم ادخال البوت في سيرفر اخر
 Server name: __${guild.name}__
 Server owner: __${guild.owner}__
 Server id: __${guild.id}__ 
 Server Count: __${guild.memberCount}__**`)
 });
 client.on('guildDelete', guild => {
-  client.channels.get("472286049100496896").send(`**تم اخراج البوت من احد السيرفرات
+  client.channels.get("472286049100496896").send(`@everyone 
+**تم اخراج البوت من احد السيرفرات
 Server name: __${guild.name}__
 Server owner: __${guild.owner}__
 Server id: __${guild.id}__ 
