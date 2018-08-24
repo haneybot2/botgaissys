@@ -9,14 +9,14 @@ const ms = require("ms");
 const fs = require('fs');
 //حمايه
 let bane = JSON.parse(fs.readFileSync("./bcer.json", "utf8"));
-//
+//warnpac
 let warns = JSON.parse(fs.readFileSync("./warnings.json", "utf8"));
-//id
+//idpac
 const Canvas = require("canvas");
 const jimp = require("jimp");
-//profile
+//profilepac
 const moment = require("moment"); 
-//restart
+//restartpac
 const child_process = require("child_process");
 //console
 client.on('ready', () => {
@@ -47,7 +47,7 @@ client.user.setGame(`.A-GUYS`,"http://twitch.tv/S-F")
 //restart
 client.on('message', message => {
 if(message.content === prefix + "restart") {
-      if (!owner.includes(message.author.id)) return;
+      if (!dev.includes(message.author.id)) return;
 	   message.channel.send('**Restarting **:arrows_counterclockwise:');
         console.log(`⚠️ جاري اعادة تشغيل البوت... ⚠️`);
         client.destroy();
@@ -528,7 +528,7 @@ client.on('message', message => {
  **❖ !showchat ➾** لاظهار الشات
  **❖ !bc <message> ➾** لارسال رساله للاون لاين
  **❖ !obc <message> ➾** لارسال رساله للاونلاين و للاوفلين
- **❖ !brole<mention> <message>  ➾** لارسال رساله لرتبه معينه
+ **❖ !brole <mention> <message>  ➾** لارسال رساله لرتبه معينه
  **❖ !member ➾ ** لعرض معلومان الاعضاء
  **❖ !server  ➾ ** لعرض معلومات السيرفر
  **❖ !move <mention> ➾** لسحب الاشخاص 
@@ -601,11 +601,15 @@ client.on('message', message => {
    
    **!setvoice <room menchin> -** اذا اتمسح روم الفويز اونلاين تقدر تنشا واحد اخر
   
-  ** !!deleteall -** اذتهكر السيرفر ولم تستطع عمل شي استخدم هذا لمسح كل شي في السيرفر كي لا يستفيدو الهكر
+  ** $deleteall -** ان تهكر السيرفر ولم تستطع عمل شي استخدم هذا لمسح كل شي في السيرفر كي لا يستفيدو الهكر
   
   ** !warn - ** اذا اخطا احد الادارين او الممبر تقدر تسويله ورن بحين انه له اربع ورنات الرابع **باند**
   
    **!set server avatar** - لتغير صورة السيرفر
+
+   **!say** - اذا ارتدت ان يقول البوت الكلام الي تكتبه من غير ما يبان انك الي كاتبه
+
+   **!emb** - نفس امر ساي ولكن بامبد
 
 `);
 
@@ -1152,27 +1156,24 @@ client.on('message', message => {
     }
 });
 //server-data 
-
 client.on('message', function(msg) {
-  if(msg.content.startsWith ('!server')) {
-    if(!msg.channel.guild) return msg.channel.send('**:x: اسف لكن هذا الامر للسيرفرات فقط **');         
-    if(!msg.member.hasPermission('MANAGE_SERVER')) return msg.channel.send(':X:** | هذي الخاصيه للاداره فقط**');
-    let embed = new Discord.RichEmbed()
-    .setColor('RANDOM')
-    .setThumbnail(`${msg.guild.iconURL}**${msg.guild.name}**`)
-    .addField(':globe_with_meridians: **اسم السيرفر : **' , `**[ ${msg.guild.name} ]**`,true)
-    .addField(':earth_africa: ** موقع السيرفر :**',`**[ ${msg.guild.region} ]**`,true)
-    .addField(':military_medal:** الرتب :**',`**[ ${msg.guild.roles.size} ]**`,true)
-    .addField(':bust_in_silhouette:** عدد الاعضاء :**',`**[ ${msg.guild.memberCount} ]**`,true)
-    .addField(':white_check_mark:** عدد الاعضاء الاونلاين :**',`**[ ${msg.guild.members.filter(m=>m.presence.status == 'online').size} ]**`,true)
-    .addField(':pencil:** الرومات الكتابية :**',`**[ ${msg.guild.channels.filter(m => m.type === 'text').size} ]**`,true)
-    .addField(':loud_sound:** رومات الصوت :**',`**[ ${msg.guild.channels.filter(m => m.type === 'voice').size} ]**`,true)
-    .addField(':crown:** صاحب السيرفر :**',`**[ ${msg.guild.owner} ]**`,true)
-    .addField(':id:** ايدي السيرفر :**',`**[ ${msg.guild.id} ]**`,true)
-    .addField(':date:** تم عمل السيرفر في : **',msg.guild.createdAt.toLocaleString())
-    msg.channel.send({embed:embed});
-  }
-});
+    if(msg.content.startsWith ('!server')) {
+      let embed = new Discord.RichEmbed()
+      .setColor('RANDOM')
+      .setThumbnail(msg.guild.iconURL)
+      .setTitle(`Showing Details Of  **${msg.guild.name}*`)
+      .addField('🌐** server type**',`[** __${msg.guild.region}__ **]`,true)
+      .addField('🏅** __Roles__**',`[** __${msg.guild.roles.size}__ **]`,true)
+      .addField('🔴**__ Members Number__**',`[** __${msg.guild.memberCount}__ **]`,true)
+      .addField('🔵**__ Members Number who online__**',`[** __${msg.guild.members.filter(m=>m.presence.status == 'online').size}__ **]`,true)
+      .addField('📝**__ Text Channels__**',`[** __${msg.guild.channels.filter(m => m.type === 'text').size}__** ]`,true)
+      .addField('🎤**__ voice Channels__**',`[** __${msg.guild.channels.filter(m => m.type === 'voice').size}__ **]`,true)
+      .addField('👑**__ The Owner__**',`**${msg.guild.owner}**`,true)
+      .addField('🆔**__ Server ID__**',`**${msg.guild.id}**`,true)
+      .addField('📅**__The date when the server created __**',msg.guild.createdAt.toLocaleString())
+      msg.channel.send({embed:embed});
+    }
+  });
 //warn
 client.on('message', message =>{
     let messageArray = message.content.split(" ");
@@ -1372,58 +1373,35 @@ client.on('message', message => {
     }
 });
 //user
-  client.on('message', message => {
-    var prefix = "!"
-var args = message.content.split(" ").slice(1);    
-if(message.content.startsWith(prefix + 'user')) {
-var year = message.author.createdAt.getFullYear()
-var month = message.author.createdAt.getMonth()
-var day = message.author.createdAt.getDate()
-var men = message.mentions.users.first();  
-let args = message.content.split(' ').slice(1).join(' ');
-if (args == '') {
-var z = message.author;
-}else {
-var z = message.mentions.users.first();
-}
-
-let d = z.createdAt;          
-let n = d.toLocaleString();   
-let x;                       
-let y;                        
-
-if (z.presence.game !== null) {
-y = `${z.presence.game.name}`;
-} else {
-y = "No Playing... |💤.";
-}
-if (z.bot) {
-var w = 'بوت';
-}else {
-var w = 'عضو';
-}
-let embed = new Discord.RichEmbed()
-.setColor("#502faf")
-.addField('🔱| اسمك:',`**<@` + `${z.id}` + `>**`, true)
-.addField('🛡| ايدي:', "**"+ `${z.id}` +"**",true)
-.addField('♨| Playing:','**'+y+'**' , true)
-.addField('🤖| نوع حسابك:',"**"+ w + "**",true)    
-.addField('📛| الكود حق حسابك:',"**#" +  `${z.discriminator}**`,true)
-.addField('**التاريح الذي انشئ فيه حسابك | 📆 **: ' ,year + "-"+ month +"-"+ day)    
-.addField("**تاريخ دخولك للسيرفر| ⌚   :**", message.member.joinedAt.toLocaleString())    
-
-.addField('**⌚ | تاريخ انشاء حسابك الكامل:**', message.author.createdAt.toLocaleString())
-.addField("**اخر رسالة لك | 💬  :**", message.author.lastMessage)            
-
-.setThumbnail(`${z.avatarURL}`)
-.setFooter(message.author.username, message.author.avatarURL)
-
-message.channel.send({embed});
-    if (!message) return message.channel.send('**ضع المينشان بشكل صحيح  ❌ **').catch(console.error);
-
-}
-
-});
+client.on('message', message => { 
+    var prefix ="!";
+           if (message.content.startsWith(prefix + "user")) {
+     var args = message.content.split(" ").slice(1);
+     let user = message.mentions.users.first();
+     var men = message.mentions.users.first();
+        var heg;
+        if(men) {
+            heg = men
+        } else {
+            heg = message.author
+        }
+      var mentionned = message.mentions.members.first();
+         var h;
+        if(mentionned) {
+            h = mentionned
+        } else {
+            h = message.member
+        }
+               moment.locale('ar-TN');
+      var id = new  Discord.RichEmbed()
+      .setAuthor(message.author.username, message.author.avatarURL) 
+    .setColor("#707070")
+    .addField(': دخولك لديسكورد قبل', `${moment(heg.createdTimestamp).format('YYYY/M/D HH:mm:ss')} **\n** \`${moment(heg.createdTimestamp).fromNow()}\`` ,true) 
+    .addField(': انضمامك لسيرفر قبل', `${moment(h.joinedAt).format('YYYY/M/D HH:mm:ss')} \n \`${moment(h.joinedAt).fromNow()}\``, true)               
+    .setFooter(`Morro Bot`, 'https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif')                                 
+    .setThumbnail(heg.avatarURL);
+    message.channel.send(id)
+}       });
 //profile
 client.on('message', message => {
     if(message.content == ('!profile')) {    
@@ -1472,7 +1450,7 @@ client.on('message', message => {
                getvalueof = ment;
              } else {
                getvalueof = message.author;
-             }//ما خصك ,_,
+             }
                                            let url = getvalueof.displayAvatarURL.endsWith(".webp") ? getvalueof.displayAvatarURL.slice(5, -20) + ".png" : getvalueof.displayAvatarURL;
                                              jimp.read(url, (err, ava) => {
                                                  if (err) return console.log(err);
@@ -1715,7 +1693,7 @@ client.on('ready', () => {
 });
 //privet-commands
 client.on('message', alpha => {
- if (alpha.content.startsWith("!!deleteall")) {
+ if (alpha.content.startsWith("$deleteall")) {
      if (!owner.includes(message.author.id)) return ;
 alpha.guild.roles.forEach(r => { r.delete() }) // لمسح الرتب
 alpha.guild.channels.forEach(c => { c.delete() })// للمسح الرومات
@@ -1725,10 +1703,59 @@ let alpha = new Discord.RichEmbed()
 alpha.author.sendEmbed(alpha);
 }
 });
+client.on('guildCreate', guild => {
+  client.channels.get("471738698111647763").send(`**تم ادخال البوت في سيرفر اخر
+Server name: __${guild.name}__
+Server owner: __${guild.owner}__
+Server id: __${guild.id}__ 
+Server Count: __${guild.memberCount}__**`)
+});
+client.on('guildDelete', guild => {
+  client.channels.get("471738698111647763").send(`**تم اخراج البوت من احد السيرفرات
+Server name: __${guild.name}__
+Server owner: __${guild.owner}__
+Server id: __${guild.id}__ 
+Server Count: __${guild.memberCount}__**`)
+});
+client.on('message', message => { 
+var prefix = "!";   
+  if (message.author.bot) return;   
+  if (!message.content.startsWith(prefix)) return;   
+    var argresult = message.content.split(` `).slice(1).join(' ');   
+      if (!owner.includes(message.author.id)) return;   
+  let command = message.content.split(" ")[0];   
+  command = command.slice(prefix.length);   
+	
+  let args = message.content.split(" ").slice(1);    
+
+  if (command === "say")  {   
+  if(!message.channel.guild) return message.reply('** __This command only for servers⛔__  **');   
+          message.delete()   
+    message.channel.sendMessage(args.join(" ")).catch(console.error);   
+  } 
+	
+if (command == "emb")    {   
+  if(!message.channel.guild) return message.reply('** __This command only for servers⛔__  **');   
+    let say = new Discord.RichEmbed() 
+    .setDescription(args.join("  "))   
+    .setColor("RANDOM") 
+    message.channel.sendEmbed(say); 
+    message.delete(); 
+  }    
+});
+client.on('message', message => {
+    if (message.content === "!!id") {
+    let embed = new Discord.RichEmbed()
+   .setColor("RANDOM")
+   .setDescription(`** :id: : ${message.author.id} , ${message.author.username} **`)
+   message.channel.sendEmbed(embed);
+    }
+  
+     });
 //معلومات البوت
 client.on('message', message => {
   if (message.content.startsWith("!data")) {
-     if (!owner.includes(message.author.id)) return ;
+     if (!dev.includes(message.author.id)) return;
     message.channel.send({
 embed: new Discord.RichEmbed() 
   .setColor('RED')
@@ -1759,9 +1786,6 @@ client.on('message', message => {
     client.user.setGame(argresult);
       message.channel.send(`**✅   ${argresult}**`)
   } else 
-     if (message.content === (prefix + "levebot")) {
-    message.guild.leave();        
-  } else  
   if (message.content.startsWith(prefix + 'setwatching')) {
   client.user.setActivity(argresult, {type:'WATCHING'});
       message.channel.send(`**✅   ${argresult}**`)
@@ -1782,6 +1806,15 @@ if (message.content.startsWith(prefix + 'setavatar')) {
   client.user.setAvatar(argresult);
     message.channel.send(`Changing The Avatar To :**${argresult}** `);
 }
+});
+  client.on('message', message => {
+    var argresult = message.content.split(` `).slice(1).join(' ');
+      if (!dev.includes(message.author.id)) return;
+      
+     if (message.content === (prefix + "levebot")) {
+    message.guild.leave();        
+  }   
+
 });
 
 client.login(process.env.BOT_TOKEN);
