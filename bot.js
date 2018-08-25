@@ -695,7 +695,7 @@ if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return m
 
   let role = message.guild.roles.find (r => r.name === "Muted");
   
-  if(!role || !toMute.roles.has(role.id)) return message.channel.send("**لم يتم اعطاء هذه شخص ميوت من  الاساس**:x:")
+  if(!role || !toMute.roles.has(role.id)) return message.channel.send(":information_source:  **تم فك الميوت عنه مسبقاً! **")
 
   await toMute.removeRole(role)
   message.channel.send("**لقد تم فك الميوت عن شخص بنجاح**:white_check_mark:");
@@ -759,6 +759,38 @@ message.channel.send(`**✅ ${user.tag} banned from the server ! ✈ **  `)
 message.channel.send(`**✅ ${user.tag} kicked from the server ! ✈ **  `)
 
 }
+});
+//viocekick
+client.on("message", message => {
+    var prefix = "!";
+    const command = message.content.split(" ")[0];
+
+    if(command == prefix+"vkick"){
+
+        if (!message.guild.member(message.author).hasPermission('MOVE_MEMBERS') || !message.guild.member(message.author).hasPermission('ADMINISTRATOR')) {
+            return message.channel.send(':x:you do not have permission to perform this action!');
+        }
+
+        var member = message.guild.members.get(message.mentions.users.array()[0].id);
+        if(!message.mentions.users){
+            message.channel.send(":information_source: منشن شخص")
+            return;
+        }
+
+    if(!member.voiceChannel){
+    message.channel.send("i can't include voice channel for member!")
+    return;
+    }
+              message.guild.createChannel('voicekick', 'voice').then(c => {
+                member.setVoiceChannel(c).then(() => {
+                    c.delete(305).catch(console.log)
+
+
+
+
+      });
+     });
+    }
 });
  //clere-chat
   client.on('message', msg => {
@@ -976,8 +1008,9 @@ client.on('message', message => {
 });
 //bc-online
 client.on("message", message => {
-
+    if(message.author.bot) return;
             if (message.content.startsWith(prefix + "bc")) {
+		    	var args = message.content.split(' ').slice(1).join(' ');
                          if (!message.member.hasPermission("ADMINISTRATOR"))  return;
 		    	if(!args) return message.channel.send(`**➥ Useage:** ${prefix}bc `message``);
   let args = message.content.split(" ").slice(1);
