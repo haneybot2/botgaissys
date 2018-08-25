@@ -695,10 +695,10 @@ if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return m
 
   let role = message.guild.roles.find (r => r.name === "Muted");
   
-  if(!role || !toMute.roles.has(role.id)) return message.channel.send(":information_source:  **تم فك الميوت عنه مسبقاً! **")
+  if(!role || !toMute.roles.has(role.id)) return message.channel.send(":information_source:  ** `${message.user.username}` تم فك الميوت عنه مسبقاً! **")
 
   await toMute.removeRole(role)
-  message.channel.send("**لقد تم فك الميوت عن شخص بنجاح**:white_check_mark:");
+  message.channel.send(":white_check_mark: ** `${message.user.username}` Unmuted! ");
 
   return;
 
@@ -768,7 +768,7 @@ client.on("message", message => {
     if(command == prefix+"vkick"){
 
         if (!message.guild.member(message.author).hasPermission('MOVE_MEMBERS') || !message.guild.member(message.author).hasPermission('ADMINISTRATOR')) {
-            return message.channel.send(':x:you do not have permission to perform this action!');
+            return message.channel.send(':x:*8you do not have permission to perform this action!**');
         }
 
         var member = message.guild.members.get(message.mentions.users.array()[0].id);
@@ -778,7 +778,7 @@ client.on("message", message => {
         }
 
     if(!member.voiceChannel){
-    message.channel.send("i can't include voice channel for member!")
+    message.channel.send("**i can't include voice channel for member!**")
     return;
     }
               message.guild.createChannel('voicekick', 'voice').then(c => {
@@ -943,11 +943,11 @@ client.on('message' , message => {
     let args = message.content.split(" ").slice(1);
 
     if(!args[0]) {
-      message.channel.send("قم بمنشنة الرتبة | *bcrole @everyone رساله");
+      message.channel.send("قم بمنشنة الرتبة | !bcrole @everyone رساله");
         return;
     }
     if(!args[1]) {
-      message.channel.send("قم بمنشنة الرتبة | *bcrole @everyone رساله");
+      message.channel.send("قم بمنشنة الرتبة | !bcrole @everyone رساله");
         return;
     }
 
@@ -1012,6 +1012,7 @@ client.on("message", message => {
             if (message.content.startsWith(prefix + "bc")) {
                          if (!message.member.hasPermission("ADMINISTRATOR"))  return;
 
+  if (message.mentions.users.size < 1) return message.channel.send(`:information_source:**➥ Useage:** ${prefix}bc `message``);
   let args = message.content.split(" ").slice(1);
   var argresult = args.join(' '); 
   message.guild.members.filter(m => m.presence.status !== 'offline').forEach(m => {
@@ -1023,12 +1024,12 @@ client.on("message", message => {
 });
 //bc-online and ofline
 client.on('message', message => {
-	var command = message.content.split(" ")[0];
+		if(message.author.bot) return;
 	if(command == prefix + 'obc') {
 		 if (!message.member.hasPermission("ADMINISTRATOR"))  return;
 		var args = message.content.split(' ').slice(1).join(' ');
-		if(message.author.bot) return;
-		if(!args) return message.channel.send(`**➥ Useage:** ${prefix}obc `message``);
+
+	  if (message.mentions.users.size < 1) return message.channel.send(`:information_source:**➥ Useage:** ${prefix}bc `message``);
 		
 		let bcSure = new Discord.RichEmbed()
 		.setTitle(`:mailbox_with_mail: **هل انت متأكد انك تريد ارسال رسالتك الى** ${message.guild.memberCount} **عضو**`)
@@ -1437,7 +1438,8 @@ client.on('message', message => {
       .setAuthor(message.author.username, message.author.avatarURL) 
     .setColor("#707070")
     .addField(': دخولك لديسكورد قبل', `${moment(heg.createdTimestamp).format('YYYY/M/D HH:mm:ss')} **\n** \`${moment(heg.createdTimestamp).fromNow()}\`` ,true) 
-    .addField(': انضمامك لسيرفر قبل', `${moment(h.joinedAt).format('YYYY/M/D HH:mm:ss')} \n \`${moment(h.joinedAt).fromNow()}\``, true)               
+    .addField(': انضمامك لسيرفر قبل', `${moment(h.joinedAt).format('YYYY/M/D HH:mm:ss')} \n \`${moment(h.joinedAt).fromNow()}\``, true)  
+    .addField(': عدد الدعوات', inviteCount,true)
     .setFooter(`${message.author.tag}`, 'https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif')                                 
     .setThumbnail(heg.avatarURL);
     message.channel.send(id)
