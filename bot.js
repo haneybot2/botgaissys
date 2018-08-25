@@ -506,6 +506,7 @@ client.on('message', message => {
 client.on('message', message => {
     if (message.author.bot) return;
      if (message.content === prefix + "help") {
+	     if(!message.channel.guild) return; 
 		   if(!message.member.hasPermission('MANAGE_MESSAGES')) return; 
 	     
  message.author.sendMessage(`
@@ -558,6 +559,7 @@ client.on('message', message => {
 client.on('message', message => {
     if (message.author.bot) return;
      if (message.content === prefix + "help") {
+	     if(!message.channel.guild) return; 
       if (!id.includes(message.author.id)) return;
 	     
  message.author.sendMessage(`
@@ -589,6 +591,7 @@ client.on('message', message => {
 client.on('message', message => {
     if (message.author.bot) return;
      if (message.content === prefix + "help") {
+	     if(!message.channel.guild) return; 
       if (!owner.includes(message.author.id)) return;
 	     
  message.author.sendMessage(`
@@ -618,28 +621,29 @@ client.on('message', message => {
 client.on('message', message => {
     if (message.author.bot) return;
      if (message.content === prefix + "help") {
+	     if(!message.channel.guild) return; 
  message.channel.send('**The Message Was Sent On Private**');
     }
 });
 //comand-adminsserver
  //members
-client.on('message', message => {
-              if (!message.channel.guild) return;
-      if(message.content =='!member')
-	      if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES"))
-      var IzRo = new Discord.RichEmbed()
-      .setFooter(message.author.username) 
-      .setTitle('🌷| Members info')
-      .addBlankField(true)
-      .addField('📗| Online',
-      `${message.guild.members.filter(m=>m.presence.status == 'online').size}`)
-      .addField('📕| DND',`${message.guild.members.filter(m=>m.presence.status == 'dnd').size}`)
-      .addField('📙| Idle',`${message.guild.members.filter(m=>m.presence.status == 'idle').size}`)
-      .addField('📓| Offline',`${message.guild.members.filter(m=>m.presence.status == 'offline').size}`)
-      .addField('➡| Server Members',`${message.guild.memberCount}`)
-      message.channel.send(IzRo);
-	
-    });
+client.on('message',function(message) {
+  if (message.author.bot) return;
+                  if(!message.channel.guild) return;
+                    if (message.content === prefix + "members") {
+			          if(!message.channel.guild) return; 
+				if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return;
+ const embed = new Discord.RichEmbed()
+    .setDescription(`**Members info ✨
+Online :   ${message.guild.members.filter(m=>m.presence.status == 'online').size}
+DND :     ${message.guild.members.filter(m=>m.presence.status == 'dnd').size}
+Idle :     ${message.guild.members.filter(m=>m.presence.status == 'idle').size}
+Offline :     ${message.guild.members.filter(m=>m.presence.status == 'offline').size}
+Server Members :  ${message.guild.memberCount - message.guild.members.filter(m=>m.user.bot).size} **`)
+         message.channel.send({embed});
+
+    }
+      });
 //mute-unmute
 client.on('message', async message =>{
   if (message.author.boss) return;
@@ -712,7 +716,7 @@ if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return m
   let args = message.content.split(" ").slice(1);
 
   if (command == "ban") {
-               if(!message.channel.guild) return message.channel.send('** This command only for servers**');
+               if(!message.channel.guild) return;
          
   if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return ;
   if(!message.guild.member(client.user).hasPermission("BAN_MEMBERS")) return message.channel.send("**I Don't Have ` BAN_MEMBERS ` Permission**");
@@ -739,7 +743,7 @@ message.channel.send(`**✅ ${user.tag} banned from the server ! ✈ **  `)
   let args = message.content.split(" ").slice(1);
 
   if (command == "kick") {
-               if(!message.channel.guild) return message.channel.send('** This command only for servers**');
+               if(!message.channel.guild) return;
          
   if(!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return ;
   if(!message.guild.member(client.user).hasPermission("KICK_MEMBERS")) return message.channel.send("**I Don't Have ` KICK_MEMBERS ` Permission**");
@@ -1156,24 +1160,27 @@ client.on('message', message => {
     }
 });
 //server-data 
+
 client.on('message', function(msg) {
-    if(msg.content.startsWith ('!server')) {
-      let embed = new Discord.RichEmbed()
-      .setColor('RANDOM')
-      .setThumbnail(msg.guild.iconURL)
-      .setTitle(`Showing Details Of  **${msg.guild.name}*`)
-      .addField('🌐** server type**',`[** __${msg.guild.region}__ **]`,true)
-      .addField('🏅** __Roles__**',`[** __${msg.guild.roles.size}__ **]`,true)
-      .addField('🔴**__ Members Number__**',`[** __${msg.guild.memberCount}__ **]`,true)
-      .addField('🔵**__ Members Number who online__**',`[** __${msg.guild.members.filter(m=>m.presence.status == 'online').size}__ **]`,true)
-      .addField('📝**__ Text Channels__**',`[** __${msg.guild.channels.filter(m => m.type === 'text').size}__** ]`,true)
-      .addField('🎤**__ voice Channels__**',`[** __${msg.guild.channels.filter(m => m.type === 'voice').size}__ **]`,true)
-      .addField('👑**__ The Owner__**',`**${msg.guild.owner}**`,true)
-      .addField('🆔**__ Server ID__**',`**${msg.guild.id}**`,true)
-      .addField('📅**__The date when the server created __**',msg.guild.createdAt.toLocaleString())
-      msg.channel.send({embed:embed});
-    }
-  });
+  if(msg.content === prefix + "server") { 
+    if(!msg.channel.guild) return;        
+	   if (!msg.member.hasPermission('MANAGE_SERVER')) return;
+    let embed = new Discord.RichEmbed()
+    .setColor('RANDOM')
+    .setThumbnail(msg.guild.iconURL)
+    .addField(':globe_with_meridians: **اسم السيرفر : **' , `**[ ${msg.guild.name} ]**`,true)
+    .addField(':earth_africa: ** موقع السيرفر :**',`**[ ${msg.guild.region} ]**`,true)
+    .addField(':military_medal:** الرتب :**',`**[ ${msg.guild.roles.size} ]**`,true)
+    .addField(':bust_in_silhouette:** عدد الاعضاء :**',`**[ ${msg.guild.memberCount} ]**`,true)
+    .addField(':white_check_mark:** عدد الاعضاء الاونلاين :**',`**[ ${msg.guild.members.filter(m=>m.presence.status == 'online').size} ]**`,true)
+    .addField(':pencil:** الرومات الكتابية :**',`**[ ${msg.guild.channels.filter(m => m.type === 'text').size} ]**`,true)
+    .addField(':loud_sound:** رومات الصوت :**',`**[ ${msg.guild.channels.filter(m => m.type === 'voice').size} ]**`,true)
+    .addField(':crown:** صاحب السيرفر :**',`**[ ${msg.guild.owner} ]**`,true)
+    .addField(':id:** ايدي السيرفر :**',`**[ ${msg.guild.id} ]**`,true)
+    .addField(':date:** تم عمل السيرفر في : **',msg.guild.createdAt.toLocaleString())
+    msg.channel.send({embed:embed});
+  }
+});
 //warn
 client.on('message', message =>{
     let messageArray = message.content.split(" ");
