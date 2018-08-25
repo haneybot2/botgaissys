@@ -979,6 +979,7 @@ client.on("message", message => {
 
             if (message.content.startsWith(prefix + "bc")) {
                          if (!message.member.hasPermission("ADMINISTRATOR"))  return;
+		    	if(!args) return message.channel.send(`**➥ Useage:** ${prefix}bc `message``);
   let args = message.content.split(" ").slice(1);
   var argresult = args.join(' '); 
   message.guild.members.filter(m => m.presence.status !== 'offline').forEach(m => {
@@ -995,7 +996,7 @@ client.on('message', message => {
 		 if (!message.member.hasPermission("ADMINISTRATOR"))  return;
 		var args = message.content.split(' ').slice(1).join(' ');
 		if(message.author.bot) return;
-		if(!args) return message.channel.send(`**➥ Useage:** ${prefix}bc كلامك`);
+		if(!args) return message.channel.send(`**➥ Useage:** ${prefix}obc `message``);
 		
 		let bcSure = new Discord.RichEmbed()
 		.setTitle(`:mailbox_with_mail: **هل انت متأكد انك تريد ارسال رسالتك الى** ${message.guild.memberCount} **عضو**`)
