@@ -1130,7 +1130,7 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return;
 
 });
 //role-command
-Client.on("message", message => {
+client.on("message", message => {
 	var prefix = "!";
 	var args = message.content.split(' ').slice(1); 
 	var msg = message.content.toLowerCase();
