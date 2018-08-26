@@ -861,13 +861,13 @@ client.on("message", message => {
     }
 
 });
-//move-members
+ //move-members
 client.on('message', message => {
 if(!message.channel.guild) return;
 if(message.content.startsWith(prefix + 'move')) {
  if (message.member.hasPermission("MOVE_MEMBERS")) {
  if (message.mentions.users.size === 0) {
- return message.channel.send("**:x:  لم يتم العثور على العضو المطلوب **")
+ return message.channel.send("``لاستخدام الأمر اكتب هذه الأمر : " +prefix+ "move [USER]``")
 }
 if (message.member.voiceChannel != null) {
  if (message.mentions.members.first().voiceChannel != null) {
@@ -882,6 +882,7 @@ var embed = new Discord.RichEmbed()
  .setColor("#000000")
 .setDescription(`<@${message.author.id}> moved you to his channel!\nServer => ${message.guild.name}`)
  message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => message.channel.send(embed))
+
 } else {
 message.channel.send("**:x:  العضو يجب أن يكون متواجد بروم صوتي **")
 }
@@ -896,7 +897,7 @@ if(!message.channel.guild) return;
 if(message.content.startsWith('اسحب')) {
  if (message.member.hasPermission("MOVE_MEMBERS")) {
  if (message.mentions.users.size === 0) {
- return message.channel.send("**:x:  لم يتم العثور على العضو المطلوب **")
+ return message.channel.send("``لاستخدام الأمر اكتب هذه الأمر : " +prefix+ "move [USER]``")
 }
 if (message.member.voiceChannel != null) {
  if (message.mentions.members.first().voiceChannel != null) {
@@ -910,7 +911,8 @@ var embed = new Discord.RichEmbed()
 .setTitle(`You are Moved in ${message.guild.name}`)
  .setColor("#000000")
 .setDescription(`<@${message.author.id}> moved you to his channel!\nServer => ${message.guild.name}`)
- message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => message.channel.send(embed))5
+ message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => message.channel.send(embed))
+
 } else {
 message.channel.send("**:x:  العضو يجب أن يكون متواجد بروم صوتي **")
 }
@@ -920,20 +922,6 @@ message.channel.send("**:x:  العضو يجب أن يكون متواجد برو
 } else {
 message.react("❌")
  }}});
-client.on('message', message => {
-if(message.content.startsWith('!move all')) {
-	if(!message.member.hasPermission('MANAGE_SERVER')) return;
-if (message.member.voiceChannel == null) return message.channel.send(`**الرجاء الدخول لروم صوتي** :x:`)
- var author = message.member.voiceChannelID;
- var m = message.guild.members.filter(m=>m.voiceChannel)
- message.guild.members.filter(m=>m.voiceChannel).forEach(m => {
- m.setVoiceChannel(author)
- })
- message.channel.send(`**تم سحب جميع الأعضاء إليك**`)
-
-
- }
-});
 //bcrole
 client.on('message' , message => {
   var prefix = "!";
