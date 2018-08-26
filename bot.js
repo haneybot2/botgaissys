@@ -867,7 +867,7 @@ if(!message.channel.guild) return;
 if(message.content.startsWith(prefix + 'move')) {
  if (message.member.hasPermission("MOVE_MEMBERS")) {
  if (message.mentions.users.size === 0) {
- return message.channel.send("``لاستخدام الأمر اكتب هذه الأمر : " +prefix+ "move [USER]``")
+ return message.channel.send(":x:  لم يتم العثور على العضو المطلوب ")
 }
 if (message.member.voiceChannel != null) {
  if (message.mentions.members.first().voiceChannel != null) {
@@ -897,7 +897,7 @@ if(!message.channel.guild) return;
 if(message.content.startsWith('اسحب')) {
  if (message.member.hasPermission("MOVE_MEMBERS")) {
  if (message.mentions.users.size === 0) {
- return message.channel.send("``لاستخدام الأمر اكتب هذه الأمر : " +prefix+ "move [USER]``")
+ return message.channel.send("``لاستخدام الأمر اكتب هذه الأمر : " +prefix+ "اسح [USER]``")
 }
 if (message.member.voiceChannel != null) {
  if (message.mentions.members.first().voiceChannel != null) {
@@ -922,6 +922,22 @@ message.channel.send("**:x:  العضو يجب أن يكون متواجد برو
 } else {
 message.react("❌")
  }}});
+client.on('message', message => {
+if(message.content.startsWith(prefix + 'move all')) {
+ if (!message.member.hasPermission("MANAGE_SERVER")) return message.channel.send('**لايوجد لديك صلاحية سحب الأعضاء**');
+   if(!message.guild.member(client.user).hasPermission("MANAGE_SERVER")) return message.channel.send("**لايوجد لدي صلاحية السحب**");
+if (message.member.voiceChannel == null) return message.channel.send(`**الرجاء الدخول لروم صوتي**`)
+ var author = message.member.voiceChannelID;
+ var m = message.guild.members.filter(m=>m.voiceChannel)
+ message.guild.members.filter(m=>m.voiceChannel).forEach(m => {
+ m.setVoiceChannel(author)
+ })
+ message.channel.send(`**تم سحب جميع الأعضاء إليك**`)
+
+
+ }
+   });
+
 //bcrole
 client.on('message' , message => {
   var prefix = "!";
