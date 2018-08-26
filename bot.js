@@ -882,7 +882,6 @@ var embed = new Discord.RichEmbed()
  .setColor("#000000")
 .setDescription(`<@${message.author.id}> moved you to his channel!\nServer => ${message.guild.name}`)
  message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => message.channel.send(embed))
-message.guild.members.get(usermentioned).send(embed)
 } else {
 message.channel.send("**:x:  العضو يجب أن يكون متواجد بروم صوتي **")
 }
@@ -911,8 +910,7 @@ var embed = new Discord.RichEmbed()
 .setTitle(`You are Moved in ${message.guild.name}`)
  .setColor("#000000")
 .setDescription(`<@${message.author.id}> moved you to his channel!\nServer => ${message.guild.name}`)
- message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => message.channel.send(embed))
-message.guild.members.get(usermentioned).send(embed)
+ message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => message.channel.send(embed))5
 } else {
 message.channel.send("**:x:  العضو يجب أن يكون متواجد بروم صوتي **")
 }
