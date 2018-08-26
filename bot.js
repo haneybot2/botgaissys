@@ -583,7 +583,7 @@ client.on('message', message => {
  
  **❖ !setavatar  ➾ **لتغير صورة البوت
  
- **❖ !setstatus **  **ONLINE**, **IDLE**, **DND**, **INVISIBLE** **➾ **  تغير حالة البوت  (يجب ان لاتكون حالة البوت ستريمنج)
+ **❖ !setstatus **  **online**, **idle**, **dnd**, **invisible** **➾ **  تغير حالة البوت 
  
 `);
 
@@ -1793,28 +1793,29 @@ if (message.content.startsWith(prefix + 'setavatar')) {
     message.channel.send(`Changing The Avatar To :**${argresult}** `);
 }
 });
+//تغير حالات البوت
   client.on('message', async message => {
             if(!message.channel.guild) return;
-             if (message.content.startsWith(prefix + "setstatus")) {
-		         if (!id.includes(message.author.id)) return;
+             if (message.content.startsWith("!setstatus")) {
+      if (!id.includes(message.author.id)) return;
 let args = message.content.split(' ').slice(1).join(' ');
             let sigMessage = await args;
             
             if (sigMessage === "online") {
                 client.user.setStatus("online");
-                message.channel.send("Your status was set to online.");
+                message.author.send("Your status was set to online.");
             }
             if (sigMessage === "idle") {
                 client.user.setStatus("idle");
-                message.channel.send("Your status was set to idle.");
+                message.author.send("Your status was set to idle.");
             }
             if (sigMessage === "invisible") {
                 client.user.setStatus("invisible");
-                message.channel.send("Your status was set to invisible.");
+                message.author.send("Your status was set to invisible.");
             }
             if (sigMessage === "dnd") {
                 client.user.setStatus("dnd");
-                message.channel.send("Your status was set to dnd.");
+                message.author.send("Your status was set to dnd.");
             }
             // message.author.send("." + message.content);
         
