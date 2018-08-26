@@ -477,7 +477,7 @@ client.on('message', message => {
     if (message.author.bot) return;
      if (message.content === prefix + "help") {
 
- message.author.sendMessage("
+ message.author.sendMessage(`
  
 
 
@@ -498,7 +498,7 @@ client.on('message', message => {
  
 
 
-");
+`);
 
     }
 });
@@ -508,7 +508,7 @@ client.on('message', message => {
 	     if(!message.channel.guild) return; 
 		   if(!message.member.hasPermission('MANAGE_MESSAGES')) return; 
 	     
- message.author.sendMessage("
+ message.author.sendMessage(`
  
 
 
@@ -552,7 +552,7 @@ client.on('message', message => {
  
 
 
-");
+`);
 
     }
 });
@@ -562,7 +562,7 @@ client.on('message', message => {
 	     if(!message.channel.guild) return; 
       if (!id.includes(message.author.id)) return;
 	     
- message.author.sendMessage("
+ message.author.sendMessage(`
  
 
 
@@ -583,9 +583,9 @@ client.on('message', message => {
  
  **❖ !setavatar  ➾ **لتغير صورة البوت
  
- **❖ !setstatus  `ONLINE`, `IDLE`, `DND`, `INVISIBLE` ➾ **  تغير حالة البوت  (يجب ان لاتكون حالة البوت ستريمنج)
+ **❖ !setstatus **  **ONLINE**, **IDLE**, **DND**, **INVISIBLE** **➾ **  تغير حالة البوت  (يجب ان لاتكون حالة البوت ستريمنج)
  
-");
+`);
 
     }
 });
@@ -595,7 +595,7 @@ client.on('message', message => {
 	     if(!message.channel.guild) return; 
       if (!owner.includes(message.author.id)) return;
 	     
- message.author.sendMessage("
+ message.author.sendMessage(`
  
  ╔[❖═════════════════❖]╗
        **Owner Commands**
@@ -617,7 +617,7 @@ client.on('message', message => {
 
    **!c-invites** - لرؤية روابط الدعوات التي انشاتها ودخل بها اشخاص
 
-");
+`);
 
     }
 });
