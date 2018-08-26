@@ -491,11 +491,10 @@ client.on('message', message => {
  **❖ !user  ➾** لاظهار معلومات حسابك
  **❖ !profile  ➾** الملف الشخصي
  **❖ !time  ➾** لتحديد الوقت كمؤقت
- **❖ !avatar  ➾ **لعرض صورة حسابك
+ **❖ !avatar  ➾ ** لعرض صورة حسابك
  **❖ !invites  ➾** لمعرفة عدد الاعضاء الي جبتهم 
- **❖ !top  ➾ **لمعرفة التوب انفايت
- **❖ !short  ➾ ** أختصار الروابط 
-
+ **❖ !top  ➾ ** لمعرفة التوب انفايت
+ **❖ !roll  ➾ ** القرعه
  
 
 
@@ -531,7 +530,7 @@ client.on('message', message => {
  **❖ !bc <message> ➾** لارسال رساله للاون لاين
  **❖ !obc <message> ➾** لارسال رساله للاونلاين و للاوفلين
  **❖ !brole <mention> <message>  ➾** لارسال رساله لرتبه معينه
- **❖ !member ➾ ** لعرض معلومان الاعضاء
+ **❖ !members ➾ ** لعرض معلومان الاعضاء
  **❖ !server  ➾ ** لعرض معلومات السيرفر
  **❖ !move <mention> ➾** لسحب الاشخاص 
  **❖ !move all  ➾** لسحب كل الناس لروم الموجود انت فيه
@@ -614,6 +613,8 @@ client.on('message', message => {
    **!say** - اذا ارتدت ان يقول البوت الكلام الي تكتبه من غير ما يبان انك الي كاتبه
 
    **!emb** - نفس امر ساي ولكن بامبد
+
+   **!c-invites** - لرؤية روابط الدعوات التي انشاتها ودخل بها اشخاص
 
 `);
 
@@ -1129,19 +1130,19 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return;
 
 });
 //role-command
-client.on("message", message => {
+Client.on("message", message => {
 	var prefix = "!";
 	var args = message.content.split(' ').slice(1); 
 	var msg = message.content.toLowerCase();
 	if( !message.guild ) return;
 	if( !msg.startsWith( prefix + 'role' ) ) return;
-	if(!message.member.hasPermission('MANAGE_ROLES')) return;
+	if(!message.member.hasPermission('MANAGE_ROLES')) return message.channel.send(' **__ليس لديك صلاحيات__**');
 	if( msg.toLowerCase().startsWith( prefix + 'roleremove' ) ){
-		if( !args[0] ) return;
-		if( !args[1] ) return;
+		if( !args[0] ) return message.channel.send( '**:x: يرجى وضع الشخص المراد سحب منه الرتبة**' );
+		if( !args[1] ) return message.channel.send( '**:x: يرجى وضع الرتبة المراد سحبها من الشخص**' );
 		var role = msg.split(' ').slice(2).join(" ").toLowerCase(); 
 		var role1 = message.guild.roles.filter( r=>r.name.toLowerCase().indexOf(role)>-1 ).first(); 
-		if( !role1 ) return;if( message.mentions.members.first() ){
+		if( !role1 ) return message.channel.send( '**:x: يرجى وضع الرتبة المراد سحبها من الشخص**' );if( message.mentions.members.first() ){
 			message.mentions.members.first().removeRole( role1 );
 			return message.channel.send('**:white_check_mark: [ '+role1.name+' ] رتبة [ '+args[0]+' ] تم سحب من **');
 		}
@@ -1156,11 +1157,11 @@ client.on("message", message => {
 			return	message.channel.send('**:white_check_mark: [ '+role1.name+' ] تم سحب من البشريين رتبة**');
 		} 	
 	} else {
-		if( !args[0] ) return ;
-		if( !args[1] ) return ;
+		if( !args[0] ) return message.channel.send( '**:x: يرجى وضع الشخص المراد اعطائها الرتبة**' );
+		if( !args[1] ) return message.channel.send( '**:x: يرجى وضع الرتبة المراد اعطائها للشخص**' );
 		var role = msg.split(' ').slice(2).join(" ").toLowerCase(); 
 		var role1 = message.guild.roles.filter( r=>r.name.toLowerCase().indexOf(role)>-1 ).first(); 
-		if( !role1 ) return;if( message.mentions.members.first() ){
+		if( !role1 ) return message.channel.send( '**:x: يرجى وضع الرتبة المراد اعطائها للشخص**' );if( message.mentions.members.first() ){
 			message.mentions.members.first().addRole( role1 );
 			return message.channel.send('**:white_check_mark: [ '+role1.name+' ] رتبة [ '+args[0]+' ] تم اعطاء **');
 		}
@@ -1177,17 +1178,17 @@ client.on("message", message => {
 	} 
 });
 client.on('message', message => {
-            if (message.content.startsWith( prefix + "role")) {
+            if (message.content.startsWith( prefix + "helprole")) {
 		    if (!message.member.hasPermission('MANAGE_ROLES')) return ;
 		    
      let embed = new Discord.RichEmbed()
-.setTitle("**أمثله على الأوامر : **")
-.setDescription(`ـــــــــــــــــــــــــــــــــــــــــــــــــ`)
-.addField('     **!role @َζ͜͡ELMEWAL3ヅ Admin** ' ,' **للأعطاء رتبة لعضو معين** ')
-.addField('     **!roleRemove @َζ͜͡ELMEWAL3ヅ Admin** ' ,' **لازالة الرتبة من شخص معين** ')
-.addField('     **!role all <role name> ** ' ,' **للأعطاء رتبة للجميع** ')
-.addField('     **!role humans <role name>** ' ,' **لأعطاء رتبة للاشخاص فقط** ')
-.addField('     **!role bots <role name>** ' ,' **لأعطاء رتبة لجميع البوتات** ')
+.setDescription(`
+** أمثله على الأوامر : **
+**#role @َζ͜͡ELMEWAL3 ヅ<role name>**: لأعطاء رتبة لعضو معين
+**#roleremove @َζ͜͡ELMEWAL3 ヅ<role name>** : لازالة الرتبة من شخص معين
+**#role all <role name>** :  لأعطاء رتبة للجميع
+**#role humans <role name>**: لأعطاء رتبة للاشخاص فقط
+**#role bots <role name>**: لأعطاء رتبة لجميع البوتات`)
 .setAuthor(message.author.username, message.author.avatarURL)
 .setColor('RANDOM')
   message.channel.sendEmbed(embed);
@@ -1594,23 +1595,6 @@ return;
 }
 
 });
-//short
-client.on('message', message => { 
-	var prefix = "!";
- let args = message.content.split(' ').slice(1);
-    if(message.content.startsWith(prefix + 'short')) {
-    if(!message.channel.guild) return;  
-
-        googl.setKey('AIzaSyC2Z2mZ_nZTcSvh3QvIyrmOIFP6Ra6co6w');
-        googl.getKey();
-        googl.shorten(args.join(' ')).then(shorturl => {
-            message.channel.send(''+shorturl)
-        }).catch(e=>{
-            console.log(e.message);
-            message.channel.send('Error!');
-        });
-}
-});
 //link
 client.on('message', message => {
     if (message.content.startsWith("رابط")) {
@@ -1649,6 +1633,21 @@ client.on('message', message => {
 client.on('message', message => {
     if (message.content === "!icon") {
     message.channel.send( `${message.guild.name} icon URL: ${message.guild.iconURL}`); 
+    }
+});
+//roll
+client.on('message', function(message) {
+    if(message.content.startsWith(prefix + 'roll')) {
+        let args = message.content.split(" ").slice(1);
+        if (!args[0]) {
+            message.channel.send('**Please supply a number**');
+            return;
+            }
+    message.channel.send(Math.floor(Math.random() * args.join(' ')));
+            if (!args[0]) {
+          message.edit('1')
+          return;
+        }
     }
 });
 //الردوت العاديه
