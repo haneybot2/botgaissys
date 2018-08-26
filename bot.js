@@ -1191,7 +1191,7 @@ client.on('message', message => {
 **#role all <role name>** :  لأعطاء رتبة للجميع
 **#role humans <role name>**: لأعطاء رتبة للاشخاص فقط
 **#role bots <role name>**: لأعطاء رتبة لجميع البوتات`)
-.setAuthor(message.author.username, message.author.avatarURL)
+.setFooter(message.author.username, message.author.avatarURL)
 .setColor('RANDOM')
   message.channel.sendEmbed(embed);
     }
