@@ -422,10 +422,10 @@ client.on('guildMemberAdd', member => {
 //pic-room
 client.on('message', ( message ) => {
   if(message.author.bot) return;
-if(!message.member.hasPermission('MANAGE_SERVER')) return;
+
   if(message.channel.id !== '471715491430531073') return;
 
-
+if(!message.member.hasPermission('MANAGE_SERVER')) return;
   let types = [
     'jpg',
     'jpeg',
