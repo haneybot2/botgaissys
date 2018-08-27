@@ -422,7 +422,7 @@ client.on('guildMemberAdd', member => {
 //pic-room
 client.on('message', ( message ) => {
   if(message.author.bot) return;
-
+if(!message.member.hasPermission('MANAGE_SERVER')) return;
   if(message.channel.id !== '471715491430531073') return;
 
 
@@ -434,7 +434,7 @@ client.on('message', ( message ) => {
 
   if (message.attachments.size <= 0) {
     message.delete();
-    message.channel.send(`${message.author}, This channel for Pic 🖼️ Only`) // 
+    message.channel.send(`${message.author},   **هذا الروم مخصص للصور فقط **`) // 
     .then(msg => {
       setTimeout(() => {
         msg.delete();
