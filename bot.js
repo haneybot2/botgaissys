@@ -1201,8 +1201,8 @@ client.on('message', message => {
 
 client.on('message', function(msg) {
   if(msg.content === prefix + "server") { 
+	  		    if (!msg.member.hasPermission('MANAGE_MESSAGES')) return ;
     if(!msg.channel.guild) return;        
-	   if (!msg.member.hasPermission('MANAGE_SERVER')) return;
     let embed = new Discord.RichEmbed()
     .setColor('RANDOM')
     .setThumbnail(msg.guild.iconURL)
@@ -1220,72 +1220,130 @@ client.on('message', function(msg) {
   }
 });
 //warn
-client.on('message', message =>{
-    let messageArray = message.content.split(" ");
-    let cmd = messageArray[0];
-    let args = messageArray.slice(1);
-    let prefix = '!';
-     
-    if(cmd === `${prefix}warn`) {
+client.on('message', async message => {
 
-  //!warn @daeshan <reason>
-   if (!owner.includes(message.author.id)) return ;
-  let wUser = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0])
-  if(!wUser) return message.channel.send("yo i can't find this User");
-  if(wUser.hasPermission("ADMINISTRATOR")) return message.channel.send("This User is very cool why warn him? >.>");
-  let reason = args.join(" ").slice(22);
+  if (message.author.x5bz) return;
+  if (!message.content.startsWith(prefix)) return;
 
-  if(!warns[wUser.id]) warns[wUser.id] = {
+
+  let command = message.content.split(" ")[0];
+  command = command.slice(prefix.length);
+
+  let args = message.content.split(" ").slice(1);
+
+  if (command == "warn") { 
+
+               if(!message.channel.guild) return message.channel.send('** This command only for servers**');
+         
+  if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.channel.send("**You Don't Have ` BAN_MEMBERS ` Permission**");
+  let user = message.mentions.users.first();
+  let reason = message.content.split(" ").slice(2).join(" ");
+
+  if (message.mentions.users.size < 1) return message.channel.send("**!warn <mention><Reason>**");
+  if(!reason) return message.channel.send ("**!warn <mention><Reason>**");
+
+  
+
+
+  
+
+  if(!warns[user.id]) warns[user.id] = {
     warns: 0
   };
 
-  warns[wUser.id].warns++;
+
+  
+  warns[user.id].warns++;
 
   fs.writeFile("./warnings.json", JSON.stringify(warns), (err) => {
     if (err) console.log(err)
   });
 
-  let warnEmbed = new Discord.RichEmbed()
-  .setDescription("Warns")
-  .setAuthor(message.author.username)
-  .setColor("#fc6400")
-  .addField("Warned User", `<@${wUser.id}>`)
-  .addField("Warned In", message.channel)
-  .addField("Number of Warnings", warns[wUser.id].warns)
-  .addField("Reason", reason);
 
 
-  message.channel.send(warnEmbed);
-
-  if(warns[wUser.id].warns == 2){
+  const banembed = new Discord.RichEmbed()
+  .setAuthor(`WARNED!`, user.displayAvatarURL)
+  .setColor("RANDOM")
+  .setTimestamp()
+  .addField("**User:**",  '**[ ' + `${user.tag}` + ' ]**')
+  .addField("**By:**", '**[ ' + `${message.author.tag}` + ' ]**')
+  .addField("**Reason:**", '**[ ' + `${reason}` + ' ]**')
+   client.channels.find('name', 'log').send({
+    embed : banembed
+  })
+  
+    if(warns[user.id].warns == 2){ 
     let muterole = message.guild.roles.find(`name`, "Muted");
-    if(!muterole) return message.channel.send("You should make A **Muted** role, to mute this User!!");
+    if(!muterole){
+      try{
+        muterole = await message.guild.createRole({
+          name: "Muted",
+          color: "#000000",
+          permissions:[]
+        })
+        message.guild.channels.forEach(async (channel, id) => {
+          await channel.overwritePermissions(muterole, {
+            SEND_MESSAGES: false,
+            ADD_REACTIONS: false
+          });
+        });
+      }catch(e){
+        console.log(e.stack);
+      }
+    }
+    
+    let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
+    if(!tomute) return message.channel.send(":x:") .then(m => m.delete(5000));
+    
 
-    let mutetime = "12h";
-    await(wUser.addRole(muterole.id));
-    message.channel.send(`<@${wUser.id}> Just Muted for sometime!`);
 
-    setTimeout(function(){
-      wUser.removeRole(muterole.id)
-      message.channel.send(`<@${wUser.id}> Just unmuted!`)
+	
+    let mutetime = "600s";
+    await(tomute.addRole(muterole.id));
+    message.channel.send(`<@${user.id}> has been temporarily muted`);
+
+
+	
+    setTimeout(async function(){
+    await(tomute.removeRole(muterole.id));
+      message.channel.send(`<@${user.id}> has been unmuted.`)
     }, ms(mutetime))
+
   }
-    if(warns[wUser.id].warns == 3){
+    if(warns[user.id].warns == 3){ 
     let muterole = message.guild.roles.find(`name`, "Muted");
-    if(!muterole) return message.channel.send("You should make A **Muted** role, to mute this User!!");
+    if(!muterole){
+      try{
+        muterole = await message.guild.createRole({
+          name: "Muted",
+          color: "#000000",
+          permissions:[]
+        })
+        message.guild.channels.forEach(async (channel, id) => {
+          await channel.overwritePermissions(muterole, {
+            SEND_MESSAGES: false,
+            ADD_REACTIONS: false
+          });
+        });
+      }catch(e){
+        console.log(e.stack);
+      }
+    }
+    
+    let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
+    if(!tomute) return message.channel.send(":x:") .then(m => m.delete(5000));
+    
+    let mutetime = "86400s";
+    await(tomute.addRole(muterole.id));
+    message.channel.send(`<@${user.id}> has been temporarily muted`);
 
-    let mutetime = "24h";
-    await(wUser.addRole(muterole.id));
-    message.channel.send(`<@${wUser.id}> Just Muted for sometime!`);
 
-    setTimeout(function(){
-      wUser.removeRole(muterole.id)
-      message.channel.send(`<@${wUser.id}> Just unmuted!`)
+	
+    setTimeout(async function(){
+    await(tomute.removeRole(muterole.id));
+      message.channel.send(`<@${user.id}> has been unmuted.`)
     }, ms(mutetime))
-  }
-  if(warns[wUser.id].warns == 4){
-    message.guild.member(wUser).ban(reason);
-    message.channel.send(`<@${wUser.id}> Just banned for 3 warns!!`)
+
   }
 
 }
