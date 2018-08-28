@@ -1143,7 +1143,7 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return;
 **!role humans <role name>**: لأعطاء رتبة للاشخاص فقط
 **!role bots <role name>**: لأعطاء رتبة لجميع البوتات`)
 .setFooter(message.author.username, message.author.avatarURL)
-.setColor('RED')
+.setColor('BLACK')
 	var prefix = "!";
 	var args = message.content.split(' ').slice(1); 
 	var msg = message.content.toLowerCase();
