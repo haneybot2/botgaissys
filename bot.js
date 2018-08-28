@@ -1133,19 +1133,29 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return;
 
 });
 //role-command
-client.on("message", message => {
-	var prefix = "!";
+  client.on("message", message => {
+	  const embed = new Discord.RichEmbed()
+.setDescription(`
+** أمثله على الأوامر : **
+**!role @َζ͜͡ELMEWAL3 ヅ<role name>**: لأعطاء رتبة لعضو معين
+**!roleremove @َζ͜͡ELMEWAL3 ヅ<role name>** : لازالة الرتبة من شخص معين
+**!role all <role name>** :  لأعطاء رتبة للجميع
+**!role humans <role name>**: لأعطاء رتبة للاشخاص فقط
+**!role bots <role name>**: لأعطاء رتبة لجميع البوتات`)
+.setFooter(message.author.username, message.author.avatarURL)
+.setColor('RED')
+	var prefix = "a";
 	var args = message.content.split(' ').slice(1); 
 	var msg = message.content.toLowerCase();
 	if( !message.guild ) return;
 	if( !msg.startsWith( prefix + 'role' ) ) return;
-	if(!message.member.hasPermission('MANAGE_ROLES')) return message.channel.send(' **__ليس لديك صلاحيات__**');
+	if(!message.member.hasPermission('MANAGE_ROLES')) return ;
 	if( msg.toLowerCase().startsWith( prefix + 'roleremove' ) ){
-		if( !args[0] ) return message.channel.send( '**:x: يرجى وضع الشخص المراد سحب منه الرتبة**' );
-		if( !args[1] ) return message.channel.send( '**:x: يرجى وضع الرتبة المراد سحبها من الشخص**' );
+		if( !args[0] ) return message.channel.sendEmbed(embed);		     
+		if( !args[1] ) return message.channel.sendEmbed(embed);
 		var role = msg.split(' ').slice(2).join(" ").toLowerCase(); 
 		var role1 = message.guild.roles.filter( r=>r.name.toLowerCase().indexOf(role)>-1 ).first(); 
-		if( !role1 ) return message.channel.send( '**:x: يرجى وضع الرتبة المراد سحبها من الشخص**' );if( message.mentions.members.first() ){
+		if( !role1 ) return  message.channel.sendEmbed(embed);if( message.mentions.members.first() ){
 			message.mentions.members.first().removeRole( role1 );
 			return message.channel.send('**:white_check_mark: [ '+role1.name+' ] رتبة [ '+args[0]+' ] تم سحب من **');
 		}
@@ -1160,11 +1170,11 @@ client.on("message", message => {
 			return	message.channel.send('**:white_check_mark: [ '+role1.name+' ] تم سحب من البشريين رتبة**');
 		} 	
 	} else {
-		if( !args[0] ) return message.channel.send( '**:x: يرجى وضع الشخص المراد اعطائها الرتبة**' );
-		if( !args[1] ) return message.channel.send( '**:x: يرجى وضع الرتبة المراد اعطائها للشخص**' );
+		if( !args[0] ) return message.channel.sendEmbed(embed);
+		if( !args[1] ) return message.channel.sendEmbed(embed);
 		var role = msg.split(' ').slice(2).join(" ").toLowerCase(); 
 		var role1 = message.guild.roles.filter( r=>r.name.toLowerCase().indexOf(role)>-1 ).first(); 
-		if( !role1 ) return message.channel.send( '**:x: يرجى وضع الرتبة المراد اعطائها للشخص**' );if( message.mentions.members.first() ){
+		if( !role1 ) return message.channel.sendEmbed(embed);if( message.mentions.members.first() ){
 			message.mentions.members.first().addRole( role1 );
 			return message.channel.send('**:white_check_mark: [ '+role1.name+' ] رتبة [ '+args[0]+' ] تم اعطاء **');
 		}
@@ -1180,25 +1190,7 @@ client.on("message", message => {
 		} 
 	} 
 });
-client.on('message', message => {
-            if (message.content.startsWith( prefix + "helprole")) {
-		    if (!message.member.hasPermission('MANAGE_ROLES')) return ;
-		    
-     let embed = new Discord.RichEmbed()
-.setDescription(`
-** أمثله على الأوامر : **
-**#role @َζ͜͡ELMEWAL3 ヅ<role name>**: لأعطاء رتبة لعضو معين
-**#roleremove @َζ͜͡ELMEWAL3 ヅ<role name>** : لازالة الرتبة من شخص معين
-**#role all <role name>** :  لأعطاء رتبة للجميع
-**#role humans <role name>**: لأعطاء رتبة للاشخاص فقط
-**#role bots <role name>**: لأعطاء رتبة لجميع البوتات`)
-.setFooter(message.author.username, message.author.avatarURL)
-.setColor('RANDOM')
-  message.channel.sendEmbed(embed);
-    }
-});
 //server-data 
-
 client.on('message', function(msg) {
   if(msg.content === prefix + "server") { 
 	  		    if (!msg.member.hasPermission('MANAGE_MESSAGES')) return ;
