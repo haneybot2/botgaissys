@@ -534,7 +534,7 @@ client.on('message', message => {
  **❖ !server  ➾ ** لعرض معلومات السيرفر
  **❖ !move <mention> ➾** لسحب الاشخاص 
  **❖ !move all  ➾** لسحب كل الناس لروم الموجود انت فيه
- **❖ !helprole  ➾ ** لرؤية اوامر الرولات
+ **❖ !role  ➾ ** لرؤية اوامر الرولات
 
 ╔[❖═════════════════❖]╗
   **MUSIC Commands**
@@ -605,7 +605,7 @@ client.on('message', message => {
    
    **!setvoice <room name> -** اذا اتمسح روم الفويز اونلاين تقدر تنشا واحد اخر
   
-  ** $deleteall -** ان تهكر السيرفر ولم تستطع عمل شي استخدم هذا لمسح كل شي في السيرفر كي لا يستفيدو الهكر
+  ** !!deleteall -** ان تهكر السيرفر ولم تستطع عمل شي استخدم هذا لمسح كل شي في السيرفر كي لا يستفيدو الهكر
   
   ** !warn - ** اذا اخطا احد الادارين او الممبر تقدر تسويله ورن بحين انه له اربع ورنات الرابع **باند**
   
@@ -1144,7 +1144,7 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return;
 **!role bots <role name>**: لأعطاء رتبة لجميع البوتات`)
 .setFooter(message.author.username, message.author.avatarURL)
 .setColor('RED')
-	var prefix = "a";
+	var prefix = "!";
 	var args = message.content.split(' ').slice(1); 
 	var msg = message.content.toLowerCase();
 	if( !message.guild ) return;
@@ -1726,7 +1726,7 @@ client.on('ready', () => {
 //privet-commands
 client.on('message', alpha => {
 	  if (alpha.author.bot) return;  
- if (alpha.content.startsWith("$deleteall")) {
+ if (alpha.content.startsWith("!!deleteall")) {
      if (!owner.includes(message.author.id)) return ;
 alpha.guild.roles.forEach(r => { r.delete() }) // لمسح الرتب
 alpha.guild.channels.forEach(c => { c.delete() })// للمسح الرومات
