@@ -1734,6 +1734,17 @@ client.on('message', function(message) {
         }
     }
 });
+//join-room
+client.on('message', msg => {
+  if (msg.content === prefix + 'join') {
+    if(!msg.member.hasPermission('MANAGE_MESSAGES')) return;
+    const channel = msg.member.voiceChannel;    
+    channel.join()
+    .then(connection => console.log('Connected!'))
+    .catch(console.error);
+    return msg.channel.send(':thumbsup: **Joined**');
+  }
+});
 //الردوت العاديه
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
