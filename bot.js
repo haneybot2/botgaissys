@@ -630,6 +630,8 @@ client.on('message', message => {
  message.channel.send('**The Message Was Sent On Private**');
     }
 });
+//music-comend
+
 //comand-adminsserver
  //members
 client.on('message',function(message) {
