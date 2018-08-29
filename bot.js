@@ -617,6 +617,8 @@ client.on('message', message => {
 
    **!c-invites** - لرؤية روابط الدعوات التي انشاتها ودخل بها اشخاص
 
+   **!unban <ID>** - الازلة بان عن شخص باستنخدام الايدي
+
 `);
 
     }
@@ -708,7 +710,7 @@ if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return m
   }
 
 });
-//ban-kick
+//ban-unban-kick
   client.on('message', message => {
   if (message.author.codes) return;
   if (!message.content.startsWith(prefix)) return;
@@ -736,6 +738,25 @@ message.channel.send(`**✅ ${user.tag} banned from the server ! ✈ **  `)
 
 }
 });
+client.on('message' , message => {
+    var prefix = "!";
+    let user = message.mentions.users.first()|| client.users.get(message.content.split(' ')[1])
+    if(message.content.startsWith(prefix + 'unban')) {
+        if(!message.member.hasPermission('ADMINISTRATOR')) return;
+        if(!user) return;
+        message.guild.unban(user);
+        message.guild.owner.send(`**لقد تم فك الباند عن الشخص** \n ${user} \n **By :** <@${message.author.id}>`)
+        var embed = new Discord.RichEmbed()
+        .setThumbnail(message.author.avatarURl)
+        .setColor("RANDOM")
+        .setTitle('**Unban** !')
+        .addField('**User Unban :** ', `${user}` , true)
+        .addField('**By :**' ,       ` <@${message.author.id}> ` , true)
+        .setAuthor(message.guild.name)
+       .setFooter('Requested by '+message.author.username, message.author.avatarURL)
+        message.channel.sendEmbed(embed)
+    }
+  });
   client.on('message', message => {
   if (message.author.codes) return;
   if (!message.content.startsWith(prefix)) return;
@@ -1677,10 +1698,20 @@ client.on('message', message => {
     }
 });
   // Your Avatar URL!
-client.on('message', message => {
-    if (message.content === "!avatar") {
-	message.channel.send( `${message.author.username} avatar URL: ${message.author.avatarURL}`);
-    }
+    client.on('message', message =>{
+    let args = message.content.split(' ');
+    var prefix = '!'; 
+    
+    if(args[0] === `${prefix}avatar`){
+        let mentions = message.mentions.members.first()
+        if(!mentions) {
+          let sicon = message.author.avatarURL
+          message.channel.send(`**${message.author.username}** avatar URL: ${sicon}`)
+        } else {
+          let sicon = mentions.user.avatarURL
+          message.channel.send(`**${mentions.user.username}** avatar URL: ${sicon}`)
+        }
+    };
 });
   // Avatar Server URL!
 client.on('message', message => {
