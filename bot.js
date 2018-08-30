@@ -1402,7 +1402,7 @@ client.on('message', message => {
   command = command.slice(prefix.length);
   var argresult = message.content.split(" ").slice(1);
 if (command == "sendpic") {
-	    if(!msg.member.hasPermission('MANAGE_MESSAGES')) return;
+	    if(!message.member.hasPermission('MANAGE_MESSAGES')) return;
   message.channel.sendFile(argresult.join(" "))
 
 }
@@ -1415,7 +1415,7 @@ client.on('message', message => {
   command = command.slice(prefix.length);
   var argresult = message.content.split(" ").slice(1);
 if (command == "sendpice") {
-	    if(!msg.member.hasPermission('MANAGE_MESSAGES')) return;
+	    if(!message.member.hasPermission('MANAGE_MESSAGES')) return;
     let embedsay = new Discord.RichEmbed()
  .setColor("RANDOM")
 .setDescription("-----------------")
