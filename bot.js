@@ -1250,9 +1250,9 @@ client.on('message', async message => {
 
   if (command == "warn") { 
 
-               if(!message.channel.guild) return message.channel.send('** This command only for servers**');
+               if(!message.channel.guild) return;
          
-  if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.channel.send("**You Don't Have ` BAN_MEMBERS ` Permission**");
+if(!message.member.hasPermission('ADMINISTRATOR')) return;
   let user = message.mentions.users.first();
   let reason = message.content.split(" ").slice(2).join(" ");
 
@@ -1373,7 +1373,7 @@ client.on('message', message => {
     let prefix = '!';
 
     if(cmd === `${prefix}set server avatar`) {
-	    if (!message.member.hasPermission("ADMINISTRATOR"))  return;
+	    if (!message.member.hasPermission("MANAGE_SERVER"))  return;
         if(!args[1].match(/^(jpeg|jpg|png)/)) {
             message.guild.setIcon(args[1]).then(message.channel.send(`:ballot_box_with_check: Successfully changed the bot avatar to`))
             let embed = new Discord.RichEmbed()
@@ -1424,6 +1424,34 @@ message.channel.send({embed:embedsay});
 
 
 }
+});
+client.on('message', message => { 
+var prefix = "!";   
+  if (message.author.bot) return;   
+  if (!message.content.startsWith(prefix)) return;   
+    var argresult = message.content.split(` `).slice(1).join(' ');   
+      if (!owner.includes(message.author.id)) return;   
+  let command = message.content.split(" ")[0];   
+  command = command.slice(prefix.length);   
+	
+  let args = message.content.split(" ").slice(1);    
+
+  if (command === "say")  {   
+  if(!message.channel.guild) return; 
+	  	if(!message.member.hasPermission('ADMINISTRATOR')) return;
+          message.delete()   
+    message.channel.sendMessage(args.join(" ")).catch(console.error);   
+  } 
+	
+if (command == "emb")    {   
+  if(!message.channel.guild) return; 
+		if(!message.member.hasPermission('ADMINISTRATOR')) return;
+    let say = new Discord.RichEmbed() 
+    .setDescription(args.join("  "))   
+    .setColor("RANDOM") 
+    message.channel.sendEmbed(say); 
+    message.delete(); 
+  }    
 });
 //Temporary Channels
 const temp = {};
@@ -1802,6 +1830,16 @@ client.on('ready', () => {
 
             }
 });
+//my-id
+client.on('message', message => {
+    if (message.content === "!!id") {
+    let embed = new Discord.RichEmbed()
+   .setColor("RANDOM")
+   .setDescription(`** :id: : ${message.author.id} , ${message.author.username} **`)
+   message.channel.sendEmbed(embed);
+    }
+  
+     });
 //privet-commands
 client.on('message', alpha => {
 	  if (alpha.author.bot) return;  
@@ -1828,42 +1866,6 @@ Server owner: __${guild.owner}__
 Server id: __${guild.id}__ 
 Server Count: __${guild.memberCount}__**`)
 });
-
-client.on('message', message => { 
-var prefix = "!";   
-  if (message.author.bot) return;   
-  if (!message.content.startsWith(prefix)) return;   
-    var argresult = message.content.split(` `).slice(1).join(' ');   
-      if (!owner.includes(message.author.id)) return;   
-  let command = message.content.split(" ")[0];   
-  command = command.slice(prefix.length);   
-	
-  let args = message.content.split(" ").slice(1);    
-
-  if (command === "say")  {   
-  if(!message.channel.guild) return message.channel.send('** __This command only for servers⛔__  **');   
-          message.delete()   
-    message.channel.sendMessage(args.join(" ")).catch(console.error);   
-  } 
-	
-if (command == "emb")    {   
-  if(!message.channel.guild) return message.channel.send('** __This command only for servers⛔__  **');   
-    let say = new Discord.RichEmbed() 
-    .setDescription(args.join("  "))   
-    .setColor("RANDOM") 
-    message.channel.sendEmbed(say); 
-    message.delete(); 
-  }    
-});
-client.on('message', message => {
-    if (message.content === "!!id") {
-    let embed = new Discord.RichEmbed()
-   .setColor("RANDOM")
-   .setDescription(`** :id: : ${message.author.id} , ${message.author.username} **`)
-   message.channel.sendEmbed(embed);
-    }
-  
-     });
 //معلومات البوت
 client.on('message', message => {
   if (message.content.startsWith("!data")) {
