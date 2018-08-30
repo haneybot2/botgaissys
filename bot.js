@@ -585,8 +585,6 @@ client.on('message', message => {
  
  **❖ !setavatar  ➾ **لتغير صورة البوت
  
- **❖ !setstatus **  **online**, **idle**, **dnd**, **invisible** **➾ **  تغير حالة البوت 
- 
 `);
 
     }
