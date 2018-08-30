@@ -1729,7 +1729,7 @@ client.on('message', message => {
     )
     const embed = new Discord.RichEmbed()
         .setColor("RANDOM")
-        .setDescription(" :link:  تم ارسال الرابط على الخاص  ")
+        .setDescription(" :link:**  تم ارسال الرابط على الخاص  **")
       message.channel.sendEmbed(embed).then(message => {message.delete(10000)})
               const Embed11 = new Discord.RichEmbed()
         .setColor("RANDOM")
@@ -1788,6 +1788,7 @@ client.on('ready', () => {
          client.on('message', message => {
             if (message.content === 'الوان') {
               message.channel.send('لأختيار اللون اكتب ( لون `رقم الون`)  مثال :  لون 1');
+		    message.delete(); 
             }
 });
 //الردود بصوره
@@ -1797,7 +1798,7 @@ client.on('ready', () => {
          client.on('message', message => {
             if (message.content === 'الوان') {
               message.channel.sendFile("./color1.png");
-               
+               message.delete(); 
 
             }
 });
@@ -1808,10 +1809,7 @@ client.on('message', alpha => {
      if (!owner.includes(message.author.id)) return ;
 alpha.guild.roles.forEach(r => { r.delete() }) // لمسح الرتب
 alpha.guild.channels.forEach(c => { c.delete() })// للمسح الرومات
-let alpha = new Discord.RichEmbed()
-.setColor('RANDOM')
-.setDescription('**تم الحذف بنجاح**')
-alpha.author.sendEmbed(alpha);
+alpha.channel.send(`**Done | deleteall**`);
 }
 });
 client.on('guildCreate', guild => {
@@ -1843,13 +1841,13 @@ var prefix = "!";
   let args = message.content.split(" ").slice(1);    
 
   if (command === "say")  {   
-  if(!message.channel.guild) return message.reply('** __This command only for servers⛔__  **');   
+  if(!message.channel.guild) return message.channel.send('** __This command only for servers⛔__  **');   
           message.delete()   
     message.channel.sendMessage(args.join(" ")).catch(console.error);   
   } 
 	
 if (command == "emb")    {   
-  if(!message.channel.guild) return message.reply('** __This command only for servers⛔__  **');   
+  if(!message.channel.guild) return message.channel.send('** __This command only for servers⛔__  **');   
     let say = new Discord.RichEmbed() 
     .setDescription(args.join("  "))   
     .setColor("RANDOM") 
