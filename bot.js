@@ -1418,7 +1418,7 @@ if (command == "sendpice") {
 	    if(!message.member.hasPermission('MANAGE_MESSAGES')) return;
     let embedsay = new Discord.RichEmbed()
  .setColor("RANDOM")
-.setDescription("-----------------")
+.setDescription("ـــــــــــــــــــــــــــــــــ")
 .setImage(`${argresult}`)
 message.channel.send({embed:embedsay});
 
