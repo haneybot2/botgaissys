@@ -949,8 +949,8 @@ message.react("❌")
  }}});
 client.on('message', message => {
 if(message.content.startsWith(prefix + 'move all')) {
- if (!message.member.hasPermission("MANAGE_SERVER")) return message.channel.send('**لايوجد لديك صلاحية سحب الأعضاء**');
-   if(!message.guild.member(client.user).hasPermission("MANAGE_SERVER")) return message.channel.send("**لايوجد لدي صلاحية السحب**");
+ if (!message.member.hasPermission("MOVE_MEMBERS")) return;
+   if(!message.guild.member(client.user).hasPermission("MOVE_MEMBERS")) return message.channel.send("**لايوجد لدي صلاحية السحب**");
 if (message.member.voiceChannel == null) return message.channel.send(`**الرجاء الدخول لروم صوتي**`)
  var author = message.member.voiceChannelID;
  var m = message.guild.members.filter(m=>m.voiceChannel)
@@ -962,7 +962,6 @@ if (message.member.voiceChannel == null) return message.channel.send(`**الرج
 
  }
    });
-
 //bcrole
 client.on('message' , message => {
   var prefix = "!";
