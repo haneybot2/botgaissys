@@ -540,14 +540,16 @@ client.on('message', message => {
   **MUSIC Commands**
 ╚[❖═════════════════❖]╝
 
- **❖ !play <name > <url> ➾** لبدء تشغيل الاغنيه
- **❖ !join  ➾ **لادخال البوت للروم
- **❖ !stop ➾ ** لايقاف الاغنيه
- **❖ !skip ➾ **لتخطي الاغنيه الحاليه
+ **❖ !play ➾**  لتشغيل مقطع 
+ **❖ !join ➾ **لادخال البوت للروم الصوتي
+ **❖ !stop ➾ ** لأيقاف تشغيل اغنيه والخروج من الروم الصوتي
+ **❖ !skip ➾ ** لتخطي الاغنيه الحالية 
+ **❖ !vol ➾ ** لإظهار مستوي الصوت الحالي / تغيير درجه الصوت
  **❖ !np ➾ **لمعرفة الاغنيه المشغله الان
- **❖ !queue  ➾** لمعرفة قآئمة التشغيل
- **❖ !pause ➾** لايقاف الاغنيه مؤقتا
- **❖ !resume ➾** لاتشغيل الاغنيه المتوقفه
+ **❖ !queue ➾** لمعرفة قآئمة التشغيل
+ **❖ !pause ➾** لأيقاف الاغنيه مؤقتا 
+ **❖ !resume ➾** لتكملة تشغيل الاغنيه
+
 
  
 
@@ -618,6 +620,8 @@ client.on('message', message => {
    **!c-invites** - لرؤية روابط الدعوات التي انشاتها ودخل بها اشخاص
 
    **!unban <ID>** - الازلة بان عن شخص باستنخدام الايدي
+
+   **!sendpic <or> sendpice** - لارسال صوره بامبد وبدون
 
 `);
 
@@ -1378,6 +1382,49 @@ client.on('message', message => {
         }
     }
 });
+//join-room
+client.on('message', msg => {
+  if (msg.content === prefix + 'join') {
+    if(!msg.member.hasPermission('MANAGE_MESSAGES')) return;
+    const channel = msg.member.voiceChannel;    
+    channel.join()
+    .then(connection => console.log('Connected!'))
+    .catch(console.error);
+    return msg.channel.send(':thumbsup: **Joined**');
+  }
+});
+//send-pic
+client.on('message', message => {
+  if (message.author.bot) return;
+  if (!message.content.startsWith(prefix)) return;
+
+  let command = message.content.split(" ")[0];
+  command = command.slice(prefix.length);
+  var argresult = message.content.split(" ").slice(1);
+if (command == "sendpic") {
+	    if(!msg.member.hasPermission('MANAGE_MESSAGES')) return;
+  message.channel.sendFile(argresult.join(" "))
+
+}
+});
+client.on('message', message => {
+  if (message.author.bot) return;
+  if (!message.content.startsWith(prefix)) return;
+
+  let command = message.content.split(" ")[0];
+  command = command.slice(prefix.length);
+  var argresult = message.content.split(" ").slice(1);
+if (command == "sendpice") {
+	    if(!msg.member.hasPermission('MANAGE_MESSAGES')) return;
+    let embedsay = new Discord.RichEmbed()
+ .setColor("RANDOM")
+.setDescription("-----------------")
+.setImage(`${argresult}`)
+message.channel.send({embed:embedsay});
+
+
+}
+});
 //Temporary Channels
 const temp = {};
 client.on('message', async message => {
@@ -1733,17 +1780,6 @@ client.on('message', function(message) {
           return;
         }
     }
-});
-//join-room
-client.on('message', msg => {
-  if (msg.content === prefix + 'join') {
-    if(!msg.member.hasPermission('MANAGE_MESSAGES')) return;
-    const channel = msg.member.voiceChannel;    
-    channel.join()
-    .then(connection => console.log('Connected!'))
-    .catch(console.error);
-    return msg.channel.send(':thumbsup: **Joined**');
-  }
 });
 //الردوت العاديه
 client.on('ready', () => {
