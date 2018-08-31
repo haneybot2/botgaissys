@@ -611,15 +611,9 @@ client.on('message', message => {
 
    **!emb** - نفس امر ساي ولكن بامبد
 
-   **!c-invites** - لرؤية روابط الدعوات التي انشاتها ودخل بها اشخاص
-
    **!unban <ID>** - الازلة بان عن شخص باستنخدام الايدي
 
    **!sendpic <or> sendpice** - لارسال صوره بامبد وبدون
-ــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
-  ** !!deleteall -** ان تهكر السيرفر ولم تستطع عمل شي استخدم هذا لمسح كل شي في السيرفر كي لا يستفيدو الهكر
-
-  ** !!crate server -** انشاء سيرفر كامل ان تهكر
 
 `);
 
@@ -1422,6 +1416,7 @@ message.channel.send({embed:embedsay});
 
 }
 });
+//say-emb
 client.on('message', message => { 
 var prefix = "!";   
   if (message.author.bot) return;   
