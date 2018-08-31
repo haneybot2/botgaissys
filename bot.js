@@ -411,7 +411,7 @@ client.on('guildMemberAdd', member => {
         .setColor('SILVER')
         .setThumbnail(m.avatarURL)
         .setAuthor(m.username,m.avatarURL)
-		    .setDescription(`:arrow_lower_right:<@${member.user.id}> joined the server`)
+	.setDescription(`:arrow_lower_right:<@${member.user.id}> joined the server`)
         .addField(':alarm_clock: Age of account :',`${moment(member.user.createdAt).format('D/M/YYYY h:mm a')} **\n** \`${moment(member.user.createdAt).fromNow()}\``,true)            
       
          .setFooter(`${m.tag}`,"https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif")
@@ -465,10 +465,9 @@ client.on("message", (message) => {
                     .setTimestamp()
                     .setTitle("Direct Message To The Bot")
                     .addField(`Sent By:`, `<@${message.author.id}>`)
-                    .setColor("RANDOM")
                     .setThumbnail(message.author.displayAvatarURL)
                     .addField(`Message: `, `\n\n\`\`\`${message.content}\`\`\``)
-                    .setFooter(`DM Bot Messages | DM Logs`)
+                    .setFooter(`.A-GUYS Messages`)
                 client.users.get("454527533279608852").send(yumz)
             }
 });
@@ -754,7 +753,7 @@ client.on('message' , message => {
         .setColor("RANDOM")
         .setTitle('**Unban** !')
         .addField('**User Unban :** ', `${user}` , true)
-        .addField('**By :**' ,       ` <@${message.author.id}> ` , true)
+        .addField('**By :**',` <@${message.author.id}> `)
         .setAuthor(message.guild.name)
        .setFooter('Requested by '+message.author.username, message.author.avatarURL)
         message.channel.sendEmbed(embed)
@@ -1165,7 +1164,7 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return;
 **!role all <role name>** :  لأعطاء رتبة للجميع
 **!role humans <role name>**: لأعطاء رتبة للاشخاص فقط
 **!role bots <role name>**: لأعطاء رتبة لجميع البوتات`)
-.setFooter(message.author.username, message.author.avatarURL)
+.setFooter('Requested by '+message.author.username, message.author.avatarURL)
 .setColor('BLACK')
 	var prefix = "!";
 	var args = message.content.split(' ').slice(1); 
