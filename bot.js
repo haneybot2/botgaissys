@@ -659,38 +659,27 @@ if (!message.content.startsWith(prefix)) return;
 		if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return message.channel.send("**I Don't Have Permissions**").then(msg => msg.delete(5000));;
 		let user = message.mentions.users.first();
 		let muteRole = message.guild.roles.find("name", "Muted");
+		let log = message.guild.channels.find('name', 'log');
 		if (!muteRole) return message.channel.send("** لا يوجد رتبة الميوت 'Muted' **").then(msg => {msg.delete(5000)});
 		if (message.mentions.users.size < 1) return message.channel.send(':information_source:  **`!mute @َζ͜͡ELMEWAL3 ヅ` يجب تحديد شخص **').then(msg => {msg.delete(5000)});
 		let reason = message.content.split(" ").slice(2).join(" ");
 		message.guild.member(user).addRole(muteRole);
-		const muteembed = new Discord.RichEmbed()
+		message.channel.send(`:white_check_mark: ${user.tag} **Muted!** :zipper_mouth: `);
+		const mutelog = new Discord.RichEmbed()
 		.setColor("RANDOM")
 		.setAuthor(`Muted!`, user.displayAvatarURL)
 		.setThumbnail(user.displayAvatarURL)
-		.addField("**:busts_in_silhouette:  المستخدم**",  '**[ ' + `${user.tag}` + ' ]**',true)
-		.addField("**:hammer:  تم بواسطة **", '**[ ' + `${message.author.tag}` + ' ]**',true)
-		.addField("**:book:  السبب**", '**[ ' + `${reason}` + ' ]**',true)
+		.addField("**:busts_in_silhouette: المستخدم**",  '**[ ' + `${user.tag}` + ' ]**',true)
+		.addField("**:hammer: by : **", '**[ ' + `${message.author.tag}` + ' ]**',true)
+		.addField("**:book: reason**", '**[ ' + `${reason}` + ' ]**',true)
 		.addField("User", user, true)
-		message.channel.send({embed : muteembed});
-		var muteembeddm = new Discord.RichEmbed()
-		.setAuthor(`Muted!`, user.displayAvatarURL)
-		.setDescription(`      
-${user} انت معاقب بميوت كتابي بسبب مخالفة القوانين
-
-${message.author.tag} تمت معاقبتك بواسطة
-
-[ ${reason} ] : السبب
-
-اذا كانت العقوبة عن طريق الخطأ تكلم مع المسؤلين
-`)
-		.setFooter(`في سيرفر : ${message.guild.name}`)
-		.setColor("RANDOM")
-	user.send( muteembeddm);
+		log.send({embed : mutelog});
   }
 if(command === `unmute`) {
   if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send(":x:** | للاداره فقط**").then(m => m.delete(5000));
 if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return message.channel.send("**I Don't Have Permissions**").then(msg => msg.delete(6000))
-
+ 
+  let user = message.mentions.users.first();
   let toMute = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
   if(!toMute) return message.channel.send(":information_source:  **`!unmute @َζ͜͡ELMEWAL3ヅ` يجب تحديد شخص **");
 
@@ -699,7 +688,7 @@ if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return m
   if(!role || !toMute.roles.has(role.id)) return message.channel.send(`:information_source:  **  تم فك الميوت عنه مسبقاً! **`)
 
   await toMute.removeRole(role)
-  message.channel.send("**لقد تم فك الميوت عن شخص بنجاح**:white_check_mark:");
+  message.channel.send(`:white_check_mark: ${user.tag} **Unmuted!**`);
 
   return;
 
@@ -730,7 +719,7 @@ if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return m
 
   message.guild.member(user).ban(7, user);
 
-message.channel.send(`**✅ ${user.tag} banned from the server ! ✈ **  `)
+message.channel.send(`**✅ ${user.tag} banned from the server !  **  `)
 
 }
 });
@@ -776,7 +765,7 @@ client.on('message' , message => {
 
   message.guild.member(user).kick(7, user);
 
-message.channel.send(`**✅ ${user.tag} kicked from the server ! ✈ **  `)
+message.channel.send(`**✅ ${user.tag} kicked from the server !  **  `)
 
 }
 });
