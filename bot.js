@@ -664,7 +664,7 @@ if (!message.content.startsWith(prefix)) return;
 		if (message.mentions.users.size < 1) return message.channel.send(':information_source:  **`!mute @َζ͜͡ELMEWAL3 ヅ` يجب تحديد شخص **').then(msg => {msg.delete(5000)});
 		let reason = message.content.split(" ").slice(2).join(" ");
 		message.guild.member(user).addRole(muteRole);
-		message.channel.send(`:white_check_mark: ${user.tag} **Muted!** :zipper_mouth: `);
+		message.channel.send(`:white_check_mark: **${user.tag} Muted!** :zipper_mouth: `);
 		const mutelog = new Discord.RichEmbed()
 		.setColor("RANDOM")
 		.setAuthor(`Muted!`, user.displayAvatarURL)
@@ -688,7 +688,7 @@ if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return m
   if(!role || !toMute.roles.has(role.id)) return message.channel.send(`:information_source:  **  تم فك الميوت عنه مسبقاً! **`)
 
   await toMute.removeRole(role)
-  message.channel.send(`:white_check_mark: ${user.tag} **Unmuted!**`);
+  message.channel.send(`:white_check_mark: **${user.tag} Unmuted!**`);
 
   return;
 
