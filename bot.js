@@ -1186,7 +1186,7 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return;
 		var role1 = message.guild.roles.filter( r=>r.name.toLowerCase().indexOf(role)>-1 ).first(); 
 		if( !role1 ) return  message.channel.sendEmbed(embed);if( message.mentions.members.first() ){
 			message.mentions.members.first().removeRole( role1 );
-			 var role-1 = new Discord.RichEmbed()
+			 var roleremove = new Discord.RichEmbed()
 .setDescription(`:white_check_mark: **Changed roles for '+args[0]+', -'+role1.name+'.**`)
 .setFooter('Requested by '+message.author.username, message.author.avatarURL)
 .setColor('#06f70a')
@@ -1209,7 +1209,7 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return;
 		var role1 = message.guild.roles.filter( r=>r.name.toLowerCase().indexOf(role)>-1 ).first(); 
 		if( !role1 ) return message.channel.sendEmbed(embed);if( message.mentions.members.first() ){
 			message.mentions.members.first().addRole( role1 );
-			 var role+1 = new Discord.RichEmbed()
+			 var rolegive = new Discord.RichEmbed()
 .setDescription(`:white_check_mark: **Changed roles for '+args[0]+', +'+role1.name+'.**`)
 .setFooter('Requested by '+message.author.username, message.author.avatarURL)
 .setColor('#06f70a')
