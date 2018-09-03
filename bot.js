@@ -910,8 +910,8 @@ if (message.member.voiceChannel != null) {
  var movelog = new Discord.RichEmbed()
   .setTitle(`<${usermentioned}>`)
  .setColor("#000000")
- .setDescription(`:white_check_mark:**``<@${usermentioned}> ``moved to ``${message.guild.name}``**`)
- message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => message.channel.send(`:white_check_mark:**``<@${usermentioned}> ``moved to ``${message.guild.name}``**`))
+ .setDescription(':white_check_mark:**<@${usermentioned}> moved to `${message.guild.name}`**')
+ message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => message.channel.send(':white_check_mark:**<@${usermentioned}> moved to `${message.guild.name}`**'))
  message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => log.send({embed : movelog}))
 	 
 } else {
