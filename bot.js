@@ -44,6 +44,10 @@ client.user.setGame(`.A-GUYS`,"http://twitch.tv/S-F")
   console.log('')
   console.log('')
 });
+client.on('warn', console.warn);
+client.on('error', console.error);
+client.on('ready', () => console.log('Yo this ready!'));
+client.on('reconnecting', () => console.log('I am reconnecting now!'));
 //restart
 client.on('message', message => {
 if(message.content === prefix + "restart") {
@@ -661,11 +665,11 @@ if (!message.content.startsWith(prefix)) return;
 		let muteRole = message.guild.roles.find("name", "Muted");
 		let log = message.guild.channels.find('name', 'log');
 		if (!muteRole) return message.channel.send("** لا يوجد رتبة الميوت 'Muted' **").then(msg => {msg.delete(5000)});
-		if (message.mentions.users.size < 1) return message.channel.send(':information_source:  **`!mute @َζ͜͡ELMEWAL3 ヅ` يجب تحديد شخص **').then(msg => {msg.delete(5000)});
+		if (message.mentions.users.size < 1) return message.channel.send(':information_source:  **`!mute @َζ͜͡ELMEWAL3` يجب تحديد شخص **').then(msg => {msg.delete(5000)});
 		let reason = message.content.split(" ").slice(2).join(" ");
 		message.guild.member(user).addRole(muteRole);
 		message.channel.send(`:white_check_mark: **${user.tag} Muted!** :zipper_mouth: `);
-		const mutelog = new Discord.RichEmbed()
+		 const mutelog = new Discord.RichEmbed()
 		.setColor("RANDOM")
 		.setAuthor(`Muted!`, user.displayAvatarURL)
 		.setThumbnail(user.displayAvatarURL)
@@ -681,7 +685,7 @@ if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return m
  
   let user = message.mentions.users.first();
   let toMute = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
-  if(!toMute) return message.channel.send(":information_source:  **`!unmute @َζ͜͡ELMEWAL3ヅ` يجب تحديد شخص **");
+  if(!toMute) return message.channel.send(":information_source:  **`!unmute @َζ͜͡ELMEWAL3` يجب تحديد شخص **");
 
   let role = message.guild.roles.find (r => r.name === "Muted");
   
@@ -710,9 +714,9 @@ if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return m
          
   if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return ;
   if(!message.guild.member(client.user).hasPermission("BAN_MEMBERS")) return message.channel.send("**I Don't Have ` BAN_MEMBERS ` Permission**");
-  let user = message.mentions.users.first();
+  var user = message.mentions.users.first();
   
-  if (message.mentions.users.size < 1) return message.channel.send(":information_source: ** `!ban @َζ͜͡ELMEWAL3ヅ` يجب تحديد شخص **");
+  if (message.mentions.users.size < 1) return message.channel.send(":information_source: ** `!ban @َζ͜͡ELMEWAL3` يجب تحديد شخص **");
   if (!message.guild.member(user)
   .bannable) return message.channel.send("**يجب ان تكون رتبة البوت اعلي من رتبه الشخص المراد تبنيدة**");
 
@@ -721,6 +725,17 @@ if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return m
 
 message.channel.send(`**✅ ${user.tag} banned from the server !  **  `)
 
+	  var ban = new Discord.RichEmbed()
+.setDescription(`
+
+**${user.tag} banned from the server !  ** 
+
+
+`)
+	     client.channels.find('name', 'log').send({
+    embed : ban
+  })
+	  
 }
 });
 client.on('message' , message => {
@@ -756,9 +771,9 @@ client.on('message' , message => {
          
   if(!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return ;
   if(!message.guild.member(client.user).hasPermission("KICK_MEMBERS")) return message.channel.send("**I Don't Have ` KICK_MEMBERS ` Permission**");
-  let user = message.mentions.users.first();
+  var user = message.mentions.users.first();
   
-  if (message.mentions.users.size < 1) return message.channel.send(":information_source: ** `!kick @َζ͜͡ELMEWAL3ヅ` يجب تحديد شخص **");
+  if (message.mentions.users.size < 1) return message.channel.send(":information_source: ** `!kick @َζ͜͡ELMEWAL3` يجب تحديد شخص **");
   if (!message.guild.member(user)
   .bannable) return message.channel.send("**يجب ان تكون رتبة البوت اعلي من رتبه الشخص المراد طرده**");
 
@@ -766,6 +781,17 @@ client.on('message' , message => {
   message.guild.member(user).kick(7, user);
 
 message.channel.send(`**✅ ${user.tag} kicked from the server !  **  `)
+	  
+  var kick = new Discord.RichEmbed()
+.setDescription(`
+
+**${user.tag} banned from the server !  ** 
+
+
+`)
+	     client.channels.find('name', 'log').send({
+    embed : kick
+  })
 
 }
 });
@@ -774,7 +800,7 @@ client.on("message", message => {
     var prefix = "!";
     const command = message.content.split(" ")[0];
 
-    if(command == prefix+"vkick"){
+    if(command == prefix + "vkick"){
 
         if (!message.guild.member(message.author).hasPermission('MOVE_MEMBERS') || !message.guild.member(message.author).hasPermission('ADMINISTRATOR')) {
             return message.channel.send(':x:*8you do not have permission to perform this action!**');
@@ -782,7 +808,7 @@ client.on("message", message => {
 
         var member = message.guild.members.get(message.mentions.users.array()[0].id);
         if(!message.mentions.users){
-            message.channel.send(":information_source: منشن شخص")
+            message.channel.send(":information_source: ** `!vkick @َζ͜͡ELMEWAL3` يجب تحديد شخص **")
             return;
         }
 
@@ -880,16 +906,14 @@ if (message.member.voiceChannel != null) {
  if (message.mentions.members.first().voiceChannel != null) {
  var authorchannel = message.member.voiceChannelID;
  var usermentioned = message.mentions.members.first().id;
-var embed = new Discord.RichEmbed()
- .setTitle("Succes!")
+ var log = message.guild.channels.find('name', 'log');
+ var movelog = new Discord.RichEmbed()
+  .setTitle(`<${usermentioned}>`)
  .setColor("#000000")
- .setDescription(`لقد قمت بسحب <@${usermentioned}> الى الروم الصوتي الخاص بك:white_check_mark: `)
-var embed = new Discord.RichEmbed()
-.setTitle(`You are Moved in ${message.guild.name}`)
- .setColor("#000000")
-.setDescription(`<@${message.author.id}> moved you to his channel!\nServer => ${message.guild.name}`)
- message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => message.channel.send(embed))
-
+ .setDescription(`:white_check_mark:**``<@${usermentioned}> ``moved to ``${message.guild.name}``**`)
+ message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => message.channel.send(`:white_check_mark:**``<@${usermentioned}> ``moved to ``${message.guild.name}``**`))
+ message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => log.send(embed : movelog))
+	 
 } else {
 message.channel.send("**:x:  العضو يجب أن يكون متواجد بروم صوتي **")
 }
@@ -931,7 +955,7 @@ message.react("❌")
  }}});
 client.on('message', message => {
 if(message.content.startsWith(prefix + 'move all')) {
- if (!message.member.hasPermission("MOVE_MEMBERS")) return;
+ if (!message.member.hasPermission("ADMINISTRATOR")) return;
    if(!message.guild.member(client.user).hasPermission("MOVE_MEMBERS")) return message.channel.send("**لايوجد لدي صلاحية السحب**");
 if (message.member.voiceChannel == null) return message.channel.send(`**الرجاء الدخول لروم صوتي**`)
  var author = message.member.voiceChannelID;
@@ -1142,8 +1166,8 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return;
 	  const embed = new Discord.RichEmbed()
 .setDescription(`
 ** أمثله على الأوامر : **
-**!role @َζ͜͡ELMEWAL3 ヅ<role name>**: لأعطاء رتبة لعضو معين
-**!roleremove @َζ͜͡ELMEWAL3 ヅ<role name>** : لازالة الرتبة من شخص معين
+**!role @َζ͜͡ELMEWAL3 <role name>**: لأعطاء رتبة لعضو معين
+**!roleremove @َζ͜͡ELMEWAL3 <role name>** : لازالة الرتبة من شخص معين
 **!role all <role name>** :  لأعطاء رتبة للجميع
 **!role humans <role name>**: لأعطاء رتبة للاشخاص فقط
 **!role bots <role name>**: لأعطاء رتبة لجميع البوتات`)
@@ -1162,7 +1186,11 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return;
 		var role1 = message.guild.roles.filter( r=>r.name.toLowerCase().indexOf(role)>-1 ).first(); 
 		if( !role1 ) return  message.channel.sendEmbed(embed);if( message.mentions.members.first() ){
 			message.mentions.members.first().removeRole( role1 );
-			return message.channel.send('**:white_check_mark: [ '+role1.name+' ] رتبة [ '+args[0]+' ] تم سحب من **');
+			 var role-1 = new Discord.RichEmbed()
+.setDescription(`:white_check_mark: **Changed roles for '+args[0]+', -'+role1.name+'.**`)
+.setFooter('Requested by '+message.author.username, message.author.avatarURL)
+.setColor('#06f70a')
+			return message.channel.send({embed:role-1});
 		}
 		if( args[0].toLowerCase() == "all" ){
 			message.guild.members.forEach(m=>m.removeRole( role1 ))
@@ -1181,7 +1209,11 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return;
 		var role1 = message.guild.roles.filter( r=>r.name.toLowerCase().indexOf(role)>-1 ).first(); 
 		if( !role1 ) return message.channel.sendEmbed(embed);if( message.mentions.members.first() ){
 			message.mentions.members.first().addRole( role1 );
-			return message.channel.send('**:white_check_mark: [ '+role1.name+' ] رتبة [ '+args[0]+' ] تم اعطاء **');
+			 var role+1 = new Discord.RichEmbed()
+.setDescription(`:white_check_mark: **Changed roles for '+args[0]+', +'+role1.name+'.**`)
+.setFooter('Requested by '+message.author.username, message.author.avatarURL)
+.setColor('#06f70a')
+			return message.channel.send({embed:role+1});
 		}
 		if( args[0].toLowerCase() == "all" ){
 			message.guild.members.forEach(m=>m.addRole( role1 ))
