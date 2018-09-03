@@ -910,7 +910,7 @@ if (message.member.voiceChannel != null) {
  .setColor("#000000")
  .setDescription(`**<@${usermentioned}> moved to \`\`${message.guild.name}\`\`**`)
  .setTimestamp(message.author.username, message.author.avatarURL);
- message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => message.channel.send(`:white_check_mark: **<@${usermentioned}> moved you to his channel!**`))
+ message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => message.channel.send(`:white_check_mark: **<@${message.user.id}> moved you to his channel!**`))
  message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => log.send({embed : movelog}))
 	 
 } else {
