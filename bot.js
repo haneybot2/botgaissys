@@ -1045,8 +1045,8 @@ client.on("message", message => {
 
             if (message.content.startsWith(prefix + "bc")) {
                          if (!message.member.hasPermission("ADMINISTRATOR"))  return;
-		    var args = message.content.split(' ').slice(1).join(' ');
-		    if(!args) return message.channel.send(`**➥ Useage:** ${prefix}bc <message>`);
+		    var args1 = message.content.split(' ').slice(1).join(' ');
+		    if(!args1) return message.channel.send(`**➥ Useage:** ${prefix}bc <message>`);
   let args = message.content.split(" ").slice(1);
   var argresult = args.join(' '); 
   message.guild.members.filter(m => m.presence.status !== 'offline').forEach(m => {
