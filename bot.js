@@ -910,8 +910,8 @@ if (message.member.voiceChannel != null) {
  var movelog = new Discord.RichEmbed()
   .setTitle(`<${usermentioned}>`)
  .setColor("#000000")
- .setDescription(':white_check_mark:**<@${usermentioned}> moved to `${message.guild.name}`**')
- message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => message.channel.send(':white_check_mark:**<@${usermentioned}> moved to `${message.guild.name}`**'))
+ .setDescription(`**<@${usermentioned}> moved to \`\`${message.guild.name}\`\`**`)
+ message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => message.channel.send(`:white_check_mark:**<@${usermentioned}> moved to \`\`${message.guild.name}\`\`**`))
  message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => log.send({embed : movelog}))
 	 
 } else {
@@ -977,16 +977,16 @@ client.on('message' , message => {
     let args = message.content.split(" ").slice(1);
 
     if(!args[0]) {
-      message.channel.send("قم بمنشنة الرتبة | !bcrole @everyone رساله");
+      message.channel.send(":information_source:** `!brole @Admin message` قم بمنشنة الرتبة **");
         return;
     }
     if(!args[1]) {
-      message.channel.send("قم بمنشنة الرتبة | !bcrole @everyone رساله");
+      message.channel.send(":information_source: **`!brole @Admin message` قم بمنشنة الرتبة** ");
         return;
     }
 
       if(args[0] == "@everyone") {
-        message.channel.send(`لقد تم ارسال هذه الرسالة الى ${message.guild.memberCount} اعضاء`);
+        message.channel.send(`**${message.guild.memberCount} تم ارسال رسالتك الي  **`);
         message.guild.members.forEach(mi => {
           mi.send(
           "الرسالة :" + "\n" +
@@ -997,7 +997,7 @@ client.on('message' , message => {
       }
           var role = message.mentions.roles.first();
             if(!role) {
-              message.channel.send("لا توجد رتبة بهذا الاسم");
+              message.channel.send(":x: **لا توجد رتبة بهذا الاسم**");
                 return;
             }
         message.guild.members.filter(m => m.roles.get(role.id)).forEach(sa => {
@@ -1006,7 +1006,7 @@ client.on('message' , message => {
         "**" + `${args[1]}` + "**"
           );
         });
-      message.channel.send(`**لقد تم ارسال هذه الرسالة الى ${message.guild.members.filter(m => m.roles.get(role.id)).size} عظو**`);
+      message.channel.send(`** ${message.guild.members.filter(m => m.roles.get(role.id)).size}  تم ارسال رسالتك الي  ****`);
     }
 });
 //bc-privet
@@ -1045,6 +1045,8 @@ client.on("message", message => {
 
             if (message.content.startsWith(prefix + "bc")) {
                          if (!message.member.hasPermission("ADMINISTRATOR"))  return;
+		    var args = message.content.split(' ').slice(1).join(' ');
+		    if(!args) return message.channel.send(`**➥ Useage:** ${prefix}bc <message>`);
   let args = message.content.split(" ").slice(1);
   var argresult = args.join(' '); 
   message.guild.members.filter(m => m.presence.status !== 'offline').forEach(m => {
@@ -1061,7 +1063,7 @@ client.on('message', message => {
 		 if (!message.member.hasPermission("ADMINISTRATOR"))  return;
 		var args = message.content.split(' ').slice(1).join(' ');
 		if(message.author.bot) return;
-		if(!args) return message.channel.send(`**➥ Useage:** ${prefix}obc كلامك`);
+		if(!args) return message.channel.send(`**➥ Useage:** ${prefix}obc <message>`);
 		
 		let bcSure = new Discord.RichEmbed()
 		.setTitle(`:mailbox_with_mail: **هل انت متأكد انك تريد ارسال رسالتك الى** ${message.guild.memberCount} **عضو**`)
@@ -1172,7 +1174,7 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return;
 **!role humans <role name>**: لأعطاء رتبة للاشخاص فقط
 **!role bots <role name>**: لأعطاء رتبة لجميع البوتات`)
 .setFooter('Requested by '+message.author.username, message.author.avatarURL)
-.setColor('BLACK')
+.setColor('BLACK');
 	var prefix = "!";
 	var args = message.content.split(' ').slice(1); 
 	var msg = message.content.toLowerCase();
@@ -1268,8 +1270,8 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return;
   let user = message.mentions.users.first();
   let reason = message.content.split(" ").slice(2).join(" ");
 
-  if (message.mentions.users.size < 1) return message.channel.send("**!warn <mention><Reason>**");
-  if(!reason) return message.channel.send ("**!warn <mention><Reason>**");
+  if (message.mentions.users.size < 1) return message.channel.send("**!warn <mention> <Reason>**");
+  if(!reason) return message.channel.send ("**!warn <mention> <Reason>**");
 
   
 
@@ -1296,7 +1298,7 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return;
   .setTimestamp()
   .addField("**User:**",  '**[ ' + `${user.tag}` + ' ]**')
   .addField("**By:**", '**[ ' + `${message.author.tag}` + ' ]**')
-  .addField("**Reason:**", '**[ ' + `${reason}` + ' ]**')
+  .addField("**Reason:**", '**[ ' + `${reason}` + ' ]**');
    client.channels.find('name', 'log').send({
     embed : banembed
   })
@@ -1606,12 +1608,10 @@ var mentionned = message.mentions.members.first();
  }
         moment.locale('ar-TN');
       var id = new  Discord.RichEmbed()
-
     .setColor("#0a0909")
-    .setAuthor(message.author.username, message.author.avatarURL)
 .addField(': دخولك لديسكورد قبل', `${moment(heg.createdTimestamp).format('YYYY/M/D HH:mm:ss')} **\n** \`${moment(heg.createdTimestamp).fromNow()}\`` ,true)
 .addField(': انضمامك لسيرفر قبل', `${moment(h.joinedAt).format('YYYY/M/D HH:mm:ss')} \n \`${moment(h.joinedAt).fromNow()}\``, true)
-.addField(': عدد الدعوات', inviteCount,false)
+.addField(': عدد الدعوات', inviteCount)
 .setFooter(`${message.author.tag}`, 'https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif')                                 
 .setThumbnail(heg.avatarURL);
     message.channel.sendEmbed(id);
