@@ -912,7 +912,7 @@ if (message.member.voiceChannel != null) {
  .setColor("#000000")
  .setDescription(`:white_check_mark:**``<@${usermentioned}> ``moved to ``${message.guild.name}``**`)
  message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => message.channel.send(`:white_check_mark:**``<@${usermentioned}> ``moved to ``${message.guild.name}``**`))
- message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => log.send(embed : movelog))
+ message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => log.send({embed : movelog}))
 	 
 } else {
 message.channel.send("**:x:  العضو يجب أن يكون متواجد بروم صوتي **")
