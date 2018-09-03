@@ -906,11 +906,11 @@ if (message.member.voiceChannel != null) {
  var usermentioned = message.mentions.members.first().id;
  var log = message.guild.channels.find('name', 'log');
  var movelog = new Discord.RichEmbed()
- .setTitle(message.member.username, message.member.avatarURL)
+ .setTitle(`<${message.member.username}>`, message.member.avatarURL)
  .setColor("#000000")
  .setDescription(`**<@${usermentioned}> moved to \`\`${message.guild.name}\`\`**`)
  .setTimestamp(message.author.username, message.author.avatarURL);
- message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => message.channel.send(`:white_check_mark: **<@${message.author.id}> moved you to his channel!**`))
+ message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => message.channel.send(`:white_check_mark: **<@${usermentioned}> moved you to his channel!**`))
  message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => log.send({embed : movelog}))
 	 
 } else {
