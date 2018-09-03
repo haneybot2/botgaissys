@@ -367,9 +367,10 @@ client.on("guildMemberAdd", (member) => {
        .setAuthor(`${message.author.tag}`, message.author.avatarURL)
        .setColor('SILVER')
        .setDescription(`**:pencil2: Message sent by <@${message.author.id}> edited in <#${message.channel.id}> **`)
-	   .addField(`Old: `, `\n\n\`\`\`${message.cleanContent}\`\`\``)
-	   .addField(`New: `, `\n\n\`\`\`${newMessage.cleanContent}\`\`\``)
-       .setTimestamp();
+       .addField(`Old: `, `\n\n\`\`\`${message.cleanContent}\`\`\``)
+       .addField(`New: `, `\n\n\`\`\`${newMessage.cleanContent}\`\`\``)
+       .setTimestamp()
+       .setFooter(message.author.username, message.author.avatarURL);
      channel.send({embed:embed});
 
 
@@ -384,7 +385,8 @@ client.on('messageDelete', message => {
        .setColor('BLACK')
        .setDescription(`**:wastebasket: Message sent by <@${message.author.id}> deleted in <#${message.channel.id}>**`)
        .addField(`Message: `, `\n\n\`\`\`${message.cleanContent}\`\`\``)
-       .setTimestamp();
+       .setTimestamp()
+       .setFooter(message.author.username, message.author.avatarURL);
      channel.send({embed:embed});
 
 });
@@ -402,7 +404,8 @@ client.on('guildMemberRemove', member => {
 	   .setThumbnail(memberavatar)
        .setColor('BLACK')
        .setDescription(`:arrow_upper_left:  <@${member.user.id}> **Leave From Server**\n\n`)
-       .setTimestamp();
+       .setTimestamp()
+       .setFooter(member.author.username, member.author.avatarURL);
      channel.send({embed:embed});
 });
 client.on('guildMemberAdd', member => {
@@ -422,6 +425,70 @@ client.on('guildMemberAdd', member => {
      join.send({embed:yumz});          
          
  }
+});
+client.on('channelCreate', channel => {
+    
+    if(!channel.guild.member(client.user).hasPermission('EMBED_LINKS')) return;
+    if(!channel.guild.member(client.user).hasPermission('VIEW_AUDIT_LOG')) return;
+    
+    var logChannel = channel.guild.channels.find(c => c.name === 'log');
+    if(!logChannel) return;
+    
+    if(channel.type === 'text') {
+        var roomType = 'Text';
+    }else
+    if(channel.type === 'voice') {
+        var roomType = 'Voice';
+    }else
+    if(channel.type === 'category') {
+        var roomType = 'Category';
+    }
+    
+    channel.guild.fetchAuditLogs().then(logs => {
+        var userID = logs.entries.first().executor.id;
+        var userAvatar = logs.entries.first().executor.avatarURL;
+        
+        let channelCreate = new Discord.RichEmbed()
+        .setTitle('**[CHANNEL CREATE]**') 
+        .setDescription(`**:white_check_mark: CREATE ${roomType}channel.**\n\n**Channel Name:** \n**By:** <@${userID}>`)
+        .setColor('GREEN')
+        .setTimestamp()
+        .setFooter(channel.guild.name, channel.guild.iconURL)
+        
+        logChannel.send(channelCreate);
+    })
+});
+client.on('channelDelete', channel => {
+    
+    if(!channel.guild.member(client.user).hasPermission('EMBED_LINKS')) return;
+    if(!channel.guild.member(client.user).hasPermission('VIEW_AUDIT_LOG')) return;
+    
+    var logChannel = channel.guild.channels.find(c => c.name === 'log');
+    if(!logChannel) return;
+    
+    if(channel.type === 'text') {
+        var roomType = 'Text';
+    }else
+    if(channel.type === 'voice') {
+        var roomType = 'Voice';
+    }else
+    if(channel.type === 'category') {
+        var roomType = 'Category';
+    }
+    
+    channel.guild.fetchAuditLogs().then(logs => {
+        var userID = logs.entries.first().executor.id;
+        var userAvatar = logs.entries.first().executor.avatarURL;
+        
+        let channelCreate = new Discord.RichEmbed()
+		.setTitle('**[CHANNEL DELETE]**') 
+        .setDescription(`**Channel Deleted:** ${channel.name}\n**By:** <@${userID}>`)
+        .setColor('RED')
+        .setTimestamp()
+        .setFooter(channel.guild.name, channel.guild.iconURL)
+        
+        logChannel.send(channelCreate);
+    })
 });
 //pic-room
 client.on('message', ( message ) => {
