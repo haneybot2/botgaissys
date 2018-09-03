@@ -906,11 +906,12 @@ if (message.member.voiceChannel != null) {
  var usermentioned = message.mentions.members.first().id;
  var log = message.guild.channels.find('name', 'log');
  var movelog = new Discord.RichEmbed()
- .setTitle(`<${message.member.username}>`, message.member.avatarURL)
+ .setAuthor(message.author.username, message.author.avatarURL) 
  .setColor("#000000")
- .setDescription(`**<@${usermentioned}> moved to \`\`${message.guild.name}\`\`**`)
- .setTimestamp(message.author.username, message.author.avatarURL);
- message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => message.channel.send(`:white_check_mark: **<@${message.user.id}> moved you to his channel!**`))
+ .setDescription(`**<@${usermentioned}> moved to<@${message.author.id}>**`)
+ .setFooter(message.author.username, message.author.avatarURL) 
+ .setTimestamp();
+ message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => message.channel.send(`:white_check_mark: **<@${usermentioned}> moved you to his channel!**`))
  message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => log.send({embed : movelog}))
 	 
 } else {
@@ -927,22 +928,22 @@ if(!message.channel.guild) return;
 if(message.content.startsWith('اسحب')) {
  if (message.member.hasPermission("MOVE_MEMBERS")) {
  if (message.mentions.users.size === 0) {
- return message.channel.send("``لاستخدام الأمر اكتب هذه الأمر : " +prefix+ "اسح [USER]``")
+ return message.channel.send(":x:  لم يتم العثور على العضو المطلوب ")
 }
 if (message.member.voiceChannel != null) {
  if (message.mentions.members.first().voiceChannel != null) {
  var authorchannel = message.member.voiceChannelID;
  var usermentioned = message.mentions.members.first().id;
-var embed = new Discord.RichEmbed()
- .setTitle("Succes!")
+ var log = message.guild.channels.find('name', 'log');
+ var movelog = new Discord.RichEmbed()
+ .setAuthor(message.author.username, message.author.avatarURL) 
  .setColor("#000000")
- .setDescription(`لقد قمت بسحب <@${usermentioned}> الى الروم الصوتي الخاص بك:white_check_mark: `)
-var embed = new Discord.RichEmbed()
-.setTitle(`You are Moved in ${message.guild.name}`)
- .setColor("#000000")
-.setDescription(`<@${message.author.id}> moved you to his channel!\nServer => ${message.guild.name}`)
- message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => message.channel.send(embed))
-
+ .setDescription(`**<@${usermentioned}> moved to<@${message.author.id}>**`)
+ .setFooter(message.author.username, message.author.avatarURL) 
+ .setTimestamp();
+ message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => message.channel.send(`:white_check_mark: **<@${usermentioned}> moved you to his channel!**`))
+ message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => log.send({embed : movelog}))
+	 
 } else {
 message.channel.send("**:x:  العضو يجب أن يكون متواجد بروم صوتي **")
 }
