@@ -1190,7 +1190,7 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return;
 .setDescription(`:white_check_mark: **Changed roles for '+args[0]+', -'+role1.name+'.**`)
 .setFooter('Requested by '+message.author.username, message.author.avatarURL)
 .setColor('#06f70a')
-			return message.channel.send({embed:role-1});
+			return message.channel.send({embed:roleremove});
 		}
 		if( args[0].toLowerCase() == "all" ){
 			message.guild.members.forEach(m=>m.removeRole( role1 ))
@@ -1213,7 +1213,7 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return;
 .setDescription(`:white_check_mark: **Changed roles for '+args[0]+', +'+role1.name+'.**`)
 .setFooter('Requested by '+message.author.username, message.author.avatarURL)
 .setColor('#06f70a')
-			return message.channel.send({embed:role+1});
+			return message.channel.send({embed:rolegive});
 		}
 		if( args[0].toLowerCase() == "all" ){
 			message.guild.members.forEach(m=>m.addRole( role1 ))
