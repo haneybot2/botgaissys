@@ -835,9 +835,7 @@ message.channel.send(`**✅ ${user.tag} banned from the server !  **  `)
 
 
 `)
-	     client.channels.find('name', 'log').send({
-    embed : ban
-  })
+
 	  
 }
 });
@@ -892,9 +890,7 @@ message.channel.send(`**✅ ${user.tag} kicked from the server !  **  `)
 
 
 `)
-	     client.channels.find('name', 'log').send({
-    embed : kick
-  })
+
 
 }
 });
