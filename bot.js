@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
-const client = new Discord.Client(); 
+const { Client } = require('discord.js');
+const client = new Client();
 const prefix = '!'
 const dev = ['454527533279608852'];
 const owner = ['454527533279608852' , '478192028279111690'];
@@ -18,6 +19,8 @@ const jimp = require("jimp");
 const moment = require("moment"); 
 //restartpac
 const child_process = require("child_process");
+//shortpac
+const googl = require('goo.gl');
 //console
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
@@ -2065,20 +2068,19 @@ client.on('message', function(message) {
         }
     }
 });
-  client.on('message', message => { 
-    var prefix = "!";
- let args = message.content.split(' ').slice(1);
+//short
+googl.setKey('AIzaSyC9MdpZYw0ELyRQuAhz4ycYJnBUgE0BEDc');
+googl.getKey();
+client.on('message', message => {
+    let args = message.content.split(' ').slice(1);
     if(message.content.startsWith(prefix + 'short')) {
-    if(!message.channel.guild) return;  
-
-        googl.setKey('AIzaSyC2Z2mZ_nZTcSvh3QvIyrmOIFP6Ra6co6w');
-        googl.getKey();
-        googl.shorten(args.join(' ')).then(shorturl => {
-            message.channel.send(''+shorturl)
-        }).catch(e=>{
-            console.log(e.message);
-            message.channel.send('خطأ!');
-        });
+    googl.shorten(args[1])
+    .then(function (shortenUrl) {
+        message.channel.send(`${shortenUrl}`);
+    })
+    .catch(function (err) {
+        console.log(err.message);
+    });
 }
 });
 //الردوت العاديه
