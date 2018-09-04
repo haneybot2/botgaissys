@@ -482,9 +482,10 @@ client.on('voiceStateUpdate', (oldM, newM) => {
   })
 });
 client.on('channelCreate', channel => {
-    
-    var logChannel = channel.guild.channels.find(c => c.name === 'log');
-    if(!logChannel) return;
+    if(!channel.guild.member(client.user).hasPermission('EMBED_LINKS')) return;
+    if(!channel.guild.member(client.user).hasPermission('VIEW_AUDIT_LOG')) return;
+    const channel = message.guild.channels.find('name', 'log');
+    if(!channel) return;
     
     if(channel.type === 'text') {
         var roomType = 'Text';
@@ -507,16 +508,14 @@ client.on('channelCreate', channel => {
         .setTimestamp()
         .setFooter(channel.guild.name, channel.guild.iconURL)
         
-        logChannel.send(channelCreate);
+        channel.send(channelCreate);
     })
 });
 client.on('channelDelete', channel => {
-    
     if(!channel.guild.member(client.user).hasPermission('EMBED_LINKS')) return;
     if(!channel.guild.member(client.user).hasPermission('VIEW_AUDIT_LOG')) return;
-    
-    var logChannel = channel.guild.channels.find(c => c.name === 'log');
-    if(!logChannel) return;
+    const channel = message.guild.channels.find('name', 'log');
+    if(!channel) return;
     
     if(channel.type === 'text') {
         var roomType = 'Text';
@@ -539,7 +538,7 @@ client.on('channelDelete', channel => {
         .setTimestamp()
         .setFooter(channel.guild.name, channel.guild.iconURL)
         
-        logChannel.send(channelCreate);
+        channel.send(channelCreate);
     })
 });
 //pic-room
