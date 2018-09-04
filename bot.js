@@ -698,6 +698,7 @@ client.on('message', message => {
 client.on('message', message => {
           let args = message.content.split(' ').slice(1);
    if(message.content.split(' ')[0] == 'لون'){
+	   if (message.channel.id !== "486291719537688576") return;
            const embedd = new Discord.RichEmbed()
      .setFooter('Requested by '+message.author.username, message.author.avatarURL)
    .setDescription(`**There's No Color With This Number ** :x: `)
@@ -1209,7 +1210,7 @@ client.on('message', message => {
 client.on('message', message => {
 
 if (message.author.bot) return;
-    if (message.content === "!mutechat") {
+    if (message.content === prefix + "mutechat") {
                         if(!message.channel.guild) return message.channel.send(' This command only for servers');
 
 if(!message.member.hasPermission('MANAGE_CHANNELS')) return;
@@ -1220,7 +1221,7 @@ if(!message.member.hasPermission('MANAGE_CHANNELS')) return;
                message.channel.send("Channel Muted ✅ ")
            });
              }
-if (message.content === "!unmutechat") {
+if (message.content === prefix + "unmutechat") {
     if(!message.channel.guild) return message.channel.send(' This command only for servers');
 
 if(!message.member.hasPermission('MANAGE_CHANNELS')) return;
@@ -1238,7 +1239,7 @@ if(!message.member.hasPermission('MANAGE_CHANNELS')) return;
 client.on('message', message => {
 
 if (message.author.bot) return;
-    if (message.content === "!hidechat") {
+    if (message.content === prefix + "hidechat") {
                         if(!message.channel.guild) return message.channel.send(' This command only for servers');
 
 if(!message.member.hasPermission('ADMINISTRATOR')) return;
@@ -1251,7 +1252,7 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return;
                message.channel.send("Channel Hide ✅ ")
            });
              }
-if (message.content === "!showchat") {
+if (message.content === prefix + "showchat") {
     if(!message.channel.guild) return message.channel.send(' This command only for servers');
 
 if(!message.member.hasPermission('ADMINISTRATOR')) return;
@@ -1603,7 +1604,7 @@ if (command == "emb")    {
 });
 //up-time-bot
 client.on('message', message => {
-     var prefix = "r"
+     var prefix = "!"
      if (message.author.bot) return;
 if (message.content.startsWith(prefix + "uptime")) {
 	if(!message.member.hasPermission('MANAGE_MESSAGE')) return;
@@ -1744,7 +1745,7 @@ client.on('message',async message => {
 //comand-memberserver
 //id
 client.on('message', message => {
-   if (message.content === "!id") {
+   if (message.content === prefix + "id") {
 	   if (message.channel.id !== "486291719537688576") return;
    let embed = new Discord.RichEmbed()
   .setColor("RANDOM")
@@ -1857,7 +1858,6 @@ client.on('message' , message => {
   var prefix = "!";
   if(message.author.bot) return;
   if(message.content.startsWith(prefix + "ping")) {
-	  if (message.channel.id !== "486291719537688576") return;
  message.channel.send('Pong...').then((msg) => {
       msg.edit(`\`\`\`javascript\nTime taken: ${msg.createdTimestamp - message.createdTimestamp} ms.\nDiscord API: ${Math.round(client.ping)} ms.\`\`\``);
  })
@@ -1952,15 +1952,15 @@ client.on('message', message => {
       message.author.sendMessage(invite.url)
     )
 
-      message.channel.sendEmbed(" :link:**  تم ارسال الرابط على الخاص  **").then(message => {message.delete(10000)})
+      message.channel.send(" :link:**  تم ارسال الرابط على الخاص  **").then(message => {message.delete(10000)})
 
-      message.author.sendEmbed(`**
+      message.author.send(`**
 	  
   مدة الرابط : يـوم 
  عدد استخدامات الرابط : 10
  
  
- 
+ link:
 [${message.guild.name}]
 
 **`)
