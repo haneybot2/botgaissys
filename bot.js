@@ -443,7 +443,7 @@ client.on('voiceStateUpdate', (oldM, newM) => {
        .setAuthor(`${newM.user.tag}`, newM.user.avatarURL)
        .setDescription(`:microphone: **${newM} has been muted **By : **${user}**`)
 	   .setFooter(`${user.tag}`)
-       .setColor('#36393e')
+       .setColor('#ff0000')
 	   .setTimestamp()
        ch.send(embed1)
     }
@@ -453,7 +453,7 @@ client.on('voiceStateUpdate', (oldM, newM) => {
        .setAuthor(`${newM.user.tag}`, newM.user.avatarURL)
        .setDescription(`:microphone: **${newM} has been unmuted **By : **${user}**`)
 	   .setFooter(`${user}`)
-       .setColor('#36393e')
+       .setColor('#ff0000')
        .setTimestamp()
        ch.send(embed2)
     }
@@ -463,7 +463,7 @@ client.on('voiceStateUpdate', (oldM, newM) => {
        .setAuthor(`${newM.user.tag}`, newM.user.avatarURL)
        .setDescription(`:mute: **${newM} has been deafen **By : **${user}**`)
 	   .setFooter(`${user}`)
-       .setColor('#36393e')
+       .setColor('#ff0000')
        .setTimestamp()
        ch.send(embed3)
     }
@@ -473,7 +473,7 @@ client.on('voiceStateUpdate', (oldM, newM) => {
        .setAuthor(`${newM.user.tag}`, newM.user.avatarURL)
        .setDescription(`:headphones: **${newM} has been undeafen **By : **${user}**`)
 	   .setFooter(`${user}`)
-       .setColor('#36393e')
+       .setColor('#ff0000')
        .setTimestamp()
        ch.send(embed4)
     }
@@ -672,7 +672,7 @@ client.on('message', message => {
        **Owner Commands**
  ╚[❖═════════════════❖]╝
    
-   **!setvoice <room name> -** اذا اتمسح روم الفويز اونلاين تقدر تنشا واحد اخر
+   **!setvoice [room name] -** اذا اتمسح روم الفويز اونلاين تقدر تنشا واحد اخر
   
   ** !warn - ** اذا اخطا احد الادارين او الممبر تقدر تسويله ورن بحين انه له اربع ورنات الرابع **باند**
   
@@ -773,7 +773,7 @@ if (!message.content.startsWith(prefix)) return;
 		message.guild.member(user).addRole(muteRole);
 		message.channel.send(`:white_check_mark: **${user.tag} Muted!** :zipper_mouth: `);
 		 const mutelog = new Discord.RichEmbed()
-		.setColor("RANDOM")
+		.setColor(`#ff0000`)
 		.setAuthor(`Muted!`, user.displayAvatarURL)
 		.setThumbnail(user.displayAvatarURL)
 		.addField("**:busts_in_silhouette: المستخدم**",  '**[ ' + `${user.tag}` + ' ]**',true)
@@ -849,7 +849,7 @@ client.on('message' , message => {
         message.guild.owner.send(`**لقد تم فك الباند عن الشخص** \n ${user} \n **By :** <@${message.author.id}>`)
         var embed = new Discord.RichEmbed()
         .setThumbnail(message.author.avatarURl)
-        .setColor("RANDOM")
+        .setColor(`#ff0000`)
         .setTitle('**Unban** !')
         .addField('**User Unban :** ', `${user}` , true)
         .addField('**By :**',` <@${message.author.id}> `)
@@ -1275,7 +1275,7 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return;
 **!role humans <role name>**: لأعطاء رتبة للاشخاص فقط
 **!role bots <role name>**: لأعطاء رتبة لجميع البوتات`)
 .setFooter('Requested by '+message.author.username, message.author.avatarURL)
-.setColor('BLACK');
+.setColor(`#e60909`);
 	var prefix = "!";
 	var args = message.content.split(' ').slice(1); 
 	var msg = message.content.toLowerCase();
@@ -1336,7 +1336,7 @@ client.on('message', function(msg) {
 	  		    if (!msg.member.hasPermission('MANAGE_MESSAGES')) return ;
     if(!msg.channel.guild) return;        
     let embed = new Discord.RichEmbed()
-    .setColor('RANDOM')
+    .setColor('BLACK')
     .setThumbnail(msg.guild.iconURL)
     .addField(':globe_with_meridians: **اسم السيرفر : **' , `**[ ${msg.guild.name} ]**`,true)
     .addField(':earth_africa: ** موقع السيرفر :**',`**[ ${msg.guild.region} ]**`,true)
@@ -1395,7 +1395,7 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return;
 
   const banembed = new Discord.RichEmbed()
   .setAuthor(`WARNED!`, user.displayAvatarURL)
-  .setColor("RANDOM")
+  .setColor(`#e60909`)
   .setTimestamp()
   .addField("**User:**",  '**[ ' + `${user.tag}` + ' ]**')
   .addField("**By:**", '**[ ' + `${message.author.tag}` + ' ]**')
@@ -1496,22 +1496,6 @@ client.on('message', eyad => {
 
        });
 //set-server-avatar
-client.on('message', message => {
-    let messageArray = message.content.split(" ");
-    let cmd = messageArray[0];
-    let args = messageArray.slice(0);
-    let prefix = '!';
-
-    if(cmd === `${prefix}set server avatar`) {
-	    if (!message.member.hasPermission("MANAGE_SERVER"))  return;
-        if(!args[1].match(/^(jpeg|jpg|png)/)) {
-            message.guild.setIcon(args[1]).then(message.channel.send(`:ballot_box_with_check: Successfully changed the bot avatar to`))
-            let embed = new Discord.RichEmbed()
-            .setImage(args[1])
-            message.channel.send(embed)
-        }
-    }
-});
 client.on('message', eyadandr3d => {
   let args = eyadandr3d.content.split(" ").slice(1).join(" ")
   let prefix = '!';
