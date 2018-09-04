@@ -19,8 +19,6 @@ const jimp = require("jimp");
 const moment = require("moment"); 
 //restartpac
 const child_process = require("child_process");
-//shortpac
-const googl = require('goo.gl');
 //console
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
@@ -2066,21 +2064,6 @@ client.on('message', function(message) {
           return;
         }
     }
-});
-//short
-googl.setKey('AIzaSyC9MdpZYw0ELyRQuAhz4ycYJnBUgE0BEDc');
-googl.getKey();
-client.on('message', message => {
-    let args = message.content.split(' ').slice(1);
-    if(message.content.startsWith(prefix + 'short')) {
-    googl.shorten(args[1])
-    .then(function (shortenUrl) {
-        message.channel.send(`${shortenUrl}`);
-    })
-    .catch(function (err) {
-        console.log(err.message);
-    });
-}
 });
 //الردوت العاديه
 client.on('ready', () => {
