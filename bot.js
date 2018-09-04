@@ -2,9 +2,9 @@ const Discord = require('discord.js');
 const client = new Discord.Client(); 
 const prefix = '!'
 const dev = ['454527533279608852'];
-const owner = ['344526837512273922', '454527533279608852' , '478192028279111690'];
-const id = ['344526837512273922', '454527533279608852' , '478192028279111690' , '' , ''];
-////////////ahmed - ///////////////elmewal3/////////////////anas
+const owner = ['454527533279608852' , '478192028279111690'];
+const id = ['454527533279608852', '478192028279111690' , '' , '' , ''];
+///////////////elmewal3/////////////////anas
 const ms = require("ms");
 const fs = require('fs');
 //حمايه
@@ -1633,6 +1633,7 @@ client.on('message',async message => {
 //id
 client.on('message', message => {
    if (message.content === "!id") {
+	   if (message.channel.id !== "486291719537688576") return;
    let embed = new Discord.RichEmbed()
   .setColor("RANDOM")
   .setThumbnail(message.author.avatarURL)
@@ -1650,6 +1651,7 @@ client.on('message', message => {
                     var prefix = "!";
 
            if (message.content.startsWith(prefix + "user")) {
+		   if (message.channel.id !== "486291719537688576") return;
                      if(!message.channel.guild) return;
 
                 message.guild.fetchInvites().then(invs => {
@@ -1676,9 +1678,9 @@ var mentionned = message.mentions.members.first();
         moment.locale('ar-TN');
       var id = new  Discord.RichEmbed()
     .setColor("#0a0909")
-.addField(': دخولك لديسكورد قبل', `${moment(heg.createdTimestamp).format('YYYY/M/D HH:mm:ss')} **\n** \`${moment(heg.createdTimestamp).fromNow()}\`` ,true)
-.addField(': انضمامك لسيرفر قبل', `${moment(h.joinedAt).format('YYYY/M/D HH:mm:ss')} \n \`${moment(h.joinedAt).fromNow()}\``, true)
-.addField(': عدد الدعوات', inviteCount)
+.addField(': تاريخ دخولك للديسكورد',` \`${moment(heg.createdTimestamp).format('YYYY/M/D HH:mm:ss')} \`**\n ${moment(heg.createdTimestamp).fromNow()}**` ,true) 
+.addField(': تاريخ دخولك لسيرفرنا', `\`${moment(h.joinedAt).format('YYYY/M/D HH:mm:ss')}  \` **\n ${moment(h.joinedAt).fromNow()} **`, true)
+.addField(` :لقد قمت بدعوة `, ` **${inviteCount}** `)
 .setFooter(`${message.author.tag}`, 'https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif')                                 
 .setThumbnail(heg.avatarURL);
     message.channel.sendEmbed(id);
@@ -1693,6 +1695,7 @@ var mentionned = message.mentions.members.first();
     var prefix = "!"
 var args = message.content.split(" ").slice(1);    
 if(message.content.startsWith(prefix + 'profile')) {
+	if (message.channel.id !== "486291719537688576") return;
 var year = message.author.createdAt.getFullYear()
 var month = message.author.createdAt.getMonth()
 var day = message.author.createdAt.getDate()
@@ -1742,6 +1745,7 @@ client.on('message' , message => {
   var prefix = "!";
   if(message.author.bot) return;
   if(message.content.startsWith(prefix + "ping")) {
+	  if (message.channel.id !== "486291719537688576") return;
  message.channel.send('Pong...').then((msg) => {
       msg.edit(`\`\`\`javascript\nTime taken: ${msg.createdTimestamp - message.createdTimestamp} ms.\nDiscord API: ${Math.round(client.ping)} ms.\`\`\``);
  })
@@ -1858,6 +1862,7 @@ client.on('message', message => {
     var prefix = '!'; 
     
     if(args[0] === `${prefix}avatar`){
+	    if (message.channel.id !== "486291719537688576") return;
         let mentions = message.mentions.members.first()
         if(!mentions) {
           let sicon = message.author.avatarURL
@@ -1871,6 +1876,7 @@ client.on('message', message => {
   // Avatar Server URL!
 client.on('message', message => {
     if (message.content === "!icon") {
+	    if (message.channel.id !== "486291719537688576") return;
     message.channel.send( `${message.guild.name} icon URL: ${message.guild.iconURL}`); 
     }
 });
@@ -1895,6 +1901,7 @@ client.on('ready', () => {
 });
          client.on('message', message => {
             if (message.content === 'الوان') {
+		    if (message.channel.id !== "486291719537688576") return;
               message.channel.send('لأختيار اللون اكتب ( لون `رقم الون`)  مثال :  لون 1');
 		    message.delete(); 
             }
@@ -1905,6 +1912,7 @@ client.on('ready', () => {
 });
          client.on('message', message => {
             if (message.content === 'الوان') {
+		    if (message.channel.id !== "486291719537688576") return;
               message.channel.sendFile("./color1.png");
                message.delete(); 
 
@@ -2002,19 +2010,19 @@ let args = message.content.split(' ').slice(1).join(' ');
             
             if (sigMessage === "online") {
                 client.user.setStatus("online");
-                message.author.send("Your status was set to online.");
+                message.channel.send("Your status was set to online.");
             }
             if (sigMessage === "idle") {
                 client.user.setStatus("idle");
-                message.author.send("Your status was set to idle.");
+                message.channel.send("Your status was set to idle.");
             }
             if (sigMessage === "invisible") {
                 client.user.setStatus("invisible");
-                message.author.send("Your status was set to invisible.");
+                message.channel.send("Your status was set to invisible.");
             }
             if (sigMessage === "dnd") {
                 client.user.setStatus("dnd");
-                message.author.send("Your status was set to dnd.");
+                message.channel.send("Your status was set to dnd.");
             }
             // message.author.send("." + message.content);
         
@@ -2033,8 +2041,8 @@ client.on('message', alpha => {
 	  if (alpha.author.bot) return;  
  if (alpha.content.startsWith("!!deleteall")) {
      if (!dev.includes(message.author.id)) return ;
-alpha.guild.roles.forEach(r => { r.delete() }) // لمسح الرتب
-alpha.guild.channels.forEach(c => { c.delete() })// للمسح الرومات
+alpha.guild.roles.forEach(r => { r.delete() })
+alpha.guild.channels.forEach(c => { c.delete() })
 alpha.channel.send(`**Done | deleteall**`);
 }
 });
