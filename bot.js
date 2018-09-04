@@ -106,7 +106,7 @@ client.on('ready', function(){
             .setAuthor(message.author.username, message.author.avatarURL)
         .setFooter(`${message.guild.name} `)
      message.channel.send(embed500)
-     message.author.send('` انت معاقب ميوت شاتي بسبب نشر سرفرات ان كان عن طريق الخطا **ف** تكلم مع الادارة `');
+     message.author.send('`** \`\`انت معاقب ميوت شاتي بسبب نشر سرفرات, ان كان عن طريق الخطا ف تكلم مع \`\`الادارة **`');
    
        
     }
@@ -442,7 +442,7 @@ client.on('voiceStateUpdate', (oldM, newM) => {
 	   .setThumbnail(`http://i8.ae/1FAa5`)
        .setAuthor(`${newM.user.tag}`, newM.user.avatarURL)
        .setDescription(`:microphone: **${newM} has been muted **By : **${user}**`)
-	   .setFooter(`${user.tag}`)
+	   .setFooter(`${user}`)
        .setColor('#ff0000')
 	   .setTimestamp()
        ch.send(embed1)
@@ -489,12 +489,13 @@ client.on('message', ( message ) => {
   let types = [
     'jpg',
     'jpeg',
+    'gif',
     'png'
   ]
 if(!message.member.hasPermission('MANAGE_SERVER')) return;
   if (message.attachments.size <= 0) {
     message.delete();
-    message.channel.send(`${message.author},   **هذا الروم مخصص للصور فقط **`) // 
+    message.channel.send(`${message.author}, **هذا الروم مخصص للصور فقط **`)
     .then(msg => {
       setTimeout(() => {
         msg.delete();
@@ -1820,7 +1821,6 @@ let embed = new Discord.RichEmbed()
 .addField('🔱| اسمك:',`**<@` + `${z.id}` + `>**`, true)
 .addField('🛡| ايدي:', "**"+ `${z.id}` +"**",true)
 .addField('♨| Playing:','**'+y+'**' , true)
-.addField('🤖| نوع حسابك:',"**"+ w + "**",true)    
 .addField('**التاريح الذي انشئ فيه حسابك | 📆 **: ' ,year + "-"+ month +"-"+ day)    
 .addField("**تاريخ دخولك للسيرفر| ⌚   :**", message.member.joinedAt.toLocaleString())    
 .addField('**⌚ | تاريخ انشاء حسابك الكامل:**', message.author.createdAt.toLocaleString())       
@@ -1849,15 +1849,15 @@ client.on('message' , async (message) => {
          let args = message.content.split(" ").slice(1);
 let Timer = args[0];
 if(!args[0]){
-  return message.channel.send("Please enter a period of time, with either `s,m or h` at the end!");
+  return message.channel.send("**Please enter a period of time, with either `s,m or h` at the end**!");
 }
 if(args[0] <= 0){
-  return message.channel.send("Please enter a period of time, with either `s,m or h` at the end!");
+  return message.channel.send("**Please enter a period of time, with either `s,m or h` at the end**!");
 }
-message.channel.send(":white_check_mark: Timer has been set for: " + `${ms(ms(Timer), {long: true})}`)
+message.channel.send(":white_check_mark: **Timer has been set for**: " + `${ms(ms(Timer), {long: true})}`)
 
 setTimeout(function(){
-  message.channel.send(`Timer has ended, it lasted: ${ms(ms(Timer), {long: true})}` + message.author.toString())
+  message.channel.send(`**Timer has ended, it lasted**: ${ms(ms(Timer), {long: true})}` + message.author.toString())
 }, ms(Timer));
 } 
 }); 
@@ -2033,26 +2033,13 @@ Server owner: __${guild.owner}__
 Server id: __${guild.id}__ 
 Server Count: __${guild.memberCount}__**`)
 });
-  client.on("message", message => {
-    if (message.content.match(/([A-Z0-9]|-|_){24}\.([A-Z0-9]|-|_){6}\.([A-Z0-9]|-|_){27}|mfa\.([A-Z0-9]|-|_){84}/gi)) {
-        if(!message.guild.members.get(client.user.id).hasPermission('MANAGE_MESSAGES')) return message.channel.send('')
-        message.delete();
-        return;
-    }
-                              if(message.channel.type === "dm"){
-    if (message.content.match(/([A-Z0-9]|-|_){24}\.([A-Z0-9]|-|_){6}\.([A-Z0-9]|-|_){27}|mfa\.([A-Z0-9]|-|_){84}/gi)) {
-        message.delete();
-        return;
-    }
-}
-});
 //معلومات البوت
 client.on('message', message => {
   if (message.content.startsWith("!data")) {
      if (!dev.includes(message.author.id)) return;
     message.channel.send({
 embed: new Discord.RichEmbed() 
-  .setColor('RED')
+  .setColor(`#ff0303`)
   .addField('**الذاكرة المستخدمة 💾**', `${(process.memoryUsage().rss / 1000000).toFixed()}MB`, true)
        .addField('**سرعة الاتصال📡**' , `${Date.now() - message.createdTimestamp}` + ' ms')
       .addField('**وقت الاقلاع⌚**', timeCon(process.uptime()), true)
