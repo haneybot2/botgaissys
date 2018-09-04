@@ -597,7 +597,7 @@ client.on("message", (message) => {
 //role-retern
 var KinG66S = {};
 client.on('guildMemberRemove', member => {
-KinG66S[member.id] = {roles: member.roles.array()};/
+KinG66S[member.id] = {roles: member.roles.array()};
 });
 client.on('guildMemberAdd', member => {
 if(!KinG66S[member.user.id]) return;
