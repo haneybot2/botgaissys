@@ -1405,7 +1405,7 @@ if(message.content === prefix + "roles"){
         role = role.sort((a,b)=> b.position - a.position).join('\n,');
         }
     }
- message.channel.send(role);
+ message.channel.send(`\`\`role\`\``);
 }
 });
 //server-data 
