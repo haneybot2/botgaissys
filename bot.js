@@ -480,9 +480,6 @@ client.on('voiceStateUpdate', (oldM, newM) => {
 });
 client.on('channelCreate', channel => {
     
-    if(!channel.guild.member(client.user).hasPermission('EMBED_LINKS')) return;
-    if(!channel.guild.member(client.user).hasPermission('VIEW_AUDIT_LOG')) return;
-    
     var logChannel = channel.guild.channels.find(c => c.name === 'log');
     if(!logChannel) return;
     
@@ -501,7 +498,7 @@ client.on('channelCreate', channel => {
         var userAvatar = logs.entries.first().executor.avatarURL;
         
         let channelCreate = new Discord.RichEmbed()
-        .setTitle('**[CHANNEL CREATE]**') 
+	.setAuthor(channel.guild.name, channel.guild.iconURL) 
         .setDescription(`**:white_check_mark: CREATE ${roomType}channel.**\n\n**Channel Name:** \n**By:** <@${userID}>`)
         .setColor('GREEN')
         .setTimestamp()
@@ -533,7 +530,7 @@ client.on('channelDelete', channel => {
         var userAvatar = logs.entries.first().executor.avatarURL;
         
         let channelCreate = new Discord.RichEmbed()
-		.setTitle('**[CHANNEL DELETE]**') 
+	.setAuthor(channel.guild.name, channel.guild.iconURL) 
         .setDescription(`**Channel Deleted:** ${channel.name}\n**By:** <@${userID}>`)
         .setColor('RED')
         .setTimestamp()
@@ -747,6 +744,7 @@ client.on('message', message => {
    **!emb** - نفس امر ساي ولكن بامبد
 
    **!hide** - اخفا جميع رومات السيرفر
+   **!show** - اظهار وفتح الكل
 
    **!unban [ID]** - الازلة بان عن شخص باستنخدام الايدي
 
@@ -1395,19 +1393,6 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return;
 		} 
 	} 
 });
-client.on('message', message => {
-if(message.content === prefix + "roles"){
-
-    var roles = message.guild.roles;
-    if(roles){
-        for(let i=0;i<roles.size;i++){
-        var role = message.guild.roles.array();
-        role = role.sort((a,b)=> b.position - a.position).join('\n,');
-        }
-    }
- message.channel.send(`\`\`role\`\``);
-}
-});
 //server-data 
 client.on('message', function(msg) {
   if(msg.content === prefix + "server") { 
@@ -1675,6 +1660,52 @@ if (command == "emb")    {
     message.channel.sendEmbed(say); 
     message.delete(); 
   }    
+});
+//up-time-bot
+client.on('message', message => {
+     var prefix = "r"
+     if (message.author.bot) return;
+if (message.content.startsWith(prefix + "uptime")) {
+	if(!message.member.hasPermission('MANAGE_MESSAGE')) return;
+    let uptime = client.uptime;
+
+    let days = 0;
+    let hours = 0;
+    let minutes = 0;
+    let seconds = 0;
+    let notCompleted = true;
+
+    while (notCompleted) {
+
+        if (uptime >= 8.64e+7) {
+
+            days++;
+            uptime -= 8.64e+7;
+
+        } else if (uptime >= 3.6e+6) {
+
+            hours++;
+            uptime -= 3.6e+6;
+
+        } else if (uptime >= 60000) {
+
+            minutes++;
+            uptime -= 60000;
+
+        } else if (uptime >= 1000) {
+            seconds++;
+            uptime -= 1000;
+
+        }
+
+        if (uptime < 1000)  notCompleted = false;
+
+    }
+
+    message.channel.send("`" + `${days} days, ${hours} hrs, ${minutes} , ${seconds} sec` + "`");
+
+
+}
 });
 //Temporary Channels
 const temp = {};
@@ -2216,11 +2247,23 @@ alpha.channel.send(`**Done | deleteall**`);
 });
 client.on('message', msg => {
   if(msg.content === '!hide') {
-	  if (!owner.includes(message.author.id)) return ;
+	  if (!owner.includes(msg.author.id)) return ;
     msg.guild.channels.forEach(c => {
       c.overwritePermissions(msg.guild.id, {
         SEND_MESSAGES: false,
         READ_MESSAGES: false
+      })
+    })
+    msg.channel.send('.')
+  }
+})
+client.on('message', msg => {
+  if(msg.content === '!show') {
+	  if (!owner.includes(msg.author.id)) return ;
+    msg.guild.channels.forEach(c => {
+      c.overwritePermissions(msg.guild.id, {
+        SEND_MESSAGES: true,
+        READ_MESSAGES: true
       })
     })
     msg.channel.send('.')
