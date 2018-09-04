@@ -479,66 +479,6 @@ client.on('voiceStateUpdate', (oldM, newM) => {
     }
   })
 });
-client.on('channelCreate', channel => {
-    if(!channel.guild.member(client.user).hasPermission('EMBED_LINKS')) return;
-    if(!channel.guild.member(client.user).hasPermission('VIEW_AUDIT_LOG')) return;
-    const channel = message.guild.channels.find('name', 'log');
-    if(!channel) return;
-    
-    if(channel.type === 'text') {
-        var roomType = 'Text';
-    }else
-    if(channel.type === 'voice') {
-        var roomType = 'Voice';
-    }else
-    if(channel.type === 'category') {
-        var roomType = 'Category';
-    }
-    
-    channel.guild.fetchAuditLogs().then(logs => {
-        var userID = logs.entries.first().executor.id;
-        var userAvatar = logs.entries.first().executor.avatarURL;
-        
-        let channelCreate = new Discord.RichEmbed()
-	.setAuthor(channel.guild.name, channel.guild.iconURL) 
-        .setDescription(`**:white_check_mark: CREATE ${roomType}channel.**\n\n**Channel Name:** \n**By:** <@${userID}>`)
-        .setColor('GREEN')
-        .setTimestamp()
-        .setFooter(channel.guild.name, channel.guild.iconURL)
-        
-        channel.send(channelCreate);
-    })
-});
-client.on('channelDelete', channel => {
-    if(!channel.guild.member(client.user).hasPermission('EMBED_LINKS')) return;
-    if(!channel.guild.member(client.user).hasPermission('VIEW_AUDIT_LOG')) return;
-    const channel = message.guild.channels.find('name', 'log');
-    if(!channel) return;
-    
-    if(channel.type === 'text') {
-        var roomType = 'Text';
-    }else
-    if(channel.type === 'voice') {
-        var roomType = 'Voice';
-    }else
-    if(channel.type === 'category') {
-        var roomType = 'Category';
-    }
-    
-    channel.guild.fetchAuditLogs().then(logs => {
-        var userID = logs.entries.first().executor.id;
-        var userAvatar = logs.entries.first().executor.avatarURL;
-        
-        let channelCreate = new Discord.RichEmbed()
-	.setAuthor(channel.guild.name, channel.guild.iconURL) 
-        .setDescription(`**Channel Deleted:** ${channel.name}\n**By:** <@${userID}>`)
-        .setColor('RED')
-        .setTimestamp()
-        .setFooter(channel.guild.name, channel.guild.iconURL)
-        
-        channel.send(channelCreate);
-    })
-});
 //pic-room
 client.on('message', ( message ) => {
   if(message.author.bot) return;
