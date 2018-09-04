@@ -1961,8 +1961,6 @@ client.on('message', message => {
  
  
  link:
-[${message.guild.name}]
-
 **`)
     }
 });
