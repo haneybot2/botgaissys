@@ -614,7 +614,6 @@ client.on('message', message => {
 ╚[❖═════════════════❖]╝
 
  **❖ !play ➾**  لتشغيل مقطع 
- **❖ !join ➾ **لادخال البوت للروم الصوتي
  **❖ !stop ➾ ** لأيقاف تشغيل اغنيه والخروج من الروم الصوتي
  **❖ !skip ➾ ** لتخطي الاغنيه الحالية 
  **❖ !vol ➾ ** لإظهار مستوي الصوت الحالي / تغيير درجه الصوت
@@ -1511,17 +1510,18 @@ client.on('message', eyadandr3d => {
        }
 
        });
-//join-room
+//joinroome
 client.on('message', msg => {
+	
   if (msg.content === prefix + 'join') {
-    if(!msg.member.hasPermission('MANAGE_MESSAGES')) return;
-    const channel = msg.member.voiceChannel;    
-    channel.join()
-    .then(connection => console.log('Connected!'))
-    .catch(console.error);
-    return msg.channel.send(':thumbsup: **Joined**');
-  }
-});
+        if (msg.member.voiceChannel) {
+		
+     if (msg.member.voiceChannel.joinable) {
+         msg.member.voiceChannel.join().then(msg.react('✅'));
+     }
+    }
+}
+})
 //send-pic
 client.on('message', message => {
   if (message.author.bot) return;
