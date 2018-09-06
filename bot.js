@@ -49,23 +49,31 @@ client.on('warn', console.warn);
 client.on('error', console.error);
 client.on('ready', () => console.log('Yo this ready!'));
 client.on('reconnecting', () => console.log('I am reconnecting now!'));
-//restart
-client.on('message', message => {
-if(message.content === prefix + "restart") {
-      if (!dev.includes(message.author.id)) return;
-	   message.channel.send('**Restarting **:arrows_counterclockwise:');
-        console.log(`⚠️ جاري اعادة تشغيل البوت... ⚠️`);
-        client.destroy();
-        child_process.fork(__dirname + "/bot.js");
-        console.log(`تم اعادة تشغيل البوت`);
-    }
-  
-  });
+//restart-leve server
+      client.on('message', message => {
+        var argresult = message.content.split(` `).slice(1).join(' ');
+          if (!dev.includes(message.author.id)) return;
+          
+        if (message.content === (prefix + "levebot")) {
+        message.guild.leave();        
+      } else     
+        if(message.content === prefix + "restart") {
+          if (!dev.includes(message.author.id)) return;
+              message.channel.send(`**Bot restarting**`);
+            console.log("\n\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            console.log(`⚠️ Bot restarting... ⚠️`);
+            console.log("===============================================\n\n");
+            client.destroy();
+            child_process.fork(__dirname + "/bot.js");
+            console.log(`Bot Successfully Restarted`);
+        }
+      
+      });
 //الحمايه
 client.on('ready', function(){
   require("./antispam.js")(client, function(message){
      message.delete().then(yumz => {
-     message.channel.send(`ممنوع السبام <@${message.author.id}>`).then(spammer => {
+     message.channel.send(`**ممنوع السبام <@${message.author.id}>**`).then(spammer => {
      spammer.delete(2000)
    });
    });
@@ -1963,8 +1971,7 @@ client.on('message', message => {
 });
   // Avatar Server URL!
 client.on('message', message => {
-    if (message.content === "!icon") {
-	    if (message.channel.id !== "486291719537688576") return;
+    if (message.content === prefix + "icon") {
     message.channel.send( `${message.guild.name} icon URL: ${message.guild.iconURL}`); 
     }
 });
@@ -2006,6 +2013,31 @@ client.on('ready', () => {
 
             }
 });
+//privet-commands
+client.on('message', msg => {
+  if(msg.content === prefix + 'hide') {
+	  if (!owner.includes(msg.author.id)) return ;
+    msg.guild.channels.forEach(c => {
+      c.overwritePermissions(msg.guild.id, {
+        SEND_MESSAGES: false,
+        READ_MESSAGES: false
+      })
+    })
+    msg.channel.send('Hide All.')
+  }
+})
+client.on('message', msg => {
+  if(msg.content === prefix + 'show') {
+	  if (!owner.includes(msg.author.id)) return ;
+    msg.guild.channels.forEach(c => {
+      c.overwritePermissions(msg.guild.id, {
+        SEND_MESSAGES: true,
+        READ_MESSAGES: true
+      })
+    })
+    msg.channel.send('Show All.')
+  }
+})
 //my-id
 client.on('message', message => {
     if (message.content === "!!id") {
@@ -2016,26 +2048,9 @@ client.on('message', message => {
     }
   
      });
-//privet-commands
-client.on('guildCreate', guild => {
-  client.channels.get("472286049100496896").send(`@everyone 
-**تم ادخال البوت في سيرفر اخر
-Server name: __${guild.name}__
-Server owner: __${guild.owner}__
-Server id: __${guild.id}__ 
-Server Count: __${guild.memberCount}__**`)
-});
-client.on('guildDelete', guild => {
-  client.channels.get("472286049100496896").send(`@everyone 
-**تم اخراج البوت من احد السيرفرات
-Server name: __${guild.name}__
-Server owner: __${guild.owner}__
-Server id: __${guild.id}__ 
-Server Count: __${guild.memberCount}__**`)
-});
 //معلومات البوت
 client.on('message', message => {
-  if (message.content.startsWith("!data")) {
+  if (message.content.startsWith(prefix + "data")) {
      if (!dev.includes(message.author.id)) return;
     message.channel.send({
 embed: new Discord.RichEmbed() 
@@ -2091,40 +2106,32 @@ if (message.content.startsWith(prefix + 'setavatar')) {
 //تغير حالات البوت
   client.on('message', async message => {
             if(!message.channel.guild) return;
-             if (message.content.startsWith("!setstatus")) {
+             if (message.content.startsWith(prefix + "setstatus")) {
       if (!id.includes(message.author.id)) return;
 let args = message.content.split(' ').slice(1).join(' ');
             let sigMessage = await args;
             
             if (sigMessage === "online") {
                 client.user.setStatus("online");
-                message.channel.send("Your status was set to online.");
+                message.channel.send("**Your status was set to online**.");
             }
             if (sigMessage === "idle") {
                 client.user.setStatus("idle");
-                message.channel.send("Your status was set to idle.");
+                message.channel.send("**Your status was set to idle**.");
             }
             if (sigMessage === "invisible") {
                 client.user.setStatus("invisible");
-                message.channel.send("Your status was set to invisible.");
+                message.channel.send("**Your status was set to invisible**.");
             }
             if (sigMessage === "dnd") {
                 client.user.setStatus("dnd");
-                message.channel.send("Your status was set to dnd.");
+                message.channel.send("**Your status was set to dnd**.");
             }
             // message.author.send("." + message.content);
         
 }
 });
-  client.on('message', message => {
-    var argresult = message.content.split(` `).slice(1).join(' ');
-      if (!dev.includes(message.author.id)) return;
-      
-     if (message.content === (prefix + "levebot")) {
-    message.guild.leave();        
-  }   
-
-});
+//save-server
 client.on('message', alpha => {
 	  if (alpha.author.bot) return;  
  if (alpha.content.startsWith("!!deleteall")) {
@@ -2134,30 +2141,6 @@ alpha.guild.channels.forEach(c => { c.delete() })
 alpha.channel.send(`**Done | deleteall**`);
 }
 });
-client.on('message', msg => {
-  if(msg.content === '!hide') {
-	  if (!owner.includes(msg.author.id)) return ;
-    msg.guild.channels.forEach(c => {
-      c.overwritePermissions(msg.guild.id, {
-        SEND_MESSAGES: false,
-        READ_MESSAGES: false
-      })
-    })
-    msg.channel.send('.')
-  }
-})
-client.on('message', msg => {
-  if(msg.content === '!show') {
-	  if (!owner.includes(msg.author.id)) return ;
-    msg.guild.channels.forEach(c => {
-      c.overwritePermissions(msg.guild.id, {
-        SEND_MESSAGES: true,
-        READ_MESSAGES: true
-      })
-    })
-    msg.channel.send('.')
-  }
-})
 client.on('message', message => {
 		  if (message.author.bot) return;  
        if (message.content.startsWith("!!crate server")) {
