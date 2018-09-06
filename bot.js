@@ -18,6 +18,10 @@ const jimp = require("jimp");
 //profilepac
 const moment = require("moment"); 
 const dateFormat = require('dateformat');
+var daily = JSON.parse(fs.readFileSync("./daily.json", "utf8")); // يقرا ملف jso
+var rep = JSON.parse(fs.readFileSync("./rep.json", "utf8"));
+const sql = require("sqlite");
+sql.open("./score.sqlite");
 //shortpac
  const googl = require('goo.gl');
 //restartpac
