@@ -105,7 +105,7 @@ client.on('ready', function(){
         console.log(e.stack);
       }
     }
-           if(!message.channel.guild) return message.reply('** This command only for servers**');
+           if(!message.channel.guild) return message.channel.send('** This command only for servers**');
      message.member.addRole(muterole);
     const embed500 = new Discord.RichEmbed()
       .setTitle("Muted ")
@@ -571,11 +571,11 @@ client.on('message', message => {
  **❖ !ping  ➾** لعرض سرعة الاتصال
  **❖ !id  ➾** لاظهار ادي حقق
  **❖ !user  ➾** لاظهار معلومات حسابك
- **❖ !profile  ➾** الملف الشخصي
  **❖ !time  ➾** لتحديد الوقت كمؤقت
  **❖ !avatar  ➾ ** لعرض صورة حسابك
  **❖ !invites  ➾** لمعرفة عدد الاعضاء الي جبتهم 
- **❖ !roll  ➾ ** القرعه
+ **❖ !roll [number] ➾ ** القرعه
+ **❖ !short [link] ➾ ** اختصار الروابط
 
 `).catch(RebeL =>{console.log('`Error`: ' + RebeL);
 message.channel.send("** يجب السماح بأستقبال رسائل الخاص قبل طلب الأمر **")
@@ -602,7 +602,7 @@ client.on('message', message => {
  **❖ !kick [mention] ➾** لطرد العضو
  **❖ !vkick [mention] ➾** لطر العضو من الروم
  **❖ !clear [namber] ➾** لمسح الشات
- **❖ !mute [mention] [time] ➾** لاعطاء ميوت كتابي
+ **❖ !mute [mention] [reson] ➾** لاعطاء ميوت كتابي
  **❖ !unmute [mention] ➾** لازالة الميوت الكتابي
  **❖ !mutechat ➾** لاقفال الشات
  **❖ !unmutechat ➾** لفتح الشات
