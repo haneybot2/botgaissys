@@ -414,7 +414,7 @@ client.on('guildMemberRemove', member => {
        .setColor('BLACK')
        .setDescription(`:arrow_upper_left:  <@${member.user.id}> **Leave From Server**\n\n`)
        .setTimestamp()
-       .setFooter(`${m.tag}`, member.author.avatarURL);
+       .setFooter(`${m.tag}`, member.user.avatarURL);
      channel.send({embed:embed});
 });
 client.on('guildMemberAdd', member => {
