@@ -18,7 +18,6 @@ const jimp = require("jimp");
 //profilepac
 const moment = require("moment"); 
 const dateFormat = require('dateformat');
-const daily = JSON.parse(fs.readFileSync("./daily.json", "utf8"));
 const rep = JSON.parse(fs.readFileSync("./rep.json", "utf8"));
 const points = JSON.parse(fs.readFileSync("./points.json", "utf8"));
 const sql = require("sqlite");
