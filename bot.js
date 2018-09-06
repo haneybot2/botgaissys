@@ -1519,18 +1519,6 @@ client.on('message', eyadandr3d => {
        }
 
        });
-//joinroome
-client.on('message', msg => {
-	
-  if (msg.content === prefix + 'join') {
-        if (msg.member.voiceChannel) {
-		
-     if (msg.member.voiceChannel.joinable) {
-         msg.member.voiceChannel.join().then(msg.react('✅'));
-     }
-    }
-}
-})
 //send-pic
 client.on('message', message => {
   if (message.author.bot) return;
@@ -1793,131 +1781,234 @@ var mentionned = message.mentions.members.first();
 
 
  });
+//levelup
+client.pointsMonitor = (dateformat, message) => {
+  if (message.channel.type !=='text') return;
+  const settings = client.settings.get(message.guild.id);
+  if (message.content.startsWith(settings.prefix)) return;
+  const score = client.points.get(message.author.id) || { points: 1, level: 1 };
+  score.points++;
+  const curLevel = Math.floor(0.2 * Math.sqrt(score.points));
+  if (score.level < curLevel) {
+        message.channel.send(`\`\`<@!${message.author.id}>\`\` levelup${curLevel} `);
+    score.level = curLevel;
+  }
+client.points.set(message.author.id, score);
+};
 //profile
-client.on('message', message => {
+const db = require("quick.db");
+var dataPro = JSON.parse(fs.readFileSync('./walls.json', 'utf8'));
+client.on("message",  message => {
+    let args = message.content.split(' ').slice(1);
 
-    if(message.content.startsWith(prefix + 'profile')) {
-if(!message.channel.guild) return;
-      var args = message.content.split(" ").slice(1);
-      let user = message.mentions.users.first();
-      var men = message.mentions.users.first();
-         var heg;
-         if(men) {
-             heg = men
-         } else {
-             heg = message.author
-         }
-       var mentionned = message.mentions.members.first();
-          var h;
-         if(mentionned) {
-             h = mentionned
-         } else {
-             h = message.member
-         }
-  moment.locale('ar');
-    const w = ['./id1.png','./id2.png','./id3.png','./id4.png','./id5.png']
-        let Image = Canvas.Image,
-            canvas = new Canvas(500, 500),
-            ctx = canvas.getContext('2d');
-        ctx.patternQuality = 'bilinear';
-        ctx.filter = 'bilinear';
-        ctx.antialias = 'subpixel';
-        ctx.shadowColor = 'rgba(0, 0, 0, 0)';
-        ctx.shadowOffsetY = 2;
-        ctx.shadowBlur = 2;
-        fs.readFile(`${w[Math.floor(Math.random() * w.length)]}`, function (err, Background) {
-            if (err) return console.log(err);
-            let BG = Canvas.Image;
-            let ground = new Image;
-            ground.src = Background;
-            ctx.drawImage(ground, 0, 0, 500, 500);
-
-})
-                let url = h.user.displayAvatarURL.endsWith(".webp") ? h.user.displayAvatarURL.slice(5, -20) + ".png" : h.user.displayAvatarURL;
-                jimp.read(url, (err, ava) => {
-                    if (err) return console.log(err);
-                    ava.getBuffer(jimp.MIME_PNG, (err, buf) => {
-                        if (err) return console.log(err);
-  //time dateformet
-  const millis = new Date().getTime() - h.user.createdAt.getTime();
-  const now = new Date();
-  dateFormat(now, 'dddd, mmmm dS, yyyy');
-  const stats2 = ['online', 'Low', 'Medium', 'Insane'];
-  const days = millis / 1000 / 60 / 60 / 24;
-            dateFormat(now, 'dddd, mmmm dS, yyyy');
-            
-        
-                          //دخولك الديسكورد
-                          var day = `منذ ${days.toFixed(0)} يوم`
-                          ctx.font = '27px Arial Bold';
-                          ctx.fontSize = '30px';
-                          ctx.fillStyle = "#ffffff";
-                          ctx.textAlign = "center";
-                          ctx.fillText(day, 109, 97)
-              //wl
-              var millis1;
-        if(mentionned){
-            var millis1 = new Date().getTime() - mentionned.joinedAt
+var prefix =`!`;
+  let command = message.content.split(" ")[0];
+      if (command === prefix + "setprofile") {
+        if(!args[0]) return message.reply('يجب عليك اختيار رقم الخلفيه')
+        if(dataPro[message.author.id].walls[args[0]]) {
+        dataPro[message.author.id].ai = true;
+        dataPro[message.author.id].wallSrc = dataPro[message.author.id].walls[args[0]].src;
+        message.reply('تم بنجاح تغير الخلفيه');
         } else {
-            var millis1 = new Date().getTime() - moment(message.member.joinedAt);;
-            
+            message.reply('انت لا تملك هذه الخلفيه')
+        }
+    }
+
+    if(message.content.startsWith(prefix + 'Backgrounds')) {
+        var walls = dataPro[message.author.id].walls;
+        for(var wall in walls) {
+            console.log(walls[wall]);
+            message.channel.send(walls[wall]);// ;(
+        }
+    }
+    var wallpapers = {
+                1: {
+                    src: 'walls/1414.jpg',
+                    price: 1,
+                },
+                2: {
+                    src: 'walls/1515.jpg',
+                    price: 2,
+                },
+                3: {
+                    src: 'walls/7777.jpg',
+                    price: 3,
+                },
+                4: {
+                    src: 'walls/9999.jpg',
+                    price: 4,
+                },
+                5: {
+                    src: 'walls/44444.jpg',
+                    price: 5,
+                },
+            }
+    if(!dataPro[message.author.id]) {
+            dataPro[message.author.id] = {
+                ai: false,
+                wallSrc: './walls/default.jpg' ,
+                walls: {}
+            }
+        }
+         var prefix=`!`
+    if(message.content.startsWith(prefix + 'buy')) {
+        sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
+    if (!row) return message.reply("** Pls Try .daily And Try Agin**");
+        if (!row) return message.reply("sadly you do not have any points yet!");
+        let points = row.points;
+        if(!args[0]) {
+            let embed = new Discord.RichEmbed()
+.setDescription('**ورقم الخلفية .buy لـشراء خلفية آستخدم آمر  ** ')
+.addField('Profile starwars','Price : $1000 Number: 1')
+.addField('Profile Sun','Preice: $1800 Number: 2')
+.addField('Profile Tree','Price : $2300 Number: 3')
+.addField('Profile Mount','Price: $3000 Number: 4')
+.addField('Profile Old Tree','Price: $4000 Number: 5')
+ .setImage("");
+            message.channel.send({embed: embed});
+        } else {
+
+            if(wallpapers[args[0]].price > row.points) {
+                message.reply('لا يمكنك شراء هذه الخلفيه لانك لا تملك المال الكافي لشرائها ')
+            } else {
+                if(dataPro[message.author.id].walls == wallpapers[args[0]]) return message.reply('انت تملك هذه الخلفيه مسبقاً');
+                else {
+                    row.points - wallpapers[args[0]].price;
+                    sql.run(`UPDATE scores SET points = ${row.points - wallpapers[args[0]].price} WHERE userId = ${message.author.id}`);
+                     dataPro[message.author.id].ai = true;
+                     dataPro[message.author.id].walls[args[0]] = wallpapers[args[0]];
+                    message.reply('تم بنجاح شراء الخلفيه للاستخدام الخلفيه اكتب .set '+args[0]);
+                }
+
+            }
+
         }
 
-  const days1 = millis1 / 1000 / 60 / 60 / 24;
-  
-                        //دخولك السيرفر
-                        var day2 = `منذ ${days1.toFixed(0)} يوم`
-                        ctx.font = '27px Arial Bold';
-                        ctx.fontSize = '20px';
-                        ctx.fillStyle = "#ffffff";
-                        ctx.textAlign = "center";
-                        ctx.fillText(day2, 388, 97); 
+        });
+        //message.reply('Hhihihi');
+    }
 
-                        //ur name
-                        ctx.font = '27px BlowBrush';
-                        ctx.fontSize = '30px';
+    fs.writeFile('./walls.json', JSON.stringify(dataPro), (err) => {
+     if(err) console.log(err.message);
+ })
+    if(message.content.startsWith(prefix + 'profile')) {
+         if(!message.channel.guild) return message.reply('** This command only for servers**');
+     var ment = message.mentions.users.first();
+      var getvalueof;
+      if(ment) {
+        getvalueof = ment;
+      } else {
+        getvalueof = message.author;
+      }
+  if (!points[message.author.id]) points[message.author.id] = {
+    points: 0,
+    level: 0
+  };
+  let userData = points[message.author.id];
+  userData.points++;
+
+  let curLevel = Math.floor(0.1 * Math.sqrt(userData.points));
+  if (curLevel > userData.level) {
+
+    userData.level = curLevel;
+  //  message.reply(`You"ve leveled up to level **${curLevel}**! Ain"t that dandy?`);
+  }
+           var Canvas = require('canvas')
+var jimp = require('jimp')
+const snumber = require('short-number')
+         sql.get(`SELECT * FROM scores WHERE userId ="${getvalueof.id}"`).then(row => {
+message.channel.startTyping(1)
+const w = ['./img/wall.png'];
+      let Image = Canvas.Image,
+          canvas = new Canvas(437, 437),
+          ctx = canvas.getContext('2d');
+      ctx.patternQuality = 'Cairo';
+      ctx.filter = 'Cairo';
+      ctx.antialias = 'Cairo';
+      ctx.shadowColor = 'Cairo(0, 0, 0, 0.4)';
+      ctx.shadowOffsetY = 2;
+      ctx.shadowBlur = 2;
+
+
+
+      fs.readFile(`${dataPro[getvalueof.id].wallSrc}`, function (err, Background) {
+          fs.readFile(`${w[0]}`, function (err, Background) {
+          if (err) return console.log(err);
+          let BG = Canvas.Image;
+          let ground = new Image;
+          ground.src = Background;
+          ctx.drawImage(ground, 0, 0, 437, 437);
+});
+          if (err) return console.log(err);
+          let BG = Canvas.Image;
+          let ground = new Image;
+          ground.src = Background;
+          ctx.drawImage(ground, 0, 0, 437, 437);
+});
+
+
+
+              let url = getvalueof.displayAvatarURL.endsWith(".webp") ? getvalueof.displayAvatarURL.slice(5, -20) + ".png" : getvalueof.displayAvatarURL;
+              jimp.read(url, (err, ava) => {
+                  if (err) return console.log(err);
+                  ava.getBuffer(jimp.MIME_PNG, (err, buf) => {
+                      if (err) return console.log(err);
+                      let Avatar = Canvas.Image;
+                      let ava = new Avatar;
+                      ava.src = buf;
+                      ctx.drawImage(ava, 11, 47, 116, 116);
+                      if (!row) return message.reply("**Your Level Is 0 , Try .daily , Then Try This Command **");
+                      ctx.font = '25px Cairo';
+                      ctx.fontSize = '55px';
+                      ctx.fillStyle = "#FFFFFF";
+                      ctx.textAlign = "center";
+                      ctx.fillText(snumber(row.level), 395, 75);
+                      ctx.font = '25px Cairo';
+                      ctx.fontSize = '95px';
+                      ctx.fillStyle = "#FFFFFF";
+                      ctx.textAlign = "center";
+                      ctx.fillText(`$${snumber(row.points)}`, 360, 428);
+                                              //Name
+                        ctx.font = "25px Cairo";
                         ctx.fillStyle = "#FFFFFF";
                         ctx.textAlign = "center";
-                        ctx.fillText(h.user.username, 245, 365);
-                        //tag
-                        ctx.font = '27px Arial Bold';
-                        ctx.fontSize = '45px';
-                        ctx.fillStyle = "#ffffff";
-                        ctx.textAlign = "center";
-                        ctx.fillText(`#${heg.discriminator}`, 120, 450);
-                        
-                        //حالتك
-                           let status;
-    if (h.presence.status === 'online') {
-        status = 'اون لاين';
-    } else if (h.presence.status === 'dnd') {
-        status = 'مشغول';
-    } else if (h.presence.status === 'idle') {
-        status = 'خمول';
-    } else if (h.presence.status === 'offline') {
-        status = 'اوف لاين';
-    }
-                        ctx.font = '27px Arial Bold';
-                        ctx.fontSize = '30px';
-                        ctx.fillStyle = "#ffffff";
-                        ctx.textAlign = "center";
-                        ctx.fillText(`${status}`, 380, 450);
-                        
-                        //Avatar
-                        let Avatar = Canvas.Image;
-                        let ava = new Avatar;
-                        ava.src = buf;
-                        ctx.beginPath();
-                        ctx.arc(250, 238, 64, 0, Math.PI*2, true); 
-                        ctx.closePath();
-                        ctx.clip();
-                        ctx.drawImage(ava, 185, 172, 130, 130 );
-                         
-     message.channel.sendFile(canvas.toBuffer())
-})
-   })
+                        ctx.fillText(getvalueof.username, 297, 140);
+                      ctx.font = "17px Cairo";
+                      ctx.fontSize = "12px";
+                      ctx.fillStyle = "#FFFFFF";
+                      ctx.textAlign = "left";
+                      db.fetchObject(`message_${getvalueof.id}`).then(i => {
 
-} });
+                          if (!i.text){
+                              i.text = "Try .setinfo";
+                          };
+                      ctx.fillText(i.text, 140,264);
+                   ctx.font = "25px  Cairo";
+                      ctx.fontSize = "15px";
+                      ctx.fillStyle = "#FFFFFF";
+                      ctx.textAlign = "center";
+                      ctx.fillText('Soon', 1790,1200);
+                      // REP
+                    ctx.font = "25px  Cairo";
+                      ctx.fontSize = "100px";
+                      ctx.fillStyle = "#FFFFFF";
+                      ctx.textAlign = "center";
+                      ctx.fillText(`❤️: ${rep[message.author.id].repo}`, 220,343);
+                     ctx.font = '25px Cairo';//xp
+                      ctx.fontSize = '28px';
+                      ctx.fillStyle = "#FFFFFF";
+                      ctx.textAlign = "center";
+                      ctx.fillText(userData.points, 80, 428);
+                      message.channel.send(`**:pencil: |  Here is ${getvalueof.username}'s Profile**`,{file : canvas.toBuffer()});
+message.channel.stopTyping(1)
+                      });
+                  });
+                });
+         });
+
+            console.log('ProFile is Using');
+    }
+});
 //ping
 client.on('message' , message => {
   var prefix = "!";
