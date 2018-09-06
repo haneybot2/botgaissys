@@ -22,7 +22,6 @@ const child_process = require("child_process");
 //console
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
-client.user.setGame(`.A-GUYS`,"http://twitch.tv/S-F")
   console.log('')
   console.log('')
   console.log('╔[═════════════════════════════════════════════════════════════════]╗')
@@ -357,7 +356,7 @@ client.on("guildMemberAdd", (member) => {
             if (dat[Inv])
                 if (dat[Inv] < Invite.uses) {
                     setTimeout(function() {
- channel.send(`**invited by** ${Invite.inviter} `) ;
+ channel.send(`**by**: ${Invite.inviter}`) ;
                     },1500);
  }
             dat[Inv] = Invite.uses;
@@ -400,7 +399,7 @@ client.on('messageDelete', message => {
 
 });
 client.on('guildMemberRemove', member => {
-    if (!member || !member.id || !member.guild) return;
+    if (!member || !member.id || !member.guild || !member.guild || member.author.bot) return;
     const guild = member.guild;
 	
     const channel = member.guild.channels.find('name', 'log');
@@ -408,13 +407,14 @@ client.on('guildMemberRemove', member => {
     let memberavatar = member.user.avatarURL
     const fromNow = moment(member.joinedTimestamp).fromNow();
     
+	var m = member.user;
     let embed = new Discord.RichEmbed()
        .setAuthor(`${member.user.tag}`, member.user.avatarURL)
 	   .setThumbnail(memberavatar)
        .setColor('BLACK')
        .setDescription(`:arrow_upper_left:  <@${member.user.id}> **Leave From Server**\n\n`)
        .setTimestamp()
-       .setFooter(member.author.username, member.author.avatarURL);
+       .setFooter(`${m.tag}`, member.author.avatarURL);
      channel.send({embed:embed});
 });
 client.on('guildMemberAdd', member => {
