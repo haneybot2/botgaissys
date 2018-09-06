@@ -399,7 +399,7 @@ client.on('messageDelete', message => {
 
 });
 client.on('guildMemberRemove', member => {
-    if (!member || !member.id || !member.guild || !member.guild || member.author.bot) return;
+    if (!member || !member.id || !member.guild || !member.guild) return;
     const guild = member.guild;
 	
     const channel = member.guild.channels.find('name', 'log');
