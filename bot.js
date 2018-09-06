@@ -1922,7 +1922,7 @@ var jimp = require('jimp')
 const snumber = require('short-number')
          sql.get(`SELECT * FROM scores WHERE userId ="${getvalueof.id}"`).then(row => {
 message.channel.startTyping(1)
-const w = ['./img/wall.png'];
+const w = ['./walls/default.jpg'];
       let Image = Canvas.Image,
           canvas = new Canvas(437, 437),
           ctx = canvas.getContext('2d');
