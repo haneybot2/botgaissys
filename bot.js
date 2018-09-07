@@ -1918,7 +1918,7 @@ client.on('message', message => {
 **`)
     }
 });
-// Your Avatar and Avatar server !
+   // Your Avatar URL!
     client.on('message', message =>{
     let args = message.content.split(' ');
   if (message.author.boss) return;
@@ -1936,10 +1936,11 @@ if (!message.content.startsWith(prefix)) return;
           let sicon = mentions.user.avatarURL
           message.channel.send(`**${mentions.user.username}** avatar URL: ${sicon}`)
         }
+    };
 
 });
+  // Avatar Server URL!
 client.on('message' , message => { 
-    var prefix = "!";
      if (message.content === "!avatar server") {
 	     		 if (message.channel.id !== "486291719537688576") return;
     message.channel.send( `${message.guild.name} icon URL: ${message.guild.iconURL}`); 
