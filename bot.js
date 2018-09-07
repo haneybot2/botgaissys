@@ -1086,17 +1086,16 @@ if(!message.channel.guild) return;
 if (!message.content.startsWith(prefix)) return;
 	let command = message.content.split(" ")[0];
 	 command = command.slice(prefix.length);
-	let args = message.content.split(" ").slice(1);
 	if (command == "bcrole") {
 	  if (!message.member.hasPermission("ADMINISTRATOR"))  return;
     let args = message.content.split(" ").slice(1);
 
     if(!args[0]) {
-      message.channel.send(":information_source:** `!brole @Admin message` قم بمنشنة الرتبة **");
+      message.channel.send(":information_source:** `!bcrole @Admin message` قم بمنشنة الرتبة **");
         return;
     }
     if(!args[1]) {
-      message.channel.send(":information_source: **`!brole @Admin message` قم بمنشنة الرتبة** ");
+      message.channel.send(":information_source: **`!bcrole @Admin message` قم بمنشنة الرتبة** ");
         return;
     }
 
