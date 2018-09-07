@@ -437,44 +437,6 @@ client.on('guildMemberAdd', member => {
          
  }
 });
- client.on('guildMemberBanAdd', member => {
-    if (!member || !member.id || !member.guild || !member.guild) return;
-    const guild = member.guild;
-	
-    const channel = member.guild.channels.find('name', 'log');
-    if (!channel) return;
-    let memberavatar = member.user.avatarURL
-    const fromNow = moment(member.joinedTimestamp).fromNow();
-    
-	var m = member.user;
-    let embed = new Discord.RichEmbed()
-       .setAuthor(`${member.user.tag}`, member.user.avatarURL)
-	   .setThumbnail(memberavatar)
-       .setColor('BLACK')
-       .setDescription(`:airplane: <@${member.user.id}> **banned from the server**\n by : <@${member.author.id}>\n`)
-       .setTimestamp()
-       .setFooter(`${member.author.tag}`, member.author.avatarURL);
-     channel.send({embed:embed});
-});
- client.on('guildMemberBanRemove', member => {
-    if (!member || !member.id || !member.guild || !member.guild) return;
-    const guild = member.guild;
-	
-    const channel = member.guild.channels.find('name', 'log');
-    if (!channel) return;
-    let memberavatar = member.user.avatarURL
-    const fromNow = moment(member.joinedTimestamp).fromNow();
-    
-	var m = member.user;
-    let embed = new Discord.RichEmbed()
-       .setAuthor(`${member.user.tag}`, member.user.avatarURL)
-	   .setThumbnail(memberavatar)
-       .setColor('BLACK')
-       .setDescription(`:blue_car:  **The ban of <@${member.user.id}> has been removed**\n by : <@${member.author.id}>\n`)
-       .setTimestamp()
-       .setFooter(`${member.author.tag}`, member.author.avatarURL);
-     channel.send({embed:embed});
-});
 client.on('voiceStateUpdate', (oldM, newM) => {
   let rebel1 = oldM.serverMute;
   let rebel2 = newM.serverMute;
@@ -1030,7 +992,12 @@ client.on("message", message => {
  //move-members
 client.on('message', message => {
 if(!message.channel.guild) return;
-if(message.content.startsWith(prefix + 'move')) {
+	var prefix = "!";
+if (!message.content.startsWith(prefix)) return;
+	let command = message.content.split(" ")[0];
+	 command = command.slice(prefix.length);
+	let args = message.content.split(" ").slice(1);
+	if (command == "move") {
  if (message.member.hasPermission("MOVE_MEMBERS")) {
  if (message.mentions.users.size === 0) {
  return message.channel.send(":x:  لم يتم العثور على العضو المطلوب ")
@@ -1060,7 +1027,12 @@ message.react("❌")
  }}});
 client.on('message', message => {
 if(!message.channel.guild) return;
-if(message.content.startsWith('اسحب')) {
+	var prefix = "";
+if (!message.content.startsWith(prefix)) return;
+	let command = message.content.split(" ")[0];
+	 command = command.slice(prefix.length);
+	let args = message.content.split(" ").slice(1);
+	if (command == "اسحب") { 
  if (message.member.hasPermission("MOVE_MEMBERS")) {
  if (message.mentions.users.size === 0) {
  return message.channel.send(":x:  لم يتم العثور على العضو المطلوب ")
@@ -1089,7 +1061,13 @@ message.channel.send("**:x:  العضو يجب أن يكون متواجد برو
 message.react("❌")
  }}});
 client.on('message', message => {
-if(message.content.startsWith(prefix + 'move' + 'all')) {
+if(!message.channel.guild) return;
+	var prefix = "!";
+if (!message.content.startsWith(prefix)) return;
+	let command = message.content.split(" ")[0];
+	 command = command.slice(prefix.length);
+	let args = message.content.split(" ").slice(1);
+	if (command == "move all") { 
  if (!message.member.hasPermission("ADMINISTRATOR")) return;
    if(!message.guild.member(client.user).hasPermission("MOVE_MEMBERS")) return message.channel.send("**لايوجد لدي صلاحية السحب**");
 if (message.member.voiceChannel == null) return message.channel.send(`**الرجاء الدخول لروم صوتي**`)
@@ -1105,9 +1083,14 @@ if (message.member.voiceChannel == null) return message.channel.send(`**الرج
    });
 //bcrole
 client.on('message' , message => {
-  var prefix = "!";
   if(message.author.bot) return;
-  if(message.content.startsWith(prefix + "bc" + "role")) {
+if(!message.channel.guild) return;
+	var prefix = "!";
+if (!message.content.startsWith(prefix)) return;
+	let command = message.content.split(" ")[0];
+	 command = command.slice(prefix.length);
+	let args = message.content.split(" ").slice(1);
+	if (command == "bcrole") {
 	  if (!message.member.hasPermission("ADMINISTRATOR"))  return;
     let args = message.content.split(" ").slice(1);
 
@@ -1177,8 +1160,13 @@ client.on('message', message => {
 });
 //bc-online
 client.on("message", message => {
-
-            if (message.content.startsWith(prefix + "bc")) {
+if(!message.channel.guild) return;
+	var prefix = "!";
+if (!message.content.startsWith(prefix)) return;
+	let command = message.content.split(" ")[0];
+	 command = command.slice(prefix.length);
+	let args = message.content.split(" ").slice(1);
+	if (command == "bc") {
                          if (!message.member.hasPermission("ADMINISTRATOR"))  return;
 		    var args1 = message.content.split(' ').slice(1).join(' ');
 		    if(!args1) return message.channel.send(`**➥ Useage:** ${prefix}bc <message>`);
@@ -1193,8 +1181,13 @@ client.on("message", message => {
 });
 //bc-online and ofline
 client.on('message', message => {
-	var command = message.content.split(" ")[0];
-	if(command == prefix + 'obc') {
+if(!message.channel.guild) return;
+	var prefix = "!";
+if (!message.content.startsWith(prefix)) return;
+	let command = message.content.split(" ")[0];
+	 command = command.slice(prefix.length);
+	let args = message.content.split(" ").slice(1);
+	if (command == "obc") {
 		 if (!message.member.hasPermission("ADMINISTRATOR"))  return;
 		var args = message.content.split(' ').slice(1).join(' ');
 		if(message.author.bot) return;
@@ -1729,7 +1722,7 @@ client.on('message', async message => {
       });
 //setvoice-online
 client.on('message',async message => {
-  if(message.content.startsWith(prefix + "set" + "voice")) {
+  if(message.content.startsWith(prefix + "setvoice")) {
   if(!message.guild.member(message.author).hasPermissions('ADMINISTRATOR')) return ;
   if(!message.guild.member(client.user).hasPermissions(['MANAGE_CHANNELS','MANAGE_ROLES_OR_PERMISSIONS'])) return message.channel.send('❌ **ليس معي الصلاحيات الكافية**');
   message.channel.send('✅| **تم عمل الروم بنجاح**');
@@ -1807,15 +1800,15 @@ var mentionned = message.mentions.members.first();
 
  });
 //ping
-client.on('message' , message => {
-  var prefix = "!";
-  if(message.author.bot) return;
-  if(message.content.startsWith(prefix + "ping")) {
- message.channel.send('Pong...').then((msg) => {
-      msg.edit(`\`\`\`javascript\nTime taken: ${msg.createdTimestamp - message.createdTimestamp} ms.\nDiscord API: ${Math.round(client.ping)} ms.\`\`\``);
- })
-  }  
- });
+client.on('message', message =>{
+    if(message.content === prefix + 'ping'){
+let start = Date.now(); message.channel.send('pong...').then(message => { 
+message.edit(`\`\`\`js
+Time taken: ${Date.now() - start} ms
+Discord API: ${client.ping.toFixed(0)} ms\`\`\``);
+    });
+    }
+});
 //short
 client.on('message', message => {
  let args = message.content.split(' ').slice(1);
