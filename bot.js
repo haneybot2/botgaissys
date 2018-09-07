@@ -446,13 +446,15 @@ client.on('voiceStateUpdate', (oldM, newM) => {
   if(!ch) return;
     oldM.guild.fetchAuditLogs()
     .then(logs => {
-      let user = logs.entries.first().executor.username
+      let user = logs.entries.first().executor.tag;
+      let userid = logs.entries.first().executor.id;
+	  let useravatar = logs.entries.first().executor.avatarURL;
     if(rebel1 === false && rebel2 === true) {
        let embed1 = new Discord.RichEmbed()
 	   .setThumbnail(`http://i8.ae/1FAa5`)
        .setAuthor(`${newM.user.tag}`, newM.user.avatarURL)
-       .setDescription(`:microphone: **${newM} has been muted **By : **${user}**`)
-	   .setFooter(`${user}`)
+       .setDescription(`:microphone: **${newM} has been muted **By : <@${userid}>`)
+	   .setFooter(`${user}`, useravatar)
        .setColor('#ff0000')
 	   .setTimestamp()
        ch.send(embed1)
@@ -461,8 +463,8 @@ client.on('voiceStateUpdate', (oldM, newM) => {
        let embed2 = new Discord.RichEmbed()
 	   .setThumbnail(`http://i8.ae/Ohlud`)
        .setAuthor(`${newM.user.tag}`, newM.user.avatarURL)
-       .setDescription(`:microphone: **${newM} has been unmuted **By : **${user}**`)
-	   .setFooter(`${user}`)
+       .setDescription(`:microphone: **${newM} has been unmuted **By : ${userid}`)
+	   .setFooter(`${user}`, useravatar)
        .setColor('#ff0000')
        .setTimestamp()
        ch.send(embed2)
@@ -471,8 +473,8 @@ client.on('voiceStateUpdate', (oldM, newM) => {
        let embed3 = new Discord.RichEmbed()
 	   .setThumbnail(`http://i8.ae/UufuL`)
        .setAuthor(`${newM.user.tag}`, newM.user.avatarURL)
-       .setDescription(`:mute: **${newM} has been deafen **By : **${user}**`)
-	   .setFooter(`${user}`)
+       .setDescription(`:mute: **${newM} has been deafen **By : ${userid}`)
+	   .setFooter(`${user}`, useravatar)
        .setColor('#ff0000')
        .setTimestamp()
        ch.send(embed3)
@@ -481,8 +483,8 @@ client.on('voiceStateUpdate', (oldM, newM) => {
        let embed4 = new Discord.RichEmbed()
 	   .setThumbnail(`http://i8.ae/QNzaT`)
        .setAuthor(`${newM.user.tag}`, newM.user.avatarURL)
-       .setDescription(`:headphones: **${newM} has been undeafen **By : **${user}**`)
-	   .setFooter(`${user}`)
+       .setDescription(`:headphones: **${newM} has been undeafen **By : <@${userid}>`)
+	   .setFooter(`${user}`, useravatar)
        .setColor('#ff0000')
        .setTimestamp()
        ch.send(embed4)
