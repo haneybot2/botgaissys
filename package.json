@@ -1,5 +1,5 @@
 {
-  "name": "ELMEWAL3",
+  "name": "bytetech",
   "version": "2.1.0",
   "description": "-- AWESOMENESS --",
   "main": "bot.js",
@@ -44,7 +44,7 @@
     "short-number": "^1.0.6",
     "ytdl-core": "^0.20.3"
   },
-    "engines": {
-    "node": "8.x"
+  "engines": {
+    "node": "8.4.0"
   }
 }
