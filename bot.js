@@ -1062,7 +1062,12 @@ message.react("❌")
  }}});
 client.on('message', message => {
  if(message.author.bot) return;
-    if (message.content === prefix + "move all") {
+    let args = message.content.split(' ');
+	var prefix = "!";
+if (!message.content.startsWith(prefix)) return;
+	let command = message.content.split(" ")[0];
+	 command = command.slice(prefix.length);
+	if (command == "move all") {
  if (!message.member.hasPermission("ADMINISTRATOR")) return;
    if(!message.guild.member(client.user).hasPermission("MOVE_MEMBERS")) return message.channel.send("**لايوجد لدي صلاحية السحب**");
 if (message.member.voiceChannel == null) return message.channel.send(`**الرجاء الدخول لروم صوتي**`)
@@ -1943,8 +1948,13 @@ if (!message.content.startsWith(prefix)) return;
 });
   // Avatar Server URL!
 client.on('message', message => {
+    let args = message.content.split(' ');
   if (message.author.boss) return;
-    if (message.content === prefix + "avatar server") {
+	var prefix = "!";
+if (!message.content.startsWith(prefix)) return;
+	let command = message.content.split(" ")[0];
+	 command = command.slice(prefix.length);
+	if (command == "avatar server") {
 		 if (message.channel.id !== "486291719537688576") return;
     message.channel.send( `${message.guild.name} icon URL: ${message.guild.iconURL}`); 
     }
