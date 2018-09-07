@@ -1,5 +1,5 @@
 {
-  "name": "bytetech",
+  "name": "ELMEWAL3",
   "version": "2.1.0",
   "description": "-- AWESOMENESS --",
   "main": "bot.js",
@@ -45,6 +45,16 @@
     "ytdl-core": "^0.20.3"
   },
   "engines": {
-    "node": "8.4.0"
-  }
+    "node": "8.x",
+  },
+  "keywords": [
+    "heroku",
+    "discord.js"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/synicalsyntax/discord.js-heroku/issues"
+  },
+  "homepage": "https://github.com/synicalsyntax/discord.js-heroku#readme"
 }
