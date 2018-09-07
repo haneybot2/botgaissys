@@ -1920,13 +1920,7 @@ client.on('message', message => {
 });
    // Your Avatar URL!
     client.on('message', message =>{
-    let args = message.content.split(' ');
-  if (message.author.boss) return;
-	var prefix = "!";
-if (!message.content.startsWith(prefix)) return;
-	let command = message.content.split(" ")[0];
-	 command = command.slice(prefix.length);
-	if (command == "avatar") {
+if(message.content.startsWith('!avatar')){
 	    if (message.channel.id !== "486291719537688576") return;
         let mentions = message.mentions.members.first()
         if(!mentions) {
