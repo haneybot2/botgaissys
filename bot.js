@@ -1935,7 +1935,7 @@ if(message.content.startsWith('!avatar')){
 });
   // Avatar Server URL!
 client.on('message' , message => { 
-     if (message.content === "!avatar server") {
+     if (message.content === "!icon") {
 	     		 if (message.channel.id !== "486291719537688576") return;
     message.channel.send( `${message.guild.name} icon URL: ${message.guild.iconURL}`); 
  }
