@@ -1059,14 +1059,8 @@ message.channel.send("**:x:  العضو يجب أن يكون متواجد برو
 message.react("❌")
  }}});
 client.on('message' , message => {
-	  const prefix = "!"
-  if (message.author.bot) return;
-  if (!message.content.startsWith(prefix)) return;
-  let command = message.content.split(" ")[0];
-  command = command.slice(prefix.length);
-  let args = message.content.split(" ").slice(1);
-
-    if(command === "move all") {
+if (message.author.bot) return;
+    if (message.content === "!move all") {
  if (!message.member.hasPermission("ADMINISTRATOR")) return;
    if(!message.guild.member(client.user).hasPermission("MOVE_MEMBERS")) return message.channel.send("**لايوجد لدي صلاحية السحب**");
 if (message.member.voiceChannel == null) return message.channel.send(`**الرجاء الدخول لروم صوتي**`)
@@ -1100,7 +1094,7 @@ if (!message.content.startsWith(prefix)) return;
     }
 
       if(args[0] == "@everyone") {
-        message.channel.send(`**${message.guild.memberCount} تم ارسال رسالتك الي  **`);
+        message.channel.send(`**${message.guild.memberCount} تم ارسال رسالتك الي**`);
         message.guild.members.forEach(mi => {
           mi.send(
           "الرسالة :" + "\n" +
@@ -1125,7 +1119,8 @@ if (!message.content.startsWith(prefix)) return;
 });
 //bc-privet
 client.on('message', message => {
-     if(message.content.startsWith(prefix + "pbc")) {
+    var prefix = "!";
+if (message.content === prefix + "pbc") {
 	if (!owner.includes(message.author.id));
  let args = message.content.split(" ").slice(1);
 
@@ -1941,13 +1936,14 @@ if (!message.content.startsWith(prefix)) return;
           let sicon = mentions.user.avatarURL
           message.channel.send(`**${mentions.user.username}** avatar URL: ${sicon}`)
         }
-    }
-	    
-	if (command == "avatar server") {
-		 if (message.channel.id !== "486291719537688576") return;
-    message.channel.send( `${message.guild.name} icon URL: ${message.guild.iconURL}`); 
-    }
 
+});
+client.on('message' , message => { 
+    var prefix = "!";
+     if (message.content === "!avatar server") {
+	     		 if (message.channel.id !== "486291719537688576") return;
+    message.channel.send( `${message.guild.name} icon URL: ${message.guild.iconURL}`); 
+ }
 });
 //roll
 client.on('message', function(message) {
