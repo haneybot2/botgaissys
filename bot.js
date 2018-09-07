@@ -1023,21 +1023,7 @@ message.channel.send("**:x:  العضو يجب أن يكون متواجد برو
 }
 } else {
 message.react("❌")
- }}
- 	if (command == "move all") {
- if (!message.member.hasPermission("ADMINISTRATOR")) return;
-   if(!message.guild.member(client.user).hasPermission("MOVE_MEMBERS")) return message.channel.send("**لايوجد لدي صلاحية السحب**");
-if (message.member.voiceChannel == null) return message.channel.send(`**الرجاء الدخول لروم صوتي**`)
- var author = message.member.voiceChannelID;
- var m = message.guild.members.filter(m=>m.voiceChannel)
- message.guild.members.filter(m=>m.voiceChannel).forEach(m => {
- m.setVoiceChannel(author)
- })
- message.channel.send(`**تم سحب جميع الأعضاء إليك**`)
-
-
- }
- });
+ }}});
 client.on('message', message => {
 if(!message.channel.guild) return;
 	var prefix = "";
@@ -1072,6 +1058,26 @@ message.channel.send("**:x:  العضو يجب أن يكون متواجد برو
 } else {
 message.react("❌")
  }}});
+client.on('message' , message => {
+	  const prefix = "!"
+  if (message.author.bot) return;
+  if (!message.content.startsWith(prefix)) return;
+  let command = message.content.split(" ")[0];
+  command = command.slice(prefix.length);
+  let args = message.content.split(" ").slice(1);
+
+    if(command === "move all") {
+ if (!message.member.hasPermission("ADMINISTRATOR")) return;
+   if(!message.guild.member(client.user).hasPermission("MOVE_MEMBERS")) return message.channel.send("**لايوجد لدي صلاحية السحب**");
+if (message.member.voiceChannel == null) return message.channel.send(`**الرجاء الدخول لروم صوتي**`)
+ var author = message.member.voiceChannelID;
+ var m = message.guild.members.filter(m=>m.voiceChannel)
+ message.guild.members.filter(m=>m.voiceChannel).forEach(m => {
+ m.setVoiceChannel(author)
+ })
+ message.channel.send(`**تم سحب جميع الأعضاء إليك**`)
+
+ }});
 //bcrole
 client.on('message' , message => {
   if(message.author.bot) return;
@@ -1935,7 +1941,8 @@ if (!message.content.startsWith(prefix)) return;
           let sicon = mentions.user.avatarURL
           message.channel.send(`**${mentions.user.username}** avatar URL: ${sicon}`)
         }
-    };
+    }
+	    
 	if (command == "avatar server") {
 		 if (message.channel.id !== "486291719537688576") return;
     message.channel.send( `${message.guild.name} icon URL: ${message.guild.iconURL}`); 
