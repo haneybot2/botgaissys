@@ -612,7 +612,7 @@ client.on('message', message => {
  **❖ !showchat ➾** لاظهار الشات
  **❖ !bc [message] ➾** لارسال رساله للاون لاين
  **❖ !obc [message] ➾** لارسال رساله للاونلاين و للاوفلين
- **❖ !brole [mention] [message]  ➾** لارسال رساله لرتبه معينه
+ **❖ !bcrole [mention] [message]  ➾** لارسال رساله لرتبه معينه
  **❖ !members ➾ ** لعرض معلومان الاعضاء
  **❖ !server  ➾ ** لعرض معلومات السيرفر
  **❖ !move [mention] ➾** لسحب الاشخاص 
@@ -1061,13 +1061,10 @@ message.channel.send("**:x:  العضو يجب أن يكون متواجد برو
 message.react("❌")
  }}});
 client.on('message', message => {
-if(!message.channel.guild) return;
-	var prefix = "!";
-if (!message.content.startsWith(prefix)) return;
-	let command = message.content.split(" ")[0];
-	 command = command.slice(prefix.length);
-	let args = message.content.split(" ").slice(1);
-	if (command == "move all") { 
+ if(message.author.bot) return;
+    var prefix = "!";
+    const command = message.content.split(" ")[0];
+    if(command == prefix + "move all"){
  if (!message.member.hasPermission("ADMINISTRATOR")) return;
    if(!message.guild.member(client.user).hasPermission("MOVE_MEMBERS")) return message.channel.send("**لايوجد لدي صلاحية السحب**");
 if (message.member.voiceChannel == null) return message.channel.send(`**الرجاء الدخول لروم صوتي**`)
@@ -1169,7 +1166,7 @@ if (!message.content.startsWith(prefix)) return;
 	if (command == "bc") {
                          if (!message.member.hasPermission("ADMINISTRATOR"))  return;
 		    var args1 = message.content.split(' ').slice(1).join(' ');
-		    if(!args1) return message.channel.send(`**➥ Useage:** ${prefix}bc <message>`);
+		    if(!args1) return message.channel.send(":information_source:** `!bc message` فم بكتابة الرساله **");
   let args = message.content.split(" ").slice(1);
   var argresult = args.join(' '); 
   message.guild.members.filter(m => m.presence.status !== 'offline').forEach(m => {
@@ -1190,7 +1187,7 @@ if (!message.content.startsWith(prefix)) return;
 		 if (!message.member.hasPermission("ADMINISTRATOR"))  return;
 		var args = message.content.split(' ').slice(1).join(' ');
 		if(message.author.bot) return;
-		if(!args) return message.channel.send(`**➥ Useage:** ${prefix}obc <message>`);
+		if(!args) return message.channel.send(":information_source:** `!obc message` فم بكتابة الرساله **");
 		
 		let bcSure = new Discord.RichEmbed()
 		.setTitle(`:mailbox_with_mail: **هل انت متأكد انك تريد ارسال رسالتك الى** ${message.guild.memberCount} **عضو**`)
@@ -1930,9 +1927,12 @@ client.on('message', message => {
   // Your Avatar URL!
     client.on('message', message =>{
     let args = message.content.split(' ');
-    var prefix = '!'; 
-    
-    if(args[0] === `${prefix}avatar`){
+  if (message.author.boss) return;
+	var prefix = "!";
+if (!message.content.startsWith(prefix)) return;
+	let command = message.content.split(" ")[0];
+	 command = command.slice(prefix.length);
+	if (command == "avatar") {
 	    if (message.channel.id !== "486291719537688576") return;
         let mentions = message.mentions.members.first()
         if(!mentions) {
@@ -1946,7 +1946,13 @@ client.on('message', message => {
 });
   // Avatar Server URL!
 client.on('message', message => {
-    if (message.content === prefix + "icon") {
+  if (message.author.boss) return;
+	var prefix = "!";
+if (!message.content.startsWith(prefix)) return;
+	let command = message.content.split(" ")[0];
+	 command = command.slice(prefix.length);
+	if (command == "avatar server") {
+		 if (message.channel.id !== "486291719537688576") return;
     message.channel.send( `${message.guild.name} icon URL: ${message.guild.iconURL}`); 
     }
 });
