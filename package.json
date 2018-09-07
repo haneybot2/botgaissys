@@ -1,9 +1,9 @@
 {
-  "name": "ELMEWAL3",
+  "name": "elmewal3",
   "version": "2.1.0",
-  "description": "-- AWESOMENESS --",
+  "description": "Discord.js bot on Heroku",
   "main": "bot.js",
-  "scripts": {
+    "scripts": {
     "start": "node bot.js"
   },
   "dependencies": {
@@ -44,15 +44,9 @@
     "short-number": "^1.0.6",
     "ytdl-core": "^0.20.3"
   },
-  "engines": {
+    "engines": {
     "node": "8.x",
   },
-  "keywords": [
-    "heroku",
-    "discord.js"
-  ],
-  "author": "",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/synicalsyntax/discord.js-heroku/issues"
   },
