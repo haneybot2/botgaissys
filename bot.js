@@ -437,6 +437,44 @@ client.on('guildMemberAdd', member => {
          
  }
 });
+ client.on('guildMemberBanAdd', member => {
+    if (!member || !member.id || !member.guild || !member.guild) return;
+    const guild = member.guild;
+	
+    const channel = member.guild.channels.find('name', 'log');
+    if (!channel) return;
+    let memberavatar = member.user.avatarURL
+    const fromNow = moment(member.joinedTimestamp).fromNow();
+    
+	var m = member.user;
+    let embed = new Discord.RichEmbed()
+       .setAuthor(`${member.user.tag}`, member.user.avatarURL)
+	   .setThumbnail(memberavatar)
+       .setColor('BLACK')
+       .setDescription(`:airplane: <@${member.user.id}> **banned from the server**\n by : <@${member.author.id}>\n`)
+       .setTimestamp()
+       .setFooter(`${member.author.tag}`, member.author.avatarURL);
+     channel.send({embed:embed});
+});
+ client.on('guildMemberBanRemove', member => {
+    if (!member || !member.id || !member.guild || !member.guild) return;
+    const guild = member.guild;
+	
+    const channel = member.guild.channels.find('name', 'log');
+    if (!channel) return;
+    let memberavatar = member.user.avatarURL
+    const fromNow = moment(member.joinedTimestamp).fromNow();
+    
+	var m = member.user;
+    let embed = new Discord.RichEmbed()
+       .setAuthor(`${member.user.tag}`, member.user.avatarURL)
+	   .setThumbnail(memberavatar)
+       .setColor('BLACK')
+       .setDescription(`:blue_car:  **The ban of <@${member.user.id}> has been removed**\n by : <@${member.author.id}>\n`)
+       .setTimestamp()
+       .setFooter(`${member.author.tag}`, member.author.avatarURL);
+     channel.send({embed:embed});
+});
 client.on('voiceStateUpdate', (oldM, newM) => {
   let rebel1 = oldM.serverMute;
   let rebel2 = newM.serverMute;
@@ -838,13 +876,6 @@ if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return m
 
 message.channel.send(`**✅ ${user.tag} banned from the server !  **  `)
 
-	  var ban = new Discord.RichEmbed()
-.setDescription(`
-
-**${user.tag} banned from the server !  ** 
-
-
-`)
 
 	  
 }
@@ -893,13 +924,6 @@ client.on('message' , message => {
 
 message.channel.send(`**✅ ${user.tag} kicked from the server !  **  `)
 	  
-  var kick = new Discord.RichEmbed()
-.setDescription(`
-
-**${user.tag} banned from the server !  ** 
-
-
-`)
 
 
 }
@@ -1019,7 +1043,7 @@ if (message.member.voiceChannel != null) {
  var movelog = new Discord.RichEmbed()
  .setAuthor(message.author.username, message.author.avatarURL) 
  .setColor("#000000")
- .setDescription(`**<@${usermentioned}> moved to<@${message.author.id}>**`)
+ .setDescription(`**<@${usermentioned}> moved to <@${message.author.id}>**`)
  .setFooter(message.author.username, message.author.avatarURL) 
  .setTimestamp();
  message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => message.channel.send(`:white_check_mark: **<@${usermentioned}> moved you to his channel!**`))
@@ -1049,7 +1073,7 @@ if (message.member.voiceChannel != null) {
  var movelog = new Discord.RichEmbed()
  .setAuthor(message.author.username, message.author.avatarURL) 
  .setColor("#000000")
- .setDescription(`**<@${usermentioned}> moved to<@${message.author.id}>**`)
+ .setDescription(`**<@${usermentioned}> moved to <@${message.author.id}>**`)
  .setFooter(message.author.username, message.author.avatarURL) 
  .setTimestamp();
  message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => message.channel.send(`:white_check_mark: **<@${usermentioned}> moved you to his channel!**`))
@@ -1065,7 +1089,7 @@ message.channel.send("**:x:  العضو يجب أن يكون متواجد برو
 message.react("❌")
  }}});
 client.on('message', message => {
-if(message.content.startsWith(prefix + 'move all')) {
+if(message.content.startsWith(prefix + 'move' + 'all')) {
  if (!message.member.hasPermission("ADMINISTRATOR")) return;
    if(!message.guild.member(client.user).hasPermission("MOVE_MEMBERS")) return message.channel.send("**لايوجد لدي صلاحية السحب**");
 if (message.member.voiceChannel == null) return message.channel.send(`**الرجاء الدخول لروم صوتي**`)
@@ -1083,7 +1107,7 @@ if (message.member.voiceChannel == null) return message.channel.send(`**الرج
 client.on('message' , message => {
   var prefix = "!";
   if(message.author.bot) return;
-  if(message.content.startsWith(prefix + "brole")) {
+  if(message.content.startsWith(prefix + "bc" + "role")) {
 	  if (!message.member.hasPermission("ADMINISTRATOR"))  return;
     let args = message.content.split(" ").slice(1);
 
@@ -1705,7 +1729,7 @@ client.on('message', async message => {
       });
 //setvoice-online
 client.on('message',async message => {
-  if(message.content.startsWith(prefix + "set voice")) {
+  if(message.content.startsWith(prefix + "set" + "voice")) {
   if(!message.guild.member(message.author).hasPermissions('ADMINISTRATOR')) return ;
   if(!message.guild.member(client.user).hasPermissions(['MANAGE_CHANNELS','MANAGE_ROLES_OR_PERMISSIONS'])) return message.channel.send('❌ **ليس معي الصلاحيات الكافية**');
   message.channel.send('✅| **تم عمل الروم بنجاح**');
