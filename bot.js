@@ -1091,11 +1091,11 @@ if (!message.content.startsWith(prefix)) return;
     let args = message.content.split(" ").slice(1);
 
     if(!args[0]) {
-      message.channel.send(":information_source:** `!bcrole @Admin message` قم بمنشنة الرتبة **");
+      message.channel.send(":information_source:** `!bcrole @Admin [message]` قم بمنشنة الرتبة **");
         return;
     }
     if(!args[1]) {
-      message.channel.send(":information_source: **`!bcrole @Admin message` قم بمنشنة الرتبة** ");
+      message.channel.send(":information_source: **`!bcrole @Admin [message]` قم بمنشنة الرتبة** ");
         return;
     }
 
@@ -1165,7 +1165,7 @@ if (!message.content.startsWith(prefix)) return;
 	if (command == "bc") {
                          if (!message.member.hasPermission("ADMINISTRATOR"))  return;
 		    var args1 = message.content.split(' ').slice(1).join(' ');
-		    if(!args1) return message.channel.send(":information_source:** `!bc message` فم بكتابة الرساله **");
+		    if(!args1) return message.channel.send(":information_source:** `!bc [message]` فم بكتابة الرساله **");
   let args = message.content.split(" ").slice(1);
   var argresult = args.join(' '); 
   message.guild.members.filter(m => m.presence.status !== 'offline').forEach(m => {
@@ -1186,7 +1186,7 @@ if (!message.content.startsWith(prefix)) return;
 		 if (!message.member.hasPermission("ADMINISTRATOR"))  return;
 		var args = message.content.split(' ').slice(1).join(' ');
 		if(message.author.bot) return;
-		if(!args) return message.channel.send(":information_source:** `!obc message` فم بكتابة الرساله **");
+		if(!args) return message.channel.send(":information_source:** `!obc [message]` فم بكتابة الرساله **");
 		
 		let bcSure = new Discord.RichEmbed()
 		.setTitle(`:mailbox_with_mail: **هل انت متأكد انك تريد ارسال رسالتك الى** ${message.guild.memberCount} **عضو**`)
