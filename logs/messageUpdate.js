@@ -11,7 +11,7 @@ module.exports = (client, message, newMessage) => {
        .addField(`Old: `, `\n\n\`\`\`${message.cleanContent}\`\`\``)
        .addField(`New: `, `\n\n\`\`\`${newMessage.cleanContent}\`\`\``)
        .setTimestamp()
-       .setFooter(`${message.author.username}`, message.author.avatarURL);
+       .setFooter(`${message.author.username}`, message.author.avatarURL)
      channel.send({embed:embed});
 
 
