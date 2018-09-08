@@ -476,8 +476,8 @@ client.on("channelCreate",  cc => {
     var embed = new Discord.RichEmbed()
     .setAuthor(cc.guild.name, cc.guild.iconURL)
     .setDescription(`***Channel Created Name: *** **${roomType}${cc.name}**\n by : <@${userid}>`)
-    .setColor('#00ff0a')
-	.setFooter(`${usertag}`, userava)
+    .setColor('#ff0000')
+    .setFooter(`${usertag}`, userava)
     .setTimestamp();
     channel.sendEmbed(embed)
    })
@@ -503,8 +503,8 @@ client.on("channelDelete",  dc => {
     var embed = new Discord.RichEmbed()
     .setAuthor(dc.guild.name, dc.guild.iconURL)
     .setDescription(`***Channel Deleted Name : *** **${roomType}${dc.name}**\n by : <@${userid}>`)
-    .setColor('#f20a0a')
-	.setFooter(`${usertag}`, userava)
+    .setColor('#ff0000')
+    .setFooter(`${usertag}`, userava)
     .setTimestamp();
     channel.sendEmbed(embed)
    })
@@ -557,8 +557,8 @@ client.on("roleCreate", rc => {
     var embed = new Discord.RichEmbed()
     .setAuthor(rc.guild.name, rc.guild.iconURL)
     .setDescription(`***Created Role Name : *** **${rc.name}**\n by : <@${userid}>`)
-    .setColor('#00ff0a')
-	.setFooter(`${usertag}`, userava)
+    .setColor('#ff0000')
+    .setFooter(`${usertag}`, userava)
     .setTimestamp();
     channel.sendEmbed(embed)
     })
@@ -574,8 +574,8 @@ client.on("roleDelete",  rd => {
     var embed = new Discord.RichEmbed()
     .setAuthor(rd.guild.name, rd.guild.iconURL)
     .setDescription(`***Deleted Role Name : *** **${rd.name}**\n by : <@${userid}>`)
-    .setColor('#f20a0a')
-	.setFooter(`${usertag}`, userava)
+    .setColor('#ff0000')
+    .setFooter(`${usertag}`, userava)
     .setTimestamp();
     channel.sendEmbed(embed)
     })
