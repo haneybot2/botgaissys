@@ -1,4 +1,5 @@
 module.exports = (client, oldM, newM) => {
+	const Discord = require('discord.js');
   let rebel1 = oldM.serverMute;
   let rebel2 = newM.serverMute;
   let codes1 = oldM.serverDeaf;
