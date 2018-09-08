@@ -52,4 +52,4 @@ module.exports = (client, oldM, newM) => {
        ch.send(embed4)
     }
   })
-});
+};
