@@ -9,7 +9,7 @@ module.exports = (client, message) => {
        .setDescription(`**:wastebasket: Message sent by <@${message.author.id}> deleted in <#${message.channel.id}>**\n by : <@${message.author.id}>`)
        .addField(`Message: `, `\n\n\`\`\`${message.cleanContent}\`\`\``)
        .setTimestamp()
-       .setFooter(message.author.username, message.author.avatarURL);
+       .setFooter(`${message.author.username}`, message.author.avatarURL);
      channel.send({embed:embed});
 
 };
