@@ -24,4 +24,4 @@ module.exports = (client, cc) => {
     .setTimestamp();
     channel.sendEmbed(embed)
    })
-});
+};
