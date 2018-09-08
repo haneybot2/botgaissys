@@ -1,4 +1,5 @@
 module.exports = (client, message) => {
+    const Discord = require('discord.js');
     if (!message || !message.id || !message.content || !message.guild || message.author.bot) return;
     const channel = message.guild.channels.find('name', 'log');
     if (!channel) return;
