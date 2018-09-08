@@ -400,43 +400,6 @@ client.on('messageDelete', message => {
      channel.send({embed:embed});
 
 });
-client.on('guildMemberRemove', member => {
-    if (!member || !member.id || !member.guild || !member.guild) return;
-    const guild = member.guild;
-	
-    const channel = member.guild.channels.find('name', 'log');
-    if (!channel) return;
-    let memberavatar = member.user.avatarURL
-    const fromNow = moment(member.joinedTimestamp).fromNow();
-    
-	var m = member.user;
-    let embed = new Discord.RichEmbed()
-       .setAuthor(`${member.user.tag}`, member.user.avatarURL)
-	   .setThumbnail(memberavatar)
-       .setColor('BLACK')
-       .setDescription(`:arrow_upper_left:  <@${member.user.id}> **Leave From Server**\n\n`)
-       .setTimestamp()
-       .setFooter(`${m.tag}`, member.user.avatarURL);
-     channel.send({embed:embed});
-});
-client.on('guildMemberAdd', member => {
-     const join =  member.guild.channels.find('name', 'log');
-    if(!join) return;
-      if(join) {
-         moment.locale('ar-ly');
-         var m = member.user;
-        let yumz = new Discord.RichEmbed()
-        .setColor('SILVER')
-        .setThumbnail(m.avatarURL)
-        .setAuthor(m.username,m.avatarURL)
-	.setDescription(`:arrow_lower_right:<@${member.user.id}> joined the server`)
-        .addField(':alarm_clock: Age of account :',`${moment(member.user.createdAt).format('D/M/YYYY h:mm a')} **\n** \`${moment(member.user.createdAt).fromNow()}\``,true)            
-      
-         .setFooter(`${m.tag}`,"https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif")
-     join.send({embed:yumz});          
-         
- }
-});
 client.on('voiceStateUpdate', (oldM, newM) => {
   let rebel1 = oldM.serverMute;
   let rebel2 = newM.serverMute;
@@ -490,6 +453,131 @@ client.on('voiceStateUpdate', (oldM, newM) => {
        ch.send(embed4)
     }
   })
+});
+client.on("channelCreate",  cc => {
+    const channel = cc.guild.channels.find("name","log")
+	
+	if(cc.type === 'text') {
+        var roomType = ':pencil: #';
+    }else
+    if(cc.type === 'voice') {
+        var roomType = ':microphone: ';
+    }else
+    if(cc.type === 'category') {
+        var roomType = '';
+    }
+    
+	    cc.guild.fetchAuditLogs().then(logs => {
+	var userid = logs.entries.first().executor.id;
+	var userava = logs.entries.first().executor.avatarURL;
+	var usertag = logs.entries.first().executor.tag;
+
+    var embed = new Discord.RichEmbed()
+    .setAuthor(cc.guild.name, cc.guild.iconURL)
+    .setDescription(`***Channel Created Name: *** **${roomType}${cc.name}**\n by : <@${userid}>`)
+    .setColor('#00ff0a')
+	.setFooter(`${usertag}`, userava)
+    .setTimestamp();
+    channel.sendEmbed(embed)
+   })
+});
+client.on("channelDelete",  dc => {
+    const channel = dc.guild.channels.find("name","log")
+	
+	if(dc.type === 'text') {
+        var roomType = ':pencil: #';
+    }else
+    if(dc.type === 'voice') {
+        var roomType = ':microphone: ';
+    }else
+    if(dc.type === 'category') {
+        var roomType = '';
+    }
+	
+	    dc.guild.fetchAuditLogs().then(logs => {
+	var userid = logs.entries.first().executor.id;
+	var userava = logs.entries.first().executor.avatarURL;
+	var usertag = logs.entries.first().executor.tag;
+
+    var embed = new Discord.RichEmbed()
+    .setAuthor(dc.guild.name, dc.guild.iconURL)
+    .setDescription(`***Channel Deleted Name : *** **${roomType}${dc.name}**\n by : <@${userid}>`)
+    .setColor('#f20a0a')
+	.setFooter(`${usertag}`, userava)
+    .setTimestamp();
+    channel.sendEmbed(embed)
+   })
+});
+client.on('guildMemberRemove', member => {
+    if (!member || !member.id || !member.guild || !member.guild) return;
+    const guild = member.guild;
+	
+    const channel = member.guild.channels.find('name', 'log');
+    if (!channel) return;
+    let memberavatar = member.user.avatarURL
+    const fromNow = moment(member.joinedTimestamp).fromNow();
+    
+	var m = member.user;
+    let embed = new Discord.RichEmbed()
+       .setAuthor(`${member.user.tag}`, member.user.avatarURL)
+	   .setThumbnail(memberavatar)
+       .setColor('BLACK')
+       .setDescription(`:arrow_upper_left:  <@${member.user.id}> **Leave From Server**\n\n`)
+       .setTimestamp()
+       .setFooter(`${m.tag}`, member.user.avatarURL);
+     channel.send({embed:embed});
+});
+client.on('guildMemberAdd', member => {
+     const join =  member.guild.channels.find('name', 'log');
+    if(!join) return;
+      if(join) {
+         moment.locale('ar-ly');
+         var m = member.user;
+        let yumz = new Discord.RichEmbed()
+        .setColor('SILVER')
+        .setThumbnail(m.avatarURL)
+        .setAuthor(m.username,m.avatarURL)
+	.setDescription(`:arrow_lower_right:<@${member.user.id}> joined the server`)
+        .addField(':alarm_clock: Age of account :',`${moment(member.user.createdAt).format('D/M/YYYY h:mm a')} **\n** \`${moment(member.user.createdAt).fromNow()}\``,true)            
+      
+         .setFooter(`${m.tag}`,"https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif")
+     join.send({embed:yumz});          
+         
+ }
+});
+client.on("roleCreate", rc => {
+    const channel = rc.guild.channels.find("name","log")
+	
+	    rc.guild.fetchAuditLogs().then(logs => {
+	var userid = logs.entries.first().executor.id;
+	var userava = logs.entries.first().executor.avatarURL;
+	var usertag = logs.entries.first().executor.tag;
+	
+    var embed = new Discord.RichEmbed()
+    .setAuthor(rc.guild.name, rc.guild.iconURL)
+    .setDescription(`***Created Role Name : *** **${rc.name}**\n by : <@${userid}>`)
+    .setColor('#00ff0a')
+	.setFooter(`${usertag}`, userava)
+    .setTimestamp();
+    channel.sendEmbed(embed)
+    })
+});
+client.on("roleDelete",  rd => {
+    const channel = rd.guild.channels.find("name","log")
+	
+	    rd.guild.fetchAuditLogs().then(logs => {
+	var userid = logs.entries.first().executor.id;
+	var userava = logs.entries.first().executor.avatarURL;
+	var usertag = logs.entries.first().executor.tag;
+	
+    var embed = new Discord.RichEmbed()
+    .setAuthor(rd.guild.name, rd.guild.iconURL)
+    .setDescription(`***Deleted Role Name : *** **${rd.name}**\n by : <@${userid}>`)
+    .setColor('#f20a0a')
+	.setFooter(`${usertag}`, userava)
+    .setTimestamp();
+    channel.sendEmbed(embed)
+    })
 });
 //pic-room
 client.on('message', ( message ) => {
@@ -1977,7 +2065,7 @@ message.channel.sendFile(canvas.toBuffer())
 
 }
 
-})	
+});
 //ping
 client.on('message', message =>{
     if(message.content === prefix + 'ping'){
