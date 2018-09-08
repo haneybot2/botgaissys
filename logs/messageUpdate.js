@@ -15,4 +15,4 @@ module.exports = (client, message, newMessage) => {
      channel.send({embed:embed});
 
 
-});
+};
