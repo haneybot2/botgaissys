@@ -15,4 +15,4 @@ module.exports = (client, member) => {
      join.send({embed:yumz});          
          
  }
-});
+};
