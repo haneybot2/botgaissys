@@ -1,6 +1,7 @@
 module.exports = (client, message, newMessage) => {
+    const Discord = require('discord.js');
     if (message.content === newMessage.content) return;
-    if (!message || !message.id || !message.content || !message.guild || message.author.bot) return;
+    if (!message || !message.id || !message.content || !message.guild) return;
     const channel = message.guild.channels.find('name', 'log');
     if (!channel) return;
 
@@ -11,7 +12,7 @@ module.exports = (client, message, newMessage) => {
        .addField(`Old: `, `\n\n\`\`\`${message.cleanContent}\`\`\``)
        .addField(`New: `, `\n\n\`\`\`${newMessage.cleanContent}\`\`\``)
        .setTimestamp()
-       .setFooter(`${message.author.username}`, message.author.avatarURL)
+       .setFooter(`${message.author.username}`, message.author.avatarURL);
      channel.send(upmsg);
 
 
