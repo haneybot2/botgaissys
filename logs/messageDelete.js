@@ -12,4 +12,4 @@ module.exports = (client, message) => {
        .setFooter(message.author.username, message.author.avatarURL);
      channel.send({embed:embed});
 
-});
+};
