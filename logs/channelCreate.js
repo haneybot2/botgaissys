@@ -1,4 +1,5 @@
 module.exports = (client, cc) => {
+	const Discord = require('discord.js');
     const channel = cc.guild.channels.find("name","log")
 	
 	if(cc.type === 'text') {
