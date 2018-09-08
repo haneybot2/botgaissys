@@ -76,7 +76,7 @@ client.on('reconnecting', () => console.log('I am reconnecting now!'));
 //الحمايه
 anti_spam(client , {
   warnBuffer: 7,  
-  maxBuffer: 8,  
+  maxBuffer: 15,  
   interval: 1000,  
   warningMessage: "**سيتم طردك إن لم توقف سبام**",  
   banMessage: "تم الطرد بسبب السبام",  
