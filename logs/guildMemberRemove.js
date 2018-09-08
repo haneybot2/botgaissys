@@ -16,4 +16,4 @@ module.exports = (client, member) => {
        .setTimestamp()
        .setFooter(`${m.tag}`, member.user.avatarURL);
      channel.send({embed:embed});
-});
+};
