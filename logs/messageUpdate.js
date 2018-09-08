@@ -4,7 +4,7 @@ module.exports = (client, message, newMessage) => {
     const channel = message.guild.channels.find('name', 'log');
     if (!channel) return;
 
-    let embed = new Discord.RichEmbed()
+    let upmsg = new Discord.RichEmbed()
        .setAuthor(`${message.author.tag}`, message.author.avatarURL)
        .setColor('SILVER')
        .setDescription(`**:pencil2: Message sent by <@${message.author.id}> edited in <#${message.channel.id}> **\n by : <@${message.author.id}>`)
@@ -12,7 +12,7 @@ module.exports = (client, message, newMessage) => {
        .addField(`New: `, `\n\n\`\`\`${newMessage.cleanContent}\`\`\``)
        .setTimestamp()
        .setFooter(`${message.author.username}`, message.author.avatarURL)
-     channel.send({embed:embed});
+     channel.send(upmsg);
 
 
 };
