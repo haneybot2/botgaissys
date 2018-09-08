@@ -20,6 +20,8 @@ const moment = require("moment");
 const dateFormat = require('dateformat');
 //shortpac
 const googl = require('goo.gl');
+//antspampac
+const anti_spam = require("discord-anti-spam");
 //restartpac
 const child_process = require("child_process");
 //console
@@ -72,16 +74,15 @@ client.on('reconnecting', () => console.log('I am reconnecting now!'));
       
       });
 //الحمايه
-client.on('ready', function(){
-  require("./antispam.js")(client, function(message){
-     message.delete().then(yumz => {
-     message.channel.send(`**ممنوع السبام <@${message.author.id}>**`).then(spammer => {
-     spammer.delete(2000)
-   });
-   });
-  });
+anti_spam(client , {
+  warnBuffer: 7,  
+  maxBuffer: 8,  
+  interval: 1000,  
+  warningMessage: "**سيتم طردك إن لم توقف سبام**",  
+  banMessage: "تم الطرد بسبب السبام",  
+  maxDuplicatesWarning: 7, 
+  maxDuplicatesBan: 10  
 });
- 
         client.on('message', async message => {
             if(message.content.includes('discord.gg')){
                 if(message.member.hasPermission("MANAGE_GUILD")) return;
@@ -653,41 +654,41 @@ client.on('message', async message => {
   let args = message.content.split(" ");
   if(message.content.startsWith(prefix + "mute")) {
     if(!message.member.hasPermission("MANAGE_MEMBER")) return message.channel.send(':x:** | للاداره فقط**').then(msg => {
-      msg.delete(3500);
-      message.delete(3500);
+      msg.delete(5000);
+      message.delete(5000);
     });
     if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return message.channel.send('**المعظره , ولكن انا لا امتلك خصائص**').then(msg => {
-      msg.delete(3500);
-      message.delete(3500);
+      msg.delete(5000);
+      message.delete(5000);
     });
     let mention = message.mentions.members.first();
     if(!mention) return message.channel.send(':information_source:  **`!mute @َζ͜͡ELMEWAL3 5m` لاستخدام الامر **').then(msg => {
-      msg.delete(3500);
-      message.delete(3500);
+      msg.delete(5000);
+      message.delete(5000);
     });
 
     if(mention.highestRole.position >= message.guild.member(message.author).highestRole.positon) return message.channel.send('**لا يمكنك اعطاء لميوت شخص رتبته اعلى منك**').then(msg => {
-      msg.delete(3500);
-      message.delete(3500);
+      msg.delete(5000);
+      message.delete(5000);
     });
     if(mention.highestRole.positon >= message.guild.member(client.user).highestRole.positon) return message.channel.send('**لا يمكنني اعطاء ميوت لشخص رتبته اعلى مني**').then(msg => {
-      msg.delete(3500);
-      message.delete(3500);
+      msg.delete(5000);
+      message.delete(5000);
     });
     if(mention.id === message.author.id) return message.channel.send('**لا يمكنك اعطاء ميوت  لنفسك**').then(msg => {
-      msg.delete(3500);
-      message.delete(3500);
+      msg.delete(5000);
+      message.delete(5000);
     });
 
     let duration = args[2];
-    if(!duration) return message.channel.send(':information_source:  **`!mute @َζ͜͡ELMEWAL3 5m` لاستخدام الامر **').then(msg => {
-      msg.delete(3500);
-      message.delete(3500);
+    if(!duration) return message.channel.send(':information_source:  **`!mute @َζ͜͡ELMEWAL3` لاستخدام الامر **').then(msg => {
+      msg.delete(5000);
+      message.delete(5000);
     });
 
     if(isNaN(duration)) return message.channel.send('**حدد وقت زمني صحيح**').then(msg => {
-      msg.delete(3500);
-      message.delete(3500);
+      msg.delete(5000);
+      message.delete(5000);
     });
 
 	let log = message.guild.channels.find('name', 'log');
@@ -733,18 +734,18 @@ client.on('message', async message => {
     let mention = message.mentions.members.first();
     let role = message.guild.roles.find('name', 'Muted') || message.guild.roles.get(r => r.name === 'Muted');
     if(!message.member.hasPermission("MANAGE_MEMBER")) return message.channel.send('**:x:** | للاداره فقط**').then(msg => {
-      msg.delete(3500);
-      message.delete(3500);
+      msg.delete(5000);
+      message.delete(5000);
     });
 
     if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return message.channel.send('**المعظره , ولكن انا لا امتلك خصائص**').then(msg => {
-      msg.delete(3500);
-      message.delete(3500);
+      msg.delete(5000);
+      message.delete(5000);
     });
 
     if(!mention) return message.channel.send(':information_source:  **`!unmute @َζ͜͡ELMEWAL3` يجب تحديد شخص **').then(msg => {
-      msg.delete(3500);
-      message.delete(3500);
+      msg.delete(5000);
+      message.delete(5000);
     });
 
       mention.removeRole(role);
