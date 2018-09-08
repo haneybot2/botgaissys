@@ -1,4 +1,5 @@
 module.exports = (client, rc) => {
+	const Discord = require('discord.js');
     const channel = rc.guild.channels.find("name","log")
 	
 	    rc.guild.fetchAuditLogs().then(logs => {
