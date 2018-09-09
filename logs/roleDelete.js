@@ -1,6 +1,6 @@
 module.exports = (client, rd) => {
 	const Discord = require('discord.js');
-    const channel = rd.guild.channels.find("name","log");
+    const channel = rd.guild.channels.find('name', 'log');
 	
 	    rd.guild.fetchAuditLogs().then(logs => {
 	var userid = logs.entries.first().executor.id;
