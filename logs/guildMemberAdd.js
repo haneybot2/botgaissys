@@ -1,5 +1,6 @@
 module.exports = (client, member) => {
 	const Discord = require('discord.js');
+	const moment = require("moment"); 
      const join =  member.guild.channels.find('name', 'log');
     if(!join) return;
       if(join) {
