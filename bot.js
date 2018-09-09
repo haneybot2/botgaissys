@@ -1013,153 +1013,6 @@ if (message.member.voiceChannel == null) return message.channel.send(`**الرج
  message.channel.send(`**تم سحب جميع الأعضاء إليك**`)
 
  }});
-//bcrole
-client.on('message' , message => {
-  if(message.author.bot) return;
-if(!message.channel.guild) return;
-	var prefix = "!";
-if (!message.content.startsWith(prefix)) return;
-	let command = message.content.split(" ")[0];
-	 command = command.slice(prefix.length);
-	if (command == "bcrole") {
-	  if (!message.member.hasPermission("ADMINISTRATOR"))  return;
-    let args = message.content.split(" ").slice(1);
-
-    if(!args[0]) {
-      message.channel.send(":information_source:** `!bcrole @Admin [message]` قم بمنشنة الرتبة **");
-        return;
-    }
-    if(!args[1]) {
-      message.channel.send(":information_source: **`!bcrole @Admin [message]` قم بمنشنة الرتبة** ");
-        return;
-    }
-
-      if(args[0] == "@everyone") {
-        message.channel.send(`**${message.guild.memberCount} تم ارسال رسالتك الي**`);
-        message.guild.members.forEach(mi => {
-          mi.send(
-          "الرسالة :" + "\n" +
-         "**" + `${args[1]}` + "**"
-          );
-        });
-        return;
-      }
-          var role = message.mentions.roles.first();
-            if(!role) {
-              message.channel.send(":x: **لا توجد رتبة بهذا الاسم**");
-                return;
-            }
-        message.guild.members.filter(m => m.roles.get(role.id)).forEach(sa => {
-        sa.send(
-          "الرسالة :" + "\n" +
-        "**" + `${args[1]}` + "**"
-          );
-        });
-      message.channel.send(`** ${message.guild.members.filter(m => m.roles.get(role.id)).size}  تم ارسال رسالتك الي  ****`);
-    }
-});
-//bc-privet
-client.on('message', message => {
-    var prefix = "!";
-if (message.content === prefix + "pbc") {
-	if (!owner.includes(message.author.id));
- let args = message.content.split(" ").slice(1);
-
-    var user = message.mentions.users.first();
-    var reason = args.slice(1).join(' ');
-    const embed = new Discord.RichEmbed()
-        .setColor(0xFFB200)
-        .setTimestamp();
-
-    if (!user) {
-        embed.addField("DM A Person", `Who are you going to DM ${message.author.tag}?`)
-            .setFooter(`lol why did i add dis again?`);
-        return message.channel.send({embed});
-    } if (!reason) {
-        embed.addField("DM A Person", `What are you going to say to ${user.tag}?`)
-        return message.channel.send({embed});
-    }
-    embed.addField("DM A Person", `Successfully sent a DM to ${user.tag}!`)
-        .setFooter(`lol.`);
-    message.channel.send({embed});
-    const embed1 = new Discord.RichEmbed()
-        .setColor(0xFFB200)
-        .setTimestamp()
-        .addField("You have received mail! :mailbox_with_mail:", `**${reason}**`)
-        .setFooter(`Sent by ${message.author.tag}.`);
-    user.send({embed: embed1});
-}
-});
-//bc-online
-client.on("message", message => {
-if(!message.channel.guild) return;
-	var prefix = "!";
-if (!message.content.startsWith(prefix)) return;
-	let command = message.content.split(" ")[0];
-	 command = command.slice(prefix.length);
-	let args = message.content.split(" ").slice(1);
-	if (command == "bc") {
-                         if (!message.member.hasPermission("ADMINISTRATOR"))  return;
-		    var args1 = message.content.split(' ').slice(1).join(' ');
-		    if(!args1) return message.channel.send(":information_source:** `!bc [message]` فم بكتابة الرساله **");
-  let args = message.content.split(" ").slice(1);
-  var argresult = args.join(' '); 
-  message.guild.members.filter(m => m.presence.status !== 'offline').forEach(m => {
-  m.send(`${argresult}\n `);
-})
- message.channel.send(`\`${message.guild.members.filter(m => m.presence.status !== 'online').size}\` : عدد الاعضاء المستلمين`); 
- message.delete(); 
-};     
-});
-//bc-online and ofline
-client.on('message', message => {
-if(!message.channel.guild) return;
-	var prefix = "!";
-if (!message.content.startsWith(prefix)) return;
-	let command = message.content.split(" ")[0];
-	 command = command.slice(prefix.length);
-	if (command == "obc") {
-		 if (!message.member.hasPermission("ADMINISTRATOR"))  return;
-		var args = message.content.split(' ').slice(1).join(' ');
-		if(message.author.bot) return;
-		if(!args) return message.channel.send(":information_source:** `!obc [message]` فم بكتابة الرساله **");
-		
-		let bcSure = new Discord.RichEmbed()
-		.setTitle(`:mailbox_with_mail: **هل انت متأكد انك تريد ارسال رسالتك الى** ${message.guild.memberCount} **عضو**`)
-		.setThumbnail(client.user.avatarURL)
-		.setColor('RANDOM')
-		.setDescription(`**\n:envelope: ➥ رسالتك**\n\n${args}`)
-		.setTimestamp()
-		.setFooter(message.author.tag, message.author.avatarURL)
-		
-		message.channel.send(bcSure).then(msg => {
-			msg.react('✅').then(() => msg.react('❎'));
-			message.delete();
-			
-			
-			let yesEmoji = (reaction, user) => reaction.emoji.name === '✅'  && user.id === message.author.id;
-			let noEmoji = (reaction, user) => reaction.emoji.name === '❎' && user.id === message.author.id;
-			
-			let sendBC = msg.createReactionCollector(yesEmoji);
-			let dontSendBC = msg.createReactionCollector(noEmoji);
-			
-			sendBC.on('collect', r => {
-				message.guild.members.forEach(member => {
-					member.send(args.replace(`[user]`, member)).catch();
-					if(message.attachments.first()){
-						member.sendFile(message.attachments.first().url).catch();
-					}
-				})
-				message.channel.send(`:timer: **يتم الان الارسال الى** \`\`${message.guild.memberCount}\`\` **عضو**`).then(msg => msg.delete(5000));
-				msg.delete();
-			})
-			dontSendBC.on('collect', r => {
-				msg.delete();
-				message.channel.send(':white_check_mark: **تم الغاء ارسال رسالتك بنجاح**').then(msg => msg.delete(5000));
-			});
-		})
-	}
-});
 //settingchat:!chat-!unmutechat-!hidechat-!showchat
 client.on('message', message => {
 
@@ -1519,7 +1372,7 @@ var prefix = "!";
     message.channel.sendMessage(args.join(" ")).catch(console.error);   
   } 
 	
-if (command == "emb")    {   
+if (command == "saye")    {   
   if(!message.channel.guild) return; 
 		if(!message.member.hasPermission('ADMINISTRATOR')) return;
     let say = new Discord.RichEmbed() 
@@ -1913,24 +1766,6 @@ Discord API: ${client.ping.toFixed(0)} ms\`\`\``);
     });
     }
 });
-//short
-client.on('message', message => {
- let args = message.content.split(' ').slice(1);
-    if(message.content.startsWith(prefix + 'short')) {
-    if(!message.channel.guild) return;  
-
-        googl.setKey('AIzaSyC2Z2mZ_nZTcSvh3QvIyrmOIFP6Ra6co6w');
-        googl.getKey();
-        googl.shorten(args.join(' ')).then(shorturl => {
-            message.channel.send(''+shorturl)
-        }).catch(e=>{
-            console.log(e.message);
-            message.channel.send('Error!');
-        });
-
-    }
-
-});
  //time
 client.on('message' , async (message) => {
     if (message.content.startsWith(prefix + 'time')) {
@@ -2046,6 +1881,24 @@ client.on('message', function(message) {
           return;
         }
     }
+});
+//short
+client.on('message', message => {
+ let args = message.content.split(' ').slice(1);
+    if(message.content.startsWith(prefix + 'short')) {
+    if(!message.channel.guild) return;  
+
+        googl.setKey('AIzaSyC2Z2mZ_nZTcSvh3QvIyrmOIFP6Ra6co6w');
+        googl.getKey();
+        googl.shorten(args.join(' ')).then(shorturl => {
+            message.channel.send(''+shorturl)
+        }).catch(e=>{
+            console.log(e.message);
+            message.channel.send('Error!');
+        });
+
+    }
+
 });
 //الردوت العاديه
 client.on('ready', () => {
