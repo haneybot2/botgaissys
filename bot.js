@@ -1013,10 +1013,6 @@ if (message.member.voiceChannel == null) return message.channel.send(`**الرج
  message.channel.send(`**تم سحب جميع الأعضاء إليك**`)
 
  }});
-//bcrole-pbc-bc-obc
-client.on('message', message => require('./commands/bc/bcrole.js')(client, message));
-client.on('message', message => require('./commands/bc/bc.js')(client, message));
-client.on('message', message => require('./commands/bc/obc.js')(client, message));
 //settingchat:!chat-!unmutechat-!hidechat-!showchat
 client.on('message', message => {
 
