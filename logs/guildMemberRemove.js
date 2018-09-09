@@ -1,5 +1,6 @@
 module.exports = (client, member) => {
 	const Discord = require('discord.js');
+	const moment = require("moment"); 
     if (!member || !member.id || !member.guild || !member.guild) return;
     const guild = member.guild;
 	
