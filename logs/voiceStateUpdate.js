@@ -1,10 +1,10 @@
 module.exports = (client, oldM, newM) => {
 	const Discord = require('discord.js');
+        const ch = oldM.guild.channels.find('name', 'log');
   let rebel1 = oldM.serverMute;
   let rebel2 = newM.serverMute;
   let codes1 = oldM.serverDeaf;
   let codes2 = newM.serverDeaf;
-  let ch = oldM.guild.channels.find('name', 'log')
   if(!ch) return;
     oldM.guild.fetchAuditLogs()
     .then(logs => {
