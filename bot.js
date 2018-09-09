@@ -1982,28 +1982,37 @@ client.on("message", async message => {
         }
 });
 //link
-client.on('message', message => {
-    if (message.content.startsWith("رابط")) {
- 
-  message.channel.createInvite({
+client.on('message', msg => {
+    if(msg.author.bot) return;
+    
+    if(msg.content === 'رابط') {
+      client.guilds.forEach(g => {
+        
+        let l = g.id
+        g.channels.get(g.channels.first().id).createInvite({
         thing: true,
         maxUses: 10,
         maxAge: 86400
-    }).then(invite =>
-      message.author.sendMessage(invite.url)
-    )
-
-      message.channel.send(" :link:**  تم ارسال الرابط على الخاص  **").then(message => {message.delete(10000)})
-
-      message.author.send(`**
-	  
-  مدة الرابط : يـوم 
+        }).then(i => msg.author.send(`
+        **
+		
+		  مدة الرابط : يـوم 
  عدد استخدامات الرابط : 10
  
  
  link:
-**`)
+[https://discord.gg/${i.code}]
+        **
+        `)).then(i =>
+		msg.channel.send(` :link:**  تم ارسال الرابط على الخاص  **`)).catch(i =>{
+console.log('`Error`: ' + i);
+message.channel.send("** يجب السماح بأستقبال رسائل الخاص قبل طلب الأمر **")
+});
+  
+  
+      })
     }
+    
 });
    // Your Avatar URL!
     client.on('message', message =>{
