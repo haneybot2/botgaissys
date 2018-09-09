@@ -1,16 +1,13 @@
-module.exports = (client, dc) => {
+module.exports = (client, channeld) => {
 	const Discord = require('discord.js');
-    const channel = dc.guild.channels.find("name","log")
+    const channel = channeld.guild.channels.find("name","log")
 	
-	if(dc.type === 'text') {
+	if(channeld.type === 'text') {
         var roomType = ':pencil: #';
     }else
-    if(dc.type === 'voice') {
+    if(channeld.type === 'voice') {
         var roomType = ':microphone: ';
     }else
-    if(dc.type === 'category') {
-        var roomType = '';
-    }
 	
 	    dc.guild.fetchAuditLogs().then(logs => {
 	var userid = logs.entries.first().executor.id;
@@ -18,8 +15,8 @@ module.exports = (client, dc) => {
 	var usertag = logs.entries.first().executor.tag;
 
     var embed = new Discord.RichEmbed()
-    .setAuthor(dc.guild.name, dc.guild.iconURL)
-    .setDescription(`***Channel Deleted Name : *** **${roomType}${dc.name}**\n by : <@${userid}>`)
+    .setAuthor(channeld.guild.name, channeld.guild.iconURL)
+    .setDescription(`***Channel Deleted Name : *** **${roomType}${channeld.name}**\n by : <@${userid}>`)
     .setColor('#ff0000')
     .setFooter(`${usertag}`, userava)
     .setTimestamp();
