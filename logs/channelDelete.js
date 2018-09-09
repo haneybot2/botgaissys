@@ -1,6 +1,7 @@
 module.exports = (client, channeld) => {
 	const Discord = require('discord.js');
     var logchannel = channeld.guild.channels.find('name', 'log');
+   if(!logchannel) return;
 	
 	if(channeld.type === 'text') {
         var roomType = ':pencil: #';
