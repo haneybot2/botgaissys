@@ -1,6 +1,6 @@
 module.exports = (client, channelc) => {
 	const Discord = require('discord.js');
-    const channel = channelc.guild.channels.find('name', 'log');
+    const logchannel = channelc.guild.channels.find('name', 'log');
 	
     if(channelc.type === 'text') {
         var roomType = ':pencil: #';
@@ -8,7 +8,7 @@ module.exports = (client, channelc) => {
     if(channelc.type === 'voice') {
         var roomType = ':microphone: ';
     }else
-    if(channel.type === 'category') {
+    if(channelc.type === 'category') {
         var roomType = '';
     }
     
@@ -17,12 +17,12 @@ module.exports = (client, channelc) => {
 	var userava = logs.entries.first().executor.avatarURL;
 	var usertag = logs.entries.first().executor.tag;
 
-    var embed = new Discord.RichEmbed()
+    var channelCreate = new Discord.RichEmbed()
     .setAuthor(channelc.guild.name, channelc.guild.iconURL)
     .setDescription(`***Channel Created Name: *** **${roomType}${channelc.name}**\n by : <@${userid}>`)
-    .setColor('#ff0000')
     .setFooter(`${usertag}`, userava)
-    .setTimestamp();
-    channel.sendEmbed(embed)
+    .setTimestamp()
+    .setColor('#ff0000')
+    logchannel.sendEmbed(channelCreate)
    })
 };
