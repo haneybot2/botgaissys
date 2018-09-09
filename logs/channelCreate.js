@@ -2,12 +2,15 @@ module.exports = (client, channelc) => {
 	const Discord = require('discord.js');
     const channel = channelc.guild.channels.find('name', 'log');
 	
-	if(channelc.type === 'text') {
+    if(channelc.type === 'text') {
         var roomType = ':pencil: #';
     }else
     if(channelc.type === 'voice') {
         var roomType = ':microphone: ';
     }else
+    if(channel.type === 'category') {
+        var roomType = '';
+    }
     
 	    channelc.guild.fetchAuditLogs().then(logs => {
 	var userid = logs.entries.first().executor.id;
