@@ -368,6 +368,7 @@ client.on("guildMemberAdd", (member) => {
        });
     });
 });
+/*
 //log-server
 client.on('messageUpdate', (message, newMessage) => require('./logs/messageUpdate.js')(client, message, newMessage));
 client.on('messageDelete', message => require('./logs/messageDelete.js')(client, message));
@@ -378,6 +379,7 @@ client.on('guildMemberRemove', member => require('./logs/guildMemberRemove.js')(
 client.on('guildMemberAdd', member => require('./logs/guildMemberAdd.js')(client, member));
 client.on("roleCreate", rc => require('./logs/roleCreate.js')(client, rc));
 client.on("roleDelete",  rd => require('./logs/roleDelete.js')(client, rd));
+*/
 //pic-room
 client.on('message', ( message ) => {
   if(message.author.bot) return;
@@ -1013,6 +1015,10 @@ if (message.member.voiceChannel == null) return message.channel.send(`**الرج
  message.channel.send(`**تم سحب جميع الأعضاء إليك**`)
 
  }});
+//bc-obc-bcrole
+client.on('message', message => require('./commands/bc/bc.js')(client, message));
+client.on('message', message => require('./commands/bc/obc.js')(client, message));
+client.on('message', message => require('./commands/bc/bcrole.js')(client, message));
 //settingchat:!chat-!unmutechat-!hidechat-!showchat
 client.on('message', message => {
 
