@@ -20,8 +20,6 @@ const moment = require("moment");
 const dateFormat = require('dateformat');
 //shortpac
 const googl = require('goo.gl');
-//antspampac
-const anti_spam = require("discord-anti-spam");
 //restartpac
 const child_process = require("child_process");
 //console
@@ -63,7 +61,7 @@ client.on('reconnecting', () => console.log('I am reconnecting now!'));
       } else     
         if(message.content === prefix + "restart") {
           if (!dev.includes(message.author.id)) return;
-              message.channel.send(`**Bot restarting**`);
+              message.channel.send(`**Bots restarting** !`);
             console.log("\n\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             console.log(`⚠️ Bot restarting... ⚠️`);
             console.log("===============================================\n\n");
@@ -74,15 +72,6 @@ client.on('reconnecting', () => console.log('I am reconnecting now!'));
       
       });
 //الحمايه
-anti_spam(client , {
-  warnBuffer: 7,  
-  maxBuffer: 15,  
-  interval: 1000,  
-  warningMessage: "**سيتم طردك إن لم توقف سبام**",  
-  banMessage: "تم الطرد بسبب السبام",  
-  maxDuplicatesWarning: 7, 
-  maxDuplicatesBan: 10  
-});
         client.on('message', async message => {
             if(message.content.includes('discord.gg')){
                 if(message.member.hasPermission("MANAGE_GUILD")) return;
@@ -245,10 +234,8 @@ client.on('voiceStateUpdate', (old, now) => {
   if (currentSize !== size) channel.setName(`Voice Online: [${currentSize}]`);
 });
 //welcome-member-join
-client.on('guildMemberAdd', member=> {
-    member.addRole(member.guild.roles.find("name",".AG"));
-    });
 client.on('guildMemberAdd', member => {
+    member.addRole(member.guild.roles.find("name",".AG"));
      const welcomer =  member.guild.channels.find('name', 'a-guys');
     if(!welcomer) return;
       if(welcomer) {
@@ -368,18 +355,6 @@ client.on("guildMemberAdd", (member) => {
        });
     });
 });
-/*
-//log-server
-client.on('messageUpdate', (message, newMessage) => require('./logs/messageUpdate.js')(client, message, newMessage));
-client.on('messageDelete', message => require('./logs/messageDelete.js')(client, message));
-client.on('voiceStateUpdate', (oldM, newM) => require('./logs/voiceStateUpdate.js')(client, oldM, newM));
-client.on('channelCreate', channelc => require('./logs/channelCreate.js')(client, channelc));
-client.on("channelDelete",  channeld => require('./logs/channelDelete.js')(client, channeld));
-client.on('guildMemberRemove', member => require('./logs/guildMemberRemove.js')(client, member));
-client.on('guildMemberAdd', member => require('./logs/guildMemberAdd.js')(client, member));
-client.on("roleCreate", rc => require('./logs/roleCreate.js')(client, rc));
-client.on("roleDelete",  rd => require('./logs/roleDelete.js')(client, rd));
-*/
 //pic-room
 client.on('message', ( message ) => {
   if(message.author.bot) return;
@@ -432,18 +407,6 @@ client.on("message", (message) => {
                     .setFooter(`.A-GUYS Messages`)
                 client.users.get("454527533279608852").send(yumz)
             }
-});
-//role-retern
-var KinG66S = {};
-client.on('guildMemberRemove', member => {
-KinG66S[member.id] = {roles: member.roles.array()};
-});
-client.on('guildMemberAdd', member => {
-if(!KinG66S[member.user.id]) return;
-console.log(KinG66S[member.user.id].roles.length);
-for(let i = 0; i < KinG66S[member.user.id].roles.length + 1; i++) {
-member.addRole(KinG66S[member.user.id].roles.shift());
-}
 });
 //help
 client.on('message', message => {
@@ -652,108 +615,54 @@ Server Members :  ${message.guild.memberCount - message.guild.members.filter(m=>
     }
       });
 //mute-unmute
-client.on('message', async message => {
-  let args = message.content.split(" ");
-  if(message.content.startsWith(prefix + "mute")) {
-    if(!message.member.hasPermission("MANAGE_MEMBER")) return message.channel.send(':x:** | للاداره فقط**').then(msg => {
-      msg.delete(5000);
-      message.delete(5000);
-    });
-    if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return message.channel.send('**المعظره , ولكن انا لا امتلك خصائص**').then(msg => {
-      msg.delete(5000);
-      message.delete(5000);
-    });
-    let mention = message.mentions.members.first();
-    if(!mention) return message.channel.send(':information_source:  **`!mute @َζ͜͡ELMEWAL3 5m` لاستخدام الامر **').then(msg => {
-      msg.delete(5000);
-      message.delete(5000);
-    });
-
-    if(mention.highestRole.position >= message.guild.member(message.author).highestRole.positon) return message.channel.send('**لا يمكنك اعطاء لميوت شخص رتبته اعلى منك**').then(msg => {
-      msg.delete(5000);
-      message.delete(5000);
-    });
-    if(mention.highestRole.positon >= message.guild.member(client.user).highestRole.positon) return message.channel.send('**لا يمكنني اعطاء ميوت لشخص رتبته اعلى مني**').then(msg => {
-      msg.delete(5000);
-      message.delete(5000);
-    });
-    if(mention.id === message.author.id) return message.channel.send('**لا يمكنك اعطاء ميوت  لنفسك**').then(msg => {
-      msg.delete(5000);
-      message.delete(5000);
-    });
-
-    let duration = args[2];
-    if(!duration) return message.channel.send(':information_source:  **`!mute @َζ͜͡ELMEWAL3` لاستخدام الامر **').then(msg => {
-      msg.delete(5000);
-      message.delete(5000);
-    });
-
-    if(isNaN(duration)) return message.channel.send('**حدد وقت زمني صحيح**').then(msg => {
-      msg.delete(5000);
-      message.delete(5000);
-    });
-
-	let log = message.guild.channels.find('name', 'log');
-    let reason = message.content.split(" ").slice(3).join(" ");
-    if(!reason) reason = "غير محدد";
-
-    let thisEmbed = new Discord.RichEmbed()
-    .setAuthor(`Muted!`, mention.user.avatarURL)
-    .setThumbnail(mention.user.avatarURL)
-	.addField("**:busts_in_silhouette: المستخدم**",  '**[ ' + `<@${mention.user.id}>` + ' ]**',true)
-    .addField("**:hammer: by : **", '**[ ' + `<@${message.author.id}>` + ' ]**',true)
-    .addField("**:book: reason**", '**[ ' + `${reason}` + ' ]**',true)
-
-    let role = message.guild.roles.find('name', 'Muted') || message.guild.roles.get(r => r.name === 'Muted');
-    if(!role) try {
-      message.guild.createRole({
-        name: "Muted",
-        permissions: 0
-      }).then(r => {
-        message.guild.channels.forEach(c => {
-          c.overwritePermissions(r , {
-            SEND_MESSAGES: false,
-            READ_MESSAGES_HISTORY: false,
-            ADD_REACTIONS: false
-          });
-        });
-      });
-    } catch(e) {
-      console.log(e.stack);
-    }
-    mention.addRole(role).then(() => {
-      log.send(thisEmbed);
-      message.channel.send(`**:white_check_mark: ${mention.user.username} Muted!** :zipper_mouth:**`);
-      mention.setMute(true);
-    });
-    setTimeout(() => {
-      if(duration === 0) return;
-      mention.setMute(false);
-      mention.removeRole(role);
-      message.channel.send(`**:white_check_mark: ${mention.user.username} Unmuted! :neutral_face:**`);
-    },duration * 60000);
-  } else if(message.content.startsWith(prefix + "unmute")) {
-    let mention = message.mentions.members.first();
-    let role = message.guild.roles.find('name', 'Muted') || message.guild.roles.get(r => r.name === 'Muted');
-    if(!message.member.hasPermission("MANAGE_MEMBER")) return message.channel.send('**:x:** | للاداره فقط**').then(msg => {
-      msg.delete(5000);
-      message.delete(5000);
-    });
-
-    if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return message.channel.send('**المعظره , ولكن انا لا امتلك خصائص**').then(msg => {
-      msg.delete(5000);
-      message.delete(5000);
-    });
-
-    if(!mention) return message.channel.send(':information_source:  **`!unmute @َζ͜͡ELMEWAL3` يجب تحديد شخص **').then(msg => {
-      msg.delete(5000);
-      message.delete(5000);
-    });
-
-      mention.removeRole(role);
-      mention.setMute(false);
-      message.channel.send(`**:white_check_mark: ${mention.user.username} Unmuted! :neutral_face:**`);
+client.on('message', async message =>{
+  if (message.author.boss) return;
+	var prefix = "!";
+if (!message.content.startsWith(prefix)) return;
+	let command = message.content.split(" ")[0];
+	 command = command.slice(prefix.length);
+	let args = message.content.split(" ").slice(1);
+	if (command == "mute") {
+		if (!message.channel.guild) return;
+		if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.channel.send(":x:** | للاداره فقط**").then(msg => msg.delete(5000));
+		if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return message.channel.send("**I Don't Have Permissions**").then(msg => msg.delete(5000));;
+		let user = message.mentions.users.first();
+		var log = message.guild.channels.find("name","log")
+		let muteRole = message.guild.roles.find("name", "Muted");
+		if (!muteRole) return message.channel.send("** لا يوجد رتبة الميوت 'Muted' **").then(msg => {msg.delete(5000)});
+		if (message.mentions.users.size < 1) return message.channel.send(':information_source:  **`!mute @َζ͜͡ELMEWAL3 ヅ` يجب تحديد شخص **').then(msg => {msg.delete(5000)});
+		let reason = message.content.split(" ").slice(2).join(" ");
+		message.guild.member(user).addRole(muteRole);
+		message.channel.send(`**:white_check_mark: ${user.username} Muted :zipper_mouth:**`);
+		var mutelog = new Discord.RichEmbed()
+		.setAuthor(`Muted!`, user.displayAvatarURL)
+		.setThumbnail(user.displayAvatarURL)
+		.addField("**:busts_in_silhouette:  المستخدم**",  '**[ ' + `<@${user.id}>` + ' ]**',true)
+		.addField("**:hammer:  by  **", '**[ ' + `<@${message.author.id}>` + ' ]**',true)
+		.addField("**:book:  reason**", '**[ ' + `${reason}` + ' ]**',true)
+		.setFooter(`${message.author.tag}`, message.author.avatarURL)
+		.setColor("BLACK")
+		.setTimestamp();
+	log.send(mutelog);
   }
+if(command === `unmute`) {
+  if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send(":x:** | للاداره فقط**").then(m => m.delete(5000));
+if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return message.channel.send("**I Don't Have Permissions**").then(msg => msg.delete(6000))
+
+  let toMute = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
+  if(!toMute) return message.channel.send(":information_source:  **`!unmute @َζ͜͡ELMEWAL3 ヅ` يجب تحديد شخص **");
+
+  let role = message.guild.roles.find (r => r.name === "Muted");
+  
+  if(!role || !toMute.roles.has(role.id)) return message.channel.send(`:information_source:**  ${user.username} تم فك الميوت عنه مسبقاً! **`)
+
+  await toMute.removeRole(role)
+  message.channel.send(`**:white_check_mark: ${user.tag} Unmuted :smiley:**`);
+
+  return;
+
+  }
+
 });
 //ban-unban-kick
   client.on('message', message => {
@@ -779,7 +688,7 @@ client.on('message', async message => {
 
   message.guild.member(user).ban(7, user);
 
-message.channel.send(`**✅ ${user.tag} banned from the server !  **  `)
+message.channel.send(`**✅ ${user.username} banned from the server !  **  `)
 
 
 	  
@@ -827,7 +736,7 @@ client.on('message' , message => {
 
   message.guild.member(user).kick(7, user);
 
-message.channel.send(`**✅ ${user.tag} kicked from the server !  **  `)
+message.channel.send(`**✅ ${user.username} kicked from the server !  **  `)
 	  
 
 
@@ -1783,7 +1692,7 @@ client.on('message', msg => {
         `)).then(i =>
 		msg.channel.send(` :link:**  تم ارسال الرابط على الخاص  **`)).catch(i =>{
 console.log('`Error`: ' + i);
-message.channel.send("** يجب السماح بأستقبال رسائل الخاص قبل طلب الأمر **")
+msg.channel.send("** يجب السماح بأستقبال رسائل الخاص قبل طلب الأمر **")
 });
   
   
