@@ -414,9 +414,6 @@ client.on('message', message => {
      if (message.content === prefix + "help") {
 
  message.author.sendMessage(`
- 
-
-
 
 ╔[❖═════════════════❖]╗
     **MEMBERS  Commands**
@@ -444,9 +441,6 @@ client.on('message', message => {
 		   if(!message.member.hasPermission('MANAGE_MESSAGES')) return; 
 	     
  message.author.sendMessage(`
- 
-
-
  
 ╔[❖═════════════════❖]╗
     **Admin Commands**
@@ -483,10 +477,6 @@ client.on('message', message => {
  **❖ !pause ➾** لأيقاف الاغنيه مؤقتا 
  **❖ !resume ➾** لتكملة تشغيل الاغنيه
 
-
- 
-
-
 `);
 
     }
@@ -499,9 +489,6 @@ client.on('message', message => {
 	     
  message.author.sendMessage(`
  
-
-
-
  ╔[❖═════════════════❖]╗
     **PRIVET Commands**
  ╚[❖═════════════════❖]╝
