@@ -1854,6 +1854,33 @@ if (message.content.startsWith(prefix + 'setavatar')) {
     message.channel.send(`Changing The Avatar To :**${argresult}** `);
 }
 });
+client.on('message', async message => {
+            if(!message.channel.guild) return;
+             if (message.content.startsWith(prefix + "setstatus")) {
+		if (!id.includes(message.author.id)) return;
+let args = message.content.split(' ').slice(1).join(' ');
+            let sigMessage = await args;
+            
+            if (sigMessage === "online") {
+                client.user.setStatus("online");
+                message.channel.send("Your status was set to online.");
+            }
+            if (sigMessage === "idle") {
+                client.user.setStatus("idle");
+                message.channel.send("Your status was set to idle.");
+            }
+            if (sigMessage === "invisible") {
+                client.user.setStatus("invisible");
+                message.channel.send("Your status was set to invisible.");
+            }
+            if (sigMessage === "dnd") {
+                client.user.setStatus("dnd");
+                message.channel.send("Your status was set to dnd.");
+            }
+           
+        
+}
+});
 //save-server
 client.on('message', alpha => {
 	  if (alpha.author.bot) return;  
