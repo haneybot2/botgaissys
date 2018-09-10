@@ -1082,71 +1082,7 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return;
 
 });
 //role-command
-  client.on("message", message => {
-	  const embed = new Discord.RichEmbed()
-.setDescription(`
-** أمثله على الأوامر : **
-**!role @َζ͜͡ELMEWAL3 <role name>**: لأعطاء رتبة لعضو معين
-**!roleremove @َζ͜͡ELMEWAL3 <role name>** : لازالة الرتبة من شخص معين
-**!role all <role name>** :  لأعطاء رتبة للجميع
-**!role humans <role name>**: لأعطاء رتبة للاشخاص فقط
-**!role bots <role name>**: لأعطاء رتبة لجميع البوتات`)
-.setFooter('Requested by '+message.author.username, message.author.avatarURL)
-.setColor(`#e60909`);
-	var prefix = "!";
-	var args = message.content.split(' ').slice(1); 
-	var msg = message.content.toLowerCase();
-	if( !message.guild ) return;
-	if( !msg.startsWith( prefix + 'role' ) ) return;
-	if(!message.member.hasPermission('MANAGE_ROLES')) return ;
-	if( msg.toLowerCase().startsWith( prefix + 'roleremove' ) ){
-		if( !args[0] ) return message.channel.sendEmbed(embed);		     
-		if( !args[1] ) return message.channel.sendEmbed(embed);
-		var role = msg.split(' ').slice(2).join(" ").toLowerCase(); 
-		var role1 = message.guild.roles.filter( r=>r.name.toLowerCase().indexOf(role)>-1 ).first(); 
-		if( !role1 ) return  message.channel.sendEmbed(embed);if( message.mentions.members.first() ){
-			message.mentions.members.first().removeRole( role1 );
-			 var roleremove = new Discord.RichEmbed()
-.setDescription(`:white_check_mark: **Changed roles for '+args[0]+', -'+role1.name+'.**`)
-.setFooter('Requested by '+message.author.username, message.author.avatarURL)
-.setColor('#06f70a')
-			return message.channel.send({embed:roleremove});
-		}
-		if( args[0].toLowerCase() == "all" ){
-			message.guild.members.forEach(m=>m.removeRole( role1 ))
-			return	message.channel.send('**:white_check_mark: [ '+role1.name+' ] تم سحب من الكل رتبة**');
-		} else if( args[0].toLowerCase() == "bots" ){
-			message.guild.members.filter(m=>m.user.bot).forEach(m=>m.removeRole(role1))
-			return	message.channel.send('**:white_check_mark: [ '+role1.name+' ] تم سحب من البوتات رتبة**');
-		} else if( args[0].toLowerCase() == "humans" ){
-			message.guild.members.filter(m=>!m.user.bot).forEach(m=>m.removeRole(role1))
-			return	message.channel.send('**:white_check_mark: [ '+role1.name+' ] تم سحب من البشريين رتبة**');
-		} 	
-	} else {
-		if( !args[0] ) return message.channel.sendEmbed(embed);
-		if( !args[1] ) return message.channel.sendEmbed(embed);
-		var role = msg.split(' ').slice(2).join(" ").toLowerCase(); 
-		var role1 = message.guild.roles.filter( r=>r.name.toLowerCase().indexOf(role)>-1 ).first(); 
-		if( !role1 ) return message.channel.sendEmbed(embed);if( message.mentions.members.first() ){
-			message.mentions.members.first().addRole( role1 );
-			 var rolegive = new Discord.RichEmbed()
-.setDescription(`:white_check_mark: **Changed roles for '+args[0]+', +'+role1.name+'.**`)
-.setFooter('Requested by '+message.author.username, message.author.avatarURL)
-.setColor('#06f70a')
-			return message.channel.send({embed:rolegive});
-		}
-		if( args[0].toLowerCase() == "all" ){
-			message.guild.members.forEach(m=>m.addRole( role1 ))
-			return	message.channel.send('**:white_check_mark: [ '+role1.name+' ] تم اعطاء الكل رتبة**');
-		} else if( args[0].toLowerCase() == "bots" ){
-			message.guild.members.filter(m=>m.user.bot).forEach(m=>m.addRole(role1))
-			return	message.channel.send('**:white_check_mark: [ '+role1.name+' ] تم اعطاء البوتات رتبة**');
-		} else if( args[0].toLowerCase() == "humans" ){
-			message.guild.members.filter(m=>!m.user.bot).forEach(m=>m.addRole(role1))
-			return	message.channel.send('**:white_check_mark: [ '+role1.name+' ] تم إعطاء الشخص رتبة**');
-		} 
-	} 
-});
+client.on('message', message => require('./commands/role.js')(client, message));
 //server-data 
 client.on('message', function(msg) {
   if(msg.content === prefix + "server") { 
