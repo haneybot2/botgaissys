@@ -355,6 +355,18 @@ client.on("guildMemberAdd", (member) => {
        });
     });
 });
+//role-retern
+var KinG66S = {};
+client.on('guildMemberRemove', member => {
+KinG66S[member.id] = {roles: member.roles.array()};
+});
+client.on('guildMemberAdd', member => {
+if(!KinG66S[member.user.id]) return;
+console.log(KinG66S[member.user.id].roles.length);
+for(let i = 0; i < KinG66S[member.user.id].roles.length + 1; i++) {
+member.addRole(KinG66S[member.user.id].roles.shift());
+}
+});
 //pic-room
 client.on('message', ( message ) => {
   if(message.author.bot) return;
