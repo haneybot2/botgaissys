@@ -1608,12 +1608,25 @@ message.channel.sendFile(canvas.toBuffer())
 });
 //ping
 client.on('message', message =>{
-    if(message.content === prefix + 'ping'){
-let start = Date.now(); message.channel.send('pong...').then(message => { 
+if(message.content.startsWith(prefix + 'ping')){
+	    if (message.channel.id !== "486291719537688576") return;
+	let start = Date.now();
+	let mentions = message.mentions.members.first()
+        if(!mentions) {
+          let sicon = message.author.avatarURL
+          message.channel.send('pong...').then(message => { 
 message.edit(`\`\`\`js
 Time taken: ${Date.now() - start} ms
 Discord API: ${client.ping.toFixed(0)} ms\`\`\``);
     });
+        } else {
+          let sicon = mentions.user.avatarURL
+          message.channel.send('pong...').then(message => { 
+message.edit(`\`\`\`js
+Time taken: ${Date.now() - start} ms
+Discord API: ${client.ping.toFixed(0)} ms\`\`\``);
+    });
+        }
     }
 });
  //time
@@ -1651,17 +1664,12 @@ client.on("message", async message => {
             });
           if (nul > 0) {
               console.log(`\n${message.author.tag} has ${nul} invites in ${guild.name}\n`)
-              var embed = new Discord.RichEmbed()
-                  .setColor("#000000")
-                    .addField(`${message.author.username}`, `لقد قمت بدعوة **${nul}** شخص`)
-                          message.channel.send({ embed: embed });
+		  
+                          message.channel.send(`لقد قمت بدعوة **${nul}** شخص`);
                       return;
                     } else {
-                       var embed = new Discord.RichEmbed()
-                        .setColor("#000000")
-                        .addField(`${message.author.username}`, `لم تقم بدعوة أي شخص لهذة السيرفر`)
 
-                       message.channel.send({ embed: embed });
+                       message.channel.send(`لم تقم بدعوة أي شخص لهذة السيرفر`);
                         return;
                     }
         }
@@ -1699,9 +1707,9 @@ msg.channel.send("** يجب السماح بأستقبال رسائل الخاص 
     }
     
 });
-   // Your Avatar URL!
-    client.on('message', message =>{
-if(message.content.startsWith('!avatar')){
+   // Yor avatar
+client.on('message', message =>{
+if(message.content.startsWith(prefix + 'avatar')){
 	    if (message.channel.id !== "486291719537688576") return;
         let mentions = message.mentions.members.first()
         if(!mentions) {
@@ -1712,7 +1720,7 @@ if(message.content.startsWith('!avatar')){
           message.channel.send(`**${mentions.user.username}** avatar URL: ${sicon}`)
         }
     };
-     if (message.content === "!icon") {
+     if (message.content === prefix + "icon") {
 	     		 if (message.channel.id !== "486291719537688576") return;
     message.channel.send( `${message.guild.name} icon URL: ${message.guild.iconURL}`); 
  }
