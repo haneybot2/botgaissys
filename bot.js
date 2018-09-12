@@ -1433,7 +1433,7 @@ let args = message.content.split(' ').slice(1).join(' ');
            defineduser = firstMentioned;
        }
 
-       const w = ['./img/profile1.png','./img/profile2.png'];
+       const w = ['./id11.png','./id22.png'];
        var Canvas = require('canvas')
 var jimp = require('jimp')
 
