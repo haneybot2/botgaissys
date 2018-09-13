@@ -13,7 +13,7 @@ module.exports = (client, message) => {
             return;
         }
 		
-		let vkuser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
+		var vkuser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
 		if(vkuser.hasPermission("MANAGE_CHANNELS")) return message.channel.send("**لايمكننك طرد احد من الاداره صوتيا**")
 
         var member = message.guild.members.get(message.mentions.users.array()[0].id);
