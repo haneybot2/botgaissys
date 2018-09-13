@@ -625,18 +625,18 @@ if (!message.content.startsWith(prefix)) return;
 	let args = message.content.split(" ").slice(1);
 	if (command == "mute") {
 		if (!message.channel.guild) return;
+		if (!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send(':information_source:  **`!mute @َζ͜͡ELMEWAL3 ヅ` يجب تحديد شخص **');
 		if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.channel.send(":x:** | للاداره فقط**").then(msg => msg.delete(5000));
 		if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return message.channel.send("**I Don't Have Permissions**").then(msg => msg.delete(5000));
 		let messageArray = message.content.split (" ");
                 let cmd = messageArray[0];
                 let argsnot = messageArray.slice(1);
 		let muteu = message.guild.member(message.mentions.users.first() || message.guild.members.get(argsnot[0]));
-		if(muteu.hasPermission("MANAGE_MESSAGES")) return message.channel.send("**لا يمكن اعطاء ميوت لاحد من الاداره**")
+		if(muteu.hasPermission("MANAGE_MESSAGES")) return message.channel.send("**لا يمكن اعطاء ميوت لاحد من الاداره**");
 		let user = message.mentions.users.first();
-		var log = message.guild.channels.find("name","log")
+		var log = message.guild.channels.find("name","log");
 		let muteRole = message.guild.roles.find("name", "Muted");
 		if (!muteRole) return message.channel.send("** لا يوجد رتبة الميوت 'Muted' **").then(msg => {msg.delete(5000)});
-		if (message.mentions.users.size < 1) return message.channel.send(':information_source:  **`!mute @َζ͜͡ELMEWAL3 ヅ` يجب تحديد شخص **');
 		let reason = message.content.split(" ").slice(2).join(" ");
 		message.guild.member(user).addRole(muteRole);
 		message.channel.send(`**:white_check_mark: ${user.username} Muted :zipper_mouth:**`);
