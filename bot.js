@@ -1882,7 +1882,7 @@ let args = message.content.split(' ').slice(1).join(' ');
             let sigMessage = await args;
 		     
             if (!args[0]) {
-                msg.channel.send("**يجب تحديد نوع الحاله ما بين : \`\`ONLINE\`\`, \`\`IDLE\`\`, \`\`DND\`\`, \`\`INVISIBLE\`\`**");
+                return msg.channel.send("**يجب تحديد نوع الحاله ما بين : \`\`ONLINE\`\`, \`\`IDLE\`\`, \`\`DND\`\`, \`\`INVISIBLE\`\`**");
             }
             
             if (sigMessage === "ONLINE") {
