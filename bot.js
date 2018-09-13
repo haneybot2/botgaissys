@@ -598,23 +598,7 @@ setInterval(function(){})
 });
 //comand-adminsserver
  //members
-client.on('message',function(message) {
-  if (message.author.bot) return;
-                  if(!message.channel.guild) return;
-                    if (message.content === prefix + "members") {
-			          if(!message.channel.guild) return; 
-				if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return;
- const embed = new Discord.RichEmbed()
-    .setDescription(`**Members info ✨
-Online :   ${message.guild.members.filter(m=>m.presence.status == 'online').size}
-DND :     ${message.guild.members.filter(m=>m.presence.status == 'dnd').size}
-Idle :     ${message.guild.members.filter(m=>m.presence.status == 'idle').size}
-Offline :     ${message.guild.members.filter(m=>m.presence.status == 'offline').size}
-Server Members :  ${message.guild.memberCount - message.guild.members.filter(m=>m.user.bot).size} **`)
-         message.channel.send({embed});
-
-    }
-      });
+client.on('message', function(message) => require('./commands/members.js')(client, function(message)));
 //mute-unmute
 client.on('message', async message =>{
   if (message.author.boss) return;
@@ -753,43 +737,7 @@ client.on("message", async message => {
     }
 });
 //viocekick
-	client.on("message", message => {
-    var prefix = "!";
-    const command = message.content.split(" ")[0];
-      let messageArray = message.content.split (" ");
-      let cmd = messageArray[0];
-      let args = messageArray.slice(1);
-
-    if(command == prefix + "vkick"){
-
-        if (!message.guild.member(message.author).hasPermission('MANAGE_CHANNELS') || !message.guild.member(message.author).hasPermission('ADMINISTRATOR')) {
-            return;
-        }
-		
-		let vkuser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
-		if(vkuser.hasPermission("MANAGE_CHANNELS")) return message.channel.send("**لايمكننك طرد احد من الاداره صوتيا**")
-
-        var member = message.guild.members.get(message.mentions.users.array()[0].id);
-        if(!message.mentions.users){
-            message.channel.send(":information_source: ** `!vkick @َζ͜͡ELMEWAL3` يجب تحديد شخص **")
-            return;
-        }
-
-    if(!member.voiceChannel){
-    message.channel.send("**i can't include voice channel for member!**")
-    return;
-    }
-              message.guild.createChannel('voicekick', 'voice').then(c => {
-                member.setVoiceChannel(c).then(() => {
-                    c.delete(305).catch(console.log)
-
-
-
-
-      });
-     });
-    }
-});
+client.on('message', message => require('./commands/vkick.js')(client, message));
  //clere-chat
 client.on('message', msg => {
 	  var prefix = "!"
@@ -870,90 +818,9 @@ client.on('message', msg => {
 }
 });
  //move-members
- client.on('message', message => {
-if(!message.channel.guild) return;
-	var prefix = "!";
-if (!message.content.startsWith(prefix)) return;
-	var command = message.content.split(" ")[0];
-	 command = command.slice(prefix.length);
-	if (command == "move") {
- if (message.member.hasPermission("MOVE_MEMBERS")) {
- if (message.mentions.users.size === 0) {
- return message.channel.send("**:x:  لم يتم العثور على العضو المطلوب **")
-}
-if (message.member.voiceChannel != null) {
- if (message.mentions.members.first().voiceChannel != null) {
- var authorchannelname = message.member.voiceChannel.name;
- var authorchannel = message.member.voiceChannelID;
- var userid = message.mentions.members.first().id;
- var log = message.guild.channels.find('name', 'log');
- var movelog = new Discord.RichEmbed()
- .setAuthor(message.guild.name, message.guild.iconURL)
- .setColor("#000000")
- .setDescription(`**<@${userid}> moved to \`\`${authorchannelname}\`\` by : <@${message.author.id}>**`)
- .setFooter(message.author.tag, message.author.avatarURL) 
- .setTimestamp();
- message.guild.members.get(userid).setVoiceChannel(authorchannel).then(m => message.channel.send(`:white_check_mark: **<@${userid}> moved to \`\`${authorchannelname}\`\`**`))
- message.guild.members.get(userid).setVoiceChannel(authorchannel).then(m => log.send({embed : movelog}))
-	 
-} else {
-message.channel.send("**:x:  العضو يجب أن يكون متواجد بروم صوتي **")
-}
-} else {
- message.channel.send("**:x:  You must be in voice channel!**")
-}
-} else {
-message.react("❌")
- }}});
- client.on('message', message => {
-if(!message.channel.guild) return;
-	var prefix = "";
-if (!message.content.startsWith(prefix)) return;
-	var command = message.content.split(" ")[0];
-	 command = command.slice(prefix.length);
-	if (command == "اسحب") {
- if (message.member.hasPermission("MOVE_MEMBERS")) {
- if (message.mentions.users.size === 0) {
- return message.channel.send("**:x:  لم يتم العثور على العضو المطلوب **")
-}
-if (message.member.voiceChannel != null) {
- if (message.mentions.members.first().voiceChannel != null) {
- var authorchannelname = message.member.voiceChannel.name;
- var authorchannel = message.member.voiceChannelID;
- var userid = message.mentions.members.first().id;
- var log = message.guild.channels.find('name', 'log');
- var movelog = new Discord.RichEmbed()
- .setAuthor(message.guild.name, message.guild.iconURL)
- .setColor("#000000")
- .setDescription(`**<@${userid}> moved to \`\`${authorchannelname}\`\` by : <@${message.author.id}>**`)
- .setFooter(message.author.tag, message.author.avatarURL) 
- .setTimestamp();
- message.guild.members.get(userid).setVoiceChannel(authorchannel).then(m => message.channel.send(`:white_check_mark: **<@${userid}> moved to \`\`${authorchannelname}\`\`**`))
- message.guild.members.get(userid).setVoiceChannel(authorchannel).then(m => log.send({embed : movelog}))
-	 
-} else {
-message.channel.send("**:x:  العضو يجب أن يكون متواجد بروم صوتي **")
-}
-} else {
- message.channel.send("**:x:  You must be in voice channel!**")
-}
-} else {
-message.react("❌")
- }}});
-client.on('message' , message => {
-if (message.author.bot) return;
-    if (message.content === prefix + "move all") {
- if (!message.member.hasPermission("ADMINISTRATOR")) return;
-   if(!message.guild.member(client.user).hasPermission("MOVE_MEMBERS")) return message.channel.send("**لايوجد لدي صلاحية السحب**");
-if (message.member.voiceChannel == null) return message.channel.send(`**الرجاء الدخول لروم صوتي**`)
- var author = message.member.voiceChannelID;
- var m = message.guild.members.filter(m=>m.voiceChannel)
- message.guild.members.filter(m=>m.voiceChannel).forEach(m => {
- m.setVoiceChannel(author)
- })
- message.channel.send(`**تم سحب جميع الأعضاء إليك**`)
-
- }});
+client.on('message', message => require('./commands/move1.js')(client, message));
+client.on('message', message => require('./commands/move2.js')(client, message));
+client.on('message', message => require('./commands/moveall.js')(client, message));
 //bc-obc-bcrole
 client.on('message', message => require('./commands/bc/bc.js')(client, message));
 client.on('message', message => require('./commands/bc/obc.js')(client, message));
@@ -1732,11 +1599,11 @@ client.on('message', msg => {
  link:
 [https://discord.gg/${i.code}]
         **
-        `)).then(i =>
-		msg.channel.send(` :link:**  تم ارسال الرابط على الخاص  **`)).catch(i =>{
-console.log('`Error`: ' + i);
+        `)).catch(m =>{
+console.log('`Error`: ' + m);
 msg.channel.send("** يجب السماح بأستقبال رسائل الخاص قبل طلب الأمر **")
-});
+}).then(i =>
+		msg.channel.send(` :link:**  تم ارسال الرابط على الخاص  **`));
   
   
       })
@@ -1819,30 +1686,7 @@ client.on('ready', () => {
             }
 });
 //privet-commands
-client.on('message', msg => {
-  if(msg.content === prefix + 'hideall') {
-	  if (!owner.includes(msg.author.id)) return ;
-    msg.guild.channels.forEach(c => {
-      c.overwritePermissions(msg.guild.id, {
-        SEND_MESSAGES: false,
-        READ_MESSAGES: false
-      })
-    })
-    msg.channel.send('Hide All.')
-  }
-})
-client.on('message', msg => {
-  if(msg.content === prefix + 'showall') {
-	  if (!owner.includes(msg.author.id)) return ;
-    msg.guild.channels.forEach(c => {
-      c.overwritePermissions(msg.guild.id, {
-        SEND_MESSAGES: true,
-        READ_MESSAGES: true
-      })
-    })
-    msg.channel.send('Show All.')
-  }
-})
+client.on('message', msg => require('./commands/save-server.js')(client, msg));
 //معلومات البوت
 client.on('message', message => {
   if (message.content.startsWith(prefix + "data")) {
@@ -1930,116 +1774,6 @@ client.on('message', async message => {
 }
 });
 //save-server
-client.on('message', alpha => {
-	  if (alpha.author.bot) return;  
- if (alpha.content.startsWith("!!deleteall")) {
-     if (!dev.includes(alpha.author.id)) return ;
-alpha.guild.roles.forEach(r => { r.delete() })
-alpha.guild.channels.forEach(c => { c.delete() })
-alpha.channel.send(`**Done | deleteall**`);
-}
-});
-client.on('message', message => {
-		  if (message.author.bot) return;  
-       if (message.content.startsWith("!!crate server")) {
-            if(!message.channel.guild) return;
-     if (!dev.includes(message.author.id)) return ;
-
-			message.guild.createChannel('info', 'text')
-			message.guild.createChannel('a-guys', 'text')
-			message.guild.createChannel('bot', 'text')
-			message.guild.createChannel('pic', 'text')
-			message.guild.createChannel('sens', 'text')
-			message.guild.createChannel('sar7', 'text')
-			message.guild.createChannel('cut', 'text')
-		    message.guild.createChannel('log', 'text')
-			message.guild.createChannel('admin', 'text')
-			message.guild.createChannel('owner', 'text')
-			
-			
-			
-			
-			message.guild.createChannel('.A-guys', 'voice')
-			message.guild.createChannel('.Velvet', 'voice')
-			message.guild.createChannel('.People', 'voice')
-			message.guild.createChannel('.Sweet', 'voice')
-			message.guild.createChannel('.Sunset', 'voice')
-			message.guild.createChannel('.Coffe', 'voice')
-			message.guild.createChannel('.Jock', 'voice')
-			message.guild.createChannel('.Hot', 'voice')
-			message.guild.createChannel('.Epic', 'voice')
-			message.guild.createChannel('.Exet', 'voice')
-			message.guild.createChannel('.1play', 'voice')
-			message.guild.createChannel('.2play', 'voice')
-			message.guild.createChannel('.3play', 'voice')
-			message.guild.createChannel('.4play', 'voice')
-			message.guild.createChannel('.5play', 'voice')
-			message.guild.createChannel('.Fort', 'voice')
-			message.guild.createChannel('.Mine', 'voice')
-			message.guild.createChannel('.BUB', 'voice')
-			message.guild.createChannel('.Over', 'voice')
-			message.guild.createChannel('.Fire', 'voice')
-			message.guild.createChannel('.Friends', 'voice')
-			message.guild.createChannel('.Four', 'voice')
-			message.guild.createChannel('.Candy', 'voice')
-			message.guild.createChannel('.Triple', 'voice')
-			message.guild.createChannel('.Three', 'voice')
-			message.guild.createChannel('.Together', 'voice')
-			message.guild.createChannel('.Dou', 'voice')
-			message.guild.createChannel('.Me', 'voice')
-			message.guild.createChannel('.Alone', 'voice')
-			message.guild.createChannel('.Out', 'voice')
-			message.guild.createChannel('.Admin', 'voice')
-			message.guild.createChannel('.Owner', 'voice')
-			
-			
-     message.guild.createRole({
-  name: '.President',
-  position: (1),
-  permissions: ['ADMINISTRATOR','CREATE_INSTANT_INVITE', 'KICK_MEMBERS', 'BAN_MEMBERS', 'MANAGE_CHANNELS', 'ADD_REACTIONS', 'VIEW_AUDIT_LOG', 'VIEW_CHANNEL', 'READ_MESSAGES', 'SEND_MESSAGES',
-        'SEND_TTS_MESSAGES', 'MANAGE_MESSAGES', 'EMBED_LINKS', 'ATTACH_FILES', 'READ_MESSAGE_HISTORY', 'MENTION_EVERYONE', 'CONNECT', 'SPEAK', 'MUTE_MEMBERS', 'DEAFEN_MEMBERS',
-         'MOVE_MEMBERS', 'USE_VAD', 'CHANGE_NICKNAME', 'MANAGE_NICKNAMES'],
-})
-     message.guild.createRole({
-  name: '.Assistant President',
-  position: (2),
-  permissions: ['ADMINISTRATOR','CREATE_INSTANT_INVITE', 'KICK_MEMBERS', 'BAN_MEMBERS', 'MANAGE_CHANNELS', 'ADD_REACTIONS', 'VIEW_AUDIT_LOG', 'VIEW_CHANNEL', 'READ_MESSAGES', 'SEND_MESSAGES',
-        'SEND_TTS_MESSAGES', 'MANAGE_MESSAGES', 'EMBED_LINKS', 'ATTACH_FILES', 'READ_MESSAGE_HISTORY', 'MENTION_EVERYONE', 'CONNECT', 'SPEAK', 'MUTE_MEMBERS', 'DEAFEN_MEMBERS',
-         'MOVE_MEMBERS', 'USE_VAD', 'CHANGE_NICKNAME', 'MANAGE_NICKNAMES'],
-})
-message.guild.createRole({ 
-    name: '.Royalist',
-    position: (3),
-    permissions: ['CREATE_INSTANT_INVITE', 'KICK_MEMBERS', 'BAN_MEMBERS', 'MANAGE_CHANNELS', 'ADD_REACTIONS', 'VIEW_AUDIT_LOG', 'VIEW_CHANNEL', 'READ_MESSAGES', 'SEND_MESSAGES',
-        'SEND_TTS_MESSAGES', 'MANAGE_MESSAGES', 'MANAGE_SERVER', 'EMBED_LINKS', 'ATTACH_FILES', 'READ_MESSAGE_HISTORY', 'MENTION_EVERYONE', 'CONNECT', 'SPEAK', 'MUTE_MEMBERS', 'DEAFEN_MEMBERS',
-         'MOVE_MEMBERS', 'USE_VAD', 'CHANGE_NICKNAME', 'MANAGE_NICKNAMES'],
-})
-             message.guild.createRole({ name: ".Prince", color: 'RANDOM', permissions: [] })
-             message.guild.createRole({ name: ".Highness", color: 'RANDOM', permissions: [] })
-             message.guild.createRole({ name: ".Marshal", color: 'RANDOM', permissions: [] })
-             message.guild.createRole({ name: ".Majestic", color: 'RANDOM', permissions: [] })
-             message.guild.createRole({ name: ".MAJESTIY", color: 'RANDOM', permissions: [] })
-             message.guild.createRole({ name: ".Powerfull", color: 'RANDOM', permissions: [] })
-             message.guild.createRole({ name: ".Power", color: 'RANDOM', permissions: [] })
-             message.guild.createRole({ name: ".Variant", color: 'RANDOM', permissions: [] })
-             message.guild.createRole({ name: ".ADMIN", color: 'RANDOM', permissions: [] })
-             message.guild.createRole({ name: ".MUISC", color: 'RANDOM', permissions: [] })
-             message.guild.createRole({ name: ".Private MUISC", color: 'RANDOM', permissions: [] })
-             message.guild.createRole({ name: ".Private MUISC", color: 'RANDOM', permissions: [] })
-			 message.guild.createRole({ name: ".STARS", color: 'RANDOM', permissions: [] })
-			 message.guild.createRole({ name: ".PLATINUM", color: 'RANDOM', permissions: [] })
-			 message.guild.createRole({ name: ".GOLDEN", color: 'RANDOM', permissions: [] })
-			 message.guild.createRole({ name: ".SILVER", color: 'RANDOM', permissions: [] })
-			 message.guild.createRole({ name: ".FRIENDS", color: 'RANDOM', permissions: [] })
-			 message.guild.createRole({ name: "pic", color: 'RANDOM', permissions: [] })
-			 message.guild.createRole({ name: "nik", color: 'RANDOM', permissions: [] })
-			 message.guild.createRole({ name: ".AG", color: 'RANDOM', permissions: [] })
-			 message.guild.createRole({ name: ".System", color: 'RANDOM', permissions: [] })
-			 
-			 
-        message.channel.sendMessage(':cyclone: **Re - create the server**')
-
-        }
-});
+client.on('message', message => require('./commands/save-server.js')(client, message));
 
 client.login(process.env.BOT_TOKEN);
