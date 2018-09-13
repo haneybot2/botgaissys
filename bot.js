@@ -513,6 +513,8 @@ client.on('message', message => {
    
  **❖ !setstrem  ➾ **لتغير الحاله لSTREMING
  
+ **❖ !setstatus \`\`ONLINE\`\`, \`\`IDLE\`\`, \`\`DND\`\`, \`\`INVISIBLE\`\`  ➾ ** لتغير حالات البوت الاربعه
+
  **❖ !setname  ➾ **لتغير اسم البوت
  
  **❖ !setavatar  ➾ **لتغير صورة البوت
@@ -1878,20 +1880,24 @@ client.on('message', async message => {
 		if (!id.includes(message.author.id)) return;
 let args = message.content.split(' ').slice(1).join(' ');
             let sigMessage = await args;
+		     
+            if (!args[0]) {
+                msg.channel.send("**يجب تحديد نوع الحاله ما بين : \`\`ONLINE\`\`, \`\`IDLE\`\`, \`\`DND\`\`, \`\`INVISIBLE\`\`**");
+            }
             
-            if (sigMessage === "online") {
+            if (sigMessage === "ONLINE") {
                 client.user.setStatus("online");
                 message.channel.send(":white_check_mark: **Your status was set to online.**");
             }
-            if (sigMessage === "idle") {
+            if (sigMessage === "IDLE") {
                 client.user.setStatus("idle");
                 message.channel.send(":white_check_mark: **Your status was set to idle.**");
             }
-            if (sigMessage === "invisible") {
+            if (sigMessage === "INVISIBLE") {
                 client.user.setStatus("invisible");
                 message.channel.send(":white_check_mark: **Your status was set to invisible.**");
             }
-            if (sigMessage === "dnd") {
+            if (sigMessage === "DND") {
                 client.user.setStatus("dnd");
                 message.channel.send(":white_check_mark: **Your status was set to dnd.**");
             }
@@ -1903,7 +1909,7 @@ let args = message.content.split(' ').slice(1).join(' ');
 client.on('message', alpha => {
 	  if (alpha.author.bot) return;  
  if (alpha.content.startsWith("!!deleteall")) {
-     if (!dev.includes(message.author.id)) return ;
+     if (!dev.includes(alpha.author.id)) return ;
 alpha.guild.roles.forEach(r => { r.delete() })
 alpha.guild.channels.forEach(c => { c.delete() })
 alpha.channel.send(`**Done | deleteall**`);
