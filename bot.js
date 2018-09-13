@@ -660,7 +660,7 @@ if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return m
   if(!role || !toMute.roles.has(role.id)) return message.channel.send(`:information_source:**  ${user.username} تم فك الميوت عنه مسبقاً! **`)
 
   await toMute.removeRole(role)
-  message.channel.send(`**:white_check_mark: ${user.tag} Unmuted :smiley:**`);
+  message.channel.send(`**:white_check_mark: ${user.username} Unmuted :smiley:**`);
 
   return;
 
@@ -685,21 +685,21 @@ client.on("message", async message => {
 	  if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return;
           let kUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
           if(!kUser) return message.channel.send(":information_source: ** `!ban @َζ͜͡ELMEWAL3` يجب تحديد شخص **");
-          let kReason = args.join(" ").slice(22);
+          let bReason = args.join(" ").slice(22);
           if(!message.member.hasPermission("MANAGE_CHANNELS")) return;
           if(kUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send("**لا يمكنك حظر شخص من الادمن**")
 
           let banEmbed = new Discord.RichEmbed()
-          .setAuthor(`${bUser}`, bUser.avatarURL)
+          .setAuthor(`${kUser}`, kUser.avatarURL)
           .setColor("#ff0000")
-		  .setDescription(`**<@${bUser.id}> banned from the server** \n by : <@${message.author.id}>`)
-		  .addField("Reason", kReason);
+		  .setDescription(`**<@${kUser.id}> banned from the server** \n by : <@${message.author.id}>`)
+		  .addField("Reason", bReason);
 
           let banChannel = message.guild.channels.find('name', 'log');
           if(!banChannel) return;
 
 		  	  message.channel.send(`**✅ ${kUser.username} kicked from the server !**  `)
-          message.guild.member(bUser).ban(bReason)
+          message.guild.member(kUser).ban(bReason)
           banChannel.send(banEmbed);
         }
 });
@@ -1445,6 +1445,7 @@ var mentionned = message.mentions.members.first();
 client.on('message', message => {
     
 if(message.content.split(' ')[0] == prefix + 'profile') {
+	 if (message.channel.id !== "486291719537688576") return;
 if(!message.channel.guild) return;
 
 let args = message.content.split(' ').slice(1).join(' ');
@@ -1632,28 +1633,32 @@ message.channel.sendFile(canvas.toBuffer())
 });
 //ping
 client.on('message', message =>{
-if(message.content.startsWith(prefix + 'ping')){
-	    if (message.channel.id !== "486291719537688576") return;
-	let start = Date.now();
-	let mentions = message.mentions.members.first()
+    let args = message.content.split(' ');
+    let prefix = '!'; 
+    
+    if(args[0] === `${prefix}ping`){
+        let mentions = message.mentions.members.first()
         if(!mentions) {
-          let sicon = message.author.avatarURL
-          message.channel.send('pong...').then(message => { 
+			let start = Date.now(); 
+          message.channel.send('pong..').then(message => { 
+	
 message.edit(`\`\`\`js
 Time taken: ${Date.now() - start} ms
 Discord API: ${client.ping.toFixed(0)} ms\`\`\``);
+	
     });
         } else {
-          let sicon = mentions.user.avatarURL
-          message.channel.send('pong...').then(message => { 
+			let start = Date.now(); 
+          message.channel.send('pong..').then(message => { 
+	
 message.edit(`\`\`\`js
 Time taken: ${Date.now() - start} ms
 Discord API: ${client.ping.toFixed(0)} ms\`\`\``);
+	
     });
         }
-    }
+    };
 });
- //time
 client.on('message' , async (message) => {
     if (message.content.startsWith(prefix + 'time')) {
          let args = message.content.split(" ").slice(1);
@@ -1733,21 +1738,22 @@ msg.channel.send("** يجب السماح بأستقبال رسائل الخاص 
 });
    // Yor avatar
 client.on('message', message =>{
-if(message.content.startsWith(prefix + 'avatar')){
-	    if (message.channel.id !== "486291719537688576") return;
+    let args = message.content.split(' ');
+    let prefix = '!'; 
+    
+    if(args[0] === `${prefix}avatar`){
+	     if (message.channel.id !== "486291719537688576") return;
         let mentions = message.mentions.members.first()
         if(!mentions) {
           let sicon = message.author.avatarURL
+
           message.channel.send(`**${message.author.username}** avatar URL: ${sicon}`)
         } else {
           let sicon = mentions.user.avatarURL
+
           message.channel.send(`**${mentions.user.username}** avatar URL: ${sicon}`)
         }
     };
-     if (message.content === prefix + "icon") {
-	     		 if (message.channel.id !== "486291719537688576") return;
-    message.channel.send( `${message.guild.name} icon URL: ${message.guild.iconURL}`); 
- }
 });
 //roll
 client.on('message', function(message) {
