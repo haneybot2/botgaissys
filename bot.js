@@ -785,30 +785,8 @@ client.on("message", async message => {
     }
 });
  //clere-chat
-  client.on('message', msg => {
-	  const prefix = ""
-  if (msg.author.bot) return;
-  if (!msg.content.startsWith(prefix)) return;
-  let command = msg.content.split(" ")[0];
-  command = command.slice(prefix.length);
-  let args = msg.content.split(" ").slice(1);
-
-    if(command === "مسح") {
-        const emoji = client.emojis.find("name", "wastebasket")
-    let textxt = args.slice(0).join("");
-    if(msg.member.hasPermission("MANAGE_MESSAGES")) 
-
- {
-    msg.delete().then
-    msg.delete().then
-    msg.channel.bulkDelete(textxt);
-        msg.channel.send("```php\nتم مسح الشات  " + textxt  + "\n```").then(m => m.delete(3000));
-        }    
-    }
-
-});
-  client.on('message', msg => {
-	  const prefix = "!"
+client.on('message', msg => {
+	  var prefix = "!"
   if (msg.author.bot) return;
   if (!msg.content.startsWith(prefix)) return;
   let command = msg.content.split(" ")[0];
@@ -818,19 +796,49 @@ client.on("message", async message => {
     if(command === "clear") {
         const emoji = client.emojis.find("name", "wastebasket")
     let textxt = args.slice(0).join("");
-    if(msg.member.hasPermission("MANAGE_MESSAGES")) 
-
- {
+    if(msg.member.hasPermission("MANAGE_MESSAGES")) {
+    if (textxt == "") {
+    msg.delete().then
+    msg.delete().then
+    msg.channel.bulkDelete(100);
+        msg.channel.send("```php\nعدد الرسائل التي تم مسحهل : 100 \n```").then(m => m.delete(3000));
+} else {
     msg.delete().then
     msg.delete().then
     msg.channel.bulkDelete(textxt);
-        msg.channel.send("```php\nتم مسح الشات  " + textxt  + "\n```").then(m => m.delete(3000));
+        msg.channel.send("```php\nعدد الرسائل التي تم مسحها: " + textxt + "\n```").then(m => m.delete(3000));
         }    
     }
-
+}
 });
-  client.on('message', msg => {
-	  const prefix = ""
+client.on('message', msg => {
+	  var prefix = ""
+  if (msg.author.bot) return;
+  if (!msg.content.startsWith(prefix)) return;
+  let command = msg.content.split(" ")[0];
+  command = command.slice(prefix.length);
+  let args = msg.content.split(" ").slice(1);
+
+    if(command === "مسح") {
+        const emoji = client.emojis.find("name", "wastebasket")
+    let textxt = args.slice(0).join("");
+    if(msg.member.hasPermission("MANAGE_MESSAGES")) {
+    if (textxt == "") {
+    msg.delete().then
+    msg.delete().then
+    msg.channel.bulkDelete(100);
+        msg.channel.send("```php\nعدد الرسائل التي تم مسحهل : 100 \n```").then(m => m.delete(3000));
+} else {
+    msg.delete().then
+    msg.delete().then
+    msg.channel.bulkDelete(textxt);
+        msg.channel.send("```php\nعدد الرسائل التي تم مسحها: " + textxt + "\n```").then(m => m.delete(3000));
+        }    
+    }
+}
+});
+client.on('message', msg => {
+	  var prefix = ""
   if (msg.author.bot) return;
   if (!msg.content.startsWith(prefix)) return;
   let command = msg.content.split(" ")[0];
@@ -840,16 +848,20 @@ client.on("message", async message => {
     if(command === "lsp") {
         const emoji = client.emojis.find("name", "wastebasket")
     let textxt = args.slice(0).join("");
-    if(msg.member.hasPermission("MANAGE_MESSAGES")) 
-
- {
+    if(msg.member.hasPermission("MANAGE_MESSAGES")) {
+    if (textxt == "") {
+    msg.delete().then
+    msg.delete().then
+    msg.channel.bulkDelete(100);
+        msg.channel.send("```php\nعدد الرسائل التي تم مسحهل : 100 \n```").then(m => m.delete(3000));
+} else {
     msg.delete().then
     msg.delete().then
     msg.channel.bulkDelete(textxt);
-        msg.channel.send("```php\nتم مسح الشات  " + textxt  + "\n```").then(m => m.delete(3000));
+        msg.channel.send("```php\nعدد الرسائل التي تم مسحها: " + textxt + "\n```").then(m => m.delete(3000));
         }    
     }
-
+}
 });
  //move-members
  client.on('message', message => {
