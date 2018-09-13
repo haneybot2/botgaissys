@@ -728,7 +728,7 @@ client.on("message", async message => {
       let kUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
       if(!kUser) return message.channel.send(":information_source: ** `!kick @َζ͜͡ELMEWAL3` يجب تحديد شخص **");
       let kReason = args.join(" ").slice(22);
-      if(kUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send("**لا يمكنك طرد احد من الاداره**")
+      if (kUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send("**لا يمكنك طرد احد من الاداره**")
 
 
 	  
