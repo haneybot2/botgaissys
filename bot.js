@@ -656,6 +656,7 @@ if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return m
   if(!toMute) return message.channel.send(":information_source:  **`!unmute @َζ͜͡ELMEWAL3 ヅ` يجب تحديد شخص **");
 
   let role = message.guild.roles.find (r => r.name === "Muted");
+  let user = message.mentions.users.first();
   
   if(!role || !toMute.roles.has(role.id)) return message.channel.send(`:information_source:**  ${user.username} تم فك الميوت عنه مسبقاً! **`)
 
