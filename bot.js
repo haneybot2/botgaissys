@@ -811,7 +811,7 @@ client.on('message', msg => {
 } else {
     msg.delete().then
     msg.delete().then
-    msg.channel.bulkDelete(textxt + 1);
+    msg.channel.bulkDelete(`${parseInt(textxt)+1}`);
         msg.channel.send("```php\nعدد الرسائل التي تم مسحها: " + textxt + "\n```").then(m => m.delete(3000));
         }    
     }
@@ -837,7 +837,7 @@ client.on('message', msg => {
 } else {
     msg.delete().then
     msg.delete().then
-    msg.channel.bulkDelete(textxt + 1);
+    msg.channel.bulkDelete(`${parseInt(textxt)+1}`);
         msg.channel.send("```php\nعدد الرسائل التي تم مسحها: " + textxt + "\n```").then(m => m.delete(3000));
         }    
     }
@@ -863,7 +863,7 @@ client.on('message', msg => {
 } else {
     msg.delete().then
     msg.delete().then
-    msg.channel.bulkDelete(textxt + 1);
+    msg.channel.bulkDelete(`${parseInt(textxt)+1}`);
         msg.channel.send("```php\nعدد الرسائل التي تم مسحها: " + textxt + "\n```").then(m => m.delete(3000));
         }    
     }
