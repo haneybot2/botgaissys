@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
-const { Client } = require('discord.js');
-const client = new Client();
+const Util = require('discord.js');
+const client = new Discord.Client({disableEveryone: true});
 const prefix = '!'
 const dev = ['454527533279608852'];
 const owner = ['454527533279608852' , '344526837512273922', '478192028279111690'];
