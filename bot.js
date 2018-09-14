@@ -1713,6 +1713,7 @@ msg.channel.send("** يجب السماح بأستقبال رسائل الخاص 
     }
     
 });
+/*
    // Yor avatar
 client.on('message', message =>{
     let args = message.content.split(' ');
@@ -1900,7 +1901,7 @@ client.on('message', async message => {
 }
 });
 //save-server
-/*
+
 client.on('message', alpha => {
 	  if (alpha.author.bot) return;  
  if (alpha.content.startsWith("!!deleteall")) {
