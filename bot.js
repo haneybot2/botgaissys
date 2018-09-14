@@ -5,6 +5,7 @@ const prefix = '!'
 const dev = ['454527533279608852'];
 const owner = ['454527533279608852' , '344526837512273922', '478192028279111690'];
 const id = ['454527533279608852', '344526837512273922' , '478192028279111690' , '' , '', '', ''];
+/*
 ///////////////elmewal3/////////////////a7med////////////////anase
 const ms = require("ms");
 const fs = require('fs');
@@ -48,7 +49,7 @@ client.on('ready', () => {
   console.log('')
   console.log('Yo this ready!')
 });
-/*
+
 client.on('warn', console.warn);
 client.on('error', console.error);
 client.on('reconnecting', () => console.log('I am reconnecting now!'));
