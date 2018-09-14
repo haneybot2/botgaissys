@@ -1703,7 +1703,7 @@ client.on('ready', () => {
             }
 });
 //privet-commands
-client.on('message', msg => require('./commands/save-server.js')(client, msg));
+client.on('message', msg => require('./commands/show-hide.js')(client, msg));
 //معلومات البوت
 client.on('message', message => {
   if (message.content.startsWith(prefix + "data")) {
