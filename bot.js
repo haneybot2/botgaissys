@@ -992,6 +992,7 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return;
 });
 //role-command
 client.on('message', message => require('./commands/role.js')(client, message));
+/*
 //server-data 
 client.on('message', function(msg) {
   if(msg.content === prefix + "server") { 
@@ -1142,7 +1143,7 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return;
 
 }
 });
-/*
+
 //set-server-name
 client.on('message', eyad => {
   let args = eyad.content.split(" ").slice(1).join(" ")
