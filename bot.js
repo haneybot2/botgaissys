@@ -21,7 +21,7 @@ const dateFormat = require('dateformat');
 //shortpac
 const googl = require('goo.gl');
 //restartpac
-const child_process = require("child_process");
+
 //console
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
