@@ -1,12 +1,6 @@
-const Discord = require('discord.js');
+exports.run = async (client, message) => { 
 
-module.exports function = (client, message) => {
-  if (message.author.bot) return;
-  var prefix = '!'; 
-                  if(!message.channel.guild) return;
-                    if (message.content === prefix + "members") {
-			          if(!message.channel.guild) return; 
-				if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return;
+                if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return;
  const embed = new Discord.RichEmbed()
     .setDescription(`**Members info ✨
 Online :   ${message.guild.members.filter(m=>m.presence.status == 'online').size}
@@ -16,5 +10,8 @@ Offline :     ${message.guild.members.filter(m=>m.presence.status == 'offline').
 Server Members :  ${message.guild.memberCount - message.guild.members.filter(m=>m.user.bot).size} **`)
          message.channel.send({embed});
 
-    }
-      }
+};
+
+exports.help = {
+  name: "members",
+};
