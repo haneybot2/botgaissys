@@ -598,7 +598,7 @@ setInterval(function(){})
 });
 //comand-adminsserver
  //members
-client.on('message', function message => require('./commands/members.js')(client, function message));
+client.on('message', async message => require('./commands/members.js')(client, message));
 //mute-unmute
 client.on('message', async message =>{
   if (message.author.boss) return;
