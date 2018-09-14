@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 
-module.exports = (client, function(message)) => {
+module.exports function = (client, message) => {
   if (message.author.bot) return;
   var prefix = '!'; 
                   if(!message.channel.guild) return;
