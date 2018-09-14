@@ -557,7 +557,7 @@ client.on('message', message => {
     if(!isNaN(args) && args.length > 0)
     
 
-if    (!(message.guild.roles.find("name",`${args}`))) return  message.channel.sendEmbed(embedd);
+if (!(message.guild.roles.find("name",`${args}`))) return  message.channel.sendEmbed(embedd);
 
 
        var a = message.guild.roles.find("name",`${args}`)
@@ -566,7 +566,6 @@ const embed = new Discord.RichEmbed()
                     
      .setFooter('Requested by '+message.author.username, message.author.avatarURL)
    .setDescription(`**Color Changed To Successfully** :white_check_mark: `)
- 
    .setColor(`${a.hexColor}`)
   message.channel.sendEmbed(embed);
           if (!args)return;
@@ -584,6 +583,7 @@ setInterval(function(){})
 });
 //comand-adminsserver
  //members
+/*
 client.on('message', message => {
   if (message.author.boss) return;
 	var prefix = "!";
@@ -605,6 +605,7 @@ if (!message.content.startsWith(prefix)) return;
       message.channel.send(IzRo);
 	}
     });
+    */
 //mute-unmute
 client.on('message', async message =>{
   if (message.author.boss) return;
@@ -892,7 +893,7 @@ client.on('message', function(msg) {
     .addField(':white_check_mark:** عدد الاعضاء الاونلاين :**',`**[ ${msg.guild.members.filter(m=>m.presence.status == 'online').size} ]**`,true)
     .addField(':pencil:** الرومات الكتابية :**',`**[ ${msg.guild.channels.filter(m => m.type === 'text').size} ]**`,true)
     .addField(':loud_sound:** رومات الصوت :**',`**[ ${msg.guild.channels.filter(m => m.type === 'voice').size} ]**`,true)
-    .addField(':crown:** صاحب السيرفر :**',`**[ ${msg.guild.owner} ]**`,true)
+    .addField(':crown:** صاحب  السيرفر :**',`**[ ${msg.guild.owner} ]**`,true)
     .addField(':id:** ايدي السيرفر :**',`**[ ${msg.guild.id} ]**`,true)
     .addField(':date:** تم عمل السيرفر في : **',msg.guild.createdAt.toLocaleString())
     msg.channel.send({embed:embed});
@@ -904,7 +905,6 @@ client.on('message', async message => {
   if (message.author.x5bz) return;
   if (!message.content.startsWith(prefix)) return;
 
-
   let command = message.content.split(" ")[0];
   command = command.slice(prefix.length);
 
@@ -912,33 +912,23 @@ client.on('message', async message => {
 
   if (command == "warn") { 
 
-               if(!message.channel.guild) return;
+ if(!message.channel.guild) return;
          
-if(!message.member.hasPermission('ADMINISTRATOR')) return;
+ if(!message.member.hasPermission('ADMINISTRATOR')) return;
   let user = message.mentions.users.first();
   let reason = message.content.split(" ").slice(2).join(" ");
 
   if (message.mentions.users.size < 1) return message.channel.send("**!warn <mention> <Reason>**");
   if(!reason) return message.channel.send ("**!warn <mention> <Reason>**");
 
-  
-
-
-  
-
   if(!warns[user.id]) warns[user.id] = {
     warns: 0
   };
-
-
-  
   warns[user.id].warns++;
 
   fs.writeFile("./warnings.json", JSON.stringify(warns), (err) => {
     if (err) console.log(err)
   });
-
-
 
   const banembed = new Discord.RichEmbed()
   .setAuthor(`WARNED!`, user.displayAvatarURL)
@@ -973,16 +963,11 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return;
     
     let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
     if(!tomute) return message.channel.send(":x:") .then(m => m.delete(5000));
-    
-
-
-	
+   
     let mutetime = "600s";
     await(tomute.addRole(muterole.id));
     message.channel.send(`<@${user.id}> has been temporarily muted`);
 
-
-	
     setTimeout(async function(){
     await(tomute.removeRole(muterole.id));
       message.channel.send(`<@${user.id}> has been unmuted.`)
@@ -1040,7 +1025,6 @@ client.on('message', eyad => {
                 eyad.channel.send(`** تم تغيير الاسم الي __${args}__ **`);
                 
        }
-
        });
 //set-server-avatar
 client.on('message', eyadandr3d => {
@@ -1317,10 +1301,10 @@ let args = message.content.split(' ').slice(1).join(' ');
            defineduser = firstMentioned;
        }
 
-       const w = ['./id11.png','./id22.png'];
-       var Canvas = require('canvas')
-var jimp = require('jimp')
 
+       var Canvas = require('canvas')
+    var jimp = require('jimp')
+       const w = ['./id11.png','./id22.png'];
         const millis = new Date().getTime() - defineduser.createdAt.getTime();
 const now = new Date();
 dateFormat(now, 'dddd, mmmm dS, yyyy');
@@ -1385,8 +1369,7 @@ var men = message.mentions.users.first();
                        ctx.drawImage(ava, 112 , 40, 75, 75);
                        
                        
-                       
-                       
+
                        var status;
    if (defineduser.presence.status === 'online') {
        status = 'ONLINE';
@@ -1484,9 +1467,6 @@ message.channel.sendFile(canvas.toBuffer())
        })
    })
 
-
-
-
 }
 
 });
@@ -1505,7 +1485,7 @@ message.edit(`\`\`\`js
 Time taken: ${Date.now() - start} ms
 Discord API: ${client.ping.toFixed(0)} ms\`\`\``);
 	
-    });
+    })
         } else {
 	let start = Date.now(); 
           message.channel.send('pong..').then(message => { 
