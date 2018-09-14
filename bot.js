@@ -1142,6 +1142,7 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return;
 
 }
 });
+/*
 //set-server-name
 client.on('message', eyad => {
   let args = eyad.content.split(" ").slice(1).join(" ")
@@ -1418,7 +1419,7 @@ var mentionned = message.mentions.members.first();
 
 
  });
-/*
+
 //profile
 client.on('message', message => {
     
