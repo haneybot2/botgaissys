@@ -733,6 +733,7 @@ client.on("message", async message => {
       message.guild.member(kUser).kick(kReason)
     }
 });
+/*
 //viocekick
 	client.on("message", message => {
     var prefix = "!";
@@ -850,6 +851,7 @@ client.on('message', msg => {
     }
 }
 });
+
  //move-members
 client.on('message', message => require('./commands/move1.js')(client, message));
  /*client.on('message', message => {
@@ -923,12 +925,13 @@ message.channel.send("**:x:  العضو يجب أن يكون متواجد برو
 } else {
 message.react("❌")
  }}});*/
+
 client.on('message', message => require('./commands/moveall.js')(client, message));
 //bc-obc-bcrole
 client.on('message', message => require('./commands/bc/bc.js')(client, message));
 client.on('message', message => require('./commands/bc/obc.js')(client, message));
 client.on('message', message => require('./commands/bc/bcrole.js')(client, message));
-/*
+
 //settingchat:!chat-!unmutechat-!hidechat-!showchat
 client.on('message', message => {
 
