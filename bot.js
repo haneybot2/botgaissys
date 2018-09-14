@@ -48,6 +48,7 @@ client.on('ready', () => {
   console.log('')
   console.log('Yo this ready!')
 });
+/*
 client.on('warn', console.warn);
 client.on('error', console.error);
 client.on('reconnecting', () => console.log('I am reconnecting now!'));
@@ -225,7 +226,7 @@ if (err) console.error(err);
 })
 
 })
-/*
+
 //voise online
 client.on('voiceStateUpdate', (old, now) => {
   const channel = client.channels.get('471810322601345024');
