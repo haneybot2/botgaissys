@@ -1608,6 +1608,7 @@ message.channel.sendFile(canvas.toBuffer())
 }
 
 });
+/*
 //ping
 client.on('message', message =>{
     let args = message.content.split(' ');
@@ -1713,7 +1714,7 @@ msg.channel.send("** يجب السماح بأستقبال رسائل الخاص 
     }
     
 });
-/*
+
    // Yor avatar
 client.on('message', message =>{
     let args = message.content.split(' ');
