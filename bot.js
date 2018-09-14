@@ -8,11 +8,13 @@ const id = ['454527533279608852', '344526837512273922' , '478192028279111690' , 
 ///////////////elmewal3/////////////////a7med////////////////anase
 const ms = require("ms");
 const fs = require('fs');
+//idpac
+const Canvas= require('canvas');
 //حمايه
 let bane = JSON.parse(fs.readFileSync("./bcer.json", "utf8"));
 let warns = JSON.parse(fs.readFileSync("./warnings.json", "utf8"));
-//idpac
-const Canvas = require("canvas");
+
+
 //profilepac
 
 //shortpac
