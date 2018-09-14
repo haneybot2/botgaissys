@@ -928,6 +928,7 @@ client.on('message', message => require('./commands/moveall.js')(client, message
 client.on('message', message => require('./commands/bc/bc.js')(client, message));
 client.on('message', message => require('./commands/bc/obc.js')(client, message));
 client.on('message', message => require('./commands/bc/bcrole.js')(client, message));
+/*
 //settingchat:!chat-!unmutechat-!hidechat-!showchat
 client.on('message', message => {
 
@@ -992,7 +993,7 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return;
 });
 //role-command
 client.on('message', message => require('./commands/role.js')(client, message));
-/*
+
 //server-data 
 client.on('message', function(msg) {
   if(msg.content === prefix + "server") { 
