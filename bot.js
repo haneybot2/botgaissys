@@ -854,7 +854,7 @@ client.on('message', msg => {
 
  //move-members
 client.on('message', message => require('./commands/move1.js')(client, message));
- /*client.on('message', message => {
+client.on('message', message => {
 if(!message.channel.guild) return;
 	var prefix = "!";
 if (!message.content.startsWith(prefix)) return;
@@ -888,9 +888,9 @@ message.channel.send("**:x:  العضو يجب أن يكون متواجد برو
 }
 } else {
 message.react("❌")
- }}});*/
+ }}});
 client.on('message', message => require('./commands/move2.js')(client, message));
- /*client.on('message', message => {
+client.on('message', message => {
 if(!message.channel.guild) return;
 	var prefix = "";
 if (!message.content.startsWith(prefix)) return;
@@ -924,7 +924,7 @@ message.channel.send("**:x:  العضو يجب أن يكون متواجد برو
 }
 } else {
 message.react("❌")
- }}});*/
+ }}});
 
 client.on('message', message => require('./commands/moveall.js')(client, message));
 //bc-obc-bcrole
