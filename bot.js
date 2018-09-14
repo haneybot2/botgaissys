@@ -876,7 +876,7 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return;
 
 });
 //role-command
-client.on('message', message => require('./commands/role.js')(client, message));
+//client.on('message', message => require('./commands/role.js')(client, message));
 //server-data 
 client.on('message', function(msg) {
   if(msg.content === prefix + "server") { 
