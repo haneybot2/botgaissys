@@ -19,7 +19,7 @@ const jimp = require("jimp");
 const moment = require("moment"); 
 const dateFormat = require('dateformat');
 //shortpac
-const googl = require('goo.gl');
+
 //restartpac
 
 //console
