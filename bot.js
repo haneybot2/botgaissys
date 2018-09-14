@@ -583,6 +583,7 @@ setInterval(function(){})
 });
 //comand-adminsserver
  //members
+/*
 client.on('message',function(message) {
   if (message.author.bot) return;
                   if(!message.channel.guild) return;
@@ -652,7 +653,7 @@ if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return m
   }
 
 });
-/*
+
 //ban-unban-kick
 client.on("message", async message => {
       if(message.author.bot) return;
