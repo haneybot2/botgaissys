@@ -12,7 +12,7 @@ const fs = require('fs');
 let bane = JSON.parse(fs.readFileSync("./bcer.json", "utf8"));
 let warns = JSON.parse(fs.readFileSync("./warnings.json", "utf8"));
 //idpac
-
+const Canvas = require("canvas");
 //profilepac
 
 //shortpac
