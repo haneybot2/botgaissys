@@ -10,6 +10,7 @@ const ms = require("ms");
 const fs = require('fs');
 //حمايه
 let bane = JSON.parse(fs.readFileSync("./bcer.json", "utf8"));
+let warns = JSON.parse(fs.readFileSync("./warnings.json", "utf8"));
 //idpac
 
 //profilepac
