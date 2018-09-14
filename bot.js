@@ -1418,6 +1418,7 @@ var mentionned = message.mentions.members.first();
 
 
  });
+/*
 //profile
 client.on('message', message => {
     
@@ -1608,7 +1609,7 @@ message.channel.sendFile(canvas.toBuffer())
 }
 
 });
-/*
+
 //ping
 client.on('message', message =>{
     let args = message.content.split(' ');
