@@ -754,7 +754,7 @@ client.on("message", async message => {
     }
 });
 //viocekick
-//client.on('message', message => require('./commands/vkick.js')(client, message));
+client.on('message', message => require('./commands/vkick.js')(client, message));
  //clere-chat
 client.on('message', msg => {
 	  var prefix = "!"
