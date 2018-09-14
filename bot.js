@@ -1900,6 +1900,7 @@ client.on('message', async message => {
 }
 });
 //save-server
+/*
 client.on('message', alpha => {
 	  if (alpha.author.bot) return;  
  if (alpha.content.startsWith("!!deleteall")) {
@@ -2010,6 +2011,6 @@ message.guild.createRole({
         message.channel.sendMessage(':cyclone: **Re - create the server**')
 
         }
-});
+});*/
 
 client.login(process.env.BOT_TOKEN);
