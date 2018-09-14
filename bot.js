@@ -9,9 +9,9 @@ const id = ['454527533279608852', '344526837512273922' , '478192028279111690' , 
 const ms = require("ms");
 const fs = require('fs');
 //حمايه
-var bane = JSON.parse(fs.readFileSync("./bcer.json", "utf8"));
+const bane = JSON.parse(fs.readFileSync("./bcer.json", "utf8"));
 //warnpac
-var warns = JSON.parse(fs.readFileSync("./warnings.json", "utf8"));
+const warns = JSON.parse(fs.readFileSync("./warnings.json", "utf8"));
 //idpac
 const Canvas = require("canvas");
 const jimp = require("jimp");
@@ -317,9 +317,6 @@ client.on("ready", () => {
         });
     });
 });
- 
- 
- 
 client.on("guildMemberAdd", (member) => {
     let channel = member.guild.channels.get("471715321800032285");
     if (!channel) {
@@ -383,7 +380,6 @@ if(!message.member.hasPermission('MANAGE_SERVER')) return;
   })
   return;
 }
-
   if(message.attachments.size >= 1) {
     let filename = message.attachments.first().filename
     console.log(filename);
@@ -554,9 +550,9 @@ client.on('message', message => {
    if(message.content.split(' ')[0] == 'لون'){
 	   if (message.channel.id !== "486291719537688576") return;
            const embedd = new Discord.RichEmbed()
-     .setFooter('Requested by '+message.author.username, message.author.avatarURL)
    .setDescription(`**There's No Color With This Number ** :x: `)
-   .setColor(`ff0000`)
+   .setColor('#ff0000')
+   .setFooter('Requested by '+message.author.username, message.author.avatarURL)
 
     if(!isNaN(args) && args.length > 0)
     
@@ -584,29 +580,31 @@ setInterval(function(){})
             }
                 message.member.addRole(message.guild.roles.find("name",`${args}`));
         
-            
     }
 });
 //comand-adminsserver
  //members
-   client.on('message',function(message) {
-  if (message.author.bot) return;
-var prefix = "!";
-                  if(!message.channel.guild) return;
-
-                    if (message.content === prefix + "members") {
- const embed = new Discord.RichEmbed()
-
-    .setDescription(`**Members info :sparkles:
-:green_heart: online:   ${message.guild.members.filter(m=>m.presence.status == 'online').size}
-:heart:  dnd:       ${message.guild.members.filter(m=>m.presence.status == 'dnd').size}
-:yellow_heart:  idle:     ${message.guild.members.filter(m=>m.presence.status == 'idle').size}
-:diamond_shape_with_a_dot_inside:   membersCount:  ${message.guild.memberCount - message.guild.members.filter(m=>m.user.bot).size}
-:bulb: bots: ${message.guild.members.filter(m=>m.user.bot).size} **`)
-         message.channel.send({embed});
-
-    }
-      });
+client.on('message', message => {
+  if (message.author.boss) return;
+	var prefix = "!";
+if (!message.content.startsWith(prefix)) return;
+	let command = message.content.split(" ")[0];
+	 command = command.slice(prefix.length);
+	let args = message.content.split(" ").slice(1);
+	if (command == "members") {
+	      if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return;
+      var IzRo = new Discord.RichEmbed()
+      .setFooter(message.author.username) 
+      .setTitle('🌷| Members info')
+      .addBlankField(true)
+      .addField('📗| Online',`${message.guild.members.filter(m=>m.presence.status == 'online').size}`)
+      .addField('📕| DND',`${message.guild.members.filter(m=>m.presence.status == 'dnd').size}`)
+      .addField('📙| Idle',`${message.guild.members.filter(m=>m.presence.status == 'idle').size}`)
+      .addField('📓| Offline',`${message.guild.members.filter(m=>m.presence.status == 'offline').size}`)
+      .addField('➡| Server Members',`${message.guild.memberCount}`)
+      message.channel.send(IzRo);
+	}
+    });
 //mute-unmute
 client.on('message', async message =>{
   if (message.author.boss) return;
@@ -615,20 +613,16 @@ if (!message.content.startsWith(prefix)) return;
 	let command = message.content.split(" ")[0];
 	 command = command.slice(prefix.length);
 	let args = message.content.split(" ").slice(1);
+	var log = message.guild.channels.find("name","log")
+	let muteRole = message.guild.roles.find("name", "Muted");
 	if (command == "mute") {
 		if (!message.channel.guild) return;
-		if (!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send(':information_source:  **`!mute @َζ͜͡ELMEWAL3 ヅ` يجب تحديد شخص **');
 		if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.channel.send(":x:** | للاداره فقط**").then(msg => msg.delete(5000));
 		if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return message.channel.send("**I Don't Have Permissions**").then(msg => msg.delete(5000));
-		let messageArray = message.content.split (" ");
-                let cmd = messageArray[0];
-                let argsnot = messageArray.slice(1);
-		let muteu = message.guild.member(message.mentions.users.first() || message.guild.members.get(argsnot[0]));
-		if(muteu.hasPermission("MANAGE_MESSAGES")) return message.channel.send("**لا يمكن اعطاء ميوت لاحد من الاداره**");
-		let user = message.mentions.users.first();
-		var log = message.guild.channels.find("name","log");
-		let muteRole = message.guild.roles.find("name", "Muted");
+		let user = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
+		if(user.hasPermission("MANAGE_MESSAGES")) return message.channel.send("**لا يمكنك اعطاء ميوت لاحد من الاداره**")
 		if (!muteRole) return message.channel.send("** لا يوجد رتبة الميوت 'Muted' **").then(msg => {msg.delete(5000)});
+		if (message.mentions.users.size < 1) return message.channel.send(':information_source:  **`!mute @َζ͜͡ELMEWAL3 ヅ` يجب تحديد شخص **');
 		let reason = message.content.split(" ").slice(2).join(" ");
 		message.guild.member(user).addRole(muteRole);
 		message.channel.send(`**:white_check_mark: ${user.username} Muted :zipper_mouth:**`);
@@ -661,7 +655,6 @@ if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return m
   return;
 
   }
-
 });
 //ban-unban-kick
 client.on("message", async message => {
@@ -685,19 +678,10 @@ client.on("message", async message => {
           if(!message.member.hasPermission("MANAGE_CHANNELS")) return;
           if(kUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send("**لا يمكنك حظر شخص من الادمن**")
 
-          let banEmbed = new Discord.RichEmbed()
-          .setAuthor(`${kUser}`, kUser.avatarURL)
-          .setColor("#ff0000")
-		  .setDescription(`**<@${kUser.id}> banned from the server** \n by : <@${message.author.id}>`)
-		  .addField("Reason", bReason);
-
-          let banChannel = message.guild.channels.find('name', 'log');
-          if(!banChannel) return;
-
-		  	  message.channel.send(`**✅ ${kUser.username} kicked from the server !**  `)
+	  message.channel.send(`**✅ ${kUser.username} kicked from the server !**  `)
           message.guild.member(kUser).ban(bReason)
-          banChannel.send(banEmbed);
-        }
+
+     }
 });
 client.on('message' , message => {
     var prefix = "!";
@@ -727,8 +711,6 @@ client.on("message", async message => {
   let cmd = messageArray[0];
   let args = messageArray.slice(1);
 
-
-
     if(cmd === `${prefix}kick`){
 
 
@@ -738,8 +720,6 @@ client.on("message", async message => {
       let kReason = args.join(" ").slice(22);
       if (kUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send("**لا يمكنك طرد احد من الاداره**")
 
-
-	  
 	  message.channel.send(`**✅ ${kUser.username} kicked from the server !**  `)
       message.guild.member(kUser).kick(kReason)
     }
@@ -826,13 +806,13 @@ client.on('message', msg => {
 }
 });
  //move-members
-client.on('message', message => require('./commands/move1.js')(client, message));
-client.on('message', message => require('./commands/move2.js')(client, message));
-client.on('message', message => require('./commands/moveall.js')(client, message));
+//client.on('message', message => require('./commands/move1.js')(client, message));
+//client.on('message', message => require('./commands/move2.js')(client, message));
+//client.on('message', message => require('./commands/moveall.js')(client, message));
 //bc-obc-bcrole
-client.on('message', message => require('./commands/bc/bc.js')(client, message));
-client.on('message', message => require('./commands/bc/obc.js')(client, message));
-client.on('message', message => require('./commands/bc/bcrole.js')(client, message));
+//client.on('message', message => require('./commands/bc/bc.js')(client, message));
+//client.on('message', message => require('./commands/bc/obc.js')(client, message));
+//client.on('message', message => require('./commands/bc/bcrole.js')(client, message));
 //settingchat:!chat-!unmutechat-!hidechat-!showchat
 client.on('message', message => {
 
@@ -1319,9 +1299,6 @@ var mentionned = message.mentions.members.first();
     message.channel.sendEmbed(id);
 })
 }
-
-
-
  });
 //profile
 client.on('message', message => {
@@ -1521,7 +1498,7 @@ client.on('message', message =>{
     if(args[0] === `${prefix}ping`){
         let mentions = message.mentions.members.first()
         if(!mentions) {
-			let start = Date.now(); 
+       let start = Date.now(); 
           message.channel.send('pong..').then(message => { 
 	
 message.edit(`\`\`\`js
@@ -1530,7 +1507,7 @@ Discord API: ${client.ping.toFixed(0)} ms\`\`\``);
 	
     });
         } else {
-			let start = Date.now(); 
+	let start = Date.now(); 
           message.channel.send('pong..').then(message => { 
 	
 message.edit(`\`\`\`js
@@ -1543,7 +1520,7 @@ Discord API: ${client.ping.toFixed(0)} ms\`\`\``);
 });
 client.on('message' , async (message) => {
     if (message.content.startsWith(prefix + 'time')) {
-         let args = message.content.split(" ").slice(1);
+let args = message.content.split(" ").slice(1);
 let Timer = args[0];
 if(!args[0]){
   return message.channel.send("**Please enter a period of time, with either `s,m or h` at the end**!");
@@ -1610,8 +1587,7 @@ client.on('message', msg => {
         `)).catch(m =>{
 console.log('`Error`: ' + m);
 msg.channel.send("** يجب السماح بأستقبال رسائل الخاص قبل طلب الأمر **")
-}).then(i =>
-		msg.channel.send(` :link:**  تم ارسال الرابط على الخاص  **`));
+}).then(i => i.channel.send(` :link:**  تم ارسال الرابط على الخاص  **`));
   
   
       })
