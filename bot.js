@@ -4,7 +4,7 @@ const client = new Client();
 const prefix = '!'
 const dev = ['454527533279608852'];
 const owner = ['454527533279608852' , '344526837512273922', '478192028279111690'];
-const id = ['454527533279608852', '344526837512273922' , '478192028279111690' , '' , '', '', '', ''];
+const id = ['454527533279608852', '344526837512273922' , '478192028279111690' , '' , '', '', ''];
 ///////////////elmewal3/////////////////a7med////////////////anase
 const ms = require("ms");
 const fs = require('fs');
@@ -225,6 +225,7 @@ if (err) console.error(err);
 })
 
 })
+/*
 //voise online
 client.on('voiceStateUpdate', (old, now) => {
   const channel = client.channels.get('471810322601345024');
@@ -583,7 +584,7 @@ setInterval(function(){})
 });
 //comand-adminsserver
  //members
-/*
+
 client.on('message',function(message) {
   if (message.author.bot) return;
                   if(!message.channel.guild) return;
