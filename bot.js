@@ -652,6 +652,7 @@ if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return m
   }
 
 });
+/*
 //ban-unban-kick
 client.on("message", async message => {
       if(message.author.bot) return;
@@ -733,7 +734,7 @@ client.on("message", async message => {
       message.guild.member(kUser).kick(kReason)
     }
 });
-/*
+
 //viocekick
 	client.on("message", message => {
     var prefix = "!";
