@@ -6,13 +6,11 @@ const dev = ['454527533279608852'];
 const owner = ['454527533279608852' , '344526837512273922', '478192028279111690'];
 const id = ['454527533279608852', '344526837512273922' , '478192028279111690' , '' , '', '', ''];
 ///////////////elmewal3/////////////////a7med////////////////anase
-const ms = require("ms");
-const fs = require('fs');
+
 //حمايه
 
 //idpac
-const Canvas = require("canvas");
-const jimp = require("jimp");
+
 //profilepac
 
 //shortpac
