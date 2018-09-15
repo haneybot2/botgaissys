@@ -22,7 +22,7 @@
     "goo.gl": "^0.1.4",
     "opusscript": "0.0.6",
     "googleapis": "^20.2.0",
-    "short-number": "^1.0.6",
+    "short-number": "^1.0.6"
   },
     "engines": {
     "node": "8.x"
