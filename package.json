@@ -10,7 +10,6 @@
     "canvas": "^1.6.10",
     "discord.js": "^11.3.2",
     "dateformat": "^3.0.3",
-    "math-expression-evaluator":"^1.2.17",
     "gif-search": "^2.0.1",
     "express": "^4.16.3",
     "finalhandler": "^1.1.1",
@@ -30,8 +29,6 @@
     "snekfetch": "^3.6.4",
     "sqlite": "^2.9.1",
     "sqlite3": "^4.0.0",
-    "youtube-info": "^1.2.0",
-    "ytdl-core": "^0.20.2"
   },
   "engines": {
     "node": "8.x"
