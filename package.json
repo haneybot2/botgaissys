@@ -7,22 +7,16 @@
     "start": "node bot.js"
   },
   "dependencies": {
-    "ascii-data-table": "^2.1.1",
     "canvas": "^1.6.10",
     "child_process": "^1.0.2",
     "bufferutil": "^3.0.3",
     "dateformat": "^3.0.3",
     "discord.js": "^11.3.2",
-    "express": "^4.16.3",
     "fs": "0.0.2",
     "jimp": "^0.2.28",
     "moment": "^2.22.1",
     "ms": "^2.1.1",
-    "pretty-ms": "^3.1.0",
     "goo.gl": "^0.1.4",
-    "opusscript": "0.0.6",
-    "googleapis": "^20.2.0",
-    "short-number": "^1.0.6"
   },
     "engines": {
     "node": "8.x"
