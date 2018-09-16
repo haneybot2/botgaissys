@@ -7,7 +7,7 @@
     "start": "node bot.js"
   },
   "dependencies": {
-    "canvas": "^1.6.10",
+    "canvas": "github:Automattic/node-canvas#92b192447e9b9ae98da0f801e4e34afdd1dc1ef8",
     "discord.js": "^11.3.2",
     "discord.js-musicbot-addon": "^1.10.3",
     "math-expression-evaluator":"^1.2.17",
