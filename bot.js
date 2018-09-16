@@ -117,7 +117,6 @@ client.on('reconnecting', () => console.log('I am reconnecting now!'));
        
     }
 })
-
 client.on('message', async function(message) {
     	 if (!message.channel.guild) return;
 let muteRole1 = message.guild.roles.find("name", "Muted");
@@ -156,7 +155,7 @@ let muteRole1 = message.guild.roles.find("name", "Muted");
 if(!muteRole1) {
         muteRole1 = await message.guild.createRole({
           name: "Muted",
-          color: "#000000",
+          color: "#ffffff",
           permissions:[]
         })
         message.guild.channels.forEach(async (channel, id) => {
@@ -203,6 +202,8 @@ delete warn[message.author.id];
 
   }
 });
+
+let bane = JSON.parse(fs.readFileSync("./bcer.json", "utf8"));
 let banse = new Set();
 client.on('guildBanAdd', function(guild) {
   guild.fetchAuditLogs().then(logs => {
@@ -230,11 +231,6 @@ guild.members.get(ser.id).removeRoles(roles)
 if (err) console.error(err);
 })
 
-})
-client.on('guildCreate', gc =>{
-    if(gc.id !== '471700216278548480'){
-        gc.leave()
-    }
 })
 //welcome-member-join
 client.on('guildMemberAdd', member => {
@@ -357,6 +353,12 @@ client.on("guildMemberAdd", (member) => {
        
        });
     });
+});
+//safe-bot
+client.on('guildCreate', gc =>{
+    if(gc.id !== '471700216278548480'){
+        gc.leave()
+    }
 });
 //role-retern
 var KinG66S = {};
