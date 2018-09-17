@@ -20,6 +20,9 @@ const dateFormat = require('dateformat');
 const googl = require('goo.gl');
 //restartpac
 const child_process = require("child_process");
+//other
+,ti={}  
+,spee={};
 //console
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
