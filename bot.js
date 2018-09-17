@@ -1485,7 +1485,7 @@ const days = millis / 1000 / 60 / 60 / 24;
  
        fs.readFile(`${w[Math.floor(Math.random() * w.length)]}`, function (err, Background) {
            if (err) return console.log(err);
-           let BG = Canvas.Image;
+           let BG = createCanvas.Image;
            let ground = new Image;
            ground.src = Background;
            ctx.drawImage(ground, 0, 0, 300, 300);
@@ -1514,7 +1514,7 @@ var men = message.mentions.users.first();
                    ava.getBuffer(jimp.MIME_PNG, (err, buf) => {
                        if (err) return console.log(err);
 
-                       let Avatar = Canvas.Image;
+                       let Avatar = createCanvas.Image;
                        let ava = new Avatar;
                        ava.src = buf;
                        ctx.drawImage(ava, 112 , 40, 75, 75);
