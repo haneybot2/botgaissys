@@ -6,21 +6,21 @@ const dev = ['454527533279608852'];
 const owner = ['454527533279608852' , '344526837512273922', '478192028279111690'];
 const id = ['454527533279608852', '344526837512273922' , '478192028279111690' , '' , '', '', ''];
 ///////////////elmewal3/////////////////a7med////////////////anase
-const ms = require("ms");
+const ms = require('ms');
 const fs = require('fs');
-
+let data = JSON.parse(fs.readFileSync("./data.json", "utf8"));
 //warnpac
 let warns = JSON.parse(fs.readFileSync("./warnings.json", "utf8"));
 //idpac
-const Canvas = require("canvas");
-const jimp = require("jimp");
+const Canvas = require('canvas');
+const jimp = require('jimp');
 //profilepac
-const moment = require("moment"); 
+const moment = require('moment'); 
 const dateFormat = require('dateformat');
 //shortpac
 const googl = require('goo.gl');
 //restartpac
-const child_process = require("child_process");
+const child_process = require('child_process');
 //console
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
@@ -47,7 +47,6 @@ client.on('ready', () => {
   console.log('')
   console.log('Yo this ready!')
 });
-
 client.on('warn', console.warn);
 client.on('error', console.error);
 client.on('reconnecting', () => console.log('I am reconnecting now!'));
@@ -69,7 +68,7 @@ client.on('reconnecting', () => console.log('I am reconnecting now!'));
             child_process.fork(__dirname + "/bot.js");
             console.log(`Bot Successfully Restarted`);
         } else
-		  if(message.content === (prefix + "shutdown")) {
+	 if(message.content === (prefix + "shutdown")) {
            if (!dev.includes(message.author.id)) return;
            message.channel.send(':warning: **Bot Shutdown**')
            process.kill(process.pid)
