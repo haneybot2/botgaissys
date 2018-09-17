@@ -11,7 +11,7 @@ const fs = require('fs');
 //warnpac
 let warns = JSON.parse(fs.readFileSync("./warnings.json", "utf8"));
 //idpac
-const Canvas = require("canvas");
+const Canvas = require('canvas-prebuilt');
 const jimp = require("jimp");
 //profilepac
 const moment = require("moment"); 
@@ -666,7 +666,7 @@ client.on("message", async message => {
           if(!kUser) return message.channel.send(":information_source: ** `!ban @َζ͜͡ELMEWAL3` يجب تحديد شخص **");
           let bReason = args.join(" ").slice(22);
           if(!message.member.hasPermission("MANAGE_CHANNELS")) return;
-          if(kUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send("**لا يمكنك حظر شخص من الادمن**")
+          if(kUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send("**لا يمكنك حظر شخص من الاداره**")
 
           let banEmbed = new Discord.RichEmbed()
           .setAuthor(`${kUser}`, kUser.avatarURL)
@@ -719,7 +719,7 @@ client.on("message", async message => {
       let kUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
       if(!kUser) return message.channel.send(":information_source: ** `!kick @َζ͜͡ELMEWAL3` يجب تحديد شخص **");
       let kReason = args.join(" ").slice(22);
-      if(kUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send("**لا يمكنك طرد احد من الاداره**")
+      if(kUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send("**لا يمكنك طرد شخص من الاداره**")
 
 
 	  
@@ -742,7 +742,7 @@ client.on("message", async message => {
         }
 		
 		let vkuser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
-		if(vkuser.hasPermission("MANAGE_CHANNELS")) return message.channel.send("**لايمكننك طرد احد من الاداره صوتيا**")
+		if(vkuser.hasPermission("MANAGE_CHANNELS")) return message.channel.send("**لا يمكنك طرد احد صوتيا من الاداره**")
 
         var member = message.guild.members.get(message.mentions.users.array()[0].id);
         if(!message.mentions.users){
@@ -778,6 +778,7 @@ client.on('message', msg => {
     const emoji = client.emojis.find("name", "wastebasket")
     let textxt = args.slice(0).join("");
     if(msg.member.hasPermission("MANAGE_MESSAGES")) {
+    if(parseInt(textxt[0]) > 100) return msg.channel.send('**انا اسف ,ولكن لايمكنك مسح اكثر من `100` رساله**')
     if (textxt == "") {
     msg.delete().then
     msg.delete().then
@@ -804,6 +805,7 @@ client.on('message', msg => {
     const emoji = client.emojis.find("name", "wastebasket")
     let textxt = args.slice(0).join("");
     if(msg.member.hasPermission("MANAGE_MESSAGES")) {
+    if(parseInt(textxt[0]) > 100) return msg.channel.send('**انا اسف ,ولكن لايمكنك مسح اكثر من `100` رساله**')
     if (textxt == "") {
     msg.delete().then
     msg.delete().then
@@ -830,6 +832,7 @@ client.on('message', msg => {
     const emoji = client.emojis.find("name", "wastebasket")
     let textxt = args.slice(0).join("");
     if(msg.member.hasPermission("MANAGE_MESSAGES")) {
+    if(parseInt(textxt[0]) > 100) return msg.channel.send('**انا اسف ,ولكن لايمكنك مسح اكثر من `100` رساله**')
     if (textxt == "") {
     msg.delete().then
     msg.delete().then
@@ -845,6 +848,8 @@ client.on('message', msg => {
 }
 });
  //move-members
+client.on('message', message => require('./commands/move1.js')(client, message));
+/*
  client.on('message', message => {
 if(!message.channel.guild) return;
 	var prefix = "!";
@@ -880,6 +885,9 @@ message.channel.send("**:x:  العضو يجب أن يكون متواجد برو
 } else {
 message.react("❌")
  }}});
+*/
+client.on('message', message => require('./commands/move2.js')(client, message));
+/*
  client.on('message', message => {
 if(!message.channel.guild) return;
 	var prefix = "";
@@ -915,6 +923,9 @@ message.channel.send("**:x:  العضو يجب أن يكون متواجد برو
 } else {
 message.react("❌")
  }}});
+*/
+client.on('message', message => require('./commands/moveall.js')(client, message));
+/*
 client.on('message' , message => {
 if (message.author.bot) return;
     if (message.content === prefix + "move all") {
@@ -929,6 +940,7 @@ if (message.member.voiceChannel == null) return message.channel.send(`**الرج
  message.channel.send(`**تم سحب جميع الأعضاء إليك**`)
 
  }});
+ */
 //bc-obc-bcrole
 client.on('message', message => require('./commands/bc/bc.js')(client, message));
 client.on('message', message => require('./commands/bc/obc.js')(client, message));
@@ -1686,37 +1698,29 @@ client.on("message", async message => {
         }
 });
 //link
-client.on('message', msg => {
-    if(msg.author.bot) return;
-    
-    if(msg.content === 'رابط') {
-      client.guilds.forEach(g => {
-        
-        let l = g.id
-        g.channels.get(g.channels.first().id).createInvite({
+client.on('message', message => {
+    if (message.content.startsWith("رابط")) {
+ 
+  message.channel.createInvite({
         thing: true,
         maxUses: 10,
         maxAge: 86400
-        }).then(i => msg.author.send(`
-        **
+    }).then(invite =>
+      message.author.sendMessage(invite.url)
+    )
+
+      message.channel.sendEmbed(`**:link:  تم ارسال الرابط على الخاص  **`).then(message => {message.delete(10000)})
+
+      message.author.sendEmbed(`
+**
 		
-		  مدة الرابط : يـوم 
- عدد استخدامات الرابط : 10
+مدة الرابط : يـوم 
+عدد استخدامات الرابط : 10
  
- 
- link:
-[https://discord.gg/${i.code}]
-        **
-        `)).then(i =>
-		msg.channel.send(` :link:**  تم ارسال الرابط على الخاص  **`)).catch(i =>{
-console.log('`Error`: ' + i);
-msg.channel.send("** يجب السماح بأستقبال رسائل الخاص قبل طلب الأمر **")
-});
-  
-  
-      })
+ **
+ ***link:***
+	  `)
     }
-    
 });
    // Yor avatar
 client.on('message', message =>{
