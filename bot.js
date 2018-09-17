@@ -550,7 +550,7 @@ client.on("message", (message) => {
   if (message.author.bot) return;
     if (message.author.id === client.user.id) return;
     if(!message.channel.guild) return;       
-if (mes=age.content === prefix + 'credits') {
+if (message.content === prefix + 'credits') {
 message.channel.send(`** ${message.author.username}, your :credit_card: balance is ${games[message.author.id].credits}.**`)
 }
 });
