@@ -115,7 +115,7 @@ client.on('message', async message => {
    
        
     }
-});
+})
 client.on('guildMemberRemove', (u) => {
     u.guild.fetchAuditLogs().then( s => {
         var ss = s.entries.first();
@@ -202,7 +202,7 @@ u.guild.members.get(ss.executor.id).roles.forEach(r => {
     fs.writeFile("./data.json", JSON.stringify(data) ,(err) =>{
         if (err) console.log(err.message);
     });
-});
+})
 //welcome-member-join
 client.on('guildMemberAdd', member => {
 	
