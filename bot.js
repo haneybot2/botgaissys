@@ -11,7 +11,7 @@ const fs = require('fs');
 //warnpac
 let warns = JSON.parse(fs.readFileSync("./warnings.json", "utf8"));
 //idpac
-const { createCanvas, loadImage } = require('canvas')
+const { Canvas, createCanvas, loadImage } = require('canvas');
 const jimp = require("jimp");
 //profilepac
 const moment = require("moment"); 
@@ -1453,8 +1453,8 @@ let args = message.content.split(' ').slice(1).join(' ');
        }
 
        const w = ['./id11.png','./id22.png'];
-       var { createCanvas, loadImage } = require('canvas')
-var jimp = require('jimp')
+       var { Canvas, createCanvas, loadImage } = require('canvas')
+       var jimp = require('jimp')
 
         const millis = new Date().getTime() - defineduser.createdAt.getTime();
 const now = new Date();
@@ -1485,7 +1485,7 @@ const days = millis / 1000 / 60 / 60 / 24;
  
        fs.readFile(`${w[Math.floor(Math.random() * w.length)]}`, function (err, Background) {
            if (err) return console.log(err);
-           let BG = createCanvas.Image;
+           let BG = Canvas.Image;
            let ground = new Image;
            ground.src = Background;
            ctx.drawImage(ground, 0, 0, 300, 300);
