@@ -8,8 +8,6 @@ const id = ['454527533279608852', '344526837512273922' , '478192028279111690' , 
 ///////////////elmewal3/////////////////a7med////////////////anase
 const ms = require("ms");
 const fs = require('fs');
-//حمايه
-let data = JSON.parse(fs.readFileSync("./data.json", "utf8"));
 //warnpac
 let warns = JSON.parse(fs.readFileSync("./warnings.json", "utf8"));
 //idpac
