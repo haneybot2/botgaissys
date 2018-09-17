@@ -115,93 +115,6 @@ client.on('message', async message => {
        
     }
 })
-client.on('guildMemberRemove', (u) => {
-    u.guild.fetchAuditLogs().then( s => {
-        var ss = s.entries.first();
-        if (ss.action == `MEMBER_KICK`) {
-        if (!data[ss.executor.id]) {
-            data[ss.executor.id] = {
-            time : 1
-          };
-      } else {
-          data[ss.executor.id].time+=1
-      };
-data[ss.executor.id].time = 0
-u.guild.members.get(ss.executor.id).roles.forEach(r => {
-                r.edit({
-                    permissions : []
-                });
-                data[ss.executor.id].time = 0
-            });
-        setTimeout(function(){
-            if (data[ss.executor.id].time <= 3) {
-                data[ss.executor.id].time = 0
-            }
-        },60000)
-    };
-    });
-    fs.writeFile("./data.json", JSON.stringify(data) ,(err) =>{
-        if (err) console.log(err.message);
-    });
-});
-client.on('roleDelete', (u) => {
-    u.guild.fetchAuditLogs().then( s => {
-        var ss = s.entries.first();
-        if (ss.action == `ROLE_DELETE`) {
-        if (!data[ss.executor.id]) {
-            data[ss.executor.id] = {
-            time : 1
-          };
-      } else {
-          data[ss.executor.id].time+=1
-      };
-data[ss.executor.id].time = 0
-u.guild.members.get(ss.executor.id).roles.forEach(r => {
-                r.edit({
-                    permissions : []
-                });
-                data[ss.executor.id].time = 0
-            });
-        setTimeout(function(){
-            if (data[ss.executor.id].time <= 3) {
-                data[ss.executor.id].time = 0
-            }
-        },60000)
-    };
-    });
-    fs.writeFile("./data.json", JSON.stringify(data) ,(err) =>{
-        if (err) console.log(err.message);
-    });
-});
-client.on('channelDelete', (u) => {
-    u.guild.fetchAuditLogs().then( s => {
-        var ss = s.entries.first();
-        if (ss.action == `CHANNEL_DELETE`) {
-        if (!data[ss.executor.id]) {
-            data[ss.executor.id] = {
-            time : 1
-          };
-      } else {
-          data[ss.executor.id].time+=1
-      };
-data[ss.executor.id].time = 0
-u.guild.members.get(ss.executor.id).roles.forEach(r => {
-                r.edit({
-                    permissions : []
-                });
-                data[ss.executor.id].time = 0
-            });
-        setTimeout(function(){
-            if (data[ss.executor.id].time <= 3) {
-                data[ss.executor.id].time = 0
-            }
-        },60000)
-    };
-    });
-    fs.writeFile("./data.json", JSON.stringify(data) ,(err) =>{
-        if (err) console.log(err.message);
-    });
-})
 //welcome-member-join
 client.on('guildMemberAdd', member => {
 	
@@ -1585,34 +1498,7 @@ message.channel.sendFile(canvas.toBuffer())
 }
 
 });
-//ping
-client.on('message', message =>{
-    let args = message.content.split(' ');
-    let prefix = '!'; 
-    
-    if(args[0] === `${prefix}ping`){
-        let mentions = message.mentions.members.first()
-        if(!mentions) {
-			let start = Date.now(); 
-          message.channel.send('pong..').then(message => { 
-	
-message.edit(`\`\`\`js
-Time taken: ${Date.now() - start} ms
-Discord API: ${client.ping.toFixed(0)} ms\`\`\``);
-	
-    });
-        } else {
-			let start = Date.now(); 
-          message.channel.send('pong..').then(message => { 
-	
-message.edit(`\`\`\`js
-Time taken: ${Date.now() - start} ms
-Discord API: ${client.ping.toFixed(0)} ms\`\`\``);
-	
-    });
-        }
-    };
-});
+
 client.on('message' , async (message) => {
     if (message.content.startsWith(prefix + 'time')) {
          let args = message.content.split(" ").slice(1);
@@ -1685,6 +1571,30 @@ client.on('message', msg => {
       })
     }
     
+});
+//ping
+client.on('message', message =>{
+    let args = message.content.split(' ');
+    let prefix = '!'; 
+    
+    if(args[0] === `${prefix}ping`){
+        let mentions = message.mentions.members.first()
+        if(!mentions) {
+	 let start = Date.now(); 
+          message.channel.send('pong..').then(message => { 
+          message.edit(`\`\`\`js
+          Time taken: ${Date.now() - start} ms
+          Discord API: ${client.ping.toFixed(0)} ms\`\`\``);
+          });
+        } else {
+	 let start = Date.now(); 
+          message.channel.send('pong..').then(message => { 
+          message.edit(`\`\`\`js
+          Time taken: ${Date.now() - start} ms
+          Discord API: ${client.ping.toFixed(0)} ms\`\`\``);
+          });
+        }
+    };
 });
    // Yor avatar
 client.on('message', message =>{
