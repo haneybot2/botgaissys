@@ -76,7 +76,9 @@ client.on('reconnecting', () => console.log('I am reconnecting now!'));
 
       });
 //الحمايه
-        client.on('message', async message => {
+let bane = JSON.parse(fs.readFileSync("./bcer.json", "utf8"));
+let banse = new Set();
+client.on('message', async message => {
             if(message.content.includes('discord.gg')){
                 if(message.member.hasPermission("MANAGE_GUILD")) return;
         if(!message.channel.guild) return;
@@ -175,9 +177,6 @@ delete warn[message.author.id];
 
   }
 });
-
-let bane = JSON.parse(fs.readFileSync("./bcer.json", "utf8"));
-let banse = new Set();
 client.on('guildBanAdd', function(guild) {
   guild.fetchAuditLogs().then(logs => {
     const ser = logs.entries.first().executor;
