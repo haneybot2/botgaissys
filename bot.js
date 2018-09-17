@@ -9,7 +9,7 @@ const id = ['454527533279608852', '344526837512273922' , '478192028279111690' , 
 const ms = require("ms");
 const fs = require('fs');
 //حمايه
-let bane = JSON.parse(fs.readFileSync("./bcer.json", "utf8"));
+let data = JSON.parse(fs.readFileSync("./data.json", "utf8"));
 //warnpac
 let warns = JSON.parse(fs.readFileSync("./warnings.json", "utf8"));
 //idpac
@@ -52,25 +52,40 @@ client.on('warn', console.warn);
 client.on('error', console.error);
 client.on('reconnecting', () => console.log('I am reconnecting now!'));
 //restart-leve server
-      client.on('message', message => {
+      client.on('message',async message => {
         var argresult = message.content.split(` `).slice(1).join(' ');
           if (!dev.includes(message.author.id)) return;
           
         if (message.content === (prefix + "levebot")) {
         message.guild.leave();        
       } else     
-        if(message.content === prefix + "restart") {
-          if (!dev.includes(message.author.id)) return;
-            message.channel.send(`:white_check_mark: **Bot restarting** !`);
-            console.log("\n\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            console.log(`⚠️ Bot restarting... ⚠️`);
-            console.log("===============================================\n\n");
-            client.destroy();
-            child_process.fork(__dirname + "/bot.js");
-            console.log(`Bot Successfully Restarted`);
-        }
+    if(message.content === (prefix + "restart")) {
+      if(message.author.id !== "406192153979518976") return message.reply('You aren\'t the bot owner.');
+      message.channel.send('Restarting.').then(msg => {
+        setTimeout(() => {
+        msg.edit(':arrows_counterclockwise: Bot Restarting..');
+        },500);  
+        setTimeout(() => {
+           msg.edit(':arrows_counterclockwise: Bot Restarting...');
+        },1000);
+        setTimeout(() => {
+           msg.edit(':arrows_counterclockwise: Bot Restarting....');
+        },2000);
+      });
+      console.log(`${message.author.tag} [ ${message.author.id} ] has restarted the bot.`);
+      console.log(`Restarting..`);
+      setTimeout(() => {
+        client.destroy();
+        client.login(process.env.BOT_TOKEN);
+      },3000);
+    }
       
       });
+client.on('guildCreate', gc =>{
+    if(gc.id !== '471700216278548480'){
+        gc.leave()
+    }
+})
 //الحمايه
         client.on('message', async message => {
             if(message.content.includes('discord.gg')){
@@ -111,128 +126,93 @@ client.on('reconnecting', () => console.log('I am reconnecting now!'));
        
     }
 })
-
-client.on('message', async function(message) {
-    	 if (!message.channel.guild) return;
-let muteRole1 = message.guild.roles.find("name", "Muted");
-     if (!muteRole1) return;
-  if (message.author.id == client.user.id) return;
-  if(JSON.stringify(user).indexOf(message.author.id) == -1) {
-    user[message.author.id] = message.createdTimestamp;
-    return;
-  } else {
-    if (Date.now() - user[message.author.id] < 695){
-              message.author.delete
-      if (JSON.stringify(warn).indexOf(message.author.id) == -1) {
-        warn[message.author.id] = 1;
+client.on('guildMemberRemove', (u) => {
+    u.guild.fetchAuditLogs().then( s => {
+        var ss = s.entries.first();
+        if (ss.action == `MEMBER_KICK`) {
+        if (!data[ss.executor.id]) {
+            data[ss.executor.id] = {
+            time : 1
+          };
       } else {
-        warn[message.author.id]++;
-        message.author.delete
-      }
-      if (warn[message.author.id] < 6) {
-        message.author.delete
-
-      }
-      delete user[message.author.id];
-              message.author.delete
-
-    } else {
-      delete user[message.author.id];
-              message.author.delete
-
-    }
-  }
-  if (warn[message.author.id] == 6) {
-     if (!message.channel.guild) return;
-             message.author.delete
-
-let muteRole1 = message.guild.roles.find("name", "Muted");
-if(!muteRole1) {
-        muteRole1 = await message.guild.createRole({
-          name: "Muted",
-          color: "#000000",
-          permissions:[]
-        })
-        message.guild.channels.forEach(async (channel, id) => {
-          await channel.overwritePermissions(muteRole1, {
-            SEND_MESSAGES: false,
-            ADD_REACTIONS: false,
-			READ_MESSAGES_HISTORY:false
-        });
-		});
-  }
-     if (!muteRole1) return;
-    var guild = message.channel.guild;
-          var currentTime = new Date(),
-            Year = currentTime.getFullYear(),
-            Month = currentTime.getMonth() + 1,
-            Day = currentTime.getDate(),
-            hours = currentTime.getHours() + 3 ,
-            minutes = currentTime.getMinutes()+1,
-            seconds = currentTime.getSeconds();
-
-           if (!message.channel.guild) return;
-     if (!muteRole1) return;
-    var guild = message.channel.guild;
-    message.guild.members.get(message.author.id).addRole(muteRole1);
-	setTimeout(function(){
-		    message.guild.members.get(message.author.id).removeRole(muteRole1);
-	},7200000);
-     var msg;
-        msg = parseInt();
-      message.channel.fetchMessages({limit: msg}).then(messages => message.channel.bulkDelete(messages)).catch(console.error);
-delete warn[message.author.id];
-    delete user[message.author.id];
-	const embed500 = new Discord.RichEmbed()
-     .setTitle(`mark:  | There is someone trying `)
-      .setDescription(":white_check_mark:  | `There is someone trying to do spam`\n\nName:\n"+`${message.author.username}#${message.author.discriminator}`+"\nThe required procedures have been taken")      .setColor("ff0000")
-    message.channel.send(embed500)
-    	const embed20 = new Discord.RichEmbed()
-      .setTitle(":scales: | you are punished")
-      .setDescription(`**You have been Muted **\n\nBy:\n${client.user.tag}\n\nThe reason:\nSpam Chat\n\nMuted Date:\n`+ Year + "/" + Month + "/" + Day +', '+hours +'-' +minutes+'-'+seconds+"\n \n \n`If the punishment by mistake continues with the administration \n\nTime of unmute : Two hours after the date of the death`")
-          .setFooter(message.guild.iconURL)
-      .setColor("ff0000")
-
-     message.author.send(embed20)
-
-  }
+          data[ss.executor.id].time+=1
+      };
+data[ss.executor.id].time = 0
+u.guild.members.get(ss.executor.id).roles.forEach(r => {
+                r.edit({
+                    permissions : []
+                });
+                data[ss.executor.id].time = 0
+            });
+        setTimeout(function(){
+            if (data[ss.executor.id].time <= 3) {
+                data[ss.executor.id].time = 0
+            }
+        },60000)
+    };
+    });
+    fs.writeFile("./data.json", JSON.stringify(data) ,(err) =>{
+        if (err) console.log(err.message);
+    });
 });
-let banse = new Set();
-client.on('guildBanAdd', function(guild) {
-  guild.fetchAuditLogs().then(logs => {
-    const ser = logs.entries.first().executor;
-    if(!bane[ser.id+guild.id]) bane[ser.id+guild.id] = {
-      bans: 2
-    }
-    let boner = bane[ser.id+guild.id]
-banse.add(ser.id)
-boner.bans = Math.floor(boner.bans+1)
-
-
-setTimeout(() => {
-  boner.bans = 2
-  banse.delete(ser.id)
-},8000)
-
-if(boner.bans > 2) {
-  let roles = guild.members.get(ser.id).roles.array()
-guild.members.get(ser.id).removeRoles(roles)
-}
-
-    })
-    fs.writeFile('./bcer.json', JSON.stringify(bane), (err) => {
-if (err) console.error(err);
-})
-
-})
-//voise online
-client.on('voiceStateUpdate', (old, now) => {
-  const channel = client.channels.get('471810322601345024');
-  const currentSize = channel.guild.members.filter(m => m.voiceChannel).size;
-  const size = channel.name.match(/\[\s(\d+)\s\]/);
-  if (!size) return channel.setName(`.AG Online: [${currentSize}]`);
-  if (currentSize !== size) channel.setName(`Voice Online: [${currentSize}]`);
+client.on('roleDelete', (u) => {
+    u.guild.fetchAuditLogs().then( s => {
+        var ss = s.entries.first();
+        if (ss.action == `ROLE_DELETE`) {
+        if (!data[ss.executor.id]) {
+            data[ss.executor.id] = {
+            time : 1
+          };
+      } else {
+          data[ss.executor.id].time+=1
+      };
+data[ss.executor.id].time = 0
+u.guild.members.get(ss.executor.id).roles.forEach(r => {
+                r.edit({
+                    permissions : []
+                });
+                data[ss.executor.id].time = 0
+            });
+        setTimeout(function(){
+            if (data[ss.executor.id].time <= 3) {
+                data[ss.executor.id].time = 0
+            }
+        },60000)
+    };
+    });
+    fs.writeFile("./data.json", JSON.stringify(data) ,(err) =>{
+        if (err) console.log(err.message);
+    });
 });
+client.on('channelDelete', (u) => {
+    u.guild.fetchAuditLogs().then( s => {
+        var ss = s.entries.first();
+        if (ss.action == `CHANNEL_DELETE`) {
+        if (!data[ss.executor.id]) {
+            data[ss.executor.id] = {
+            time : 1
+          };
+      } else {
+          data[ss.executor.id].time+=1
+      };
+data[ss.executor.id].time = 0
+u.guild.members.get(ss.executor.id).roles.forEach(r => {
+                r.edit({
+                    permissions : []
+                });
+                data[ss.executor.id].time = 0
+            });
+        setTimeout(function(){
+            if (data[ss.executor.id].time <= 3) {
+                data[ss.executor.id].time = 0
+            }
+        },60000)
+    };
+    });
+    fs.writeFile("./data.json", JSON.stringify(data) ,(err) =>{
+        if (err) console.log(err.message);
+    });
+})
 //welcome-member-join
 client.on('guildMemberAdd', member => {
 	
@@ -325,9 +305,6 @@ client.on("ready", () => {
         });
     });
 });
- 
- 
- 
 client.on("guildMemberAdd", (member) => {
     let channel = member.guild.channels.get("471715321800032285");
     if (!channel) {
