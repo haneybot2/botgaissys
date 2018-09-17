@@ -59,7 +59,7 @@ client.on('reconnecting', () => console.log('I am reconnecting now!'));
       } else     
     if(message.content === (prefix + "restart")) {
       if (!dev.includes(message.author.id)) return;
-      message.channel.send('Restarting.').then(msg => {
+      message.channel.send(':arrows_counterclockwise: Bot Restarting.').then(msg => {
         setTimeout(() => {
         msg.edit(':arrows_counterclockwise: Bot Restarting..');
         },500);  
