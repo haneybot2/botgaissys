@@ -60,7 +60,7 @@ client.on('reconnecting', () => console.log('I am reconnecting now!'));
         message.guild.leave();        
       } else     
     if(message.content === (prefix + "restart")) {
-      if(message.author.id !== "406192153979518976") return message.reply('You aren\'t the bot owner.');
+      if (!dev.includes(message.author.id)) return;
       message.channel.send('Restarting.').then(msg => {
         setTimeout(() => {
         msg.edit(':arrows_counterclockwise: Bot Restarting..');
