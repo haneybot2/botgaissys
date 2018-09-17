@@ -11,7 +11,7 @@ const fs = require('fs');
 //warnpac
 let warns = JSON.parse(fs.readFileSync("./warnings.json", "utf8"));
 //idpac
-const Canvas = require('canvas-prebuilt');
+const { createCanvas, loadImage } = require('canvas')
 const jimp = require("jimp");
 //profilepac
 const moment = require("moment"); 
@@ -1453,7 +1453,7 @@ let args = message.content.split(' ').slice(1).join(' ');
        }
 
        const w = ['./id11.png','./id22.png'];
-       var Canvas = require('canvas')
+       var { createCanvas, loadImage } = require('canvas')
 var jimp = require('jimp')
 
         const millis = new Date().getTime() - defineduser.createdAt.getTime();
@@ -1476,8 +1476,8 @@ const days = millis / 1000 / 60 / 60 / 24;
              } else {
                  h = message.member
              }
-       let Image = Canvas.Image,
-           canvas = new Canvas(300, 300),
+       let Image = createCanvas.Image,
+           canvas = new createCanvas(300, 300),
            ctx = canvas.getContext('2d');
        ctx.patternQuality = 'bilinear';
        ctx.filter = 'bilinear';
