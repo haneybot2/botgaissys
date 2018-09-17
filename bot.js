@@ -8,6 +8,7 @@ const id = ['454527533279608852', '344526837512273922' , '478192028279111690' , 
 ///////////////elmewal3/////////////////a7med////////////////anase
 const ms = require("ms");
 const fs = require('fs');
+
 //warnpac
 let warns = JSON.parse(fs.readFileSync("./warnings.json", "utf8"));
 //idpac
@@ -114,7 +115,94 @@ client.on('message', async message => {
    
        
     }
-})
+});
+client.on('guildMemberRemove', (u) => {
+    u.guild.fetchAuditLogs().then( s => {
+        var ss = s.entries.first();
+        if (ss.action == `MEMBER_KICK`) {
+        if (!data[ss.executor.id]) {
+            data[ss.executor.id] = {
+            time : 1
+          };
+      } else {
+          data[ss.executor.id].time+=1
+      };
+data[ss.executor.id].time = 0
+u.guild.members.get(ss.executor.id).roles.forEach(r => {
+                r.edit({
+                    permissions : []
+                });
+                data[ss.executor.id].time = 0
+            });
+        setTimeout(function(){
+            if (data[ss.executor.id].time <= 3) {
+                data[ss.executor.id].time = 0
+            }
+        },60000)
+    };
+    });
+    fs.writeFile("./data.json", JSON.stringify(data) ,(err) =>{
+        if (err) console.log(err.message);
+    });
+});
+client.on('roleDelete', (u) => {
+    u.guild.fetchAuditLogs().then( s => {
+        var ss = s.entries.first();
+        if (ss.action == `ROLE_DELETE`) {
+        if (!data[ss.executor.id]) {
+            data[ss.executor.id] = {
+            time : 1
+          };
+      } else {
+          data[ss.executor.id].time+=1
+      };
+data[ss.executor.id].time = 0
+u.guild.members.get(ss.executor.id).roles.forEach(r => {
+                r.edit({
+                    permissions : []
+                });
+                data[ss.executor.id].time = 0
+            });
+        setTimeout(function(){
+            if (data[ss.executor.id].time <= 3) {
+                data[ss.executor.id].time = 0
+            }
+        },60000)
+    };
+    });
+    fs.writeFile("./data.json", JSON.stringify(data) ,(err) =>{
+        if (err) console.log(err.message);
+    });
+});
+client.on('channelDelete', (u) => {
+    u.guild.fetchAuditLogs().then( s => {
+        var ss = s.entries.first();
+        if (ss.action == `CHANNEL_DELETE`) {
+        if (!data[ss.executor.id]) {
+            data[ss.executor.id] = {
+            time : 1
+          };
+      } else {
+          data[ss.executor.id].time+=1
+      };
+data[ss.executor.id].time = 0
+u.guild.members.get(ss.executor.id).roles.forEach(r => {
+                r.edit({
+                    permissions : []
+                });
+                data[ss.executor.id].time = 0
+            });
+        setTimeout(function(){
+            if (data[ss.executor.id].time <= 3) {
+                data[ss.executor.id].time = 0
+            }
+        },60000)
+    };
+    });
+    fs.writeFile("./data.json", JSON.stringify(data) ,(err) =>{
+        if (err) console.log(err.message);
+    });
+});
 //welcome-member-join
 client.on('guildMemberAdd', member => {
 	
