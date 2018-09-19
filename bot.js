@@ -11,7 +11,7 @@ const fs = require('fs');
 //warnpac
 let warns = JSON.parse(fs.readFileSync("./warnings.json", "utf8"));
 //idpac
-const { Canvas, createCanvas, loadImage } = require('canvas');
+const Canvas = require('canvas');
 const jimp = require("jimp");
 //profilepac
 const moment = require("moment"); 
