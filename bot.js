@@ -1732,7 +1732,6 @@ client.on('ready', () => {
 		    message.delete(); 
             }
 });
-//الردود بصوره
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
@@ -1754,7 +1753,6 @@ client.on('ready', () => {
 		    message.delete(); 
             }
 });
-//الردود بصوره
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
@@ -1878,6 +1876,8 @@ client.on('message', async message => {
 }
 });
 //save-server
+client.on('message', message => require('./commands/save-server.js')(client, message));
+/*
 client.on('message', alpha => {
 	  if (alpha.author.bot) return;  
  if (alpha.content.startsWith("!!deleteall")) {
@@ -1988,6 +1988,6 @@ message.guild.createRole({
         message.channel.sendMessage(':cyclone: **Re - create the server**')
 
         }
-});
+});*/
 
 client.login(process.env.BOT_TOKEN);
