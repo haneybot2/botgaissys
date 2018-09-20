@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
-const id = ['454527533279608852', '344526837512273922' , '478192028279111690' , '' , '', '', '', ''];
-
+const id = [process.env.id1, process.env.id2 , process.env.id3];
+const adminprefix = process.env.adminprefix
 
 module.exports = (client, msg) => {
   if(msg.content === adminprefix + 'hideall') {
