@@ -2,10 +2,10 @@ const Discord = require("discord.js");
 
 module.exports = (client, message) => {
 if(!message.channel.guild) return;
-	var prefix = "";
-if (!message.content.startsWith(prefix)) return;
+	var prefix1 = "";
+if (!message.content.startsWith(prefix1)) return;
 	var command = message.content.split(" ")[0];
-	 command = command.slice(prefix.length);
+	 command = command.slice(prefix1.length);
 	if (command == "اسحب") {
  if (message.member.hasPermission("MOVE_MEMBERS")) {
  if (message.mentions.users.size === 0) {
