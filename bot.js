@@ -737,7 +737,7 @@ client.on('message', message => {
    
   var command = message.content.toLowerCase().split(" ")[0];
   var args = message.content.toLowerCase().split(" ");
-  var logChannelk = message.guild.channels.find(c => c.name === 'log');
+  var logChannelk = message.guild.channels.find(m => m.name === 'log');
  
   if(command == prefix + 'kick') {
       if(!message.member.hasPermission('KICK_MEMBERS')) return;
