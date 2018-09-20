@@ -1,8 +1,8 @@
 const Discord = require("discord.js");
+const prefix = process.env.prefix
 
 module.exports = (client, message) => {
 if (message.author.bot) return;
-    var prefix = "!";
     if (message.content === prefix + "move all") {
  if (!message.member.hasPermission("ADMINISTRATOR")) return;
    if(!message.guild.member(client.user).hasPermission("MOVE_MEMBERS")) return message.channel.send("**لايوجد لدي صلاحية السحب**");
