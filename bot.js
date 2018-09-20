@@ -601,9 +601,10 @@ if (!message.content.startsWith(prefix)) return;
 	let args = message.content.split(" ").slice(1);
 	if (command == "mute") {
 		if (!message.channel.guild) return;
-		if (!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send(':information_source:  **`!mute @َζ͜͡ELMEWAL3 ヅ` يجب تحديد شخص **');
+		if (!message.member.hasPermission("MANAGE_MESSAGES")) return;
 		if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.channel.send(":x:** | للاداره فقط**").then(msg => msg.delete(5000));
 		if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return message.channel.send("**I Don't Have Permissions**").then(msg => msg.delete(5000));
+		if (message.mentions.users.size < 1) return message.channel.send(`:information_source: ** \`\`${prefix}mute @َζ͜͡ELMEWAL3 ヅ\`\` يجب تحديد شخص **`);
 		let messageArray = message.content.split (" ");
                 let cmd = messageArray[0];
                 let argsnot = messageArray.slice(1);
@@ -632,7 +633,7 @@ if(command === `unmute`) {
 if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return message.channel.send("**I Don't Have Permissions**").then(msg => msg.delete(6000))
 
   let toMute = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
-  if(!toMute) return message.channel.send(":information_source:  **`!unmute @َζ͜͡ELMEWAL3 ヅ` يجب تحديد شخص **");
+  if(!toMute) return message.channel.send(`:information_source:  **\`\`${prefix}unmute @َζ͜͡ELMEWAL3 ヅ\`\` يجب تحديد شخص **`);
 
   let role = message.guild.roles.find (r => r.name === "Muted");
   let user = message.mentions.users.first();
@@ -648,39 +649,52 @@ if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return m
 
 });
 //ban-unban-kick
-client.on("message", async message => {
-      if(message.author.bot) return;
-      if(message.channel.type === "dm") return;
+client.on('message', message => {
+   
+  var command = message.content.toLowerCase().split(" ")[0];
+  var args = message.content.toLowerCase().split(" ");
+  var userM = message.guild.member(message.mentions.users.first() || message.guild.members.find(m => m.id === args[1]));
+  var logChannel = message.guild.channels.find(c => c.name === 'log');
+ 
+  if(command == prefix + 'ban') {
+      if(!message.member.hasPermission('BAN_MEMBERS')) return;
+      if(!message.guild.member(client.user).hasPermission('BAN_MEMBERS')) return;
+      if(!message.guild.member(client.user).hasPermission('EMBED_LINKS')) return;
 
-      let messageArray = message.content.split (" ");
-      let cmd = messageArray[0];
-      let args = messageArray.slice(1);
+      if(!userM) return message.channel.send(`**:information_source: Useage: \`\`${prefix}ban [member] [time] [reason]\`\``);
+      if(userM.user.id === message.author.id) return message.channel.send(':x: **لا يمكنك حظر نفسك**');
+      if(userM.user.id === message.guild.owner.id) return message.channel.send(':x: **لطيفة حاول يا صاح \:D**');
+      if(message.guild.member(userM.user).highestRole.position >= message.guild.member(message.member).highestRole.position) return message.channel.send(`:x: **لا يمكنك حظر شخص من الاداره**`);
+      if(message.guild.member(userM.user).highestRole.position >= message.guild.member(client.user).highestRole.position) return message.channel.send(`**انا اسف ولكن لا يمكني حظر شخص اعلي مني**`);
+      if(!message.guild.member(userM.user).bannable) return;
 
+      var time = message.content.split(" ")[2];
+      if(!time) return;
 
-
-        if(cmd === `${prefix}ban`){
-
-
-	  if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return;
-          let kUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
-          if(!kUser) return message.channel.send(":information_source: ** `!ban @َζ͜͡ELMEWAL3` يجب تحديد شخص **");
-          let bReason = args.join(" ").slice(22);
-          if(!message.member.hasPermission("MANAGE_CHANNELS")) return;
-          if(kUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send("**لا يمكنك حظر شخص من الاداره**")
-
-          let banEmbed = new Discord.RichEmbed()
-          .setAuthor(`${kUser}`, kUser.avatarURL)
-          .setColor("#ff0000")
-		  .setDescription(`**<@${kUser.id}> banned from the server** \n by : <@${message.author.id}>`)
-		  .addField("Reason", bReason);
-
-          let banChannel = message.guild.channels.find('name', 'log');
-          if(!banChannel) return;
-
-		  	  message.channel.send(`**✅ ${kUser.username} kicked from the server !**  `)
-          message.guild.member(kUser).ban(bReason)
-          banChannel.send(banEmbed);
-        }
+      if(!ms(time)) {
+          var reason = message.content.split(' ')[2];
+      }else {
+          var reason = message.content.split(' ')[3];
+      }
+     
+      if(!reason) reason = 'No reason provided.';
+     
+      message.guild.member(userM.user).ban({ reason: reason });
+      message.channel.send(`:white_check_mark: ${userM.user.username} baned from the server ** `);
+     
+      let banInfo = new Discord.RichEmbed()
+      .setAuthor(userM.user.username, userM.user.avatarURL)
+      .setThumbnail(userM.user.username)
+      .setColor(`#ff0000`)
+      .setDescription(`**:airplane: <@${userM.user.id}> banned From the server **by : ** <@${message.author.id}> \n**Reason:** \`\`${reason}\`\`\n**Time:** ${time}`)
+      .setTimestamp()
+      .setFooter(message.author.tag, message.author.avatarURL)
+     
+      if(logChannel) {
+          logChannel.send(banInfo);
+      }
+     
+  }
 });
 client.on('message' , message => {
     let user = message.mentions.users.first()|| client.users.get(message.content.split(' ')[1])
@@ -700,30 +714,52 @@ client.on('message' , message => {
         message.channel.sendEmbed(embed)
     }
   });
-client.on("message", async message => {
-  if(message.author.bot) return;
-  if(message.channel.type === "dm") return;
+client.on('message', message => {
+   
+  var command = message.content.toLowerCase().split(" ")[0];
+  var args = message.content.toLowerCase().split(" ");
+  var userM = message.guild.member(message.mentions.users.first() || message.guild.members.find(m => m.id === args[1]));
+  var logChannel = message.guild.channels.find(c => c.name === 'log');
+ 
+  if(command == prefix + 'kick') {
+      if(!message.member.hasPermission('KICK_MEMBERS')) return;
+      if(!message.guild.member(client.user).hasPermission('KICK_MEMBERS')) return;
+      if(!message.guild.member(client.user).hasPermission('EMBED_LINKS')) return;
 
-  let messageArray = message.content.split (" ");
-  let cmd = messageArray[0];
-  let args = messageArray.slice(1);
+      if(!userM) return message.channel.send(`**:information_source: Useage: \`\`${prefix}KICK [member] [time] [reason]\`\``);
+      if(userM.user.id === message.author.id) return message.channel.send(':x: **لا يمكنك طرد نفسك**');
+      if(userM.user.id === message.guild.owner.id) return message.channel.send(':x: **لطيفة حاول يا صاح \:D**');
+      if(message.guild.member(userM.user).highestRole.position >= message.guild.member(message.member).highestRole.position) return message.channel.send(`:x: **لا يمكنك طرد شخص من الاداره**`);
+      if(message.guild.member(userM.user).highestRole.position >= message.guild.member(client.user).highestRole.position) return message.channel.send(`**انا اسف ولكن لا يمكني طرد شخص اعلي مني**`);
+      if(!message.guild.member(userM.user).bannable) return;
 
+      var time = message.content.split(" ")[2];
+      if(!time) return;
 
-
-    if(cmd === `${prefix}kick`){
-
-
-      if(!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return;
-      let kUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
-      if(!kUser) return message.channel.send(":information_source: ** `!kick @َζ͜͡ELMEWAL3` يجب تحديد شخص **");
-      let kReason = args.join(" ").slice(22);
-      if(kUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send("**لا يمكنك طرد شخص من الاداره**")
-
-
-	  
-	  message.channel.send(`**✅ ${kUser.username} kicked from the server !**  `)
-      message.guild.member(kUser).kick(kReason)
-    }
+      if(!ms(time)) {
+          var reason = message.content.split(' ')[2];
+      }else {
+          var reason = message.content.split(' ')[3];
+      }
+     
+      if(!reason) reason = 'No reason provided.';
+     
+      message.guild.member(userM.user).kick({ reason: reason });
+      message.channel.send(`:white_check_mark: ${userM.user.username} kicked from the server ** `);
+     
+      let kickInfo = new Discord.RichEmbed()
+      .setAuthor(userM.user.username, userM.user.avatarURL)
+      .setThumbnail(userM.user.username)
+      .setColor(`#ff0000`)
+      .setDescription(`**:airplane: <@${userM.user.id}> kicked From the server **by : ** <@${message.author.id}> \n**Reason:** \`\`${reason}\`\`\n**Time:** ${time}`)
+      .setTimestamp()
+      .setFooter(message.author.tag, message.author.avatarURL)
+     
+      if(logChannel) {
+          logChannel.send(kickInfo);
+      }
+     
+  }
 });
 //viocekick
 client.on("message", message => {
@@ -738,25 +774,21 @@ client.on("message", message => {
             return;
         }
 		
-		let vkuser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
-		if(vkuser.hasPermission("MANAGE_CHANNELS")) return message.channel.send("**لا يمكنك طرد احد صوتيا من الاداره**")
-
+	let vkuser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
+	if(vkuser.hasPermission("MANAGE_CHANNELS")) return message.channel.send("**لا يمكنك طرد احد صوتيا من الاداره**")
         var member = message.guild.members.get(message.mentions.users.array()[0].id);
         if(!message.mentions.users){
-            message.channel.send(":information_source: ** `!vkick @َζ͜͡ELMEWAL3` يجب تحديد شخص **")
-            return;
+		message.channel.send(":information_source: ** `!vkick @َζ͜͡ELMEWAL3` يجب تحديد شخص **")
+		return;
         }
 
-    if(!member.voiceChannel){
-    message.channel.send("**i can't include voice channel for member!**")
-    return;
-    }
+        if(!member.voiceChannel){
+    		message.channel.send("**i can't include voice channel for member!**")
+    		return;
+        }
               message.guild.createChannel('voicekick', 'voice').then(c => {
                 member.setVoiceChannel(c).then(() => {
                     c.delete(305).catch(console.log)
-
-
-
 
       });
      });
