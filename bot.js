@@ -595,7 +595,6 @@ Server Members :  ${message.guild.memberCount - message.guild.members.filter(m=>
 //mute-unmute
 client.on('message', async message =>{
   if (message.author.boss) return;
-	var prefix = "!";
 if (!message.content.startsWith(prefix)) return;
 	let command = message.content.split(" ")[0];
 	 command = command.slice(prefix.length);
@@ -653,7 +652,6 @@ client.on("message", async message => {
       if(message.author.bot) return;
       if(message.channel.type === "dm") return;
 
-      let prefix = "!";
       let messageArray = message.content.split (" ");
       let cmd = messageArray[0];
       let args = messageArray.slice(1);
@@ -685,7 +683,6 @@ client.on("message", async message => {
         }
 });
 client.on('message' , message => {
-    var prefix = "!";
     let user = message.mentions.users.first()|| client.users.get(message.content.split(' ')[1])
     if(message.content.startsWith(prefix + 'unban')) {
 	if(!message.guild.member(message.author).hasPermission("ADMINISTRATOR")) return;
@@ -707,7 +704,6 @@ client.on("message", async message => {
   if(message.author.bot) return;
   if(message.channel.type === "dm") return;
 
-  let prefix = "!";
   let messageArray = message.content.split (" ");
   let cmd = messageArray[0];
   let args = messageArray.slice(1);
@@ -730,8 +726,7 @@ client.on("message", async message => {
     }
 });
 //viocekick
-	client.on("message", message => {
-    var prefix = "!";
+client.on("message", message => {
     const command = message.content.split(" ")[0];
       let messageArray = message.content.split (" ");
       let cmd = messageArray[0];
@@ -785,12 +780,12 @@ client.on('message', msg => {
     msg.delete().then
     msg.delete().then
     msg.channel.bulkDelete(100);
-        msg.channel.send("```php\nعدد الرسائل التي تم مسحهل : 100 \n```").then(m => m.delete(3000));
+        msg.channel.send("```php\nعدد الرسائل التي تم مسحها : 100\n```").then(m => m.delete(3000));
 } else {
     msg.delete().then
     msg.delete().then
     msg.channel.bulkDelete(textxt);
-        msg.channel.send("```php\nعدد الرسائل التي تم مسحها: " + textxt + "\n```").then(m => m.delete(3000));
+        msg.channel.send("```php\nعدد الرسائل التي تم مسحها : " + textxt + "\n```").then(m => m.delete(3000));
         }    
     }
 }
@@ -812,12 +807,12 @@ client.on('message', msg => {
     msg.delete().then
     msg.delete().then
     msg.channel.bulkDelete(100);
-        msg.channel.send("```php\nعدد الرسائل التي تم مسحهل : 100 \n```").then(m => m.delete(3000));
+        msg.channel.send("```php\nعدد الرسائل التي تم مسحها : 100\n```").then(m => m.delete(3000));
 } else {
     msg.delete().then
     msg.delete().then
     msg.channel.bulkDelete(textxt);
-        msg.channel.send("```php\nعدد الرسائل التي تم مسحها: " + textxt + "\n```").then(m => m.delete(3000));
+        msg.channel.send("```php\nعدد الرسائل التي تم مسحها : " + textxt + "\n```").then(m => m.delete(3000));
         }    
     }
 }
@@ -839,110 +834,20 @@ client.on('message', msg => {
     msg.delete().then
     msg.delete().then
     msg.channel.bulkDelete(100);
-        msg.channel.send("```php\nعدد الرسائل التي تم مسحهل : 100 \n```").then(m => m.delete(3000));
+        msg.channel.send("```php\nعدد الرسائل التي تم مسحها : 100\n```").then(m => m.delete(3000));
 } else {
     msg.delete().then
     msg.delete().then
     msg.channel.bulkDelete(textxt);
-        msg.channel.send("```php\nعدد الرسائل التي تم مسحها: " + textxt + "\n```").then(m => m.delete(3000));
+        msg.channel.send("```php\nعدد الرسائل التي تم مسحها : " + textxt + "\n```").then(m => m.delete(3000));
         }    
     }
 }
 });
  //move-members
 client.on('message', message => require('./commands/move1.js')(client, message));
-/*
- client.on('message', message => {
-if(!message.channel.guild) return;
-	var prefix = "!";
-if (!message.content.startsWith(prefix)) return;
-	var command = message.content.split(" ")[0];
-	 command = command.slice(prefix.length);
-	if (command == "move") {
- if (message.member.hasPermission("MOVE_MEMBERS")) {
- if (message.mentions.users.size === 0) {
- return message.channel.send("**:x:  لم يتم العثور على العضو المطلوب **")
-}
-if (message.member.voiceChannel != null) {
- if (message.mentions.members.first().voiceChannel != null) {
- var authorchannelname = message.member.voiceChannel.name;
- var authorchannel = message.member.voiceChannelID;
- var userid = message.mentions.members.first().id;
- var log = message.guild.channels.find('name', 'log');
- var movelog = new Discord.RichEmbed()
- .setAuthor(message.guild.name, message.guild.iconURL)
- .setColor("#000000")
- .setDescription(`**<@${userid}> moved to \`\`${authorchannelname}\`\` by : <@${message.author.id}>**`)
- .setFooter(message.author.tag, message.author.avatarURL) 
- .setTimestamp();
- message.guild.members.get(userid).setVoiceChannel(authorchannel).then(m => message.channel.send(`:white_check_mark: **<@${userid}> moved to \`\`${authorchannelname}\`\`**`))
- message.guild.members.get(userid).setVoiceChannel(authorchannel).then(m => log.send({embed : movelog}))
-	 
-} else {
-message.channel.send("**:x:  العضو يجب أن يكون متواجد بروم صوتي **")
-}
-} else {
- message.channel.send("**:x:  You must be in voice channel!**")
-}
-} else {
-message.react("❌")
- }}});
-*/
 client.on('message', message => require('./commands/move2.js')(client, message));
-/*
- client.on('message', message => {
-if(!message.channel.guild) return;
-	var prefix = "";
-if (!message.content.startsWith(prefix)) return;
-	var command = message.content.split(" ")[0];
-	 command = command.slice(prefix.length);
-	if (command == "اسحب") {
- if (message.member.hasPermission("MOVE_MEMBERS")) {
- if (message.mentions.users.size === 0) {
- return message.channel.send("**:x:  لم يتم العثور على العضو المطلوب **")
-}
-if (message.member.voiceChannel != null) {
- if (message.mentions.members.first().voiceChannel != null) {
- var authorchannelname = message.member.voiceChannel.name;
- var authorchannel = message.member.voiceChannelID;
- var userid = message.mentions.members.first().id;
- var log = message.guild.channels.find('name', 'log');
- var movelog = new Discord.RichEmbed()
- .setAuthor(message.guild.name, message.guild.iconURL)
- .setColor("#000000")
- .setDescription(`**<@${userid}> moved to \`\`${authorchannelname}\`\` by : <@${message.author.id}>**`)
- .setFooter(message.author.tag, message.author.avatarURL) 
- .setTimestamp();
- message.guild.members.get(userid).setVoiceChannel(authorchannel).then(m => message.channel.send(`:white_check_mark: **<@${userid}> moved to \`\`${authorchannelname}\`\`**`))
- message.guild.members.get(userid).setVoiceChannel(authorchannel).then(m => log.send({embed : movelog}))
-	 
-} else {
-message.channel.send("**:x:  العضو يجب أن يكون متواجد بروم صوتي **")
-}
-} else {
- message.channel.send("**:x:  You must be in voice channel!**")
-}
-} else {
-message.react("❌")
- }}});
-*/
 client.on('message', message => require('./commands/moveall.js')(client, message));
-/*
-client.on('message' , message => {
-if (message.author.bot) return;
-    if (message.content === prefix + "move all") {
- if (!message.member.hasPermission("ADMINISTRATOR")) return;
-   if(!message.guild.member(client.user).hasPermission("MOVE_MEMBERS")) return message.channel.send("**لايوجد لدي صلاحية السحب**");
-if (message.member.voiceChannel == null) return message.channel.send(`**الرجاء الدخول لروم صوتي**`)
- var author = message.member.voiceChannelID;
- var m = message.guild.members.filter(m=>m.voiceChannel)
- message.guild.members.filter(m=>m.voiceChannel).forEach(m => {
- m.setVoiceChannel(author)
- })
- message.channel.send(`**تم سحب جميع الأعضاء إليك**`)
-
- }});
- */
 //bc-obc-bcrole
 client.on('message', message => require('./commands/bc/bc.js')(client, message));
 client.on('message', message => require('./commands/bc/obc.js')(client, message));
