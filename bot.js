@@ -672,7 +672,7 @@ client.on('message', message => {
    
   var command = message.content.toLowerCase().split(" ")[0];
   var args = message.content.toLowerCase().split(" ");
-  var userM = message.guild.member(message.mentions.users.first() || message.guild.members.find(m => m.id === args[1]));
+
   var logChannel = message.guild.channels.find(c => c.name === 'log');
  
   if(command == prefix + 'ban') {
@@ -680,6 +680,7 @@ client.on('message', message => {
       if(!message.guild.member(client.user).hasPermission('BAN_MEMBERS')) return;
       if(!message.guild.member(client.user).hasPermission('EMBED_LINKS')) return;
 
+      var userM = message.guild.member(message.mentions.users.first() || message.guild.members.find(m => m.id === args[1]));
       if(!userM) return message.channel.send(`**:information_source: Useage: \`\`${prefix}ban [member] [time] [reason]\`\`**`);
       if(userM.user.id === message.author.id) return message.channel.send(':x: **لا يمكنك حظر نفسك**');
       if(userM.user.id === message.guild.owner.id) return message.channel.send(':x: **لطيفة حاول يا صاح \:D**');
@@ -737,7 +738,6 @@ client.on('message', message => {
    
   var command = message.content.toLowerCase().split(" ")[0];
   var args = message.content.toLowerCase().split(" ");
-  var userM = message.guild.member(message.mentions.users.first() || message.guild.members.find(m => m.id === args[1]));
   var logChannel = message.guild.channels.find(c => c.name === 'log');
  
   if(command == prefix + 'kick') {
@@ -745,12 +745,13 @@ client.on('message', message => {
       if(!message.guild.member(client.user).hasPermission('KICK_MEMBERS')) return;
       if(!message.guild.member(client.user).hasPermission('EMBED_LINKS')) return;
 
-      if(!userM) return message.channel.send(`**:information_source: Useage: \`\`${prefix}KICK [member] [time] [reason]\`\`**`);
-      if(userM.user.id === message.author.id) return message.channel.send(':x: **لا يمكنك طرد نفسك**');
-      if(userM.user.id === message.guild.owner.id) return message.channel.send(':x: **لطيفة حاول يا صاح \:D**');
-      if(message.guild.member(userM.user).highestRole.position >= message.guild.member(message.member).highestRole.position) return message.channel.send(`:x: **لا يمكنك طرد شخص من الاداره**`);
-      if(message.guild.member(userM.user).highestRole.position >= message.guild.member(client.user).highestRole.position) return message.channel.send(`**انا اسف ولكن لا يمكني طرد شخص اعلي مني**`);
-      if(!message.guild.member(userM.user).bannable) return;
+      var userk = message.guild.member(message.mentions.users.first() || message.guild.members.find(m => m.id === args[1]));
+      if(!userk) return message.channel.send(`**:information_source: Useage: \`\`${prefix}KICK [member] [time] [reason]\`\`**`);
+      if(userk.user.id === message.author.id) return message.channel.send(':x: **لا يمكنك طرد نفسك**');
+      if(userk.user.id === message.guild.owner.id) return message.channel.send(':x: **لطيفة حاول يا صاح \:D**');
+      if(message.guild.member(userk.user).highestRole.position >= message.guild.member(message.member).highestRole.position) return message.channel.send(`:x: **لا يمكنك طرد شخص من الاداره**`);
+      if(message.guild.member(userk.user).highestRole.position >= message.guild.member(client.user).highestRole.position) return message.channel.send(`**انا اسف ولكن لا يمكني طرد شخص اعلي مني**`);
+      if(!message.guild.member(userk.user).bannable) return;
 
       var time = message.content.split(" ")[2];
       if(!time) return;
@@ -763,14 +764,14 @@ client.on('message', message => {
      
       if(!reason) reason = 'No reason provided.';
      
-      message.guild.member(userM.user).kick({ reason: reason });
-      message.channel.send(`**:white_check_mark: ${userM.user.username} kicked from the server **`);
+      message.guild.member(userk.user).kick({ reason: reason });
+      message.channel.send(`**:white_check_mark: ${userk.user.username} kicked from the server **`);
      
       let kickInfo = new Discord.RichEmbed()
-      .setAuthor(userM.user.username, userM.user.avatarURL)
-      .setThumbnail(userM.user.username)
+      .setAuthor(userk.user.username, userk.user.avatarURL)
+      .setThumbnail(userk.user.username)
       .setColor(`#ff0000`)
-      .setDescription(`**:airplane: <@${userM.user.id}> kicked From the server **by : <@${message.author.id}> \n**Reason:** \`\`${reason}\`\`\n**Time:** ${time}`)
+      .setDescription(`**:airplane: <@${userk.user.id}> kicked From the server **by : <@${message.author.id}> \n**Reason:** \`\`${reason}\`\`\n**Time:** ${time}`)
       .setTimestamp()
       .setFooter(message.author.tag, message.author.avatarURL)
      
