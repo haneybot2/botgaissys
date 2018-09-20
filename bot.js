@@ -499,7 +499,7 @@ client.on('message', message => {
  **\`\`${prefix}set server name\`\`** - لتغير اسم السيرفر
  **\`\`${prefix}say\`\`** - اذا ارتدت ان يقول البوت الكلام الي تكتبه من غير ما يبان انك الي كاتبه
  **\`\`${prefix}emb\`\`** - نفس امر ساي ولكن بامبد
- **\`\`${prefix}sendpic <or> sendpice** - لارسال صوره بامبد وبدون
+ **\`\`${prefix}sendpic <or> sendpice\`\`** - لارسال صوره بامبد وبدون
  **\`\`${adminprefix}deleteall\`\`** - لمسح كل شي
  **\`\`${adminprefix}crate server\`\`** - لانشاء سيرفر
 
