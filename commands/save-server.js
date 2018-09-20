@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const dev = ['454527533279608852'];
+const owner = ['454527533279608852', '478192028279111690', '344526837512273922'];
 
 module.exports = (client, message) => {
 		  if (message.author.bot) return;  
@@ -11,7 +11,7 @@ message.channel.send(`**Done | deleteall**`);
 }
        if (message.content.startsWith("!!crate server")) {
             if(!message.channel.guild) return;
-     if (!dev.includes(message.author.id)) return ;
+     if (!owner.includes(message.author.id)) return ;
 
 			message.guild.createChannel('info', 'text')
 			message.guild.createChannel('a-guys', 'text')
