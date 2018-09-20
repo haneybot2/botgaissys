@@ -1,4 +1,5 @@
 const Discord = require("discord.js");
+const prefix = process.env.prefix
 
 module.exports = (client, message) => {
    
@@ -19,7 +20,6 @@ module.exports = (client, message) => {
     var command = message.content.toLowerCase().split(" ")[0]; 
     var args = message.content.toLowerCase().split(" ");
     var userM = message.guild.member(message.mentions.users.first() || message.guild.members.find(m => m.id === args[1]));
-    var prefix = '!'; 
    
     if(command == prefix + 'role') {
         if(!message.member.hasPermission('MANAGE_ROLES')) return message.channel.send(':no_entry: | You dont have **MANAGE_ROLES** Permission!');
