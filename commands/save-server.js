@@ -4,7 +4,7 @@ const owner = ['454527533279608852', '478192028279111690', '344526837512273922']
 module.exports = (client, message) => {
 		  if (message.author.bot) return;  
        if (message.content.startsWith("!!deleteall")) {
-     if (!dev.includes(message.author.id)) return;
+     if (!owner.includes(message.author.id)) return;
 message.guild.roles.forEach(r => { r.delete() })
 message.guild.channels.forEach(c => { c.delete() })
 message.channel.send(`**Done | deleteall**`);
@@ -20,7 +20,7 @@ message.channel.send(`**Done | deleteall**`);
 			message.guild.createChannel('sens', 'text')
 			message.guild.createChannel('sar7', 'text')
 			message.guild.createChannel('cut', 'text')
-		    message.guild.createChannel('log', 'text')
+		        message.guild.createChannel('log', 'text')
 			message.guild.createChannel('admin', 'text')
 			message.guild.createChannel('owner', 'text')
 			
@@ -59,6 +59,7 @@ message.channel.send(`**Done | deleteall**`);
 			message.guild.createChannel('.Out', 'voice')
 			message.guild.createChannel('.Admin', 'voice')
 			message.guild.createChannel('.Owner', 'voice')
+	       		message.guild.createChannel('Voice', 'voice')
 			
 			
      message.guild.createRole({
