@@ -582,7 +582,7 @@ client.on('message', message => {
     message.reply("مَّا يَلْفِظُ مِن قَوْلٍ إِلَّا لَدَيْهِ رَقِيبٌ عَتِيدٌ").then(sentMessage =>{
       sentMessage.delete(20000)
     })
-    message.delete(3000)
+    message.delete(1000)
     client.channels.get('488681093998837760').send(message.author.toString() + "استخدم كلام لا يليق ~")
   }
 });
