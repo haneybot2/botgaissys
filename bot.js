@@ -672,8 +672,7 @@ client.on('message', message => {
    
   var command = message.content.toLowerCase().split(" ")[0];
   var args = message.content.toLowerCase().split(" ");
-
-  var logChannel = message.guild.channels.find(c => c.name === 'log');
+  var logChannelb = message.guild.channels.find(c => c.name === 'log');
  
   if(command == prefix + 'ban') {
       if(!message.member.hasPermission('BAN_MEMBERS')) return;
@@ -710,8 +709,8 @@ client.on('message', message => {
       .setTimestamp()
       .setFooter(message.author.tag, message.author.avatarURL)
      
-      if(logChannel) {
-          logChannel.send(banInfo);
+      if(logChannelb) {
+          logChannelb.send(banInfo);
       }
      
   }
@@ -738,7 +737,7 @@ client.on('message', message => {
    
   var command = message.content.toLowerCase().split(" ")[0];
   var args = message.content.toLowerCase().split(" ");
-  var logChannel = message.guild.channels.find(c => c.name === 'log');
+  var logChannelk = message.guild.channels.find(c => c.name === 'log');
  
   if(command == prefix + 'kick') {
       if(!message.member.hasPermission('KICK_MEMBERS')) return;
@@ -775,8 +774,8 @@ client.on('message', message => {
       .setTimestamp()
       .setFooter(message.author.tag, message.author.avatarURL)
      
-      if(logChannel) {
-          logChannel.send(kickInfo);
+      if(logChannelk) {
+          logChannelk.send(kickInfo);
       }
      
   }
