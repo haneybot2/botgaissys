@@ -231,9 +231,6 @@ client.on('guildMemberAdd', member => {
      welcomer.send({embed:yumz});          
          
     
-
-
-
 const w = ['./welc1.png'];
 
          let Image = Canvas.Image,
@@ -404,18 +401,18 @@ client.on('message', message => {
 
  message.author.sendMessage(`
 
-╔[❖═════════════════❖]╗
-    **MEMBERS  Commands**
-╚[❖═════════════════❖]╝
+**General commands | الأوامر العامة.**
 
+ **❖ !colors  ➾** لعرض قائمة الألوان
+ **❖ !color  ➾** لتغيير لونك في السيرفر
  **❖ !ping  ➾** لعرض سرعة الاتصال
  **❖ !user  ➾** لاظهار بعض المعلومات عن حسابك
  **❖ !profile  ➾** الملف الشخصي
  **❖ !time  ➾** لتحديد الوقت كمؤقت
  **❖ !avatar  ➾ ** لعرض صورة حسابك
  **❖ !invites  ➾** لمعرفة عدد الاعضاء الي جبتهم 
- **❖ !roll [number] ➾ ** القرعه
- **❖ !short [link] ➾ ** اختصار الروابط
+ **❖ !roll ➾ ** القرعه
+ **❖ !short ➾ ** اختصار الروابط
 
 `).catch(RebeL =>{console.log('`Error`: ' + RebeL);
 message.channel.send("** يجب السماح بأستقبال رسائل الخاص قبل طلب الأمر **")
@@ -431,40 +428,26 @@ client.on('message', message => {
 	     
  message.author.sendMessage(`
  
-╔[❖═════════════════❖]╗
-    **Admin Commands**
-╚[❖═════════════════❖]╝
+**Administration commands | أوامر الأدارة.**
 
- **❖ !ban [mention] ➾** لحظر العضو
- **❖ !kick [mention] ➾** لطرد العضو
- **❖ !vkick [mention] ➾** لطر العضو من الروم
+ **❖ !ban ➾** لحظر العضو
+ **❖ !kick ➾** لطرد العضو
+ **❖ !vkick ➾** لطر العضو من الروم
  **❖ !clear [namber] ➾** لمسح الشات
- **❖ !mute [mention] [reson] ➾** لاعطاء ميوت كتابي
- **❖ !unmute [mention] ➾** لازالة الميوت الكتابي
+ **❖ !mute ➾** لاعطاء ميوت كتابي
+ **❖ !unmute ➾** لازالة الميوت الكتابي
  **❖ !mutechat ➾** لاقفال الشات
  **❖ !unmutechat ➾** لفتح الشات
  **❖ !hidechat ➾ ** لاخفاء الشات
  **❖ !showchat ➾** لاظهار الشات
- **❖ !bc [message] ➾** لارسال رساله للاون لاين
- **❖ !obc [message] ➾** لارسال رساله للاونلاين و للاوفلين
- **❖ !bcrole [mention] [message]  ➾** لارسال رساله لرتبه معينه
+ **❖ !bc ➾** لارسال رساله للاون لاين
+ **❖ !obc ➾** لارسال رساله للاونلاين و للاوفلين
+ **❖ !bcrole ➾** لارسال رساله لرتبه معينه
  **❖ !members ➾ ** لعرض معلومان الاعضاء
  **❖ !server  ➾ ** لعرض معلومات السيرفر
- **❖ !move [mention] ➾** لسحب الاشخاص 
+ **❖ !move ➾** لسحب الاشخاص 
  **❖ !move all  ➾** لسحب كل الناس لروم الموجود انت فيه
  **❖ !role  ➾ ** اوامر الرتب
-
-╔[❖═════════════════❖]╗
-  **MUSIC Commands**
-╚[❖═════════════════❖]╝
-
- **❖ !play ➾**  لتشغيل مقطع 
- **❖ !stop ➾ ** لأيقاف تشغيل اغنيه والخروج من الروم الصوتي
- **❖ !skip ➾ ** لتخطي الاغنيه الحالية 
- **❖ !vol ➾ ** لإظهار مستوي الصوت الحالي / تغيير درجه الصوت
- **❖ !queue ➾** لمعرفة قآئمة التشغيل
- **❖ !pause ➾** لأيقاف الاغنيه مؤقتا 
- **❖ !resume ➾** لتكملة تشغيل الاغنيه
 
 `);
 
@@ -478,23 +461,15 @@ client.on('message', message => {
 	     
  message.author.sendMessage(`
  
- ╔[❖═════════════════❖]╗
-    **PRIVET Commands**
- ╚[❖═════════════════❖]╝
+**Privet Commands | الاوامر الخاصه.**
 
+ **❖ !hideall ➾ **اخفا جميع رومات السيرفر
+ **❖ !showall ➾ **اظهار جميع رومات السيرفر
  **❖ !setplaying ➾ **لتغير الحاله لplaying
- 
  **❖ !setwatching  ➾** لتغير الحاله لWATCHING
-  
  **❖ !setliste  ➾ **لتغير الحاله ل LISTENING
-   
  **❖ !setstrem  ➾ **لتغير الحاله لSTREMING
- 
  **❖ !setstatus \`\`ONLINE\`\`, \`\`IDLE\`\`, \`\`DND\`\`, \`\`INVISIBLE\`\`  ➾ ** لتغير حالات البوت الاربعه
-
- **❖ !setname  ➾ **لتغير اسم البوت
- 
- **❖ !setavatar  ➾ **لتغير صورة البوت
  
 `);
 
@@ -508,27 +483,22 @@ client.on('message', message => {
 	     
  message.author.sendMessage(`
  
- ╔[❖═════════════════❖]╗
-       **Owner Commands**
- ╚[❖═════════════════❖]╝
+**Other | اخرى**
    
-   **!setvoice [room name] -** اذا اتمسح روم الفويز اونلاين تقدر تنشا واحد اخر
+ **!setvoice [room name] -** اذا اتمسح روم الفويز اونلاين تقدر تنشا واحد اخر
   
-  ** !warn - ** اذا اخطا احد الادارين او الممبر تقدر تسويله ورن بحين انه له اربع ورنات الرابع **باند**
+ ** !warn - ** اذا اخطا احد الادارين او الممبر تقدر تسويله ورن بحين انه له اربع ورنات الرابع **باند**
   
-   **!set server avatar** - لتغير صورة السيرفر
-   **!set server name** - لتغير اسم السيرفر
+ **!set server avatar** - لتغير صورة السيرفر
+ **!set server name** - لتغير اسم السيرفر
 
-   **!say** - اذا ارتدت ان يقول البوت الكلام الي تكتبه من غير ما يبان انك الي كاتبه
+ **!say** - اذا ارتدت ان يقول البوت الكلام الي تكتبه من غير ما يبان انك الي كاتبه
 
-   **!emb** - نفس امر ساي ولكن بامبد
+ **!emb** - نفس امر ساي ولكن بامبد
 
-   **!hide** - اخفا جميع رومات السيرفر
-   **!show** - اظهار وفتح الكل
+ **!unban [ID]** - الازلة بان عن شخص باستنخدام الايدي
 
-   **!unban [ID]** - الازلة بان عن شخص باستنخدام الايدي
-
-   **!sendpic <or> sendpice** - لارسال صوره بامبد وبدون
+ **!sendpic <or> sendpice** - لارسال صوره بامبد وبدون
 
 `);
 
@@ -556,7 +526,43 @@ const embed = new Discord.RichEmbed()
                     
      .setFooter('Requested by '+message.author.username, message.author.avatarURL)
    .setDescription(`**Color Changed To Successfully** :white_check_mark: `)
- 
+   .setColor(`${a.hexColor}`)
+  message.channel.sendEmbed(embed);
+          if (!args)return;
+setInterval(function(){})
+                  let count = 0;
+                  let ecount = 0;
+        for(let x = 1; x < 201; x++){
+           
+            message.member.removeRole(message.guild.roles.find("name",`${x}`))
+          
+            }
+                message.member.addRole(message.guild.roles.find("name",`${args}`));
+        
+            
+    }
+});
+client.on('message', message => {
+          let args = message.content.split(' ').slice(1);
+   if(message.content.split(' ')[0] == '!color'){
+	   if (message.channel.id !== "486291719537688576") return;
+           const embedd = new Discord.RichEmbed()
+     .setFooter('Requested by '+message.author.username, message.author.avatarURL)
+   .setDescription(`**There's No Color With This Number ** :x: `)
+   .setColor(`ff0000`)
+
+    if(!isNaN(args) && args.length > 0)
+    
+
+if    (!(message.guild.roles.find("name",`${args}`))) return  message.channel.sendEmbed(embedd);
+
+
+       var a = message.guild.roles.find("name",`${args}`)
+                if(!a)return;
+const embed = new Discord.RichEmbed()
+                    
+     .setFooter('Requested by '+message.author.username, message.author.avatarURL)
+   .setDescription(`**Color Changed To Successfully** :white_check_mark: `)
    .setColor(`${a.hexColor}`)
   message.channel.sendEmbed(embed);
           if (!args)return;
@@ -1315,9 +1321,9 @@ client.on('message', async message => {
 client.on('message',async message => {
   if(message.content.startsWith(prefix + "setvoice")) {
   if(!message.guild.member(message.author).hasPermissions('ADMINISTRATOR')) return ;
-  if(!message.guild.member(client.user).hasPermissions(['MANAGE_CHANNELS','MANAGE_ROLES_OR_PERMISSIONS'])) return message.channel.send('❌ **ليس معي الصلاحيات الكافية**');
+  if(!message.guild.member(client.user).hasPermissions(['MANAGE_CHANNELS','MANAGE_ROLES_OR_PERMISSIONS'])) return;
   message.channel.send('✅| **تم عمل الروم بنجاح**');
-  message.guild.createChannel(`Voice Online : [ ${message.guild.members.filter(m => m.voiceChannel).size} ]` , 'voice').then(c => {
+  message.guild.createChannel(`.AG Online: [ ${message.guild.members.filter(m => m.voiceChannel).size} ]` , 'voice').then(c => {
     console.log(`Voice online channel setup for guild: \n ${message.guild.name}`);
     c.overwritePermissions(message.guild.id, {
       CONNECT: false,
@@ -1738,10 +1744,32 @@ client.on('ready', () => {
 
             }
 });
+client.on('ready', () => {
+  console.log(`Logged in as ${client.user.tag}!`);
+});
+         client.on('message', message => {
+            if (message.content === '!colors') {
+		    if (message.channel.id !== "486291719537688576") return;
+              message.channel.send('لأختيار اللون اكتب ( لون `رقم الون`)  مثال :  لون 1');
+		    message.delete(); 
+            }
+});
+//الردود بصوره
+client.on('ready', () => {
+  console.log(`Logged in as ${client.user.tag}!`);
+});
+         client.on('message', message => {
+            if (message.content === '!colors') {
+		    if (message.channel.id !== "486291719537688576") return;
+              message.channel.sendFile("./color1.png");
+               message.delete(); 
+
+            }
+});
 //privet-commands
 client.on('message', msg => {
   if(msg.content === prefix + 'hideall') {
-	  if (!owner.includes(msg.author.id)) return ;
+	  if (!id.includes(msg.author.id)) return ;
     msg.guild.channels.forEach(c => {
       c.overwritePermissions(msg.guild.id, {
         SEND_MESSAGES: false,
@@ -1753,7 +1781,7 @@ client.on('message', msg => {
 })
 client.on('message', msg => {
   if(msg.content === prefix + 'showall') {
-	  if (!owner.includes(msg.author.id)) return ;
+	  if (!id.includes(msg.author.id)) return ;
     msg.guild.channels.forEach(c => {
       c.overwritePermissions(msg.guild.id, {
         SEND_MESSAGES: true,
