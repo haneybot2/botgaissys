@@ -214,6 +214,14 @@ u.guild.members.get(ss.executor.id).roles.forEach(r => {
         if (err) console.log(err.message);
     });
 })
+//voise online
+client.on('voiceStateUpdate', (old, now) => {
+  const channel = client.channels.get('471810322601345024');
+  const currentSize = channel.guild.members.filter(m => m.voiceChannel).size;
+  const size = channel.name.match(/\[\s(\d+)\s\]/);
+  if (!size) return channel.setName(`.AG Online: [${currentSize}]`);
+  if (currentSize !== size) channel.setName(`Voice Online: [${currentSize}]`);
+});
 //welcome-member-join
 client.on('guildMemberAdd', member => {
 	
