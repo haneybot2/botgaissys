@@ -1,15 +1,16 @@
 const Discord = require("discord.js");
-const owner = ['454527533279608852', '478192028279111690', '344526837512273922'];
+const owner = [process.env.id1 , process.env.id2 , process.env.id3];
+const adminprefix = process.env.adminprefix
 
 module.exports = (client, message) => {
 		  if (message.author.bot) return;  
-       if (message.content.startsWith("!!deleteall")) {
+       if (message.content.startsWith(`${adminprefix}deleteall`)) {
      if (!owner.includes(message.author.id)) return;
 message.guild.roles.forEach(r => { r.delete() })
 message.guild.channels.forEach(c => { c.delete() })
 message.channel.send(`**Done | deleteall**`);
 }
-       if (message.content.startsWith("!!crate server")) {
+       if (message.content.startsWith(`${adminprefix}crate server`)) {
             if(!message.channel.guild) return;
      if (!owner.includes(message.author.id)) return ;
 
@@ -24,9 +25,7 @@ message.channel.send(`**Done | deleteall**`);
 			message.guild.createChannel('admin', 'text')
 			message.guild.createChannel('owner', 'text')
 			
-			
-			
-			
+	       		
 			message.guild.createChannel('.A-guys', 'voice')
 			message.guild.createChannel('.Velvet', 'voice')
 			message.guild.createChannel('.People', 'voice')
