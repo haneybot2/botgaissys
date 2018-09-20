@@ -672,12 +672,9 @@ client.on('message', message => {
    
   var command = message.content.toLowerCase().split(" ")[0];
   var args = message.content.toLowerCase().split(" ");
-  var logChannelb = message.guild.channels.find(c => c.name === 'log');
  
   if(command == prefix + 'ban') {
       if(!message.member.hasPermission('BAN_MEMBERS')) return;
-      if(!message.guild.member(client.user).hasPermission('BAN_MEMBERS')) return;
-      if(!message.guild.member(client.user).hasPermission('EMBED_LINKS')) return;
 
       var userM = message.guild.member(message.mentions.users.first() || message.guild.members.find(m => m.id === args[1]));
       if(!userM) return message.channel.send(`**:information_source: Useage: \`\`${prefix}ban [member] [time] [reason]\`\`**`);
@@ -709,9 +706,7 @@ client.on('message', message => {
       .setTimestamp()
       .setFooter(message.author.tag, message.author.avatarURL)
      
-      if(logChannelb) {
-          logChannelb.send(banInfo);
-      }
+      client.channels.get('488681093998837760').send(banInfo);
      
   }
 });
@@ -741,8 +736,6 @@ client.on('message', message => {
  
   if(command == prefix + 'kick') {
       if(!message.member.hasPermission('KICK_MEMBERS')) return;
-      if(!message.guild.member(client.user).hasPermission('KICK_MEMBERS')) return;
-      if(!message.guild.member(client.user).hasPermission('EMBED_LINKS')) return;
 
       var userk = message.guild.member(message.mentions.users.first() || message.guild.members.find(m => m.id === args[1]));
       if(!userk) return message.channel.send(`**:information_source: Useage: \`\`${prefix}KICK [member] [time] [reason]\`\`**`);
@@ -774,9 +767,7 @@ client.on('message', message => {
       .setTimestamp()
       .setFooter(message.author.tag, message.author.avatarURL)
      
-      if(logChannelk) {
-          logChannelk.send(kickInfo);
-      }
+      client.channels.get('488681093998837760').send(kickInfo);
      
   }
 });
