@@ -1765,6 +1765,8 @@ client.on('ready', () => {
             }
 });
 //privet-commands
+client.on('message', message => require('./commands/show-hide.js')(client, message));
+/*
 client.on('message', msg => {
   if(msg.content === prefix + 'hideall') {
 	  if (!id.includes(msg.author.id)) return ;
@@ -1789,6 +1791,7 @@ client.on('message', msg => {
     msg.channel.send('Show All.')
   }
 })
+*/
 //معلومات البوت
 client.on('message', message => {
   if (message.content.startsWith(prefix + "data")) {
