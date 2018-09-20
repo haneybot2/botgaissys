@@ -661,7 +661,7 @@ client.on('message', message => {
       if(!message.guild.member(client.user).hasPermission('BAN_MEMBERS')) return;
       if(!message.guild.member(client.user).hasPermission('EMBED_LINKS')) return;
 
-      if(!userM) return message.channel.send(`**:information_source: Useage: \`\`${prefix}ban [member] [time] [reason]\`\``);
+      if(!userM) return message.channel.send(`**:information_source: Useage: \`\`${prefix}ban [member] [time] [reason]\`\`**`);
       if(userM.user.id === message.author.id) return message.channel.send(':x: **لا يمكنك حظر نفسك**');
       if(userM.user.id === message.guild.owner.id) return message.channel.send(':x: **لطيفة حاول يا صاح \:D**');
       if(message.guild.member(userM.user).highestRole.position >= message.guild.member(message.member).highestRole.position) return message.channel.send(`:x: **لا يمكنك حظر شخص من الاداره**`);
@@ -680,13 +680,13 @@ client.on('message', message => {
       if(!reason) reason = 'No reason provided.';
      
       message.guild.member(userM.user).ban({ reason: reason });
-      message.channel.send(`:white_check_mark: ${userM.user.username} baned from the server ** `);
+      message.channel.send(`**:white_check_mark: ${userM.user.username} baned from the server ** `);
      
       let banInfo = new Discord.RichEmbed()
       .setAuthor(userM.user.username, userM.user.avatarURL)
       .setThumbnail(userM.user.username)
       .setColor(`#ff0000`)
-      .setDescription(`**:airplane: <@${userM.user.id}> banned From the server **by : ** <@${message.author.id}> \n**Reason:** \`\`${reason}\`\`\n**Time:** ${time}`)
+      .setDescription(`**:airplane: <@${userM.user.id}> banned From the server **by : <@${message.author.id}> \n**Reason:** \`\`${reason}\`\`\n**Time:** ${time}`)
       .setTimestamp()
       .setFooter(message.author.tag, message.author.avatarURL)
      
@@ -726,7 +726,7 @@ client.on('message', message => {
       if(!message.guild.member(client.user).hasPermission('KICK_MEMBERS')) return;
       if(!message.guild.member(client.user).hasPermission('EMBED_LINKS')) return;
 
-      if(!userM) return message.channel.send(`**:information_source: Useage: \`\`${prefix}KICK [member] [time] [reason]\`\``);
+      if(!userM) return message.channel.send(`**:information_source: Useage: \`\`${prefix}KICK [member] [time] [reason]\`\`**`);
       if(userM.user.id === message.author.id) return message.channel.send(':x: **لا يمكنك طرد نفسك**');
       if(userM.user.id === message.guild.owner.id) return message.channel.send(':x: **لطيفة حاول يا صاح \:D**');
       if(message.guild.member(userM.user).highestRole.position >= message.guild.member(message.member).highestRole.position) return message.channel.send(`:x: **لا يمكنك طرد شخص من الاداره**`);
@@ -745,13 +745,13 @@ client.on('message', message => {
       if(!reason) reason = 'No reason provided.';
      
       message.guild.member(userM.user).kick({ reason: reason });
-      message.channel.send(`:white_check_mark: ${userM.user.username} kicked from the server ** `);
+      message.channel.send(`**:white_check_mark: ${userM.user.username} kicked from the server **`);
      
       let kickInfo = new Discord.RichEmbed()
       .setAuthor(userM.user.username, userM.user.avatarURL)
       .setThumbnail(userM.user.username)
       .setColor(`#ff0000`)
-      .setDescription(`**:airplane: <@${userM.user.id}> kicked From the server **by : ** <@${message.author.id}> \n**Reason:** \`\`${reason}\`\`\n**Time:** ${time}`)
+      .setDescription(`**:airplane: <@${userM.user.id}> kicked From the server **by : <@${message.author.id}> \n**Reason:** \`\`${reason}\`\`\n**Time:** ${time}`)
       .setTimestamp()
       .setFooter(message.author.tag, message.author.avatarURL)
      
