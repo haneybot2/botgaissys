@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
+const prefix = process.env.prefix
 
 module.exports = (client, message) => {
-    var prefix = "!";
     const command = message.content.split(" ")[0];
       let messageArray = message.content.split (" ");
       let cmd = messageArray[0];
