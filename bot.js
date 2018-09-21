@@ -396,7 +396,6 @@ client.on('message', message => {
      if (message.content === prefix + "help") {
 
  message.author.sendMessage(`
-
 **General commands | الأوامر العامة.**
 
  **❖ \`\`${prefix}colors\`\` ➾** لعرض قائمة الألوان
@@ -414,7 +413,7 @@ client.on('message', message => {
  **❖ \`\`${prefix}invites\`\` ➾** لمعرفة عدد الاعضاء الي جبتهم 
  **❖ \`\`${prefix}roll\`\` ➾ ** القرعه
  **❖ \`\`${prefix}short\`\` ➾ ** لأختصار الروابط
-
+ّ
 `).catch(RebeL =>{console.log('`Error`: ' + RebeL);
 message.channel.send("** يجب السماح بأستقبال رسائل الخاص قبل طلب الأمر **")
 });
@@ -428,7 +427,7 @@ client.on('message', message => {
 		   if(!message.member.hasPermission('MANAGE_MESSAGES')) return; 
 	     
  message.author.sendMessage(`
- 
+ ّ
 **Administration commands | أوامر الأدارة.**
 
  **❖ \`\`${prefix}ban\`\` ➾** لحظر عضو من السيرفر
@@ -448,8 +447,8 @@ client.on('message', message => {
  **❖ \`\`${prefix}move\`\` ➾** لسحب الاشخاص 
  **❖ \`\`${prefix}move all\`\`  ➾** لسحب كل الناس لروم الموجود انت فيه
  **❖ \`\`${prefix}role\`\`  ➾ ** اوامر الرتب
-
-
+ّ
+ّ
 **Other | اخرى**
 
  **❖ \`\`${prefix}members\`\`  ➾ ** لرؤية عدد اعضاء السيرفر
@@ -457,6 +456,7 @@ client.on('message', message => {
  **❖ \`\`${prefix}temp on\`\`  ➾ ** لتفعيل خاصية الرومات المؤقته
  **❖ \`\`${prefix}temp off\`\`  ➾ ** لتعطيل خاصية الرومات المؤقته
  **❖ \`\`${prefix}temptime\`\`  ➾ ** لتحديد وقت الروم المؤقت
+ّ
 `);
 
     }
@@ -468,7 +468,7 @@ client.on('message', message => {
       if (!id.includes(message.author.id)) return;
 	     
  message.author.sendMessage(`
- 
+ ّ
 **Privet Commands | الاوامر الخاصه.**
 
  **❖ \`\`${adminprefix}hideall\`\` ➾ **اخفا جميع رومات السيرفر
@@ -478,7 +478,7 @@ client.on('message', message => {
  **❖ \`\`${prefix}setliste\`\`  ➾ **لتغير الحاله ل LISTENING
  **❖ \`\`${prefix}setstrem\`\`  ➾ **لتغير الحاله لSTREMING
  **❖ \`\`${prefix}setstatus\`\` \`\`ONLINE\`\`, \`\`IDLE\`\`, \`\`DND\`\`, \`\`INVISIBLE\`\`  ➾ ** لتغير حالات البوت الاربعه
- 
+ ّ
 `);
 
     }
@@ -490,7 +490,7 @@ client.on('message', message => {
       if (!dev.includes(message.author.id)) return;
 	     
  message.author.sendMessage(`
- 
+ ّ
 **Other | اخرى**
    
  **\`\`${prefix}setvoice\`\` ** - اذا اتمسح روم الفويز اونلاين تقدر تنشا واحد اخر
@@ -502,7 +502,6 @@ client.on('message', message => {
  **\`\`${prefix}sendpic <or> sendpice\`\`** - لارسال صوره بامبد وبدون
  **\`\`${adminprefix}deleteall\`\`** - لمسح كل شي
  **\`\`${adminprefix}crate server\`\`** - لانشاء سيرفر
-
 `);
 
     }
