@@ -15,7 +15,8 @@ let warns = JSON.parse(fs.readFileSync("./warnings.json", "utf8"));
 //creditspac
 let credits = JSON.parse(fs.readFileSync("./creditsCode.json", "utf8"));
 //idpac
-const Canvas = require('canvas');
+const Canvas = require('canvas') 
+const r1 = require('snekfetch'); 
 const jimp = require("jimp");
 //profilepac
 const moment = require("moment"); 
@@ -1375,193 +1376,136 @@ client.on('message', async message => {
 });
 */
 //profile
+var mo = "money"
+var po = "points"
+var lev = "level"
 client.on('message', message => {
+
+if (message.content.startsWith(`*${prefix}profile`)) { // الامر
+ let canvas = new Canvas(300, 300) //حجم الصوره الي هتظهر
+ let ctx = canvas.getContext('2d')
+    let Image = Canvas.Image
     
-if(message.content.split(' ')[0] == prefix + 'profile') {
-	 if (message.channel.id !== "486291719537688576") return;
-if(!message.channel.guild) return;
-
-let args = message.content.split(' ').slice(1).join(' ');
-
-       let defineduser = '';
-       if (!args[1]) { 
-           defineduser = message.author;
-       } else { // Run this if they did define someone...
-           let firstMentioned = message.mentions.users.first();
-           defineduser = firstMentioned;
-       }
-
-       const w = ['./id11.png','./id22.png'];
-       var { Canvas, createCanvas, loadImage } = require('canvas')
-       var jimp = require('jimp')
-
-        const millis = new Date().getTime() - defineduser.createdAt.getTime();
-const now = new Date();
-dateFormat(now, 'dddd, mmmm dS, yyyy');
-const stats2 = ['online', 'Low', 'Medium', 'Insane'];
-const days = millis / 1000 / 60 / 60 / 24;
-         dateFormat(now, 'dddd, mmmm dS, yyyy');
-             let time = `${dateFormat(defineduser.createdAt)}`
-             var heg;
-             if(men) {
-                 heg = men
-             } else {
-                 heg = message.author
-             }
-            var mentionned = message.mentions.members.first();
-              var h;
-             if(mentionned) {
-                 h = mentionned
-             } else {
-                 h = message.member
-             }
-       let Image = Canvas.Image,
-           canvas = new Canvas(300, 300),
-           ctx = canvas.getContext('2d');
-       ctx.patternQuality = 'bilinear';
-       ctx.filter = 'bilinear';
-       ctx.antialias = 'subpixel';
- 
-       fs.readFile(`${w[Math.floor(Math.random() * w.length)]}`, function (err, Background) {
-           if (err) return console.log(err);
-           let BG = Canvas.Image;
-           let ground = new Image;
-           ground.src = Background;
-           ctx.drawImage(ground, 0, 0, 300, 300);
-
-})
-  var mentionned = message.mentions.users.first();
-
-   var client;
-     if(mentionned){
-         var client = mentionned;
-     } else {
-         var client = message.author;
-         
-     }
-
-var men = message.mentions.users.first();
-           var heg;
-           if(men) {
-               heg = men
-           } else {
-               heg = message.author
-           }
-               let url = defineduser.displayAvatarURL.endsWith(".webp") ? defineduser.displayAvatarURL.slice(20, 20) + ".png" : defineduser.displayAvatarURL;
-               jimp.read(url, (err, ava) => {
-                   if (err) return console.log(err);
-                   ava.getBuffer(jimp.MIME_PNG, (err, buf) => {
-                       if (err) return console.log(err);
-
-                       let Avatar = Canvas.Image;
-                       let ava = new Avatar;
-                       ava.src = buf;
-                       ctx.drawImage(ava, 112 , 40, 75, 75);
-                       
-                       
-                       
-                       
-                       var status;
-   if (defineduser.presence.status === 'online') {
-       status = 'ONLINE';
-ctx.fillStyle = `#2ce032`;
-ctx.beginPath();
-ctx.arc(179, 107, 10, 0, Math.PI*2, true); 
-ctx.closePath();
-ctx.fill();
- 
-   } else if (defineduser.presence.status === 'dnd') {
-       status = 'DND';
-       ctx.fillStyle = `#ff0000`;
-ctx.beginPath();
-ctx.arc(179, 107, 8, 0, Math.PI*2, true); 
-ctx.closePath();
-ctx.fill();
-   } else if (defineduser.presence.status === 'idle') {
-       status = 'IDLE';
-       ctx.fillStyle = `#f4d32e`;
-ctx.beginPath();
-ctx.arc(179, 107, 10, 0, Math.PI*2, true); 
-ctx.closePath();
-ctx.fill();
-   } else if (defineduser.presence.status === 'offline') {
-       status = 'INVISIABLE';
-       ctx.fillStyle = `#898988`;
-ctx.beginPath();
-ctx.arc(179, 107, 10, 0, Math.PI*2, true); 
-ctx.closePath();
-ctx.fill();
-   }
-                       
-                       
-                                             var time2;
-     if(mentionned){
-         var time2 = `${dateFormat(message.mentions.users.first.joinedAt)}`;
-     } else {
-         var time2 = `${dateFormat(message.member.joinedAt)}`;
-         
-     }  
-                          
    
-                       ctx.font = 'Bold 15px Arial ';
-                       ctx.fontSize = '15px';
-                       ctx.fillStyle = "#ffffff";
-                       ctx.textAlign = "center";
-                       ctx.fillText(status, 70 , 108 );
-                       
-                        ctx.font = 'Bold 13px Arial';
-                       ctx.fontSize = '13px';
-                       ctx.fillStyle = "#ffffff";
-                       ctx.textAlign = "center";
-                       ctx.fillText(`${message.author.presence.game === null ? "No Status" : message.author.presence.game.name}`, 150.00   , 180  );
+                      //  ava.src = buf;
 
-                      
-                       ctx.font = 'Bold 20px Arial ';
-                       ctx.fontSize = '15px';
-                       ctx.fillStyle = "#ffffff";
-                       ctx.textAlign = "center";
-                       ctx.fillText(`${defineduser.username}`, 150.50 , 140);
+    fs.readFile(__dirname + '/img/profile.png', function(err, picture) { //مكان الصوره 
+      if (err) throw err
+      var img = new Image
+        		var url = message.author.avatarURL; //افتار صورتك
+		url = url.substring(0, url.indexOf('?'));
+
+		r1.get(url).then(res => {
+			var dataURL = res.body.toString('base64');
+			dataURL = 'data:image/png;base64,' + dataURL;
+			img.onload = function() {
+
+				ctx.save();
+    		ctx.beginPath();
+    		ctx.arc(54, 103, 47, 0, Math.PI * 2, true); // احدثيات الدائره
+		    ctx.closePath();
+		    ctx.clip();
+		    ctx.drawImage(img, 8, 57, 92, 92); // الصوره
+		    ctx.restore();
+			}
+			img.src = dataURL;
+		});
+		
+      img.onload = () => {
+        ctx.drawImage(img, 1, 1, 300, 300)
+        ctx.drawImage(message.author.avatarURL, 152, 27, 95, 95);
+        ctx.font = "regular 11px Cairo" // نوع الخط وحجمه
+        ctx.fillStyle = "#9f9f9f" // لون الخط
+        ctx.fillText(`${message.author.username}`, 140, 137)
+        ctx.fillText(`${mo}  `, 143, 219) //money
+        ctx.fillText(`${po}`, 120, 202) // النقاط
+
+        //Level
+        ctx.font = "regular 21px Cairo"
+        ctx.fillStyle = "#ffffff"
+        ctx.fillText(`${lev}`, 47, 255) //لفل
+
+        ctx.save()
+        
+      }
+      img.src = picture
+			
+    })
+	
+    setTimeout(function() {
+      fs.readFile(__dirname + '/images_profile/diamond_prof_bg.png', function(err, picture) {
+        if (err) throw err
+        var img = new Image
+        img.onload = () => {
+          ctx.drawImage(img, -1, -1, 0, 0)
+        }
+        img.src = picture
+        let inventoryPicture = canvas.toDataURL()
+        let data = inventoryPicture.replace(/^data:image\/\w+;base64,/, "")
+        let buf = new Buffer(data, 'base64')
+      fs.writeFile(`image.png`, buf)
+      
+        message.channel.send("", {
+          file: `image.png` 
+        })
+      })
+    }, 1000)
 
 
-                       ctx.font = 'Bold 15px Arial';
-                       ctx.fontSize = '15px';
-                       ctx.fillStyle = "#ffffff";
-                       ctx.textAlign = "center";
-                       ctx.fillText(`#${defineduser.discriminator}`, 227  , 108);
+    function roundedImage(x, y, width, height, radius) {
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.lineTo(x + width - radius, y);
+      ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+      ctx.lineTo(x + width, y + height - radius);
+      ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+      ctx.lineTo(x + radius, y + height);
+      ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+      ctx.lineTo(x, y + radius);
+      ctx.quadraticCurveTo(x, y, x + radius, y);
+      ctx.closePath();
+    }
 
-                       var time2;
-     if(mentionned){
-         var time2 = `${dateFormat(message.mentions.users.first.joinedAt)}`;
-     } else {
-         var time2 = `${dateFormat(message.member.joinedAt)}`;
-         
-     }
+    function wrapText(context, text, x, y, maxWidth, lineHeight) {
 
-                       ctx.font = 'Bold 13px Arial ';
-                       ctx.fontSize = '13px';
-                       ctx.fillStyle = "#ffffff";
-                       ctx.textAlign = "center";
-                       ctx.fillText(`${moment(defineduser.createdTimestamp).fromNow()}`, 179 , 226 );
-                       
-                       
-    
-          
-                       ctx.font = 'Bold 13px Arial ';
-                       ctx.fontSize = '13px';
-                       ctx.fillStyle = "#ffffff";
-                       ctx.textAlign = "center";
-                       ctx.fillText(`${moment(h.joinedAt).format('YYYY/M/D HH:mm:ss')}`, 179 , 253);
-                       
-message.channel.sendFile(canvas.toBuffer())
+      var words = text.split(' '),
+        line = '',
+        lineCount = 0,
+        i,
+        test,
+        metrics;
 
+      for (i = 0; i < words.length; i++) {
+        test = words[i];
+        metrics = context.measureText(test);
+        while (metrics.width > maxWidth) {
 
-       })
-   })
+          test = test.substring(0, test.length - 1);
+          metrics = context.measureText(test);
+        }
+        if (words[i] != test) {
+          words.splice(i + 1, 0, words[i].substr(test.length))
+          words[i] = test;
+        }
 
+        test = line + words[i] + ' ';
+        metrics = context.measureText(test);
 
+        if (metrics.width > maxWidth && i > 0) {
+          context.fillText(line, x, y);
+          line = words[i] + ' ';
+          y += lineHeight;
+          lineCount++;
+        } else {
+          line = test;
+        }
+      }
 
+      ctx.fillText(line, x, y);
+    }
+  
 
-}
+};
 
 });
 //ping
