@@ -12,12 +12,6 @@ const fs = require('fs');
 let data = JSON.parse(fs.readFileSync("./data.json", "utf8"));
 //warnpac
 let warns = JSON.parse(fs.readFileSync("./warnings.json", "utf8"));
-//creditspac
-let credits = JSON.parse(fs.readFileSync("./creditsCode.json", "utf8"));
-//idpac
-
-//credirpac
-const games = JSON.parse(fs.readFileSync("./games.json", "utf8"));
 //shortpac
 const googl = require('goo.gl');
 //restartpac
@@ -407,6 +401,12 @@ client.on('message', message => {
 
  **❖ \`\`${prefix}colors\`\` ➾** لعرض قائمة الألوان
  **❖ \`\`${prefix}color\`\` ➾** لتغيير لونك في السيرفر
+ **❖ \`\`${prefix}id\`\` ➾** لرؤية معلومات حسابك
+ **❖ \`\`${prefix}profile\`\` ➾** لرؤية ملفك الشخصي
+ **❖ \`\`${prefix}rep\`\` ➾** لأعطاء اي شخص نقطة اعجابك
+ **❖ \`\`${prefix}info\`\` ➾** لتغير المعلومات الخاصه بك
+ **❖ \`\`${prefix}credits\`\` ➾** لمعرفة الرصيد
+ **❖ \`\`${prefix}daily\`\` ➾** للحصول على الراتب اليومي
  **❖ \`\`${prefix}ping\`\` ➾** لعرض سرعة الاتصال
  **❖ \`\`${prefix}user\`\` ➾** لاظهار بعض المعلومات عن حسابك
  **❖ \`\`${prefix}time\`\` ➾** لأستخدام المنبه
@@ -444,7 +444,6 @@ client.on('message', message => {
  **❖ \`\`${prefix}bc\`\` ➾** لارسال رساله للاون لاين
  **❖ \`\`${prefix}obc\`\` ➾** لارسال رساله للاونلاين و للاوفلين
  **❖ \`\`${prefix}bcrole\`\` ➾** لارسال رساله لرتبه معينه
- **❖ \`\`${prefix}members\`\` ➾ ** لعرض معلومان الاعضاء
  **❖ \`\`${prefix}server\`\`  ➾ ** لعرض معلومات السيرفر
  **❖ \`\`${prefix}move\`\` ➾** لسحب الاشخاص 
  **❖ \`\`${prefix}move all\`\`  ➾** لسحب كل الناس لروم الموجود انت فيه
@@ -1324,54 +1323,6 @@ var mentionned = message.mentions.members.first();
 
 
  });
-//creditsCode
-/*
-const coolDown = new Set();
-client.on('message',async message => {
-if(message.author.bot) return;
-if(!credits[message.author.id]) credits[message.author.id] = {
-    credits: 50
-};
-	
-let userData = credits[message.author.id];
-let m = userData.credits;
-
-fs.writeFile("./creditsCode.json", JSON.stringify(credits), (err) => {
-    if (err) console.error(err);
-  });
-  credits[message.author.id] = {
-      credits: m + 0.5,
-  }
-    if(message.content.startsWith(prefix + "credit" || prefix + "credits")) {
-message.channel.send(`**${message.author.username}, your :credit_card: balance is \`\`${userData.credits}\`\`.**`);
-}
-});
-client.on('message', async message => {
-    let amount = 250;
-    if(message.content.startsWith(prefix + "daily")) {
-    if(message.author.bot) return;
-    if(coolDown.has(message.author.id)) return message.channel.send(`**:stopwatch: | ${message.author.username}, your daily :yen: credits refreshes in \`\`1 Day\`\`.**`);
-
-    let userData = credits[message.author.id];
-    let m = userData.credits + amount;
-    credits[message.author.id] = {
-    credits: m
-    };
-
-    fs.writeFile("./creditsCode.json", JSON.stringify(userData.credits + amount), (err) => {
-    if (err) console.error(err);
-    });
-    message.channel.send(`**:atm: | ${message.author.username}, you received your :yen: ${amount} credits!**`).then(() => {
-        coolDown.add(message.author.id);
-    });
-    setTimeout(() => {
-       coolDown.remove(message.author.id);
-    },86400000);
-    }
-});
-*/
-//id
-
 //ping
 client.on('message', message =>{
     let args = message.content.split(' ');
