@@ -738,7 +738,7 @@ client.on('message', message => {
 
       var log = message.guild.channels.find("name","log");
       var userk = message.guild.member(message.mentions.users.first() || message.guild.members.find(m => m.id === args[1]));
-      if(!userk) return message.channel.send(`**:information_source: Useage: \`\`${prefix}KICK [member] [time] [reason]\`\`**`);
+      if(!userk) return message.channel.send(`**:information_source: Useage: \`\`${prefix}kick [member] [time] [reason]\`\`**`);
       if(userk.user.id === message.author.id) return message.channel.send(':x: **لا يمكنك طرد نفسك**');
       if(userk.user.id === message.guild.owner.id) return message.channel.send(':x: **لطيفة حاول يا صاح \:D**');
       if(message.guild.member(userk.user).highestRole.position >= message.guild.member(message.member).highestRole.position) return message.channel.send(`:x: **لا يمكنك طرد شخص من الاداره**`);
