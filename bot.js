@@ -15,7 +15,7 @@ let warns = JSON.parse(fs.readFileSync("./warnings.json", "utf8"));
 //creditspac
 let credits = JSON.parse(fs.readFileSync("./creditsCode.json", "utf8"));
 //idpac
-const Canvas = require('canvas') 
+const Canvas = require('canvas-prebuilt');
 const r1 = require('snekfetch'); 
 const jimp = require("jimp");
 //profilepac
@@ -1394,7 +1394,7 @@ let args = message.content.split(' ').slice(1).join(' ');
        }
 
        const w = ['./img/id1.png','./img/id2.png'];
-       var Canvas = require('canvas')
+       var Canvas = require('canvas-prebuilt');
 var jimp = require('jimp')
 
         const millis = new Date().getTime() - defineduser.createdAt.getTime();
