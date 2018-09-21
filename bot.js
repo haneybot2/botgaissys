@@ -1431,7 +1431,11 @@ if (message.content.startsWith(`*${prefix}profile`)) { // الامر
       img.src = picture
 			
     })
-	
+		
+   
+
+    
+
     setTimeout(function() {
       fs.readFile(__dirname + '/images_profile/diamond_prof_bg.png', function(err, picture) {
         if (err) throw err
@@ -1505,7 +1509,12 @@ if (message.content.startsWith(`*${prefix}profile`)) { // الامر
     }
   
 
+
+
 };
+
+
+
 
 });
 //ping
