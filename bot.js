@@ -66,13 +66,13 @@ client.on('reconnecting', () => console.log('I am reconnecting now!'));
       if (!dev.includes(message.author.id)) return;
       message.channel.send('**:arrows_counterclockwise: Bot Restarting.**').then(msg => {
         setTimeout(() => {
-        msg.edit('**:arrows_counterclockwise: Bot Restarting..**');
+        msg.edit('**:arrows_counterclockwise: | Bot Restarting..**');
         },500);  
         setTimeout(() => {
-           msg.edit('**:arrows_counterclockwise: Bot Restarting...**');
+           msg.edit('**:arrows_counterclockwise: | Bot Restarting...**');
         },1000);
         setTimeout(() => {
-           msg.edit('**:arrows_counterclockwise: Bot Restarting....**');
+           msg.edit('**:arrows_counterclockwise: | Bot Restarting....**');
         },2000);
       });
       console.log(`${message.author.tag} [ ${message.author.id} ] has restarted the bot.`);
@@ -529,7 +529,7 @@ if(!isNaN(args) && args.length > 0)
           if (a.name > 250 || a.name < 1) return;
 const embed = new Discord.RichEmbed()
 .setFooter('Requested by '+message.author.username, message.author.avatarURL)
-.setDescription(`**Color Changed Successfully** ✅ `)
+.setDescription(` ✅** | Color Changed Successfully**`)
 .setColor(`${a.hexColor}`)
 message.channel.sendEmbed(embed);
     if (!args)return;
@@ -563,7 +563,7 @@ if(!isNaN(args) && args.length > 0)
           if (a.name > 250 || a.name < 1) return;
 const embed = new Discord.RichEmbed()
 .setFooter('Requested by '+message.author.username, message.author.avatarURL)
-.setDescription(`**Color Changed Successfully** ✅ `)
+.setDescription(` ✅** | Color Changed Successfully**`)
 .setColor(`${a.hexColor}`)
 message.channel.sendEmbed(embed);
     if (!args)return;
@@ -587,7 +587,7 @@ client.on('message', message => {
       sentMessage.delete(20000)
     })
     message.delete(1000)
-    client.channels.get('488681093998837760').send(message.author.toString() + "استخدم كلام لا يليق ~")
+    client.channels.get("name", "log").send(message.author.toString() + "استخدم كلام لا يليق ~")
   }
 });
 //comand-adminsserver
@@ -633,7 +633,7 @@ if (!message.content.startsWith(prefix)) return;
 		if (!muteRole) return message.channel.send("** لا يوجد رتبة الميوت 'Muted' **").then(msg => {msg.delete(5000)});
 		let reason = message.content.split(" ").slice(2).join(" ");
 		message.guild.member(user).addRole(muteRole);
-		message.channel.send(`**:white_check_mark: ${user.username} Muted :zipper_mouth:**`);
+		message.channel.send(`**:white_check_mark: | ${user.username} Muted :zipper_mouth:**`);
 		var mutelog = new Discord.RichEmbed()
 		.setAuthor(`Muted!`, user.displayAvatarURL)
 		.setThumbnail(user.displayAvatarURL)
@@ -658,7 +658,7 @@ if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return m
   if(!role || !toMute.roles.has(role.id)) return message.channel.send(`:information_source:**  ${user.username} تم فك الميوت عنه مسبقاً! **`)
 
   await toMute.removeRole(role)
-  message.channel.send(`**:white_check_mark: ${user.username} Unmuted :smiley:**`);
+  message.channel.send(`**:white_check_mark: | ${user.username} Unmuted :smiley:**`);
 
   return;
 
@@ -694,7 +694,7 @@ client.on('message', message => {
       if(!reason) reason = 'No reason provided.';
      
       message.guild.member(userM.user).ban({ reason: reason });
-      message.channel.send(`**:white_check_mark: ${userM.user.username} baned from the server ** `);
+      message.channel.send(`**:white_check_mark: | ${userM.user.username} baned from the server ** `);
      
       let banInfo = new Discord.RichEmbed()
       .setAuthor(userM.user.username, userM.user.avatarURL)
@@ -754,7 +754,7 @@ client.on('message', message => {
       if(!reason) reason = 'No reason provided.';
      
       message.guild.member(userk.user).kick({ reason: reason });
-      message.channel.send(`**:white_check_mark: ${userk.user.username} kicked from the server **`);
+      message.channel.send(`**:white_check_mark: | ${userk.user.username} kicked from the server **`);
      
       let kickInfo = new Discord.RichEmbed()
       .setAuthor(userk.user.username, userk.user.avatarURL)
@@ -871,7 +871,7 @@ if(!message.member.hasPermission('MANAGE_CHANNELS')) return;
          SEND_MESSAGES: false
 
            }).then(() => {
-               message.channel.send("✅ **Channel Muted**")
+               message.channel.send("✅ | **Channel Muted**")
            });
              }
 if (message.content === prefix + "unmutechat") {
@@ -882,7 +882,7 @@ if(!message.member.hasPermission('MANAGE_CHANNELS')) return;
          SEND_MESSAGES: true
 
            }).then(() => {
-               message.channel.send("✅ **Channel Unmuted**")
+               message.channel.send("✅ | **Channel Unmuted**")
            });
              }
 
@@ -902,7 +902,7 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return;
 	   
 	   
 	   }).then(() => {
-               message.channel.send("✅ **Channel Hide**")
+               message.channel.send("✅ | **Channel Hided**")
            });
              }
 if (message.content === prefix + "showchat") {
@@ -914,7 +914,7 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return;
 	 READ_MESSAGES: true
 
            }).then(() => {
-               message.channel.send("✅ **Channel Show**")
+               message.channel.send("✅ | **Channel Showed**")
            });
              }
 
@@ -1068,7 +1068,7 @@ client.on('message', eyad => {
                 eyad.guild.owner.send(`**تم تغيير اسم السرفر الي ${args}
                 بواسطة : <@${eyad.author.id}>**`)
                 eyad.guild.setName(args)
-                eyad.channel.send(`** تم تغيير الاسم الي __${args}__ **`);
+                eyad.channel.send(`**تم تغير اسم السيرفر الي : __${args}__ **`);
                 
        }
 
@@ -1082,7 +1082,7 @@ client.on('message', eyadandr3d => {
                 eyadandr3d.guild.owner.send(`**تم تغييرصوره السرفر الي ${args}
                 بواسطة : <@${eyadandr3d.author.id}>**`)
             eyadandr3d.guild.setIcon(args)
-                eyadandr3d.channel.send(`**تم تغيير صوره السرفر الي  __${args}__** `);
+                eyadandr3d.channel.send(`**تم تغير صورة السيرفر الي : __${args}__ ** `);
                 
        }
 
@@ -1207,13 +1207,13 @@ client.on('message', async message => {
           var ggg= message.guild.createChannel('Temporary Channels', 'category').then(cg => {
            var ccc =message.guild.createChannel('click here', 'voice').then(ch => {
             ch.setParent(cg)
-             message.channel.send('**:white_check_mark:  Done ,**')
+             message.channel.send('**:white_check_mark: | Done .**')
               client.on('message' , message => {
                if(message.content === `${prefix}temp off`) {
                 if(!message.member.hasPermission(`MANAGE_GUILD`)) return;
                  cg.delete()
                   ch.delete()
-                   message.channel.send('**:white_check_mark:  Done ,**')
+                   message.channel.send('**:white_check_mark: | Done .**')
                     }
                      });
                       const time = temp[message.guild.id].time
