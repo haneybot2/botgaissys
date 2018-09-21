@@ -9,6 +9,7 @@ const id = [process.env.id1, process.env.id2 , process.env.id3 , process.env.id4
 ///////////////elmewal3/////////////////a7med////////////////anase
 const ms = require("ms");
 const fs = require('fs');
+let data = JSON.parse(fs.readFileSync("./data.json", "utf8"));
 //warnpac
 let warns = JSON.parse(fs.readFileSync("./warnings.json", "utf8"));
 //creditspac
@@ -668,52 +669,51 @@ if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return m
 });
 //ban-unban-kick
 client.on('message', message => {
-   
-  var command = message.content.toLowerCase().split(" ")[0];
-  var args = message.content.toLowerCase().split(" ");
+  if (message.author.kick) return;
+  if (!message.content.startsWith(prefix)) return;
  
-  if(command == prefix + 'ban') {
-      if(!message.member.hasPermission('BAN_MEMBERS')) return;
-
-      var log = message.guild.channels.find("name","log");
-      var userM = message.guild.member(message.mentions.users.first() || message.guild.members.find(m => m.id === args[1]));
-      if(!userM) return message.channel.send(`**:information_source: Useage: \`\`${prefix}ban [member] [time] [reason]\`\`**`);
-      if(userM.user.id === message.author.id) return message.channel.send(':x: **لا يمكنك حظر نفسك**');
-      if(userM.user.id === message.guild.owner.id) return message.channel.send(':x: **لطيفة حاول يا صاح \:D**');
-      if(message.guild.member(userM.user).highestRole.position >= message.guild.member(message.member).highestRole.position) return message.channel.send(`:x: **لا يمكنك حظر شخص من الاداره**`);
-      if(message.guild.member(userM.user).highestRole.position >= message.guild.member(client.user).highestRole.position) return message.channel.send(`**انا اسف ولكن لا يمكني حظر شخص اعلي مني**`);
-      if(!message.guild.member(userM.user).bannable) return;
-
-      var time = message.content.split(" ")[2];
-      if(!time) return;
-
-      if(!ms(time)) {
-          var reason = message.content.split(' ')[2];
-      }else {
-          var reason = message.content.split(' ')[3];
-      }
-     
-      if(!reason) reason = 'No reason provided.';
-     
-      message.guild.member(userM.user).ban({ reason: reason });
-      message.channel.send(`**:white_check_mark: | ${userM.user.username} baned from the server ** `);
-     
-      let banInfo = new Discord.RichEmbed()
-      .setAuthor(userM.user.username, userM.user.avatarURL)
-      .setThumbnail(userM.user.username)
-      .setColor(`#ff0000`)
-      .setDescription(`**:airplane: <@${userM.user.id}> banned From the server **by : <@${message.author.id}> \n**Reason:** \`\`${reason}\`\`\n**Time:** ${time}`)
-      .setTimestamp()
-      .setFooter(message.author.tag, message.author.avatarURL)
-     
-      log.send(banInfo);
-     
-  }
+  let command = message.content.split(" ")[0];
+  command = command.slice(prefix.length);
+ 
+  let args = message.content.split(" ").slice(1);
+ 
+  if (command == "ban") {
+  if (!message.channel.guild) return;
+  var log = message.guild.channels.find("name","log");
+  if (!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return;
+  if (!message.guild.member(client.user).hasPermission("BAN_MEMBERS")) return message.msg.channel.send("I Don't Have Ban_Members Permission");
+  let user = message.mentions.users.first();
+  let reason = message.content.split(" ").slice(2).join(" ");
+ 
+  if (message.mentions.users.size < 1) return message.msg.channel.send(`:information_source: **\`\` ${prefix}ban @َζ͜͡ELMEWAL3\`\` يجب تحديد شخص **`);
+  if (!reason) reason = 'No reason provided.';
+  if (!message.guild.member(user)
+  .bannable) return message.msg.channel.send("**:x: |لايمكنني حظر شخص اعلى من رتبتي**");
+ if(user.user.id === message.author.id) return message.channel.send(':x: | **لا يمكنك حظر نفسك**');
+ if(user.user.id === message.guild.owner.id) return message.channel.send(':x: | **لطيفة حاول يا صاح \:D**');
+ if (user.hasPermission("MANAGE_MESSAGES")) return message.channel.send("**:x: | لايمكنني حظر احد من الاداره**");
+ 
+ message.guild.member(user).ban({reason : reason});
+ message.channel.send(`**:white_check_mark: | ${user.username} baned from the server ** `);
+ message.guild.owner.send(`لقد تم تبنيد <@${user.id}> من السيرف 
+من قبل : <@${message.author.id}>
+السبب : \`\`\`${reason}\`\`\``);
+ 
+  const banembed = new Discord.RichEmbed()
+  .setAuthor(user.tag, user.avatarURL)
+  .setThumbnail(user.avatarUR)
+  .setColor('#ff0000')
+  .setDescription(`:airplane: **<@${user.id}> baned from the server**\n **by: **<@${message.author.id}>\n**Reason:** \`\`\`${reason}\`\`\``)
+  .setFooter(message.author.tag)
+  .setTimestamp()
+  log.send({embed : banembed})
+}
 });
 client.on('message' , message => {
     let user = message.mentions.users.first()|| client.users.get(message.content.split(' ')[1])
     if(message.content.startsWith(prefix + 'unban')) {
 	if(!message.guild.member(message.author).hasPermission("ADMINISTRATOR")) return;
+	var log = message.guild.channels.find("name","log");
         if(!user) return;
         message.guild.unban(user);
         message.guild.owner.send(`**لقد تم فك الباند عن الشخص** \n ${user} \n **By :** <@${message.author.id}>`)
@@ -725,51 +725,49 @@ client.on('message' , message => {
         .addField('**By :**',` <@${message.author.id}> `)
         .setAuthor(message.guild.name)
        .setFooter('Requested by '+message.author.username, message.author.avatarURL)
-        message.channel.sendEmbed(embed)
+        log.sendEmbed(embed)
     }
   });
 client.on('message', message => {
-   
-  var command = message.content.toLowerCase().split(" ")[0];
-  var args = message.content.toLowerCase().split(" ");
+  if (message.author.kick) return;
+  if (!message.content.startsWith(prefix)) return;
  
-  if(command == prefix + 'kick') {
-      if(!message.member.hasPermission('KICK_MEMBERS')) return;
-
-      var log = message.guild.channels.find("name","log");
-      var userk = message.guild.member(message.mentions.users.first() || message.guild.members.find(m => m.id === args[1]));
-      if(!userk) return message.channel.send(`**:information_source: Useage: \`\`${prefix}kick [member] [time] [reason]\`\`**`);
-      if(userk.user.id === message.author.id) return message.channel.send(':x: **لا يمكنك طرد نفسك**');
-      if(userk.user.id === message.guild.owner.id) return message.channel.send(':x: **لطيفة حاول يا صاح \:D**');
-      if(message.guild.member(userk.user).highestRole.position >= message.guild.member(message.member).highestRole.position) return message.channel.send(`:x: **لا يمكنك طرد شخص من الاداره**`);
-      if(message.guild.member(userk.user).highestRole.position >= message.guild.member(client.user).highestRole.position) return message.channel.send(`**انا اسف ولكن لا يمكني طرد شخص اعلي مني**`);
-      if(!message.guild.member(userk.user).bannable) return;
-
-      var time = message.content.split(" ")[2];
-      if(!time) return;
-
-      if(!ms(time)) {
-          var reason = message.content.split(' ')[2];
-      }else {
-          var reason = message.content.split(' ')[3];
-      }
-     
-      if(!reason) reason = 'No reason provided.';
-     
-      message.guild.member(userk.user).kick({ reason: reason });
-      message.channel.send(`**:white_check_mark: | ${userk.user.username} kicked from the server **`);
-     
-      let kickInfo = new Discord.RichEmbed()
-      .setAuthor(userk.user.username, userk.user.avatarURL)
-      .setThumbnail(userk.user.username)
-      .setColor(`#ff0000`)
-      .setDescription(`**:airplane: <@${userk.user.id}> kicked From the server **by : <@${message.author.id}> \n**Reason:** \`\`${reason}\`\`\n**Time:** ${time}`)
-      .setTimestamp()
-      .setFooter(message.author.tag, message.author.avatarURL)
-     
-      log.send(kickInfo);
-     
-  }
+  let command = message.content.split(" ")[0];
+  command = command.slice(prefix.length);
+ 
+  let args = message.content.split(" ").slice(1);
+ 
+  if (command == "kick") {
+  if (!message.channel.guild) return;
+  var log = message.guild.channels.find("name","log");
+  if (!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return;
+  if (!message.guild.member(client.user).hasPermission("KICK_MEMBERS")) return message.msg.channel.send("I Don't Have KICK_Members Permission");
+  let user = message.mentions.users.first();
+  let reason = message.content.split(" ").slice(2).join(" ");
+ 
+  if (message.mentions.users.size < 1) return message.msg.channel.send(`:information_source: **\`\` ${prefix}kick @َζ͜͡ELMEWAL3\`\` يجب تحديد شخص **`);
+  if (!reason) reason = 'No reason provided.';
+  if (!message.guild.member(user)
+  .bannable) return message.msg.channel.send("**:x: |لايمكنني طرد شخص اعلى من رتبتي**");
+ if(user.user.id === message.author.id) return message.channel.send(':x: | **لا يمكنك طرد نفسك**');
+ if(user.user.id === message.guild.owner.id) return message.channel.send(':x: | **لطيفة حاول يا صاح \:D**');
+ if (user.hasPermission("MANAGE_MESSAGES")) return message.channel.send("**:x: | لايمكنني طرد احد من الاداره**");
+ 
+  message.guild.member(user).kick({reason : reason});
+ message.channel.send(`**:white_check_mark: | ${user.username} kicked from the server ** `);
+ message.guild.owner.send(`لقد تم طرد <@${user.id}> من السيرف 
+من قبل : <@${message.author.id}>
+السبب : \`\`\`${reason}\`\`\``);
+ 
+  const kicke = new Discord.RichEmbed()
+  .setAuthor(user.tag, user.avatarURL)
+  .setThumbnail(user.avatarUR)
+  .setColor('#ff0000')
+  .setDescription(`**<@${user.id}> kicked from the server**\n **by: **<@${message.author.id}>\n**Reason:** ${reason}`)
+  .setFooter(message.author.tag)
+  .setTimestamp()
+  log.send({embed : kicke})
+}
 });
 //viocekick
 client.on('message', message => require('./commands/vkick.js')(client, message));
@@ -785,7 +783,7 @@ client.on('message', msg => {
     const emoji = client.emojis.find("name", "wastebasket")
     let textxt = args.slice(0).join("");
     if(msg.member.hasPermission("MANAGE_MESSAGES")) {
-    if(parseInt(textxt[0]) > 100) return msg.channel.send('**انا اسف ,ولكن لايمكنك مسح اكثر من `100` رساله**')
+    if(parseInt(textxt) > 100) return msg.channel.send('**انا اسف ,ولكن لايمكنك مسح اكثر من `100` رساله**')
     if (textxt == "") {
     msg.delete().then
     msg.delete().then
