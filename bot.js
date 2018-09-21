@@ -681,7 +681,7 @@ client.on('message', message => {
   if (command == "ban") {
   if (!message.channel.guild) return;
   var log = message.guild.channels.find("name","log");
-  if (!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return;
+  if (!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return  message.delete(); 
   if (!message.guild.member(client.user).hasPermission("BAN_MEMBERS")) return message.msg.channel.send("I Don't Have Ban_Members Permission");
   let user = message.mentions.users.first();
   let reason = message.content.split(" ").slice(2).join(" ");
@@ -712,7 +712,7 @@ client.on('message', message => {
 client.on('message' , message => {
     let user = message.mentions.users.first()|| client.users.get(message.content.split(' ')[1])
     if(message.content.startsWith(prefix + 'unban')) {
-	if(!message.guild.member(message.author).hasPermission("ADMINISTRATOR")) return;
+	if(!message.guild.member(message.author).hasPermission("ADMINISTRATOR")) return  message.delete(); 
 	var log = message.guild.channels.find("name","log");
         if(!user) return;
         message.guild.unban(user);
@@ -740,7 +740,7 @@ client.on('message', message => {
   if (command == "kick") {
   if (!message.channel.guild) return;
   var log = message.guild.channels.find("name","log");
-  if (!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return;
+  if (!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return  message.delete(); 
   if (!message.guild.member(client.user).hasPermission("KICK_MEMBERS")) return message.msg.channel.send("I Don't Have KICK_Members Permission");
   let user = message.mentions.users.first();
   let reason = message.content.split(" ").slice(2).join(" ");
@@ -871,7 +871,7 @@ if(!message.member.hasPermission('MANAGE_CHANNELS')) return;
 
            }).then(() => {
                message.channel.send("✅ | **Channel Muted**")
-           });
+           }).then(message =>{message.delete(5000)});
              }
 if (message.content === prefix + "unmutechat") {
     if(!message.channel.guild) return message.channel.send(' This command only for servers');
@@ -882,7 +882,7 @@ if(!message.member.hasPermission('MANAGE_CHANNELS')) return;
 
            }).then(() => {
                message.channel.send("✅ | **Channel Unmuted**")
-           });
+           }).then(message =>{message.delete(5000)});
              }
 
 
@@ -894,7 +894,7 @@ if (message.author.bot) return;
     if (message.content === prefix + "hidechat") {
                         if(!message.channel.guild) return message.channel.send(' This command only for servers');
 
-if(!message.member.hasPermission('ADMINISTRATOR')) return;
+if(!message.member.hasPermission('ADMINISTRATOR')) return message.delete(); 
            message.channel.overwritePermissions(message.guild.id, {
          SEND_MESSAGES: false ,
 	 READ_MESSAGES: false
@@ -902,19 +902,19 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return;
 	   
 	   }).then(() => {
                message.channel.send("✅ | **Channel Hided**")
-           });
+           }).then(message =>{message.delete(5000)});
              }
 if (message.content === prefix + "showchat") {
     if(!message.channel.guild) return message.channel.send(' This command only for servers');
 
-if(!message.member.hasPermission('ADMINISTRATOR')) return;
+if(!message.member.hasPermission('ADMINISTRATOR')) return message.delete(); 
            message.channel.overwritePermissions(message.guild.id, {
          SEND_MESSAGES: true,
 	 READ_MESSAGES: true
 
            }).then(() => {
                message.channel.send("✅ | **Channel Showed**")
-           });
+           }).then(message =>{message.delete(5000)});
              }
 
 
@@ -925,7 +925,7 @@ client.on('message', message => require('./commands/role.js')(client, message));
 //server-data 
 client.on('message', function(msg) {
   if(msg.content === prefix + "server") { 
-	if (!msg.member.hasPermission('MANAGE_MESSAGES')) return ;
+	if (!msg.member.hasPermission('MANAGE_MESSAGES')) return msg.delete();
     if(!msg.channel.guild) return;        
     let embed = new Discord.RichEmbed()
     .setColor('BLACK')
@@ -959,7 +959,7 @@ client.on('message', async message => {
 
                if(!message.channel.guild) return;
          
-if(!message.member.hasPermission('ADMINISTRATOR')) return;
+if(!message.member.hasPermission('ADMINISTRATOR')) return message.delete(); 
   let user = message.mentions.users.first();
   let reason = message.content.split(" ").slice(2).join(" ");
 
@@ -1078,7 +1078,7 @@ client.on('message', eyadandr3d => {
   if (eyadandr3d.content.startsWith(`${prefix}set server avatar`)) {
                 if (!eyadandr3d.member.hasPermission("MANAGE_SERVER"))  return;
                 if(!args) return eyadandr3d.channel.send('`**ضع رابط الصوره**`');
-                eyadandr3d.guild.owner.send(`**تم تغييرصوره السرفر الي ${args}
+                eyadandr3d.guild.owner.send(`**تم تغيير صوره السرفر الي ${args}
                 بواسطة : <@${eyadandr3d.author.id}>**`)
             eyadandr3d.guild.setIcon(args)
                 eyadandr3d.channel.send(`**تم تغير صورة السيرفر الي : __${args}__ ** `);
@@ -1095,7 +1095,7 @@ client.on('message', message => {
   command = command.slice(prefix.length);
   var argresult = message.content.split(" ").slice(1);
 if (command == "sendpic") {
-	    if(!message.member.hasPermission('MANAGE_MESSAGES')) return;
+	    if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.delete(); 
   message.channel.sendFile(argresult.join(" "))
 
 }
@@ -1108,7 +1108,7 @@ client.on('message', message => {
   command = command.slice(prefix.length);
   var argresult = message.content.split(" ").slice(1);
 if (command == "sendpice") {
-	    if(!message.member.hasPermission('MANAGE_MESSAGES')) return;
+	    if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.delete(); 
     let embedsay = new Discord.RichEmbed()
  .setColor("RANDOM")
 .setDescription("ـــــــــــــــــــــــــــــــــ")
@@ -1131,14 +1131,14 @@ client.on('message', message => {
 
   if (command === "say")  {   
   if(!message.channel.guild) return; 
-	  	if(!message.member.hasPermission('ADMINISTRATOR')) return;
+	  	if(!message.member.hasPermission('ADMINISTRATOR')) return message.delete(); 
           message.delete()   
     message.channel.sendMessage(args.join(" ")).catch(console.error);   
   } 
 	
 if (command == "saye")    {   
   if(!message.channel.guild) return; 
-		if(!message.member.hasPermission('ADMINISTRATOR')) return;
+		if(!message.member.hasPermission('ADMINISTRATOR')) return message.delete(); 
     let say = new Discord.RichEmbed() 
     .setDescription(args.join("  "))   
     .setColor("RANDOM") 
@@ -1329,6 +1329,7 @@ var mentionned = message.mentions.members.first();
 
  });
 //creditsCode
+/*
 const coolDown = new Set();
 client.on('message',async message => {
 if(message.author.bot) return;
@@ -1373,7 +1374,6 @@ client.on('message', async message => {
     }
 });
 //profile
-/*
 client.on('message', message => {
     
 if(message.content.split(' ')[0] == prefix + 'profile') {
