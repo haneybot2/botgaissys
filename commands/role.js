@@ -9,11 +9,11 @@ module.exports = (client, message) => {
     const embed  = new Discord.RichEmbed()
 .setTitle(`** أمثله على الأوامر : **`)
 .setDescription(`
-**!role @َζ͜͡ELMEWAL3 [role name]**: لأعطاء رتبة لعضو معين
+**${prefix}role @َζ͜͡ELMEWAL3 [role name]**: لأعطاء رتبة لعضو معين
 \`\`ملاحظه : الامر لاعطاء او ازالة رتبه\`\`
-**!role all (+,-) [role name]** :  لاعطاء او ازالة رتبه للجميع
-**!role humans (+,-) [role name]**: لاعطاء او ازالة رتبه للبشر
-**!role bots (+,-) [role name]**: لاعطاء او ازالة رتبه للبوتات`)
+**${prefix}role all (+,-) [role name]** :  لاعطاء او ازالة رتبه للجميع
+**${prefix}role humans (+,-) [role name]**: لاعطاء او ازالة رتبه للبشر
+**${prefix}role bots (+,-) [role name]**: لاعطاء او ازالة رتبه للبوتات`)
 .setFooter('Requested by '+message.author.username, message.author.avatarURL)
 .setColor(`#e60909`)
 
@@ -22,9 +22,9 @@ module.exports = (client, message) => {
     var userM = message.guild.member(message.mentions.users.first() || message.guild.members.find(m => m.id === args[1]));
    
     if(command == prefix + 'role') {
-        if(!message.member.hasPermission('MANAGE_ROLES')) return message.channel.send(':no_entry: | You dont have **MANAGE_ROLES** Permission!');
-        if(!message.guild.member(client.user).hasPermission('MANAGE_ROLES')) return message.channel.send(':no_entry: | I dont have **MANAGE_ROLES** Permission!');
-        if(!message.guild.member(client.user).hasPermission('EMBED_LINKS')) return message.channel.send(':no_entry: | I dont have **EMBED_LINKS** Permission!');
+        if(!message.member.hasPermission('MANAGE_ROLES')) return;
+        if(!message.guild.member(client.user).hasPermission('MANAGE_ROLES')) return;
+        if(!message.guild.member(client.user).hasPermission('EMBED_LINKS')) return;
  
 
  
@@ -40,8 +40,8 @@ module.exports = (client, message) => {
         var getRole = message.mentions.roles.first() || message.guild.roles.find(r => r.id === argsRole) || message.guild.roles.find(r => r.name.toLowerCase().includes(argsRole));
  
         if(userM) {
-            if(!getRole) return message.channel.send(':no_entry:  اسف ولكن لم احد الرتبه المطلوبه!');
-            if(getRole.name === '@everyone') return message.channel.send(':no_entry:  اسف ولكن لم احد الرتبه المطلوبه!');
+            if(!getRole) return message.channel.send(':x:**  اسف ولكن لم احد الرتبه المطلوبه!**');
+            if(getRole.name === '@everyone') return message.channel.send(':x:  **اسف ولكن لم احد الرتبه المطلوبه!**');
             if(getRole.position >= message.guild.member(client.user).highestRole.position) return message.channel.send(`:no_entry: | I can\'t \`\`GIVE\`\` Or \`\`DELETE\`\` Any user have or not have **${getRole.name}** role beacuse this role highest from my role!`);
            
             if(!message.guild.member(userM.user).roles.has(getRole.id)) {
@@ -63,8 +63,8 @@ module.exports = (client, message) => {
            
             if(!args[2]) return message.channel.send(embed);
             if(!args[3]) return message.channel.send(embed); 
-            if(!getRole) return message.channel.send(':no_entry:  اسف ولكن لم احد الرتبه المطلوبه!');
-            if(getRole.name === '@everyone') return message.channel.send(':no_entry:  اسف ولكن لم احد الرتبه المطلوبه!');
+            if(!getRole) return message.channel.send(':x:**  اسف ولكن لم احد الرتبه المطلوبه!**');
+            if(getRole.name === '@everyone') return message.channel.send(':x:  **اسف ولكن لم احد الرتبه المطلوبه!**');
  
             if(args[2] === '+') {
                 if(getRole.position >= message.guild.member(client.user).highestRole.position) return message.channel.send(`:no_entry: | I can\'t \`\`GIVE\`\` Any User the role with name **${getRole.name}** beacuse the role highest then my role!`);
@@ -140,8 +140,8 @@ module.exports = (client, message) => {
            
             if(!args[2]) return message.channel.send(embed);
             if(!args[3]) return message.channel.send(embed);
-            if(!getRole) return message.channel.send(':no_entry:  اسف ولكن لم احد الرتبه المطلوبه!');
-            if(getRole.name === '@everyone') return message.channel.send(':no_entry:  اسف ولكن لم احد الرتبه المطلوبه!');
+            if(!getRole) return message.channel.send(':x:**  اسف ولكن لم احد الرتبه المطلوبه!**');
+            if(getRole.name === '@everyone') return message.channel.send(':x:  **اسف ولكن لم احد الرتبه المطلوبه!**');
  
             if(args[2] === '+') {
                 if(getRole.position >= message.guild.member(client.user).highestRole.position) return message.channel.send(`:no_entry: | I can\'t \`\`GIVE\`\` Any Bot the role with name **${getRole.name}** beacuse the role highest then my role!`);
@@ -218,8 +218,8 @@ module.exports = (client, message) => {
            
             if(!args[2]) return message.channel.send(embed);
             if(!args[3]) return message.channel.send(embed);
-            if(!getRole) return message.channel.send(':no_entry:  اسف ولكن لم احد الرتبه المطلوبه!');
-            if(getRole.name === '@everyone') return message.channel.send(':no_entry:  اسف ولكن لم احد الرتبه المطلوبه!');
+            if(!getRole) return message.channel.send(':x:**  اسف ولكن لم احد الرتبه المطلوبه!**');
+            if(getRole.name === '@everyone') return message.channel.send(':x:  **اسف ولكن لم احد الرتبه المطلوبه!**');
  
             if(args[2] === '+') {
                 if(getRole.position >= message.guild.member(client.user).highestRole.position) return message.channel.send(`:no_entry: | I can\'t \`\`GIVE\`\` Any User the role with name **${getRole.name}** beacuse the role highest then my role!`); // حقوق الفا كوودز Alpha Codes.
@@ -293,5 +293,14 @@ module.exports = (client, message) => {
                 })
             } 
         }
+   }else if(command == prefix + 'roles') {
+        var roles = '',
+        ros=message.guild.roles.size,
+        role = [];
+        for(let i =0;i<ros;i++){
+            if(message.guild.roles.array()[i].id !== message.guild.id){
+  role.push(message.guild.roles.filter(r => r.position == ros-i).map(r => `${i}- ${r.name}`));  
+        }}
+        message.channel.send(role.join("\n"));
     }
 };
