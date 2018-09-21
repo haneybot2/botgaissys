@@ -582,12 +582,13 @@ setInterval(function(){})
 });
 const swearWords = ["خول", "علي زبي", "كس امكم", "يلعن شكلك", "كس امك", "اكس امك", "زبي", "يلعن", "كلب" ];
 client.on('message', message => {
+	var log = message.guild.channels.find("name","log");
   if (swearWords.some(word => message.content.includes(word)) ) {
     message.reply("مَّا يَلْفِظُ مِن قَوْلٍ إِلَّا لَدَيْهِ رَقِيبٌ عَتِيدٌ").then(sentMessage =>{
       sentMessage.delete(20000)
     })
     message.delete(1000)
-    client.channels.get("name", "log").send(message.author.toString() + "استخدم كلام لا يليق ~")
+    log.send(message.author.toString() + "استخدم كلام لا يليق ~")
   }
 });
 //comand-adminsserver
@@ -674,6 +675,7 @@ client.on('message', message => {
   if(command == prefix + 'ban') {
       if(!message.member.hasPermission('BAN_MEMBERS')) return;
 
+      var log = message.guild.channels.find("name","log");
       var userM = message.guild.member(message.mentions.users.first() || message.guild.members.find(m => m.id === args[1]));
       if(!userM) return message.channel.send(`**:information_source: Useage: \`\`${prefix}ban [member] [time] [reason]\`\`**`);
       if(userM.user.id === message.author.id) return message.channel.send(':x: **لا يمكنك حظر نفسك**');
@@ -704,7 +706,7 @@ client.on('message', message => {
       .setTimestamp()
       .setFooter(message.author.tag, message.author.avatarURL)
      
-      client.channels.get('488681093998837760').send(banInfo);
+      log.send(banInfo);
      
   }
 });
@@ -734,6 +736,7 @@ client.on('message', message => {
   if(command == prefix + 'kick') {
       if(!message.member.hasPermission('KICK_MEMBERS')) return;
 
+      var log = message.guild.channels.find("name","log");
       var userk = message.guild.member(message.mentions.users.first() || message.guild.members.find(m => m.id === args[1]));
       if(!userk) return message.channel.send(`**:information_source: Useage: \`\`${prefix}KICK [member] [time] [reason]\`\`**`);
       if(userk.user.id === message.author.id) return message.channel.send(':x: **لا يمكنك طرد نفسك**');
@@ -764,7 +767,7 @@ client.on('message', message => {
       .setTimestamp()
       .setFooter(message.author.tag, message.author.avatarURL)
      
-      client.channels.get('488681093998837760').send(kickInfo);
+      log.send(kickInfo);
      
   }
 });
