@@ -628,7 +628,8 @@ if (!message.content.startsWith(prefix)) return;
                 let cmd = messageArray[0];
                 let argsnot = messageArray.slice(1);
 		let muteu = message.guild.member(message.mentions.users.first() || message.guild.members.get(argsnot[0]));
-		if(muteu.hasPermission("MANAGE_MESSAGES")) return message.channel.send("**لا يمكن اعطاء ميوت لاحد من الاداره**");
+		if(muteu.id === message.author.id) return message.channel.send(':x: | **لا يمكننك اعطاء ميوت لنفسك ._.**');
+		if(muteu.hasPermission("MANAGE_MESSAGES")) return message.channel.send("**لا يمكننك اعطاء ميوت لاحد من الاداره**");
 		let user = message.mentions.users.first();
 		var log = message.guild.channels.find("name","log");
 		let muteRole = message.guild.roles.find("name", "Muted");
@@ -687,8 +688,8 @@ client.on('message', message => {
  
   if (message.mentions.users.size < 1) return message.channel.send(`:information_source: **\`\` ${prefix}ban @َζ͜͡ELMEWAL3\`\` يجب تحديد شخص **`);
   if (!reason) reason = 'No reason provided.';
- if(user.user.id === message.author.id) return message.channel.send(':x: | **لا يمكنك حظر نفسك**');
- if(user.user.id === message.guild.owner.id) return message.channel.send(':x: | **لطيفة حاول يا صاح \:D**');
+ if(user.id === message.author.id) return message.channel.send(':x: | **لا يمكنك حظر نفسك ._.**');
+ if(user.id === message.guild.owner.id) return message.channel.send(':x: | **لطيفة حاول يا صاح \:D**');
  if (user.hasPermission("MANAGE_MESSAGES")) return message.channel.send("**:x: | لايمكنني حظر احد من الاداره**");
 
  
@@ -746,8 +747,8 @@ client.on('message', message => {
  
   if (message.mentions.users.size < 1) return message.channel.send(`:information_source: **\`\` ${prefix}kick @َζ͜͡ELMEWAL3\`\` يجب تحديد شخص **`);
   if (!reason) reason = 'No reason provided.';
- if(user.user.id === message.author.id) return message.channel.send(':x: | **لا يمكنك طرد نفسك**');
- if(user.user.id === message.guild.owner.id) return message.channel.send(':x: | **لطيفة حاول يا صاح \:D**');
+ if(user.id === message.author.id) return message.channel.send(':x: | **لا يمكنك طرد نفسك ._.**');
+ if(user.id === message.guild.owner.id) return message.channel.send(':x: | **لطيفة حاول يا صاح \:D**');
  if (user.hasPermission("MANAGE_MESSAGES")) return message.channel.send("**:x: | لايمكنني طرد احد من الاداره**");
  
   message.guild.member(user).kick({reason : reason});
