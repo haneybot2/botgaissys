@@ -687,11 +687,10 @@ client.on('message', message => {
  
   if (message.mentions.users.size < 1) return message.channel.send(`:information_source: **\`\` ${prefix}ban @َζ͜͡ELMEWAL3\`\` يجب تحديد شخص **`);
   if (!reason) reason = 'No reason provided.';
-  if (!message.guild.member(user)
-  .bannable) return;
  if(user.user.id === message.author.id) return message.channel.send(':x: | **لا يمكنك حظر نفسك**');
  if(user.user.id === message.guild.owner.id) return message.channel.send(':x: | **لطيفة حاول يا صاح \:D**');
  if (user.hasPermission("MANAGE_MESSAGES")) return message.channel.send("**:x: | لايمكنني حظر احد من الاداره**");
+
  
  message.guild.member(user).ban({reason : reason});
  message.channel.send(`**:white_check_mark: | ${user.username} baned from the server ** `);
@@ -747,8 +746,6 @@ client.on('message', message => {
  
   if (message.mentions.users.size < 1) return message.channel.send(`:information_source: **\`\` ${prefix}kick @َζ͜͡ELMEWAL3\`\` يجب تحديد شخص **`);
   if (!reason) reason = 'No reason provided.';
-  if (!message.guild.member(user)
-  .bannable) return;
  if(user.user.id === message.author.id) return message.channel.send(':x: | **لا يمكنك طرد نفسك**');
  if(user.user.id === message.guild.owner.id) return message.channel.send(':x: | **لطيفة حاول يا صاح \:D**');
  if (user.hasPermission("MANAGE_MESSAGES")) return message.channel.send("**:x: | لايمكنني طرد احد من الاداره**");
