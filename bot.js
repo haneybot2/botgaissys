@@ -685,7 +685,7 @@ client.on('message', message => {
   let user = message.mentions.users.first();
   let reason = message.content.split(" ").slice(2).join(" ");
  
-  if (message.mentions.users.size < 1) return message.msg.channel.send(`:information_source: **\`\` ${prefix}ban @َζ͜͡ELMEWAL3\`\` يجب تحديد شخص **`);
+  if (message.mentions.users.size < 1) return message.channel.send(`:information_source: **\`\` ${prefix}ban @َζ͜͡ELMEWAL3\`\` يجب تحديد شخص **`);
   if (!reason) reason = 'No reason provided.';
   if (!message.guild.member(user)
   .bannable) return message.msg.channel.send("**:x: |لايمكنني حظر شخص اعلى من رتبتي**");
@@ -745,7 +745,7 @@ client.on('message', message => {
   let user = message.mentions.users.first();
   let reason = message.content.split(" ").slice(2).join(" ");
  
-  if (message.mentions.users.size < 1) return message.msg.channel.send(`:information_source: **\`\` ${prefix}kick @َζ͜͡ELMEWAL3\`\` يجب تحديد شخص **`);
+  if (message.mentions.users.size < 1) return message.channel.send(`:information_source: **\`\` ${prefix}kick @َζ͜͡ELMEWAL3\`\` يجب تحديد شخص **`);
   if (!reason) reason = 'No reason provided.';
   if (!message.guild.member(user)
   .bannable) return message.msg.channel.send("**:x: |لايمكنني طرد شخص اعلى من رتبتي**");
