@@ -578,13 +578,12 @@ setInterval(function(){})
 });
 const swearWords = ["خول", "علي زبي", "كس امكم", "يلعن شكلك", "كس امك", "اكس امك", "زبي", "يلعن", "كلب" ];
 client.on('message', message => {
-	var log = message.guild.channels.find("name","log");
   if (swearWords.some(word => message.content.includes(word)) ) {
     message.reply("مَّا يَلْفِظُ مِن قَوْلٍ إِلَّا لَدَيْهِ رَقِيبٌ عَتِيدٌ").then(sentMessage =>{
       sentMessage.delete(20000)
     })
     message.delete(1000)
-    log.send(message.author.toString() + "استخدم كلام لا يليق ~")
+    client.channels.get('488681093998837760').send(message.author.toString() + "استخدم كلام لا يليق ~")
   }
 });
 //comand-adminsserver
@@ -626,7 +625,6 @@ if (!message.content.startsWith(prefix)) return;
 		if(muteu.id === message.author.id) return message.channel.send(':x: | **لا يمكننك اعطاء ميوت لنفسك ._.**');
 		if(muteu.hasPermission("MANAGE_MESSAGES")) return message.channel.send("**لا يمكننك اعطاء ميوت لاحد من الاداره**");
 		let user = message.mentions.users.first();
-		var log = message.guild.channels.find("name","log");
 		let muteRole = message.guild.roles.find("name", "Muted");
 		if (!muteRole) return message.channel.send("** لا يوجد رتبة الميوت 'Muted' **").then(msg => {msg.delete(5000)});
 		let reason = message.content.split(" ").slice(2).join(" ");
@@ -641,7 +639,7 @@ if (!message.content.startsWith(prefix)) return;
 		.setFooter(`${message.author.tag}`, message.author.avatarURL)
 		.setColor("BLACK")
 		.setTimestamp();
-	log.send(mutelog);
+	client.channels.get('488681093998837760').send(mutelog);
   }
 if(command === `unmute`) {
   if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send(":x:** | للاداره فقط**").then(m => m.delete(5000));
@@ -675,7 +673,6 @@ client.on('message', message => {
  
   if (command == "ban") {
   if (!message.channel.guild) return;
-  var log = message.guild.channels.find("name","log");
   if (!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return  message.delete(); 
   if (!message.guild.member(client.user).hasPermission("BAN_MEMBERS")) return message.msg.channel.send("I Don't Have Ban_Members Permission");
   let user = message.mentions.users.first();
@@ -701,14 +698,13 @@ client.on('message', message => {
   .setDescription(`:airplane: **<@${user.id}> baned from the server**\n **by: **<@${message.author.id}>\n**Reason:** \`\`\`${reason}\`\`\``)
   .setFooter(message.author.tag)
   .setTimestamp()
-  log.send({embed : banembed})
+  client.channels.get('488681093998837760').send({embed : banembed})
 }
 });
 client.on('message' , message => {
     let user = message.mentions.users.first()|| client.users.get(message.content.split(' ')[1])
     if(message.content.startsWith(prefix + 'unban')) {
 	if(!message.guild.member(message.author).hasPermission("ADMINISTRATOR")) return  message.delete(); 
-	var log = message.guild.channels.find("name","log");
         if(!user) return;
         message.guild.unban(user);
         message.guild.owner.send(`**لقد تم فك الباند عن الشخص** \n ${user} \n **By :** <@${message.author.id}>`)
@@ -720,7 +716,7 @@ client.on('message' , message => {
         .addField('**By :**',` <@${message.author.id}> `)
         .setAuthor(message.guild.name)
        .setFooter('Requested by '+message.author.username, message.author.avatarURL)
-        log.sendEmbed(embed)
+        client.channels.get('488681093998837760').sendEmbed(embed)
     }
   });
 client.on('message', message => {
@@ -734,7 +730,6 @@ client.on('message', message => {
  
   if (command == "kick") {
   if (!message.channel.guild) return;
-  var log = message.guild.channels.find("name","log");
   if (!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return  message.delete(); 
   if (!message.guild.member(client.user).hasPermission("KICK_MEMBERS")) return message.msg.channel.send("I Don't Have KICK_Members Permission");
   let user = message.mentions.users.first();
@@ -759,7 +754,7 @@ client.on('message', message => {
   .setDescription(`**<@${user.id}> kicked from the server**\n **by: **<@${message.author.id}>\n**Reason:** ${reason}`)
   .setFooter(message.author.tag)
   .setTimestamp()
-  log.send({embed : kicke})
+  client.channels.get('488681093998837760').send({embed : kicke})
 }
 });
 //viocekick
