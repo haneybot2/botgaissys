@@ -843,7 +843,6 @@ client.on('message', msg => {
  //move-members
 client.on('message', message => require('./commands/move1.js')(client, message));
 client.on('message', message => require('./commands/move2.js')(client, message));
-client.on('message', message => require('./commands/moveall.js')(client, message));
 //bc-obc-bcrole
 client.on('message', message => require('./commands/bc/bc.js')(client, message));
 client.on('message', message => require('./commands/bc/obc.js')(client, message));
