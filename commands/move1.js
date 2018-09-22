@@ -34,4 +34,15 @@ message.channel.send("**:x:  العضو يجب أن يكون متواجد برو
 }
 } else {
 message.react("❌")
- }}}
+ }} else if (command == "move all") {
+ if (!message.member.hasPermission("ADMINISTRATOR")) return;
+   if(!message.guild.member(client.user).hasPermission("MOVE_MEMBERS")) return message.channel.send("**لايوجد لدي صلاحية السحب**");
+if (message.member.voiceChannel == null) return message.channel.send(`**الرجاء الدخول لروم صوتي**`)
+	
+ var author = message.member.voiceChannelID;
+ var m = message.guild.members.filter(m=>m.voiceChannel)
+ message.guild.members.filter(m=>m.voiceChannel).forEach(m => {
+ m.setVoiceChannel(author)
+ })
+ message.channel.send(`**تم سحب جميع الأعضاء إليك**`);
+ }}
