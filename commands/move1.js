@@ -6,7 +6,7 @@ if(!message.channel.guild) return;
 if (!message.content.startsWith(prefix)) return;
 	var command = message.content.split(" ")[0];
 	 command = command.slice(prefix.length);
-	  var args12 = msg.content.split(" ").slice(1);
+	  var args12 = message.content.split(" ").slice(1);
 	 var textxt = args12.slice(0).join("");
 	if (command == "move") {
 	var userm = message.mentions.members.first().id;
