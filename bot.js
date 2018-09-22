@@ -926,7 +926,7 @@ client.on('message', function(msg) {
         .addField(':crown: Owned by',`${msg.guild.owner}[${msg.guild.owner.id}]`,true)
         .addField(`:busts_in_silhouette:  Members [${msg.guild.memberCount}]`,`**${msg.guild.members.filter(m=>m.presence.status == 'online').size}** online`,true)
         .addField(`:speech_balloon: Channels [${msg.guild.channels}]`,`**${msg.guild.channels.filter(m => m.type === 'text').size}** Text | **${msg.guild.channels.filter(m => m.type === 'voice').size}** Voice`,true)
-        .addField(':earth_africa: Others',`**Region:** ${msg.guild.region}`,`**Verification Level:** ${msg.guild.verificationLevel}`,true)
+        .addField(':earth_africa: Others',`**Region:** ${msg.guild.region}\n**Verification Level:** ${msg.guild.verificationLevel}`,true)
         .addField(`:closed_lock_with_key:  Roles [${msg.guild.roles.size}]`,`To see a list with all roles use **${prefix}roles**`);
           msg.channel.send({embed:embed});
         }
