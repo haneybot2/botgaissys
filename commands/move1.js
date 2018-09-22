@@ -9,6 +9,7 @@ command = command.slice(prefix.length);
 var args12 = message.content.split(" ").slice(1);
 var textxt = args12.slice(0).join("");
 if (command == "move") {
+if (message.member.voiceChannel != null) {
 if (message.mentions.members.first().voiceChannel != null) {
 var userm = message.mentions.members.first().id;
 if (textxt == userm) {
@@ -39,7 +40,7 @@ message.channel.send("**:x:  العضو يجب أن يكون متواجد برو
 }
 } else {
 message.react("❌")
- }}} else if (textxt == "all") {
+ }}}} else if (textxt == "all") {
  if (!message.member.hasPermission("ADMINISTRATOR")) return;
    if(!message.guild.member(client.user).hasPermission("MOVE_MEMBERS")) return message.channel.send("**لايوجد لدي صلاحية السحب**");
 if (message.member.voiceChannel == null) return message.channel.send(`**الرجاء الدخول لروم صوتي**`)
