@@ -53,4 +53,4 @@ if (message.member.voiceChannel == null) return message.channel.send(`**الرج
 
  };
  }
- }}}
+ }
