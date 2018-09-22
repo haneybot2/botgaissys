@@ -914,24 +914,22 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return message.delete();
 client.on('message', message => require('./commands/role.js')(client, message));
 //server-data 
 client.on('message', function(msg) {
-  if(msg.content === prefix + "server") { 
-	if (!msg.member.hasPermission('MANAGE_MESSAGES')) return msg.delete();
-    if(!msg.channel.guild) return;        
-    let embed = new Discord.RichEmbed()
-    .setColor('BLACK')
-    .setThumbnail(msg.guild.iconURL)
-    .addField(':globe_with_meridians: **اسم السيرفر : **' , `**[ ${msg.guild.name} ]**`,true)
-    .addField(':earth_africa: ** موقع السيرفر :**',`**[ ${msg.guild.region} ]**`,true)
-    .addField(':military_medal:** الرتب :**',`**[ ${msg.guild.roles.size} ]**`,true)
-    .addField(':bust_in_silhouette:** عدد الاعضاء :**',`**[ ${msg.guild.memberCount} ]**`,true)
-    .addField(':white_check_mark:** عدد الاعضاء الاونلاين :**',`**[ ${msg.guild.members.filter(m=>m.presence.status == 'online').size} ]**`,true)
-    .addField(':pencil:** الرومات الكتابية :**',`**[ ${msg.guild.channels.filter(m => m.type === 'text').size} ]**`,true)
-    .addField(':loud_sound:** رومات الصوت :**',`**[ ${msg.guild.channels.filter(m => m.type === 'voice').size} ]**`,true)
-    .addField(':crown:** صاحب السيرفر :**',`**[ ${msg.guild.owner} ]**`,true)
-    .addField(':id:** ايدي السيرفر :**',`**[ ${msg.guild.id} ]**`,true)
-    .addField(':date:** تم عمل السيرفر في : **',msg.guild.createdAt.toLocaleString())
-    msg.channel.send({embed:embed});
-  }
+        if(msg.content === prefix + "server") { 
+              if (!msg.member.hasPermission('MANAGE_MESSAGES')) return msg.delete();
+          if(!msg.channel.guild) return;        
+          let embed = new Discord.RichEmbed()
+        .setColor('BLACK')
+        .setThumbnail(msg.guild.iconURL)
+        .setAuthor(msg.guild.name, msg.guild.iconURL)
+        .addField(':id: Server ID:', msg.guild.id,true)
+        .addField(':calendar: Created On', msg.guild.createdAt.toLocaleString(),true)
+        .addField(':crown: Owned by',`${msg.guild.owner}[${msg.guild.owner.id}]`,true)
+        .addField(`:busts_in_silhouette:  Members [${msg.guild.memberCount}]`,`**${msg.guild.members.filter(m=>m.presence.status == 'online').size}** online`,true)
+        .addField(`:speech_balloon: Channels [${msg.guild.channels}]`,`**${msg.guild.channels.filter(m => m.type === 'text').size}** Text | **${msg.guild.channels.filter(m => m.type === 'voice').size}** Voice`,true)
+        .addField(':earth_africa: Others',`**Region:** ${msg.guild.region}`,`**Verification Level:** ${msg.guild.verificationLevel}`,true)
+        .addField(`:closed_lock_with_key:  Roles [${msg.guild.roles.size}]`,`To see a list with all roles use **${prefix}roles**`);
+          msg.channel.send({embed:embed});
+        }
 });
 //warn
 client.on('message', async message => {
