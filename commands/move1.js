@@ -6,7 +6,11 @@ if(!message.channel.guild) return;
 if (!message.content.startsWith(prefix)) return;
 	var command = message.content.split(" ")[0];
 	 command = command.slice(prefix.length);
+	  var args12 = msg.content.split(" ").slice(1);
+	 var textxt = args12.slice(0).join("");
 	if (command == "move") {
+	var userm = message.mentions.members.first().id;
+	if (textxt == userm) {
  if (message.member.hasPermission("MOVE_MEMBERS")) {
  if (message.mentions.users.size === 0) {
  return message.channel.send("**:x:  لم يتم العثور على العضو المطلوب **")
@@ -34,7 +38,7 @@ message.channel.send("**:x:  العضو يجب أن يكون متواجد برو
 }
 } else {
 message.react("❌")
- }} else if (command == "move all") {
+ }} else if (textxt == "all") {
  if (!message.member.hasPermission("ADMINISTRATOR")) return;
    if(!message.guild.member(client.user).hasPermission("MOVE_MEMBERS")) return message.channel.send("**لايوجد لدي صلاحية السحب**");
 if (message.member.voiceChannel == null) return message.channel.send(`**الرجاء الدخول لروم صوتي**`)
@@ -44,5 +48,8 @@ if (message.member.voiceChannel == null) return message.channel.send(`**الرج
  message.guild.members.filter(m=>m.voiceChannel).forEach(m => {
  m.setVoiceChannel(author)
  })
- message.channel.send(`**تم سحب جميع الأعضاء إليك**`);
- }}
+ message.channel.send(`**تم سحب جميع الأعضاء إليك**`)
+
+ }
+ }
+ }
