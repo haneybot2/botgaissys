@@ -40,7 +40,7 @@ message.channel.send("**:x:  العضو يجب أن يكون متواجد برو
 }
 } else {
 message.react("❌")
- }}}} else if (textxt == "all") {
+ }} else if (textxt == "all") {
  if (!message.member.hasPermission("ADMINISTRATOR")) return;
    if(!message.guild.member(client.user).hasPermission("MOVE_MEMBERS")) return message.channel.send("**لايوجد لدي صلاحية السحب**");
 if (message.member.voiceChannel == null) return message.channel.send(`**الرجاء الدخول لروم صوتي**`)
@@ -52,6 +52,6 @@ if (message.member.voiceChannel == null) return message.channel.send(`**الرج
  })
  message.channel.send(`**تم سحب جميع الأعضاء إليك**`)
 
+ };
  }
- }
- }
+ }}}
