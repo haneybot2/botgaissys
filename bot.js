@@ -6,7 +6,7 @@ const adminprefix = process.env.adminprefix
 const dev = [process.env.id1];
 const owner = [process.env.id1 , process.env.id2 , process.env.id3];
 const id = [process.env.id1, process.env.id2 , process.env.id3 , process.env.id4 , process.env.id5 , process.env.id6 , process.env.id7];
-const log = process.env.log;
+const log = [process.env.log];
 ///////////////elmewal3/////////////////a7med////////////////anase
 const ms = require("ms");
 const fs = require('fs');
