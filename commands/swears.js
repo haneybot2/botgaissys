@@ -1,11 +1,12 @@
 const Discord = require("discord.js");
 const fs = require('fs');
 const prefix = process.env.prefix
-let Swears = JSON.parse(fs.readFileSync("./swears.json", "utf8"));
+
 
 module.exports = (client, message) => {
     var args = message.content.toLowerCase().split(' ');
     var command = args[0];
+    let Swears = JSON.parse(fs.readFileSync("./swears.json", "utf8"));
 	const embedh = new Discord.RichEmbed()
 	.setTitle(`** أمثله على الأوامر : **`)
 	.setDescription(`
