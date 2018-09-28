@@ -1,4 +1,5 @@
 const Discord = require("discord.js");
+const fs = require('fs');
 const prefix = process.env.prefix
 
 module.exports = (client, message) => {
@@ -10,7 +11,7 @@ module.exports = (client, message) => {
 	**${prefix}swears **: لاظهار الكلمات المضافه
 	**${prefix}add-swear [SWEAR]** : لاضافة كلمه
 	**${prefix}remove-swear [NUMBER]** : لازالة كلمه 
-	\`\`**${prefix}swears** ملحوظه : لمعرفة رقم الكلمه استخدم \`\`
+	\`\`${prefix}swears ملحوظه : لمعرفة رقم الكلمه استخدم \`\`
 	**${prefix}remove-all-swears** : لمسح كل الكلمات`)
 	.setFooter('Requested by '+message.author.username, message.author.avatarURL)
     .setColor(`#e60909`)
