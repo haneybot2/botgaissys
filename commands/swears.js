@@ -17,9 +17,9 @@ module.exports = (client, message) => {
 	.setFooter('Requested by '+message.author.username, message.author.avatarURL)
 	.setColor(`#e60909`);
    
-   if(command == prefix + 'swear') {
+    if(command == prefix + 'swear') {
 	   if(!args[1]) return message.channel.send(embedh)
-   }
+    }
    
    
     if(command == prefix + 'swears') {
@@ -50,10 +50,10 @@ module.exports = (client, message) => {
             }else {
                 var morepage = `يرجي الاختيار من 1 الي ${Math.round(Swears.length / 10) + 1}`;
             }
-			const embed1 = new Discord.RichEmbed()
-			.setDescription(`**${morepage}, لم يتم العثور علي هذه الصفحه**`)
-			.setFooter('Requested by '+message.author.username, message.author.avatarURL)
-			.setColor(`#e60909`);
+            const embed1 = new Discord.RichEmbed()
+            .setDescription(`**${morepage}, لم يتم العثور علي هذه الصفحه**`)
+            .setFooter('Requested by '+message.author.username, message.author.avatarURL)
+            .setColor(`#e60909`);
 	
             if(args[1] > Math.round(Swears.length / 10) + 1) return message.channel.send(embed1);
             if(args[1] < 1) return message.channel.send(embed1);
@@ -82,7 +82,7 @@ module.exports = (client, message) => {
         if(!message.member.hasPermission('ADMINISTRATOR')) return;
         if(!args[1]) return message.channel.send(embedh);
         if(Swears.length == 50) return message.channel.send(':x: | اسف ولكن اقصي عدد للكلمات 50 كلمه');
-        if(args1.length > 20) return message.channel.send(`:x: **| The swear ${args1.length} characters. Please try with characters less then \`\`20\`\`**`);
+        if(args[1].length > 20) return message.channel.send(`:x: **| The swear ${args1.length} characters. Please try with characters less then \`\`20\`\`**`);
        
         Swears.push(args1);
         fs.writeFile('./swears.json', JSON.stringify(Swears), (err) => {
