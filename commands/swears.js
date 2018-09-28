@@ -15,7 +15,7 @@ module.exports = (client, message) => {
 	\`\`${prefix}swears ملحوظه : لمعرفة رقم الكلمه استخدم \`\`
 	**${prefix}remove-all-swears** : لمسح كل الكلمات`)
 	.setFooter('Requested by '+message.author.username, message.author.avatarURL)
-    .setColor(`#e60909`)
+	.setColor(`#e60909`);
    
    if(command == prefix + 'swear') {
 	   if(!args[1]) return message.channel.send(embedh)
