@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const log = process.env.log;
+const log = [process.env.log];
 
 module.exports = (client, message) => {
 if(!message.channel.guild) return;
