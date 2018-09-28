@@ -19,8 +19,8 @@ module.exports = (client, message) => {
 
     var command = message.content.toLowerCase().split(" ")[0]; 
     var args = message.content.toLowerCase().split(" ");
+    var args1 = message.content.split(' ').slice(1);
     var userM = message.guild.member(message.mentions.users.first() || message.guild.members.find(m => m.id === args[1]));
-    var member = message.mentions.users.first();
    
     if(command == prefix + 'role') {
         if(!message.member.hasPermission('MANAGE_ROLES')) return;
@@ -37,8 +37,9 @@ module.exports = (client, message) => {
         }else if(args[1] === 'humans' || args[1] === 'bots' || args[1] === 'all') {
             var argsRole = message.content.toLowerCase().split(' ').slice(3); 
         }
-                 var roleRe = args1.join(' ').replace(member, '').replace(args[0], '').replace('-', '').replace(' ', '');
-                var getRole = message.guild.roles.find('name', roleRe);
+ 
+        var roleRe = args1.join(' ').replace(args1[0], '').replace('-', '').replace(' ', '');
+        var getRole = message.guild.roles.find('name', roleRe);
  
         if(userM) {
             if(!getRole) return message.channel.send(':x:  **اسف ولكن لم اجد الرتبه المطلوبه!**');
