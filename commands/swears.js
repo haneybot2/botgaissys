@@ -80,7 +80,7 @@ module.exports = (client, message) => {
    
     if(command == prefix + 'add-swear') {
         if(!message.member.hasPermission('ADMINISTRATOR')) return;
-        if(!args1) return message.channel.send(embedh);
+        if(!args[1]) return message.channel.send(embedh);
         if(Swears.length == 50) return message.channel.send(':x: | اسف ولكن اقصي عدد للكلمات 50 كلمه');
         if(args1.length > 20) return message.channel.send(`:x: **| The swear ${args1.length} characters. Please try with characters less then \`\`20\`\`**`);
        
