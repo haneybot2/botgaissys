@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const prefix = process.env.prefix
+const log = process.env.log;
 
 module.exports = (client, message) => {
 if (message.author.bot) return;
@@ -9,7 +10,6 @@ if (message.author.bot) return;
 if (message.member.voiceChannel == null) return message.channel.send(`**الرجاء الدخول لروم صوتي**`)
  var author = message.member.voiceChannelID;
  var voicename = message.member.voiceChannel.name;
- var log = message.guild.channels.find('name', 'log');
  var m = message.guild.members.filter(m=>m.voiceChannel)
  var moveall = new Discord.RichEmbed()
  .setColor("#000000")
