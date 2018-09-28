@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const prefix = process.env.prefix
-const log = [process.env.log]
+const log = [process.env.log];
 
 module.exports = (client, message) => {
 if (message.author.bot) return;
