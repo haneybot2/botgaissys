@@ -6,6 +6,7 @@ const adminprefix = process.env.adminprefix
 const dev = [process.env.id1];
 const owner = [process.env.id1 , process.env.id2 , process.env.id3];
 const id = [process.env.id1, process.env.id2 , process.env.id3 , process.env.id4 , process.env.id5 , process.env.id6 , process.env.id7];
+const dev = process.env.log;
 ///////////////elmewal3/////////////////a7med////////////////anase
 const ms = require("ms");
 const fs = require('fs');
@@ -114,7 +115,7 @@ client.on('guildCreate', gc =>{
             .setThumbnail(`${message.author.avatarURL}`)
             .setAuthor(message.author.username, message.author.avatarURL)
         .setFooter(`${message.guild.name} `)
-     message.channel.send(embed500)
+     log.send(embed500)
      message.author.send('`** \`\`انت معاقب ميوت شاتي بسبب نشر سرفرات, ان كان عن طريق الخطا ف تكلم مع \`\`الادارة **`');
    
        
@@ -399,7 +400,16 @@ client.on('message', message => {
     }
 });
 //swears-not
-client.on('message', message => require('./commands/swears.js')(client, message));
+const swearWords = ["خول", "علي زبي", "كس امكم", "يلعن شكلك", "كس امك", "اكس امك", "زبي", "يلعن", "كلب" ];
+client.on('message', message => {
+  if (swearWords.some(word => message.content.includes(word)) ) {
+    message.reply("مَّا يَلْفِظُ مِن قَوْلٍ إِلَّا لَدَيْهِ رَقِيبٌ عَتِيدٌ").then(sentMessage =>{
+      sentMessage.delete(20000)
+    })
+    message.delete(1000)
+    log.send(message.author.toString() + "استخدم كلام لا يليق ~")
+  }
+});
 //comand-adminsserver
  //members
 client.on('message', function(message)  {
@@ -453,7 +463,7 @@ if (!message.content.startsWith(prefix)) return;
 		.setFooter(`${message.author.tag}`, message.author.avatarURL)
 		.setColor("BLACK")
 		.setTimestamp();
-	client.channels.get('488681093998837760').send(mutelog);
+	log.send(mutelog);
   }
 if(command === `unmute`) {
   if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send(":x:** | للاداره فقط**").then(m => m.delete(5000));
@@ -512,7 +522,7 @@ client.on('message', message => {
   .setDescription(`:airplane: **<@${user.id}> baned from the server**\n **by: **<@${message.author.id}>\n**Reason:** \`\`\`${reason}\`\`\``)
   .setFooter(message.author.tag)
   .setTimestamp()
-  client.channels.get('488681093998837760').send({embed : banembed})
+  log.send({embed : banembed})
 }
 });
 client.on('message' , message => {
@@ -530,7 +540,7 @@ client.on('message' , message => {
         .addField('**By :**',` <@${message.author.id}> `)
         .setAuthor(message.guild.name)
        .setFooter('Requested by '+message.author.username, message.author.avatarURL)
-        client.channels.get('488681093998837760').sendEmbed(embed)
+        log.sendEmbed(embed)
     }
   });
 client.on('message', message => {
@@ -568,7 +578,7 @@ client.on('message', message => {
   .setDescription(`**<@${user.id}> kicked from the server**\n **by: **<@${message.author.id}>\n**Reason:** ${reason}`)
   .setFooter(message.author.tag)
   .setTimestamp()
-  client.channels.get('488681093998837760').send({embed : kicke})
+  log.send({embed : kicke})
 }
 });
 //viocekick
@@ -785,7 +795,7 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return message.delete();
   .addField("**User:**",  '**[ ' + `${user.tag}` + ' ]**')
   .addField("**By:**", '**[ ' + `${message.author.tag}` + ' ]**')
   .addField("**Reason:**", '**[ ' + `${reason}` + ' ]**');
-   client.channels.find('name', 'log').send({
+   log.send({
     embed : banembed
   })
   
