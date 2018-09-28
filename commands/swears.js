@@ -16,7 +16,7 @@ module.exports = (client, message) => {
     .setColor(`#e60909`)
    
    if(command == prefix + 'swear') {
-	   if(!args1) return message.channel.send(embedh)
+	   if(!args[1]) return message.channel.send(embedh)
    }
    
    
