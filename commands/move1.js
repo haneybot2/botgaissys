@@ -1,6 +1,5 @@
 const Discord = require("discord.js");
 const prefix = process.env.prefix
-const log = [process.env.log];
 
 module.exports = (client, message) => {
 if(!message.channel.guild) return;
@@ -24,7 +23,7 @@ if (message.member.voiceChannel != null) {
  .setFooter(message.author.tag, message.author.avatarURL) 
  .setTimestamp();
  message.guild.members.get(userid).setVoiceChannel(authorchannel).then(m => message.channel.send(`:white_check_mark: **<@${userid}> moved to \`\`${authorchannelname}\`\`**`))
- message.guild.members.get(userid).setVoiceChannel(authorchannel).then(m => log.send({embed : movelog}))
+ message.guild.members.get(userid).setVoiceChannel(authorchannel).then(m => client.channels.get(process.env.log).send({embed : movelog}))
 	 
 } else {
 message.channel.send("**:x:  العضو يجب أن يكون متواجد بروم صوتي **")
