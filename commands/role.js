@@ -19,8 +19,8 @@ module.exports = (client, message) => {
 
     var command = message.content.toLowerCase().split(" ")[0]; 
     var args = message.content.toLowerCase().split(" ");
-    var args1 = message.content.split(' ').slice(1);
     var userM = message.guild.member(message.mentions.users.first() || message.guild.members.find(m => m.id === args[1]));
+    var member = message.mentions.users.first();
    
     if(command == prefix + 'role') {
         if(!message.member.hasPermission('MANAGE_ROLES')) return;
@@ -37,9 +37,8 @@ module.exports = (client, message) => {
         }else if(args[1] === 'humans' || args[1] === 'bots' || args[1] === 'all') {
             var argsRole = message.content.toLowerCase().split(' ').slice(3); 
         }
- 
-        var roleRe = args1.join(' ').replace(args1[0], '').replace('-', '').replace(' ', '');
-        var getRole = message.guild.roles.find('name', roleRe);
+		var roleRe = argsRole.join(' ').replace(member, '').replace(argsRole[0], '').replace('-', '').replace(' ', '');
+                var getRole = message.guild.roles.find('name', roleRe)  || message.guild.roles.find(r => r.name.toLowerCase().includes(argsRole));
  
         if(userM) {
             if(!getRole) return message.channel.send(':x:  **اسف ولكن لم اجد الرتبه المطلوبه!**');
@@ -63,8 +62,7 @@ module.exports = (client, message) => {
             }
         }else if(args[1] === 'humans') {
 		
-        var roleRe = args.join(' ').replace(args[3], '').replace('-', '').replace(' ', '');
-        var getRole = message.guild.roles.find('name', roleRe);
+        var getRole = message.mentions.roles.first() || message.guild.roles.find(r => r.id === argsRole) || message.guild.roles.find(r => r.name.toLowerCase().includes(argsRole));
            
             if(!args[2]) return message.channel.send(embed);
             if(!args[3]) return message.channel.send(embed); 
@@ -142,9 +140,6 @@ module.exports = (client, message) => {
                 })
             } 
         }else if(args[1] === 'bots') {
-		
-        var roleRe = args.join(' ').replace(args[3], '').replace('-', '').replace(' ', '');
-        var getRole = message.guild.roles.find('name', roleRe);
            
             if(!args[2]) return message.channel.send(embed);
             if(!args[3]) return message.channel.send(embed);
@@ -223,9 +218,6 @@ module.exports = (client, message) => {
                 })
             }
         }else if(args[1] === 'all') { 
-		
-        var roleRe = args.join(' ').replace(args[3], '').replace('-', '').replace(' ', '');
-        var getRole = message.guild.roles.find('name', roleRe);
            
             if(!args[2]) return message.channel.send(embed);
             if(!args[3]) return message.channel.send(embed);
