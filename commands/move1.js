@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const prefix = process.env.prefix
+const log = process.env.log;
 
 module.exports = (client, message) => {
 if(!message.channel.guild) return;
@@ -16,7 +17,6 @@ if (message.member.voiceChannel != null) {
  var authorchannelname = message.member.voiceChannel.name;
  var authorchannel = message.member.voiceChannelID;
  var userid = message.mentions.members.first().id;
- var log = message.guild.channels.find('name', 'log');
  var movelog = new Discord.RichEmbed()
  .setAuthor(message.guild.name, message.guild.iconURL)
  .setColor("#000000")
