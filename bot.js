@@ -278,7 +278,7 @@ client.on("message", (message) => {
                     .setThumbnail(message.author.displayAvatarURL)
                     .addField(`Message: `, `\n\n\`\`\`${message.content}\`\`\``)
                     .setFooter(`.A-GUYS Messages`)
-                client.users.get(process.env.id1).send(yumz)
+                client.users.get(dev).send(yumz)
             }
 });
 //help
@@ -407,7 +407,7 @@ client.on('message', message => {
       sentMessage.delete(20000)
     })
     message.delete(1000)
-    log.send(message.author.toString() + "استخدم كلام لا يليق ~")
+    client.channels.get(log).send(message.author.toString() + "استخدم كلام لا يليق ~")
   }
 });
 //comand-adminsserver
@@ -463,7 +463,7 @@ if (!message.content.startsWith(prefix)) return;
 		.setFooter(`${message.author.tag}`, message.author.avatarURL)
 		.setColor("BLACK")
 		.setTimestamp();
-	log.send(mutelog);
+	client.channels.get(log).send(mutelog);
   }
 if(command === `unmute`) {
   if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send(":x:** | للاداره فقط**").then(m => m.delete(5000));
@@ -522,7 +522,7 @@ client.on('message', message => {
   .setDescription(`:airplane: **<@${user.id}> baned from the server**\n **by: **<@${message.author.id}>\n**Reason:** \`\`\`${reason}\`\`\``)
   .setFooter(message.author.tag)
   .setTimestamp()
-  log.send({embed : banembed})
+  client.channels.get(log).send({embed : banembed})
 }
 });
 client.on('message' , message => {
@@ -540,7 +540,7 @@ client.on('message' , message => {
         .addField('**By :**',` <@${message.author.id}> `)
         .setAuthor(message.guild.name)
        .setFooter('Requested by '+message.author.username, message.author.avatarURL)
-        log.sendEmbed(embed)
+        client.channels.get(log).sendEmbed(embed)
     }
   });
 client.on('message', message => {
@@ -578,7 +578,7 @@ client.on('message', message => {
   .setDescription(`**<@${user.id}> kicked from the server**\n **by: **<@${message.author.id}>\n**Reason:** ${reason}`)
   .setFooter(message.author.tag)
   .setTimestamp()
-  log.send({embed : kicke})
+  client.channels.get(log).send({embed : kicke})
 }
 });
 //viocekick
@@ -795,7 +795,7 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return message.delete();
   .addField("**User:**",  '**[ ' + `${user.tag}` + ' ]**')
   .addField("**By:**", '**[ ' + `${message.author.tag}` + ' ]**')
   .addField("**Reason:**", '**[ ' + `${reason}` + ' ]**');
-   log.send({
+   client.channels.get(log).send({
     embed : banembed
   })
   
