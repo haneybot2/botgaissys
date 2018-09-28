@@ -1,6 +1,5 @@
 const Discord = require("discord.js");
 const prefix = process.env.prefix
-const log = [process.env.log];
 
 module.exports = (client, message) => {
 if (message.author.bot) return;
@@ -21,5 +20,5 @@ if (message.member.voiceChannel == null) return message.channel.send(`**الرج
  m.setVoiceChannel(author)
  })
  message.channel.send(`**All members have been move to \`\`${voicename}\`\`**`)
- log.send({embed : moveall})
+ client.channels.get(process.env.log).send({embed : moveall})
  }}
