@@ -87,7 +87,7 @@ module.exports = (client, message) => {
             if(err) console.error(err);
         })
         message.channel.send(`:white_check_mark: **| Successfully added **${args1}** To swears words!**`);
-    }/
+    }
    
    
     if(command == prefix + 'remove-swear') {
