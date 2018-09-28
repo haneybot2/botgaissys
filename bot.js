@@ -6,7 +6,6 @@ const adminprefix = process.env.adminprefix
 const dev = [process.env.id1];
 const owner = [process.env.id1 , process.env.id2 , process.env.id3];
 const id = [process.env.id1, process.env.id2 , process.env.id3 , process.env.id4 , process.env.id5 , process.env.id6 , process.env.id7];
-const log = [process.env.log];
 ///////////////elmewal3/////////////////a7med////////////////anase
 const ms = require("ms");
 const fs = require('fs');
@@ -407,7 +406,7 @@ client.on('message', message => {
       sentMessage.delete(20000)
     })
     message.delete(1000)
-    client.channels.get(log).send(message.author.toString() + "استخدم كلام لا يليق ~")
+    client.channels.get(process.env.log).send(message.author.toString() + "استخدم كلام لا يليق ~")
   }
 });
 //comand-adminsserver
@@ -463,7 +462,7 @@ if (!message.content.startsWith(prefix)) return;
 		.setFooter(`${message.author.tag}`, message.author.avatarURL)
 		.setColor("BLACK")
 		.setTimestamp();
-	client.channels.get(log).send(mutelog);
+	client.channels.get(process.env.log).send(mutelog);
   }
 if(command === `unmute`) {
   if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send(":x:** | للاداره فقط**").then(m => m.delete(5000));
@@ -522,7 +521,7 @@ client.on('message', message => {
   .setDescription(`:airplane: **<@${user.id}> baned from the server**\n **by: **<@${message.author.id}>\n**Reason:** \`\`\`${reason}\`\`\``)
   .setFooter(message.author.tag)
   .setTimestamp()
-  client.channels.get(log).send({embed : banembed})
+  client.channels.get(process.env.log).send({embed : banembed})
 }
 });
 client.on('message' , message => {
@@ -540,7 +539,7 @@ client.on('message' , message => {
         .addField('**By :**',` <@${message.author.id}> `)
         .setAuthor(message.guild.name)
        .setFooter('Requested by '+message.author.username, message.author.avatarURL)
-        client.channels.get(log).sendEmbed(embed)
+        client.channels.get(process.env.log).sendEmbed(embed)
     }
   });
 client.on('message', message => {
@@ -578,7 +577,7 @@ client.on('message', message => {
   .setDescription(`**<@${user.id}> kicked from the server**\n **by: **<@${message.author.id}>\n**Reason:** ${reason}`)
   .setFooter(message.author.tag)
   .setTimestamp()
-  client.channels.get(log).send({embed : kicke})
+  client.channels.get(process.env.log).send({embed : kicke})
 }
 });
 //viocekick
