@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const fs = require('fs');
-var Swears = JSON.parse(fs.readFileSync("../swears.json", "utf8"));
+var Swears = JSON.parse(fs.readFileSync("./swears.json", "utf8"));
 const prefix = process.env.prefix
 
 module.exports = (client, message) => {
@@ -85,7 +85,7 @@ module.exports = (client, message) => {
         if(args1.length > 20) return message.channel.send(`:x: **| The swear ${args1.length} characters. Please try with characters less then \`\`20\`\`**`);
        
         Swears.push(args1);
-        fs.writeFile('../swears.json', JSON.stringify(Swears), (err) => {
+        fs.writeFile('./swears.json', JSON.stringify(Swears), (err) => {
             if(err) console.error(err);
         })
         message.channel.send(`:white_check_mark: **| Successfully added **${args1}** To swears words!**`);
@@ -103,7 +103,7 @@ module.exports = (client, message) => {
         if(!args[1]) return message.channel.send(embedh);
        
         message.channel.send(`:white_check_mark: **| Successfully remove **${Swears.splice(args[1] - 1, 1)}** from swears words**`);
-        fs.writeFile('../swears.json', JSON.stringify(Swears), (err) => {
+        fs.writeFile('./swears.json', JSON.stringify(Swears), (err) => {
             if(err) console.error(err);
         })
     }
@@ -114,7 +114,7 @@ module.exports = (client, message) => {
         if(Swears.length < 1) return message.channel.send(`:information_source:** | No swears words founds to remove it! If you want to add some words type \`\`${prefix}add-swear [SWEAR]\`\`**`);
         message.channel.send(`:white_check_mark: **| Successfully remove **${Swears.length}** Swears words!**`);
         Swears = [];
-        fs.writeFile('../swears.json', JSON.stringify(Swears), (err) => {
+        fs.writeFile('./swears.json', JSON.stringify(Swears), (err) => {
             if(err) console.error(err);
         })
     }
