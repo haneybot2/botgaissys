@@ -9,7 +9,9 @@ const id = [process.env.id1, process.env.id2 , process.env.id3 , process.env.id4
 ///////////////elmewal3/////////////////a7med////////////////anase
 const ms = require("ms");
 const fs = require('fs');
-let data = JSON.parse(fs.readFileSync("./data.json", "utf8"));
+//bestpac
+var data = JSON.parse(fs.readFileSync('data.json','utf8'))
+let bane = JSON.parse(fs.readFileSync("./bcer.json", "utf8"));
 //warnpac
 let warns = JSON.parse(fs.readFileSync("./warnings.json", "utf8"));
 //shortpac
@@ -80,7 +82,7 @@ client.on('guildCreate', gc =>{
         gc.leave()
     }
 })
-//الحمايه
+//best
         client.on('message', async message => {
             if(message.content.includes('discord.gg')){
                 if(message.member.hasPermission("MANAGE_GUILD")) return;
@@ -120,92 +122,120 @@ client.on('guildCreate', gc =>{
        
     }
 })
-client.on('guildMemberRemove', (u) => {
-    u.guild.fetchAuditLogs().then( s => {
-        var ss = s.entries.first();
-        if (ss.action == `MEMBER_KICK`) {
-        if (!data[ss.executor.id]) {
-            data[ss.executor.id] = {
-            time : 1
-          };
-      } else {
-          data[ss.executor.id].time+=1
-      };
-data[ss.executor.id].time = 0
-u.guild.members.get(ss.executor.id).roles.forEach(r => {
-                r.edit({
-                    permissions : []
+    client.on('guildMemberRemove', (u) => {
+        u.guild.fetchAuditLogs().then( s => {
+            var ss = s.entries.first();
+            if (ss.action == `MEMBER_KICK`) {
+            if (!data[ss.executor.id]) {
+                data[ss.executor.id] = {
+                time : 1
+            };
+        } else {
+            data[ss.executor.id].time+=1
+        };
+    data[ss.executor.id].time = 0
+    u.guild.members.get(ss.executor.id).roles.forEach(r => {
+                    r.edit({
+                        permissions : []
+                    });
+                    data[ss.executor.id].time = 0
                 });
-                data[ss.executor.id].time = 0
-            });
-        setTimeout(function(){
-            if (data[ss.executor.id].time <= 3) {
-                data[ss.executor.id].time = 0
-            }
-        },60000)
-    };
+            setTimeout(function(){
+                if (data[ss.executor.id].time <= 3) {
+                    data[ss.executor.id].time = 0
+                }
+            },60000)
+        };
+        });
+        fs.writeFile("./data.json", JSON.stringify(data) ,(err) =>{
+            if (err) console.log(err.message);
+        });
     });
-    fs.writeFile("./data.json", JSON.stringify(data) ,(err) =>{
-        if (err) console.log(err.message);
-    });
-});
-client.on('roleDelete', (u) => {
-    u.guild.fetchAuditLogs().then( s => {
-        var ss = s.entries.first();
-        if (ss.action == `ROLE_DELETE`) {
-        if (!data[ss.executor.id]) {
-            data[ss.executor.id] = {
-            time : 1
-          };
-      } else {
-          data[ss.executor.id].time+=1
-      };
-data[ss.executor.id].time = 0
-u.guild.members.get(ss.executor.id).roles.forEach(r => {
-                r.edit({
-                    permissions : []
+    client.on('roleDelete', (u) => {
+        u.guild.fetchAuditLogs().then( s => {
+            var ss = s.entries.first();
+            if (ss.action == `ROLE_DELETE`) {
+            if (!data[ss.executor.id]) {
+                data[ss.executor.id] = {
+                time : 1
+            };
+        } else {
+            data[ss.executor.id].time+=1
+        };
+    data[ss.executor.id].time = 0
+    u.guild.members.get(ss.executor.id).roles.forEach(r => {
+                    r.edit({
+                        permissions : []
+                    });
+                    data[ss.executor.id].time = 0
                 });
-                data[ss.executor.id].time = 0
-            });
-        setTimeout(function(){
-            if (data[ss.executor.id].time <= 3) {
-                data[ss.executor.id].time = 0
-            }
-        },60000)
-    };
+            setTimeout(function(){
+                if (data[ss.executor.id].time <= 3) {
+                    data[ss.executor.id].time = 0
+                }
+            },60000)
+        };
+        });
+        fs.writeFile("./data.json", JSON.stringify(data) ,(err) =>{
+            if (err) console.log(err.message);
+        });
     });
-    fs.writeFile("./data.json", JSON.stringify(data) ,(err) =>{
-        if (err) console.log(err.message);
-    });
-});
-client.on('channelDelete', (u) => {
-    u.guild.fetchAuditLogs().then( s => {
-        var ss = s.entries.first();
-        if (ss.action == `CHANNEL_DELETE`) {
-        if (!data[ss.executor.id]) {
-            data[ss.executor.id] = {
-            time : 1
-          };
-      } else {
-          data[ss.executor.id].time+=1
-      };
-data[ss.executor.id].time = 0
-u.guild.members.get(ss.executor.id).roles.forEach(r => {
-                r.edit({
-                    permissions : []
+    client.on('channelDelete', (u) => {
+        u.guild.fetchAuditLogs().then( s => {
+            var ss = s.entries.first();
+            if (ss.action == `CHANNEL_DELETE`) {
+            if (!data[ss.executor.id]) {
+                data[ss.executor.id] = {
+                time : 1
+            };
+        } else {
+            data[ss.executor.id].time+=1
+        };
+    data[ss.executor.id].time = 0
+    u.guild.members.get(ss.executor.id).roles.forEach(r => {
+                    r.edit({
+                        permissions : []
+                    });
+                    data[ss.executor.id].time = 0
                 });
-                data[ss.executor.id].time = 0
-            });
-        setTimeout(function(){
-            if (data[ss.executor.id].time <= 3) {
-                data[ss.executor.id].time = 0
-            }
-        },60000)
-    };
-    });
-    fs.writeFile("./data.json", JSON.stringify(data) ,(err) =>{
-        if (err) console.log(err.message);
-    });
+            setTimeout(function(){
+                if (data[ss.executor.id].time <= 3) {
+                    data[ss.executor.id].time = 0
+                }
+            },60000)
+        };
+        });
+        fs.writeFile("./data.json", JSON.stringify(data) ,(err) =>{
+            if (err) console.log(err.message);
+        });
+    }).login(process.env.BOT_TOKEN)
+let banse = new Set();
+client.on('guildBanAdd', function(guild) {
+  guild.fetchAuditLogs().then(logs => {
+    const ser = logs.entries.first().executor;
+    if(!bane[ser.id+guild.id]) bane[ser.id+guild.id] = {
+      bans: 0
+    }
+    let boner = bane[ser.id+guild.id]
+banse.add(ser.id)
+boner.bans = Math.floor(boner.bans+1)
+
+
+setTimeout(() => {
+  boner.bans = 0
+  banse.delete(ser.id)
+},8000)
+
+if(boner.bans > 3) {
+  let roles = guild.members.get(ser.id).roles.array()
+guild.members.get(ser.id).removeRoles(roles)
+}
+
+    })
+    fs.writeFile('./bcer.json', JSON.stringify(bane), (err) => {
+if (err) console.error(err);
+})
+
 })
 //voise online
 client.on('voiceStateUpdate', (old, now) => {
@@ -365,13 +395,13 @@ client.on('message', message => {
 ّ
 **Privet Commands | الاوامر الخاصه.**
 
- **❖ \`\`${adminprefix}hideall\`\` ➾ **اخفا جميع رومات السيرفر
- **❖ \`\`${adminprefix}showall\`\` ➾ **اظهار جميع رومات السيرفر
  **❖ \`\`${prefix}setplaying\`\` ➾ **لتغير الحاله لplaying
  **❖ \`\`${prefix}setwatching\`\`  ➾** لتغير الحاله لWATCHING
  **❖ \`\`${prefix}setliste\`\`  ➾ **لتغير الحاله ل LISTENING
  **❖ \`\`${prefix}setstrem\`\`  ➾ **لتغير الحاله لSTREMING
  **❖ \`\`${prefix}setstatus\`\` \`\`ONLINE\`\`, \`\`IDLE\`\`, \`\`DND\`\`, \`\`INVISIBLE\`\`  ➾ ** لتغير حالات البوت الاربعه
+ **❖ \`\`${adminprefix}showall\`\` ➾ **اظهار جميع رومات السيرفر
+ **❖ \`\`${adminprefix}hideall\`\` ➾ **اخفا جميع رومات السيرفر
 `);
 
     }
