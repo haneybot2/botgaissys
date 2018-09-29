@@ -422,6 +422,7 @@ client.on('message', message => {
  **\`\`${prefix}say\`\`** - اذا ارتدت ان يقول البوت الكلام الي تكتبه من غير ما يبان انك الي كاتبه
  **\`\`${prefix}emb\`\`** - نفس امر ساي ولكن بامبد
  **\`\`${prefix}sendpic <or> sendpice\`\`** - لارسال صوره بامبد وبدون
+ **\`\`${adminprefix}id\`\`** - my id
  **\`\`${adminprefix}deleteall\`\`** - لمسح كل شي
  **\`\`${adminprefix}crate server\`\`** - لانشاء سيرفر
 `);
@@ -920,7 +921,7 @@ client.on('message', eyadandr3d => {
                 if(!args) return eyadandr3d.channel.send('`**ضع رابط الصوره**`');
                 eyadandr3d.guild.owner.send(`**تم تغيير صوره السرفر الي ${args}
                 بواسطة : <@${eyadandr3d.author.id}>**`)
-            eyadandr3d.guild.setIcon(args)
+                eyadandr3d.guild.setIcon(args)
                 eyadandr3d.channel.send(`**تم تغير صورة السيرفر الي : __${args}__ ** `);
                 
        }
@@ -1158,8 +1159,8 @@ var mentionned = message.mentions.members.first();
     .setColor("#0a0909")
 .addField(': تاريخ دخولك للديسكورد',` \`${moment(heg.createdTimestamp).format('YYYY/M/D HH:mm:ss')} \`**\n ${moment(heg.createdTimestamp).fromNow()}**` ,true) 
 .addField(': تاريخ دخولك لسيرفرنا', `\`${moment(h.joinedAt).format('YYYY/M/D HH:mm:ss')}  \` **\n ${moment(h.joinedAt).fromNow()} **`, true)
-.addField(` :لقد قمت بدعوة `, ` **${inviteCount}** `)
-.setFooter(`${message.author.tag}`, 'https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif')                                 
+.addField(' :لقد قمت بدعوة ', ` **${inviteCount}** `)
+.setFooter(`${heg.tag}`, 'https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif')                                 
 .setThumbnail(heg.avatarURL);
     message.channel.sendEmbed(id);
 })
@@ -1171,7 +1172,6 @@ var mentionned = message.mentions.members.first();
 //ping
 client.on('message', message =>{
     let args = message.content.split(' ');
-    
     if(args[0] === `${prefix}ping`){
         let mentions = message.mentions.members.first()
         if(!mentions) {
@@ -1384,18 +1384,12 @@ client.on('message', message => {
 
 });
 //الردوت العاديه
-client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}!`);
-});
          client.on('message', message => {
             if (message.content === 'الوان') {
 		    if (message.channel.id !== "486291719537688576") return;
               message.channel.send('لأختيار اللون اكتب ( لون `رقم الون`)  مثال :  لون 1');
 		    message.delete(); 
             }
-});
-client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}!`);
 });
          client.on('message', message => {
             if (message.content === 'الوان') {
@@ -1405,18 +1399,12 @@ client.on('ready', () => {
 
             }
 });
-client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}!`);
-});
          client.on('message', message => {
             if (message.content === `${prefix}colors`) {
 		    if (message.channel.id !== "486291719537688576") return;
               message.channel.send('لأختيار اللون اكتب ( لون `رقم الون`)  مثال :  لون 1');
 		    message.delete(); 
             }
-});
-client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}!`);
 });
          client.on('message', message => {
             if (message.content === `${prefix}colors`) {
@@ -1428,6 +1416,33 @@ client.on('ready', () => {
 });
 //privet-commands
 client.on('message', message => require('./commands/show-hide.js')(client, message));
+client.on("message", message => {
+        if (message.content === `${prefix}setprefix`) {
+         if (!dev.includes(message.author.id)) return;
+  let args = message.content.split(" ").slice(1);
+        let arg = args.join("").substring(message.length)
+        if (!arg) return message.channel.send(`**Please add a prefix after command like \`\`${prefix}setprefix &\`\`**`);
+        fs.database().ref('servers/' + message.guild.id).update({
+            guildname: message.guild.name,
+            guildprefix: arg
+        }).catch(function(err) {
+            message.channel.send(err + "\n\n\n");
+        });
+        message.channel.send(`**prefix updated \`\`${arg}\`\`**`);
+    }
+});
+//my-id
+client.on('message', message =>{
+    let args = message.content.split(' ');
+    if (message.content === `${adminprefix}id`) {
+        let mentions = message.mentions.members.first()
+        if(!mentions) {
+		message.channel.send(`**${message.author.username}, ID: \`\`${message.author.id}\`\`**`);
+        } else {
+		message.channel.send(`**${message.user.username}, ID: \`\`${message.user.id}\`\`**`);
+        }
+    };
+});
 //معلومات البوت
 client.on('message', message => {
   if (message.content.startsWith(prefix + "data")) {
