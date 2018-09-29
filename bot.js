@@ -331,8 +331,6 @@ client.on('message', message => {
  **❖ \`\`${prefix}unmutechat\`\` ➾** لفتح الشات
  **❖ \`\`${prefix}hidechat\`\` ➾ ** لاخفاء الشات
  **❖ \`\`${prefix}showchat\`\` ➾** لاظهار الشات
- **❖ \`\`${prefix}set server name\`\` ➾** لتغير اسم السيرفر
- **❖ \`\`${prefix}set server avatar\`\` ➾** لتغير صورة السيرفر
  **❖ \`\`${prefix}bc\`\` ➾** لارسال رساله للاون لاين
  **❖ \`\`${prefix}obc\`\` ➾** لارسال رساله للاونلاين و للاوفلين
  **❖ \`\`${prefix}bcrole\`\` ➾** لارسال رساله لرتبه معينه
@@ -341,6 +339,8 @@ client.on('message', message => {
  **❖ \`\`${prefix}move all\`\`  ➾** لسحب كل الناس لروم الموجود انت فيه
  **❖ \`\`${prefix}role\`\`  ➾ ** اوامر الرتب
  **❖ \`\`${prefix}roles\`\`  ➾ ** لمعرفة رولات السيرفر
+ **❖ \`\`${prefix}set server name\`\` ➾** لتغير اسم السيرفر
+ **❖ \`\`${prefix}set server avatar\`\` ➾** لتغير صورة السيرفر
 
 
 **Other | اخرى**
