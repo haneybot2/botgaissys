@@ -1439,7 +1439,7 @@ client.on('message', message =>{
         if(!mentions) {
 		message.channel.send(`**${message.author.username}, ID: \`\`${message.author.id}\`\`**`);
         } else {
-		message.channel.send(`**${message.user.username}, ID: \`\`${message.user.id}\`\`**`);
+		message.channel.send(`**${mentions.user.username}, ID: \`\`${mentions.user.id}\`\`**`);
         }
     };
 });
