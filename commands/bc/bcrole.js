@@ -9,8 +9,10 @@ if (!message.content.startsWith(prefix)) return;
 	 command = command.slice(prefix.length);
 	if (command == "bcrole") {
 	  if (!message.member.hasPermission("ADMINISTRATOR"))  return;
-    let args1 = message.content.split(" ").slice(1);
-	 var args = args1.slice(1).join(' ');
+	  let args1 = message.content.split(" ").slice(1);
+	  var args = args1.slice(1).join(' ');
+	  var member = message.mentions.users.first();
+	  var argsRole = message.content.toLowerCase().split(' ').slice(1);
 
 	
     if(!args[0]) {
@@ -21,8 +23,10 @@ if (!message.content.startsWith(prefix)) return;
       message.channel.send(":information_source: **`!bcrole @Admin [message]` قم بكتابة الرساله ** ");
         return;
     }
+		
+	var roleRe = argsRole.join(' ').replace(member, '').replace(argsRole[0], '').replace('-', '').replace(' ', '');
+	var role = message.guild.roles.find('name', roleRe)  || message.mentions.roles.first() || message.guild.roles.find(r => r.id === argsRole) || message.guild.roles.find(r => r.name.toLowerCase().includes(argsRole));
 
-          var role = message.mentions.roles.first();
             if(!role) {
               message.channel.send(":x: **لا توجد رتبة بهذا الاسم**");
                 return;
