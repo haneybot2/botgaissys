@@ -1134,11 +1134,6 @@ client.on('message', message => {
                      if(!message.channel.guild) return;
 
                 message.guild.fetchInvites().then(invs => {
-      let member = client.guilds.get(message.guild.id).members.get(message.author.id);
-      let personalInvites = invs.filter(i => i.inviter.id === message.author.id);
-      let inviteCount = personalInvites.reduce((p, v) => v.uses + p, 0);
-      var moment = require('moment');
-      var args = message.content.split(" ").slice(1);
 let user = message.mentions.users.first();
 var men = message.mentions.users.first();
  var heg;
@@ -1154,6 +1149,11 @@ var mentionned = message.mentions.members.first();
  } else {
      h = message.member
  }
+      let member = client.guilds.get(message.guild.id).members.get(message.author.id);
+      let personalInvites = invs.filter(i => i.inviter.id === heg.id);
+      let inviteCount = personalInvites.reduce((p, v) => v.uses + p, 0);
+      var moment = require('moment');
+      var args = message.content.split(" ").slice(1);
         moment.locale('ar-TN');
       var id = new  Discord.RichEmbed()
     .setColor("#0a0909")
