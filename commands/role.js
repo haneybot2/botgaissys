@@ -37,8 +37,9 @@ module.exports = (client, message) => {
         }else if(args[1] === 'humans' || args[1] === 'bots' || args[1] === 'all') {
             var argsRole = message.content.toLowerCase().split(' ').slice(3); 
         }
+	    
 		var roleRe = argsRole.join(' ').replace(member, '').replace(argsRole[0], '').replace('-', '').replace(' ', '');
-                var getRole = message.guild.roles.find('name', roleRe)  || message.guild.roles.find(r => r.name.toLowerCase().includes(argsRole));
+                var getRole = message.guild.roles.find('name', roleRe)  || message.mentions.roles.first() || message.guild.roles.find(r => r.id === argsRole) || message.guild.roles.find(r => r.name.toLowerCase().includes(argsRole));
  
         if(userM) {
             if(!getRole) return message.channel.send(':x:  **اسف ولكن لم اجد الرتبه المطلوبه!**');
