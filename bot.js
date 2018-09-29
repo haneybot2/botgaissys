@@ -625,17 +625,17 @@ client.on('message', msg => {
     const emoji = client.emojis.find("name", "wastebasket")
     let textxt = args.slice(0).join("");
     if(msg.member.hasPermission("MANAGE_MESSAGES")) {
-    if(parseInt(textxt) > 100) return msg.channel.send('**انا اسف ,ولكن لايمكنك مسح اكثر من `100` رساله**')
+    if(parseInt(textxt) > 100) return msg.channel.send('**انا اسف ,ولكن لايمكنك مسح اكثر من `100` رساله**').then(m => m.delete(3000));
     if (textxt == "") {
     msg.delete().then
     msg.delete().then
     msg.channel.bulkDelete(100);
-        msg.channel.send("```php\nعدد الرسائل التي تم مسحها : 100\n```").then(m => m.delete(3000));
+        msg.channel.send("```php\nعدد الرسائل التي تم مسحها : 100\n```").then(m => m.delete(2000));
 } else {
     msg.delete().then
     msg.delete().then
     msg.channel.bulkDelete(textxt);
-        msg.channel.send("```php\nعدد الرسائل التي تم مسحها : " + textxt + "\n```").then(m => m.delete(3000));
+        msg.channel.send("```php\nعدد الرسائل التي تم مسحها : " + textxt + "\n```").then(m => m.delete(2000));
         }    
     }
 }
@@ -652,17 +652,17 @@ client.on('message', msg => {
     const emoji = client.emojis.find("name", "wastebasket")
     let textxt = args.slice(0).join("");
     if(msg.member.hasPermission("MANAGE_MESSAGES")) {
-    if(parseInt(textxt) > 100) return msg.channel.send('**انا اسف ,ولكن لايمكنك مسح اكثر من `100` رساله**')
+    if(parseInt(textxt) > 100) return msg.channel.send('**انا اسف ,ولكن لايمكنك مسح اكثر من `100` رساله**').then(m => m.delete(3000));
     if (textxt == "") {
     msg.delete().then
     msg.delete().then
     msg.channel.bulkDelete(100);
-        msg.channel.send("```php\nعدد الرسائل التي تم مسحها : 100\n```").then(m => m.delete(3000));
+        msg.channel.send("```php\nعدد الرسائل التي تم مسحها : 100\n```").then(m => m.delete(2000));
 } else {
     msg.delete().then
     msg.delete().then
     msg.channel.bulkDelete(textxt);
-        msg.channel.send("```php\nعدد الرسائل التي تم مسحها : " + textxt + "\n```").then(m => m.delete(3000));
+        msg.channel.send("```php\nعدد الرسائل التي تم مسحها : " + textxt + "\n```").then(m => m.delete(2000));
         }    
     }
 }
@@ -679,17 +679,17 @@ client.on('message', msg => {
     const emoji = client.emojis.find("name", "wastebasket")
     let textxt = args.slice(0).join("");
     if(msg.member.hasPermission("MANAGE_MESSAGES")) {
-    if(parseInt(textxt) > 100) return msg.channel.send('**انا اسف ,ولكن لايمكنك مسح اكثر من `100` رساله**')
+    if(parseInt(textxt) > 100) return msg.channel.send('**انا اسف ,ولكن لايمكنك مسح اكثر من `100` رساله**').then(m => m.delete(3000));
     if (textxt == "") {
     msg.delete().then
     msg.delete().then
     msg.channel.bulkDelete(100);
-        msg.channel.send("```php\nعدد الرسائل التي تم مسحها : 100\n```").then(m => m.delete(3000));
+        msg.channel.send("```php\nعدد الرسائل التي تم مسحها : 100\n```").then(m => m.delete(2000));
 } else {
     msg.delete().then
     msg.delete().then
     msg.channel.bulkDelete(textxt);
-        msg.channel.send("```php\nعدد الرسائل التي تم مسحها : " + textxt + "\n```").then(m => m.delete(3000));
+        msg.channel.send("```php\nعدد الرسائل التي تم مسحها : " + textxt + "\n```").then(m => m.delete(2000));
         }    
     }
 }
