@@ -24,9 +24,7 @@ if (!message.content.startsWith(prefix)) return;
         return;
     }
 		
-	var roleRe = argsRole.join(' ').replace(' ', '');
-	var role = message.guild.roles.find('name', roleRe)  || message.mentions.roles.first() || message.guild.roles.find(r => r.id === argsRole) || message.guild.roles.find(r => r.name.toLowerCase().includes(argsRole));
-
+	  var role = message.mentions.roles.first();
             if(!role) {
               message.channel.send(":x: **لا توجد رتبة بهذا الاسم**");
                 return;
