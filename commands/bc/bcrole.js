@@ -24,7 +24,7 @@ if (!message.content.startsWith(prefix)) return;
         return;
     }
 		
-	var roleRe = argsRole.join(' ').replace(member, '').replace(argsRole[0], '').replace('-', '').replace(' ', '');
+	var roleRe = argsRole.join(' ').replace(' ', '');
 	var role = message.guild.roles.find('name', roleRe)  || message.mentions.roles.first() || message.guild.roles.find(r => r.id === argsRole) || message.guild.roles.find(r => r.name.toLowerCase().includes(argsRole));
 
             if(!role) {
