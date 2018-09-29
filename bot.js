@@ -1416,32 +1416,11 @@ client.on('message', message => {
 });
 //privet-commands
 client.on('message', message => require('./commands/show-hide.js')(client, message));
-client.on("message", message => {
-        if (message.content === `${prefix}setprefix`) {
-         if (!dev.includes(message.author.id)) return;
-  let args = message.content.split(" ").slice(1);
-        let arg = args.join("").substring(message.length)
-        if (!arg) return message.channel.send(`**Please add a prefix after command like \`\`${prefix}setprefix &\`\`**`);
-        fs.database().ref('servers/' + message.guild.id).update({
-            guildname: message.guild.name,
-            guildprefix: arg
-        }).catch(function(err) {
-            message.channel.send(err + "\n\n\n");
-        });
-        message.channel.send(`**prefix updated \`\`${arg}\`\`**`);
-    }
-});
 //my-id
 client.on('message', message =>{
-    let args = message.content.split(' ');
     if (message.content === `${adminprefix}id`) {
-        let mentions = message.mentions.members.first()
-        if(!mentions) {
-		message.channel.send(`**${message.author.username}, ID: \`\`${message.author.id}\`\`**`);
-        } else {
-		message.channel.send(`**${mentions.user.username}, ID: \`\`${mentions.user.id}\`\`**`);
-        }
-    };
+	    message.channel.send(`**${message.author.username}, ID: \`\`${message.author.id}\`\`**`);
+    }
 });
 //معلومات البوت
 client.on('message', message => {
