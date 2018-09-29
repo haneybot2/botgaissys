@@ -652,7 +652,7 @@ client.on('message', msg => {
     const emoji = client.emojis.find("name", "wastebasket")
     let textxt = args.slice(0).join("");
     if(msg.member.hasPermission("MANAGE_MESSAGES")) {
-    if(parseInt(textxt[0]) > 100) return msg.channel.send('**انا اسف ,ولكن لايمكنك مسح اكثر من `100` رساله**')
+    if(parseInt(textxt) > 100) return msg.channel.send('**انا اسف ,ولكن لايمكنك مسح اكثر من `100` رساله**')
     if (textxt == "") {
     msg.delete().then
     msg.delete().then
@@ -679,7 +679,7 @@ client.on('message', msg => {
     const emoji = client.emojis.find("name", "wastebasket")
     let textxt = args.slice(0).join("");
     if(msg.member.hasPermission("MANAGE_MESSAGES")) {
-    if(parseInt(textxt[0]) > 100) return msg.channel.send('**انا اسف ,ولكن لايمكنك مسح اكثر من `100` رساله**')
+    if(parseInt(textxt) > 100) return msg.channel.send('**انا اسف ,ولكن لايمكنك مسح اكثر من `100` رساله**')
     if (textxt == "") {
     msg.delete().then
     msg.delete().then
