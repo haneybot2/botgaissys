@@ -624,6 +624,28 @@ client.on('message', message => {
 //viocekick
 client.on('message', message => require('./commands/vkick.js')(client, message));
  //clere-chat
+client.on("message", message => {
+   var prefix = "r";
+  if (!message.content.startsWith(prefix)) return;
+  let command = message.content.split(" ")[0];
+  command = command.slice(prefix.length);
+  var args = message.content.substring(prefix.length).split(" ");
+           if(command === "clear") {
+if (!args[1]) {
+				message.channel.fetchMessages({limit: 100}).then(messages => message.channel.bulkDelete(messages));
+				message.channel.fetchMessages({limit: 100}).then(messages => message.channel.bulkDelete(messages));
+				message.channel.fetchMessages({limit: 100}).then(messages => message.channel.bulkDelete(messages));
+        message.channel.send("```php\nعدد الرسائل التي تم مسحها : 100\n```").then(m => m.delete(2000));
+                           } else {
+                           let messagecount = parseInt(args[1]);
+				message.channel.fetchMessages({limit: messagecount}).then(messages => message.channel.bulkDelete(messages));
+				message.channel.fetchMessages({limit: messagecount}).then(messages => message.channel.bulkDelete(messages));
+				message.channel.fetchMessages({limit: messagecount}).then(messages => message.channel.bulkDelete(messages));
+				message.delete("..");
+                               message.channel.send("```php\nعدد الرسائل التي تم مسحها : " + args[1] + "\n```").then(m => m.delete(2000));
+                           }
+                         }
+});
 client.on('message', msg => {
   if (msg.author.bot) return;
   if (!msg.content.startsWith(prefix)) return;
