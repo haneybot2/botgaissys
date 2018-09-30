@@ -920,33 +920,9 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return message.delete();
 }
 });
 //set-server-name
-client.on('message', eyad => {
-  let args = eyad.content.split(" ").slice(1).join(" ")
-  if (eyad.content.startsWith(`${prefix}set server name`)) {
-                if (!eyad.member.hasPermission("MANAGE_SERVER"))  return;
-                if(!args) return eyad.channel.send('`**يرجي ادخال اسم السرفر الجديد**`');
-                eyad.guild.owner.send(`**تم تغيير اسم السرفر الي ${args}
-                بواسطة : <@${eyad.author.id}>**`)
-                eyad.guild.setName(args)
-                eyad.channel.send(`**تم تغير اسم السيرفر الي : __${args}__ **`);
-                
-       }
-
-       });
+client.on('message', message => require('./commands/set-name-server.js')(client, message));
 //set-server-avatar
-client.on('message', eyadandr3d => {
-  let args = eyadandr3d.content.split(" ").slice(1).join(" ")
-  if (eyadandr3d.content.startsWith(`${prefix}set server avatar`)) {
-                if (!eyadandr3d.member.hasPermission("MANAGE_SERVER"))  return;
-                if(!args) return eyadandr3d.channel.send('`**ضع رابط الصوره**`');
-                eyadandr3d.guild.owner.send(`**تم تغيير صوره السرفر الي ${args}
-                بواسطة : <@${eyadandr3d.author.id}>**`)
-                eyadandr3d.guild.setIcon(args)
-                eyadandr3d.channel.send(`**تم تغير صورة السيرفر الي : __${args}__ ** `);
-                
-       }
-
-       });
+client.on('message', message => require('./commands/set-ava-server.js')(client, message));
 //send-pic
 client.on('message', message => {
   if (message.author.bot) return;
