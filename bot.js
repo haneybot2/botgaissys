@@ -725,7 +725,10 @@ if(!message.member.hasPermission('MANAGE_CHANNELS')) return;
 
            }).then(() => {
                message.channel.send("✅ | **Channel Muted**")
-           }).then(message =>{message.delete(5000)});
+           }).then(msg => {
+        msg.delete(3500);
+        message.delete(3500);
+      });
              }
 if (message.content === prefix + "unmutechat") {
     if(!message.channel.guild) return message.channel.send(' This command only for servers');
@@ -736,7 +739,10 @@ if(!message.member.hasPermission('MANAGE_CHANNELS')) return;
 
            }).then(() => {
                message.channel.send("✅ | **Channel Unmuted**")
-           }).then(message =>{message.delete(5000)});
+           }).then(msg => {
+        msg.delete(3500);
+        message.delete(3500);
+      });
              }
 
 
@@ -750,25 +756,29 @@ if (message.author.bot) return;
 
 if(!message.member.hasPermission('ADMINISTRATOR')) return message.delete(); 
            message.channel.overwritePermissions(message.guild.id, {
-         SEND_MESSAGES: false ,
 	 READ_MESSAGES: false
 	   
 	   
 	   }).then(() => {
                message.channel.send("✅ | **Channel Hided**")
-           }).then(message =>{message.delete(5000)});
+           }).then(msg => {
+        msg.delete(3500);
+        message.delete(3500);
+      });
              }
 if (message.content === prefix + "showchat") {
     if(!message.channel.guild) return message.channel.send(' This command only for servers');
 
 if(!message.member.hasPermission('ADMINISTRATOR')) return message.delete(); 
            message.channel.overwritePermissions(message.guild.id, {
-         SEND_MESSAGES: true,
 	 READ_MESSAGES: true
 
            }).then(() => {
                message.channel.send("✅ | **Channel Showed**")
-           }).then(message =>{message.delete(5000)});
+           }).then(msg => {
+        msg.delete(3500);
+        message.delete(3500);
+      });
              }
 
 
@@ -998,50 +1008,7 @@ if (command == "saye")    {
   }    
 });
 //up-time-bot
-client.on('message', message => {
-     if (message.author.bot) return;
-if (message.content.startsWith(prefix + "uptime")) {
-	if(!message.member.hasPermission('MANAGE_MESSAGE')) return;
-    let uptime = client.uptime;
-
-    let days = 0;
-    let hours = 0;
-    let minutes = 0;
-    let seconds = 0;
-    let notCompleted = true;
-
-    while (notCompleted) {
-
-        if (uptime >= 8.64e+7) {
-
-            days++;
-            uptime -= 8.64e+7;
-
-        } else if (uptime >= 3.6e+6) {
-
-            hours++;
-            uptime -= 3.6e+6;
-
-        } else if (uptime >= 60000) {
-
-            minutes++;
-            uptime -= 60000;
-
-        } else if (uptime >= 1000) {
-            seconds++;
-            uptime -= 1000;
-
-        }
-
-        if (uptime < 1000)  notCompleted = false;
-
-    }
-
-    message.channel.send("`" + `${days} days, ${hours} hrs, ${minutes} min, ${seconds} sec` + "`");
-
-
-}
-});
+client.on('message', message => require('./commands/uptime.js')(client, message));
 //Temporary Channels
 const temp = {};
 client.on('message', async message => {
