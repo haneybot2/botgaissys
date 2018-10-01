@@ -625,7 +625,6 @@ client.on('message', message => {
 client.on('message', message => require('./commands/vkick.js')(client, message));
  //clere-chat
 client.on("message", message => {
-   var prefix = "r";
   if (!message.content.startsWith(prefix)) return;
   let command = message.content.split(" ")[0];
   command = command.slice(prefix.length);
@@ -646,85 +645,49 @@ if (!args[1]) {
                            }
                          }
 });
-client.on('message', msg => {
-  if (msg.author.bot) return;
-  if (!msg.content.startsWith(prefix)) return;
-  let command = msg.content.split(" ")[0];
-  command = command.slice(prefix.length);
-  let args = msg.content.split(" ").slice(1);
-
-    if(command === "clear") {
-    const emoji = client.emojis.find("name", "wastebasket")
-    let textxt = args.slice(0).join("");
-    if(msg.member.hasPermission("MANAGE_MESSAGES")) {
-    if(parseInt(textxt) > 100) return msg.channel.send('**انا اسف ,ولكن لايمكنك مسح اكثر من `100` رساله**').then(m => m.delete(3000));
-    if (textxt == "") {
-    msg.delete().then
-    msg.delete().then
-    msg.channel.bulkDelete(100);
-        msg.channel.send("```php\nعدد الرسائل التي تم مسحها : 100\n```").then(m => m.delete(2000));
-} else {
-    msg.delete().then
-    msg.delete().then
-    msg.channel.bulkDelete(textxt);
-        msg.channel.send("```php\nعدد الرسائل التي تم مسحها : " + textxt + "\n```").then(m => m.delete(2000));
-        }    
-    }
-}
-});
-client.on('message', msg => {
-	  var prefix1 = ""
-  if (msg.author.bot) return;
-  if (!msg.content.startsWith(prefix1)) return;
-  let command = msg.content.split(" ")[0];
+client.on("message", message => {
+   var prefix1 = "";
+  if (!message.content.startsWith(prefix1)) return;
+  let command = message.content.split(" ")[0];
   command = command.slice(prefix1.length);
-  let args = msg.content.split(" ").slice(1);
-
-    if(command === "مسح") {
-    const emoji = client.emojis.find("name", "wastebasket")
-    let textxt = args.slice(0).join("");
-    if(msg.member.hasPermission("MANAGE_MESSAGES")) {
-    if(parseInt(textxt) > 100) return msg.channel.send('**انا اسف ,ولكن لايمكنك مسح اكثر من `100` رساله**').then(m => m.delete(3000));
-    if (textxt == "") {
-    msg.delete().then
-    msg.delete().then
-    msg.channel.bulkDelete(100);
-        msg.channel.send("```php\nعدد الرسائل التي تم مسحها : 100\n```").then(m => m.delete(2000));
-} else {
-    msg.delete().then
-    msg.delete().then
-    msg.channel.bulkDelete(textxt);
-        msg.channel.send("```php\nعدد الرسائل التي تم مسحها : " + textxt + "\n```").then(m => m.delete(2000));
-        }    
-    }
-}
+  var args = message.content.substring(prefix1.length).split(" ");
+           if(command === "lsp") {
+if (!args[1]) {
+				message.channel.fetchMessages({limit: 100}).then(messages => message.channel.bulkDelete(messages));
+				message.channel.fetchMessages({limit: 100}).then(messages => message.channel.bulkDelete(messages));
+				message.channel.fetchMessages({limit: 100}).then(messages => message.channel.bulkDelete(messages));
+        message.channel.send("```php\nعدد الرسائل التي تم مسحها : 100\n```").then(m => m.delete(2000));
+                           } else {
+                           let messagecount = parseInt(args[1]);
+				message.channel.fetchMessages({limit: messagecount}).then(messages => message.channel.bulkDelete(messages));
+				message.channel.fetchMessages({limit: messagecount}).then(messages => message.channel.bulkDelete(messages));
+				message.channel.fetchMessages({limit: messagecount}).then(messages => message.channel.bulkDelete(messages));
+				message.delete("..");
+                               message.channel.send("```php\nعدد الرسائل التي تم مسحها : " + args[1] + "\n```").then(m => m.delete(2000));
+                           }
+                         }
 });
-client.on('message', msg => {
-	  var prefix1 = ""
-  if (msg.author.bot) return;
-  if (!msg.content.startsWith(prefix1)) return;
-  let command = msg.content.split(" ")[0];
+client.on("message", message => {
+   var prefix1 = "";
+  if (!message.content.startsWith(prefix1)) return;
+  let command = message.content.split(" ")[0];
   command = command.slice(prefix1.length);
-  let args = msg.content.split(" ").slice(1);
-
-    if(command === "lsp") {
-    const emoji = client.emojis.find("name", "wastebasket")
-    let textxt = args.slice(0).join("");
-    if(msg.member.hasPermission("MANAGE_MESSAGES")) {
-    if(parseInt(textxt) > 100) return msg.channel.send('**انا اسف ,ولكن لايمكنك مسح اكثر من `100` رساله**').then(m => m.delete(3000));
-    if (textxt == "") {
-    msg.delete().then
-    msg.delete().then
-    msg.channel.bulkDelete(100);
-        msg.channel.send("```php\nعدد الرسائل التي تم مسحها : 100\n```").then(m => m.delete(2000));
-} else {
-    msg.delete().then
-    msg.delete().then
-    msg.channel.bulkDelete(textxt);
-        msg.channel.send("```php\nعدد الرسائل التي تم مسحها : " + textxt + "\n```").then(m => m.delete(2000));
-        }    
-    }
-}
+  var args = message.content.substring(prefix1.length).split(" ");
+           if(command === "مسح") {
+if (!args[1]) {
+				message.channel.fetchMessages({limit: 100}).then(messages => message.channel.bulkDelete(messages));
+				message.channel.fetchMessages({limit: 100}).then(messages => message.channel.bulkDelete(messages));
+				message.channel.fetchMessages({limit: 100}).then(messages => message.channel.bulkDelete(messages));
+        message.channel.send("```php\nعدد الرسائل التي تم مسحها : 100\n```").then(m => m.delete(2000));
+                           } else {
+                           let messagecount = parseInt(args[1]);
+				message.channel.fetchMessages({limit: messagecount}).then(messages => message.channel.bulkDelete(messages));
+				message.channel.fetchMessages({limit: messagecount}).then(messages => message.channel.bulkDelete(messages));
+				message.channel.fetchMessages({limit: messagecount}).then(messages => message.channel.bulkDelete(messages));
+				message.delete("..");
+                               message.channel.send("```php\nعدد الرسائل التي تم مسحها : " + args[1] + "\n```").then(m => m.delete(2000));
+                           }
+                         }
 });
  //move-members
 client.on('message', message => require('./commands/move1.js')(client, message));
@@ -735,77 +698,8 @@ client.on('message', message => require('./commands/bc/bc.js')(client, message))
 client.on('message', message => require('./commands/bc/obc.js')(client, message));
 client.on('message', message => require('./commands/bc/bcrole.js')(client, message));
 //settingchat:!chat-!unmutechat-!hidechat-!showchat
-client.on('message', message => {
-
-if (message.author.bot) return;
-    if (message.content === prefix + "mutechat") {
-                        if(!message.channel.guild) return message.channel.send(' This command only for servers');
-
-if(!message.member.hasPermission('MANAGE_CHANNELS')) return;
-           message.channel.overwritePermissions(message.guild.id, {
-         SEND_MESSAGES: false
-
-           }).then(() => {
-               message.channel.send("✅ | **Channel Muted**")
-           }).then(msg => {
-        msg.delete(3500);
-        message.delete(3500);
-      });
-             }
-if (message.content === prefix + "unmutechat") {
-    if(!message.channel.guild) return message.channel.send(' This command only for servers');
-
-if(!message.member.hasPermission('MANAGE_CHANNELS')) return;
-           message.channel.overwritePermissions(message.guild.id, {
-         SEND_MESSAGES: true
-
-           }).then(() => {
-               message.channel.send("✅ | **Channel Unmuted**")
-           }).then(msg => {
-        msg.delete(3500);
-        message.delete(3500);
-      });
-             }
-
-
-
-});
-client.on('message', message => {
-
-if (message.author.bot) return;
-    if (message.content === prefix + "hidechat") {
-                        if(!message.channel.guild) return message.channel.send(' This command only for servers');
-
-if(!message.member.hasPermission('ADMINISTRATOR')) return message.delete(); 
-           message.channel.overwritePermissions(message.guild.id, {
-	 READ_MESSAGES: false
-	   
-	   
-	   }).then(() => {
-               message.channel.send("✅ | **Channel Hided**")
-           }).then(msg => {
-        msg.delete(3500);
-        message.delete(3500);
-      });
-             }
-if (message.content === prefix + "showchat") {
-    if(!message.channel.guild) return message.channel.send(' This command only for servers');
-
-if(!message.member.hasPermission('ADMINISTRATOR')) return message.delete(); 
-           message.channel.overwritePermissions(message.guild.id, {
-	 READ_MESSAGES: true
-
-           }).then(() => {
-               message.channel.send("✅ | **Channel Showed**")
-           }).then(msg => {
-        msg.delete(3500);
-        message.delete(3500);
-      });
-             }
-
-
-
-});
+client.on('message', message => require('./commands/mute-unmutechat.js')(client, message));
+client.on('message', message => require('./commands/hide-showchat.js')(client, message));
 //role-command
 client.on('message', message => require('./commands/role.js')(client, message));
 //server-data 
