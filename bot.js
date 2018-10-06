@@ -485,7 +485,7 @@ if (!message.content.startsWith(prefix)) return;
 		let messageArray = message.content.split (" ");
 
 
-		let muteu = message.mentions.users.first() || client.users.get(message.content.split(' ')[1]);
+		let muteu = message.mentions.users.first() || message.guild.members.get(message.content.split(' ')[1]);
 		if(muteu.id === message.author.id) return message.channel.send(':x: | **لا يمكننك اعطاء ميوت لنفسك ._.**');
 		if(muteu.hasPermission("MANAGE_MESSAGES")) return message.channel.send("**لا يمكننك اعطاء ميوت لاحد من الاداره**");
 
@@ -515,7 +515,7 @@ if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return m
   if(!toMute) return message.channel.send(`:information_source:  **\`\`${prefix}unmute @َζ͜͡ELMEWAL3 ヅ\`\` يجب تحديد شخص **`);
 
   let role = message.guild.roles.find (r => r.name === "Muted");
-  let user = message.mentions.users.first() || client.users.get(message.content.split(' ')[1]);
+  let user = message.mentions.users.first() || message.guild.members.get(message.content.split(' ')[1]);
 
   if(!role || !toMute.roles.has(role.id)) return message.channel.send(`:information_source:**  ${user.username} تم فك الميوت عنه مسبقاً! **`)
 
@@ -541,7 +541,7 @@ client.on('message', message => {
   if (!message.channel.guild) return;
   if (!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return  message.delete(); 
   if (!message.guild.member(client.user).hasPermission("BAN_MEMBERS")) return message.msg.channel.send("I Don't Have Ban_Members Permission");
-  let user = message.mentions.users.first() || client.users.get(message.content.split(' ')[1]);
+  let user = message.mentions.users.first() || message.guild.members.get(message.content.split(' ')[1]);
   let reason = message.content.split(" ").slice(2).join(" ");
  
   if (message.mentions.users.size < 1) return message.channel.send(`:information_source: **\`\` ${prefix}ban @َζ͜͡ELMEWAL3\`\` يجب تحديد شخص **`);
@@ -568,7 +568,7 @@ client.on('message', message => {
 }
 });
 client.on('message' , message => {
-    let user = message.mentions.users.first()|| client.users.get(message.content.split(' ')[1]);
+    let user = message.mentions.users.first()|| message.guild.members.get(message.content.split(' ')[1]);
     if(message.content.startsWith(prefix + 'unban')) {
 	if(!message.guild.member(message.author).hasPermission("ADMINISTRATOR")) return  message.delete(); 
         if(!user) return;
@@ -598,7 +598,7 @@ client.on('message', message => {
   if (!message.channel.guild) return;
   if (!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return  message.delete(); 
   if (!message.guild.member(client.user).hasPermission("KICK_MEMBERS")) return message.msg.channel.send("I Don't Have KICK_Members Permission");
-  let user = message.mentions.users.first()|| client.users.get(message.content.split(' ')[1]);
+  let user = message.mentions.users.first()|| message.guild.members.get(message.content.split(' ')[1]);
   let reason = message.content.split(" ").slice(2).join(" ");
  
   if (message.mentions.users.size < 1) return message.channel.send(`:information_source: **\`\` ${prefix}kick @َζ͜͡ELMEWAL3\`\` يجب تحديد شخص **`);
