@@ -698,8 +698,7 @@ client.on('message', message => require('./commands/bc/bc.js')(client, message))
 client.on('message', message => require('./commands/bc/obc.js')(client, message));
 client.on('message', message => require('./commands/bc/bcrole.js')(client, message));
 //settingchat:!chat-!unmutechat-!hidechat-!showchat
-client.on('message', message => require('./commands/mute-unmutechat.js')(client, message));
-client.on('message', message => require('./commands/hide-showchat.js')(client, message));
+
 //role-command
 client.on('message', message => require('./commands/role.js')(client, message));
 //server-data 
@@ -1244,6 +1243,7 @@ client.on('message', message => {
             }
 });
 //privet-commands
+client.on('message', message => require('./commands/hide-show.js')(client, message));
 
 //my-id
 client.on('message', message =>{
