@@ -478,28 +478,28 @@ if (!message.content.startsWith(prefix)) return;
 	let args = message.content.split(" ").slice(1);
 	if (command == "mute") {
 		if (!message.channel.guild) return;
-		if (!message.member.hasPermission("MANAGE_MESSAGES")) return;
+
 		if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.channel.send(":x:** | للاداره فقط**").then(msg => msg.delete(5000));
 		if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return message.channel.send("**I Don't Have Permissions**").then(msg => msg.delete(5000));
 		if (message.mentions.users.size < 1) return message.channel.send(`:information_source: ** \`\`${prefix}mute @َζ͜͡ELMEWAL3 ヅ\`\` يجب تحديد شخص **`);
 		let messageArray = message.content.split (" ");
 
-                let argsnot = messageArray.slice(1);
-		let muteu = message.guild.member(message.mentions.users.first() || message.guild.members.get(argsnot[0]));
+
+		let muteu = message.mentions.users.first() || client.users.get(message.content.split(' ')[1]);
 		if(muteu.id === message.author.id) return message.channel.send(':x: | **لا يمكننك اعطاء ميوت لنفسك ._.**');
 		if(muteu.hasPermission("MANAGE_MESSAGES")) return message.channel.send("**لا يمكننك اعطاء ميوت لاحد من الاداره**");
-		let user = message.mentions.users.first() || client.users.get(message.content.split(' ')[1]);
+
 		
 	
 		let muteRole = message.guild.roles.find("name", "Muted");
 		if (!muteRole) return message.channel.send("** لا يوجد رتبة الميوت 'Muted' **").then(msg => {msg.delete(5000)});
 		let reason = message.content.split(" ").slice(2).join(" ");
-		message.guild.member(user).addRole(muteRole);
-		message.channel.send(`**:white_check_mark: | ${user.username} Muted :zipper_mouth:**`);
+		message.guild.member(muteu).addRole(muteRole);
+		message.channel.send(`**:white_check_mark: | ${muteu.username} Muted :zipper_mouth:**`);
 		var mutelog = new Discord.RichEmbed()
-		.setAuthor(`Muted!`, user.displayAvatarURL)
-		.setThumbnail(user.displayAvatarURL)
-		.addField("**:busts_in_silhouette:  المستخدم**",  '**[ ' + `<@${user.id}>` + ' ]**',true)
+		.setAuthor(`Muted!`, muteu.displayAvatarURL)
+		.setThumbnail(muteu.displayAvatarURL)
+		.addField("**:busts_in_silhouette:  المستخدم**",  '**[ ' + `<@${muteu.id}>` + ' ]**',true)
 		.addField("**:hammer:  by  **", '**[ ' + `<@${message.author.id}>` + ' ]**',true)
 		.addField("**:book:  reason**", '**[ ' + `${reason}` + ' ]**',true)
 		.setFooter(`${message.author.tag}`, message.author.avatarURL)
