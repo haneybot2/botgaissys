@@ -1243,7 +1243,7 @@ client.on('message', message => {
             }
 });
 //privet-commands
-client.on('message', message => require('./commands/hide-show.js')(client, message));
+client.on('message', message => require('./commands/show-hide.js')(client, message));
 
 //my-id
 client.on('message', message =>{
