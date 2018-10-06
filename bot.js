@@ -488,7 +488,7 @@ if (!message.content.startsWith(prefix)) return;
 		let muteu = message.guild.member(message.mentions.users.first() || message.guild.members.get(argsnot[0]));
 		if(muteu.id === message.author.id) return message.channel.send(':x: | **لا يمكننك اعطاء ميوت لنفسك ._.**');
 		if(muteu.hasPermission("MANAGE_MESSAGES")) return message.channel.send("**لا يمكننك اعطاء ميوت لاحد من الاداره**");
-		let user = message.mentions.users.first() || message.guild.members.get(args[1]);
+		let user = message.mentions.users.first() || client.users.get(message.content.split(' ')[1]);
 		
 	
 		let muteRole = message.guild.roles.find("name", "Muted");
@@ -515,7 +515,7 @@ if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return m
   if(!toMute) return message.channel.send(`:information_source:  **\`\`${prefix}unmute @َζ͜͡ELMEWAL3 ヅ\`\` يجب تحديد شخص **`);
 
   let role = message.guild.roles.find (r => r.name === "Muted");
-  let user = message.mentions.users.first() || message.guild.members.get(args[1]);
+  let user = message.mentions.users.first() || client.users.get(message.content.split(' ')[1]);
 
   if(!role || !toMute.roles.has(role.id)) return message.channel.send(`:information_source:**  ${user.username} تم فك الميوت عنه مسبقاً! **`)
 
