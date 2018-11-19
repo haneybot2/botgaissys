@@ -78,7 +78,7 @@ client.on('reconnecting', () => console.log('I am reconnecting now!'));
       
       });
 client.on('guildCreate', gc =>{
-    if(gc.id !== '471700216278548480'){
+    if(gc.id !== '294805996893896705'){
         gc.leave()
     }
 })
@@ -237,14 +237,6 @@ if (err) console.error(err);
 })
 
 })
-//voise online
-client.on('voiceStateUpdate', (old, now) => {
-  const channel = client.channels.get('471810322601345024');
-  const currentSize = channel.guild.members.filter(m => m.voiceChannel).size;
-  const size = channel.name.match(/\[\s(\d+)\s\]/);
-  if (!size) return channel.setName(`.AG Online: [${currentSize}]`);
-  if (currentSize !== size) channel.setName(`Voice Online: [${currentSize}]`);
-});
 //role-retern
 var KinG66S = {};
 client.on('guildMemberRemove', member => {
@@ -261,7 +253,7 @@ member.addRole(KinG66S[member.user.id].roles.shift());
 client.on('message', ( message ) => {
   if(message.author.bot) return;
 
-  if(message.channel.id !== '471715491430531073') return;
+  if(message.channel.id !== '461468385402945536') return;
 
 
   let types = [
@@ -545,7 +537,6 @@ client.on('message', message => {
   if (user < 1) return message.channel.send(`:information_source: **\`\` ${prefix}ban @َζ͜͡ELMEWAL3\`\` يجب تحديد شخص **`);
   if (!reason) reason = 'No reason provided.';
  if(user.id === message.author.id) return message.channel.send(':x: | **لا يمكنك حظر نفسك ._.**');
- if(user.id === message.guild.owner.id) return message.channel.send(':x: | **لطيفة حاول يا صاح \:D**');
  if (user.hasPermission("MANAGE_MESSAGES")) return message.channel.send("**:x: | لايمكنني حظر احد من الاداره**");
 
  
