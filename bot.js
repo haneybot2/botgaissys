@@ -489,9 +489,6 @@ if (!message.content.startsWith(prefix)) return;
                 if(muteu < 1) return message.channel.send(`:information_source: ** \`\`${prefix}mute @َζ͜͡ELMEWAL3 ヅ\`\` يجب تحديد شخص **`);
 		if(muteu.id === message.author.id) return message.channel.send(':x: | **لا يمكننك اعطاء ميوت لنفسك ._.**');
 		if(message.mentions.users.first().hasPermission("MANAGE_MESSAGES") || message.guild.members.get(message.content.split(' ')[1]).hasPermission('MANAGE_MESSAGES')) return message.channel.send("**لا يمكننك اعطاء ميوت لاحد من الاداره**");
-
-		
-	
 		let muteRole = message.guild.roles.find("name", "Muted");
 		if (!muteRole) return message.channel.send("** لا يوجد رتبة الميوت 'Muted' **").then(msg => {msg.delete(5000)});
 		let reason = message.content.split(" ").slice(2).join(" ");
