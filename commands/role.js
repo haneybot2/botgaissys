@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const prefix = process.env.prefix
+let dev = process.env.id1;
 
 module.exports = (client, message) => {
    
@@ -23,7 +24,7 @@ module.exports = (client, message) => {
     var member = message.mentions.users.first();
    
     if(command == prefix + 'role') {
-        if(!message.member.hasPermission('MANAGE_ROLES')) return;
+        if(!message.member.hasPermission('MANAGE_ROLES') || !dev.includes(message.author.id)) return;
         if(!message.guild.member(client.user).hasPermission('MANAGE_ROLES')) return;
         if(!message.guild.member(client.user).hasPermission('EMBED_LINKS')) return;
  
