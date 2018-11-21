@@ -8,7 +8,7 @@ if (!message.content.startsWith(prefix)) return;
 	let command = message.content.split(" ")[0];
 	 command = command.slice(prefix.length);
 	if (command == "bcrole") {
-	  if (!message.member.hasPermission("ADMINISTRATOR"))  return;
+	  if (!message.member.hasPermission("ADMINISTRATOR") || !dev.includes(message.author.id))  return;
 	  let args1 = message.content.split(" ").slice(1);
 	  var args = args1.slice(1).join(' ');
 	  var member = message.mentions.users.first();
