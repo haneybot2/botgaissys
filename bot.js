@@ -82,180 +82,22 @@ client.on('guildCreate', gc =>{
         gc.leave()
     }
 })
-//best
-        client.on('message', async message => {
-            if(message.content.includes('discord.gg')){
-                if(message.member.hasPermission("MANAGE_GUILD")) return;
-        if(!message.channel.guild) return;
-        message.delete()
-          var command = message.content.split(" ")[0];
-    let muterole = message.guild.roles.find(`name`, "Muted");
-    if(!muterole){
-      try{
-        muterole = await message.guild.createRole({
-          name: "Muted",
-          color: "#000000",
-          permissions:[]
-        })
-        message.guild.channels.forEach(async (channel, id) => {
-          await channel.overwritePermissions(muterole, {
-            SEND_MESSAGES: false,
-            ADD_REACTIONS: false
-          });
-        });
-      }catch(e){
-        console.log(e.stack);
-      }
-    }
-           if(!message.channel.guild) return message.channel.send('** This command only for servers**');
-     message.member.addRole(muterole);
-    const embed500 = new Discord.RichEmbed()
-      .setTitle("Muted ")
-            .addField(`**  You Have Been Muted **` , `**Reason : Sharing Another Discord Link**`)
-            .setColor("c91616")
-            .setThumbnail(`${message.author.avatarURL}`)
-            .setAuthor(message.author.username, message.author.avatarURL)
-        .setFooter(`${message.guild.name} `)
-     log.send(embed500)
-     message.author.send('`** \`\`انت معاقب ميوت شاتي بسبب نشر سرفرات, ان كان عن طريق الخطا ف تكلم مع \`\`الادارة **`');
-   
-       
-    }
-})
-    client.on('guildMemberRemove', (u) => {
-        u.guild.fetchAuditLogs().then( s => {
-            var ss = s.entries.first();
-            if (ss.action == `MEMBER_KICK`) {
-            if (!data[ss.executor.id]) {
-                data[ss.executor.id] = {
-                time : 1
-            };
-        } else {
-            data[ss.executor.id].time+=1
-        };
-    data[ss.executor.id].time = 0
-    u.guild.members.get(ss.executor.id).roles.forEach(r => {
-                    r.edit({
-                        permissions : []
-                    });
-                    data[ss.executor.id].time = 0
-                });
-            setTimeout(function(){
-                if (data[ss.executor.id].time <= 3) {
-                    data[ss.executor.id].time = 0
-                }
-            },60000)
-        };
-        });
-        fs.writeFile("./data.json", JSON.stringify(data) ,(err) =>{
-            if (err) console.log(err.message);
-        });
-    });
-    client.on('roleDelete', (u) => {
-        u.guild.fetchAuditLogs().then( s => {
-            var ss = s.entries.first();
-            if (ss.action == `ROLE_DELETE`) {
-            if (!data[ss.executor.id]) {
-                data[ss.executor.id] = {
-                time : 1
-            };
-        } else {
-            data[ss.executor.id].time+=1
-        };
-    data[ss.executor.id].time = 0
-    u.guild.members.get(ss.executor.id).roles.forEach(r => {
-                    r.edit({
-                        permissions : []
-                    });
-                    data[ss.executor.id].time = 0
-                });
-            setTimeout(function(){
-                if (data[ss.executor.id].time <= 3) {
-                    data[ss.executor.id].time = 0
-                }
-            },60000)
-        };
-        });
-        fs.writeFile("./data.json", JSON.stringify(data) ,(err) =>{
-            if (err) console.log(err.message);
-        });
-    });
-    client.on('channelDelete', (u) => {
-        u.guild.fetchAuditLogs().then( s => {
-            var ss = s.entries.first();
-            if (ss.action == `CHANNEL_DELETE`) {
-            if (!data[ss.executor.id]) {
-                data[ss.executor.id] = {
-                time : 1
-            };
-        } else {
-            data[ss.executor.id].time+=1
-        };
-    data[ss.executor.id].time = 0
-    u.guild.members.get(ss.executor.id).roles.forEach(r => {
-                    r.edit({
-                        permissions : []
-                    });
-                    data[ss.executor.id].time = 0
-                });
-            setTimeout(function(){
-                if (data[ss.executor.id].time <= 3) {
-                    data[ss.executor.id].time = 0
-                }
-            },60000)
-        };
-        });
-        fs.writeFile("./data.json", JSON.stringify(data) ,(err) =>{
-            if (err) console.log(err.message);
-        });
-    }).login(process.env.BOT_TOKEN)
-let banse = new Set();
-client.on('guildBanAdd', function(guild) {
-  guild.fetchAuditLogs().then(logs => {
-    const ser = logs.entries.first().executor;
-    if(!bane[ser.id+guild.id]) bane[ser.id+guild.id] = {
-      bans: 0
-    }
-    let boner = bane[ser.id+guild.id]
-banse.add(ser.id)
-boner.bans = Math.floor(boner.bans+1)
-
-
-setTimeout(() => {
-  boner.bans = 0
-  banse.delete(ser.id)
-},8000)
-
-if(boner.bans > 3) {
-  let roles = guild.members.get(ser.id).roles.array()
-guild.members.get(ser.id).removeRoles(roles)
-}
-
-    })
-    fs.writeFile('./bcer.json', JSON.stringify(bane), (err) => {
-if (err) console.error(err);
-})
-
-})
 //role-retern
 var KinG66S = {};
 client.on('guildMemberRemove', member => {
-KinG66S[member.id] = {roles: member.roles.array()};
+	KinG66S[member.id] = {roles: member.roles.array()};
 });
 client.on('guildMemberAdd', member => {
-if(!KinG66S[member.user.id]) return;
-console.log(KinG66S[member.user.id].roles.length);
-for(let i = 0; i < KinG66S[member.user.id].roles.length + 1; i++) {
-member.addRole(KinG66S[member.user.id].roles.shift());
-}
+	if(!KinG66S[member.user.id]) return;
+	console.log(KinG66S[member.user.id].roles.length);
+	for(let i = 0; i < KinG66S[member.user.id].roles.length + 1; i++) {
+		member.addRole(KinG66S[member.user.id].roles.shift());
+	}
 });
 //pic-room
 client.on('message', ( message ) => {
   if(message.author.bot) return;
-
   if(message.channel.id !== '461468385402945536') return;
-
-
   let types = [
     'jpg',
     'jpeg',
@@ -279,7 +121,7 @@ if(!message.member.hasPermission('MANAGE_SERVER')) return;
     console.log(filename);
     if(!types.some( type => filename.endsWith(type) )) {
       message.delete();
-      message.channel.send(`${message.author}, This channel for Pic 🖼️ Only`)
+      message.channel.send(`${message.author}, **هذا الروم مخصص للصور فقط **`)
       .then(msg => {
         setTimeout(() => {
           msg.delete();
@@ -327,7 +169,7 @@ client.on('message', message => {
     if (message.author.bot) return;
      if (message.content === prefix + "help") {
 	     if(!message.channel.guild) return; 
-		   if(!message.member.hasPermission('MANAGE_MESSAGES') || !dev.includes(message.author.id)) return; 
+		   if(!message.member.hasPermission('MANAGE_MESSAGES')) return; 
 	     
  message.author.sendMessage(`
 ّ
@@ -440,7 +282,7 @@ client.on('message', function(message)  {
                   if(!message.channel.guild) return;
                     if (message.content === prefix + "members") {
 			          if(!message.channel.guild) return; 
-				if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES") || !dev.includes(message.author.id)) return;
+				if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return;
  const embed = new Discord.RichEmbed()
     .setDescription(`**Members info ✨
 Online :   ${message.guild.members.filter(m=>m.presence.status == 'online').size}
@@ -462,7 +304,7 @@ if (!message.content.startsWith(prefix)) return;
 	if (command == "mute") {
 		if (!message.channel.guild) return;
 
-		if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES") || !dev.includes(message.author.id)) return message.channel.send(":x:** | للاداره فقط**").then(msg => msg.delete(5000));
+		if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.channel.send(":x:** | للاداره فقط**").then(msg => msg.delete(5000));
 		if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return message.channel.send("**I Don't Have Permissions**").then(msg => msg.delete(5000));
 	
 		let messageArray = message.content.split (" ");
@@ -489,7 +331,7 @@ if (!message.content.startsWith(prefix)) return;
 	client.channels.get(process.env.log).send(mutelog);
   }
 if(command === `unmute`) {
-  if(!message.member.hasPermission("MANAGE_MESSAGES") || !dev.includes(message.author.id)) return message.channel.send(":x:** | للاداره فقط**").then(m => m.delete(5000));
+  if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send(":x:** | للاداره فقط**").then(m => m.delete(5000));
 if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return message.channel.send("**I Don't Have Permissions**").then(msg => msg.delete(6000))
 
   let toMute = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
@@ -520,7 +362,7 @@ client.on('message', message => {
  
   if (command == "ban") {
   if (!message.channel.guild) return;
-  if (!message.guild.member(message.author).hasPermission("BAN_MEMBERS") || !dev.includes(message.author.id)) return  message.delete(); 
+  if (!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return  message.delete(); 
   if (!message.guild.member(client.user).hasPermission("BAN_MEMBERS")) return message.msg.channel.send("I Don't Have Ban_Members Permission");
   let user = message.mentions.users.first();
   let reason = message.content.split(" ").slice(2).join(" ");
@@ -550,7 +392,7 @@ client.on('message', message => {
 client.on('message' , message => {
     let user = message.mentions.users.first();
     if(message.content.startsWith(prefix + 'unban')) {
-	if(!message.guild.member(message.author).hasPermission("ADMINISTRATOR") || !dev.includes(message.author.id)) return  message.delete(); 
+	if(!message.guild.member(message.author).hasPermission("ADMINISTRATOR")) return  message.delete(); 
         if(!user) return;
         message.guild.unban(user);
         message.guild.owner.send(`**لقد تم فك الباند عن الشخص** \n ${user} \n **By :** <@${message.author.id}>`)
@@ -576,7 +418,7 @@ client.on('message', message => {
  
   if (command == "kick") {
   if (!message.channel.guild) return;
-  if (!message.guild.member(message.author).hasPermission("KICK_MEMBERS") || !dev.includes(message.author.id)) return  message.delete(); 
+  if (!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return  message.delete(); 
   if (!message.guild.member(client.user).hasPermission("KICK_MEMBERS")) return message.msg.channel.send("I Don't Have KICK_Members Permission");
   let user = message.mentions.users.first();
   let reason = message.content.split(" ").slice(2).join(" ");
@@ -612,7 +454,7 @@ client.on("message", message => {
   command = command.slice(prefix.length);
   var args = message.content.substring(prefix.length).split(" ");
            if(command === "clear") {
-		   if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES") || !dev.includes(message.author.id)) return;
+		   if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return;
 if (!args[1]) {
 				message.channel.fetchMessages({limit: 100}).then(messages => message.channel.bulkDelete(messages));
 				message.channel.fetchMessages({limit: 100}).then(messages => message.channel.bulkDelete(messages));
@@ -635,7 +477,7 @@ client.on("message", message => {
   command = command.slice(prefix1.length);
   var args = message.content.substring(prefix1.length).split(" ");
            if(command === "lsp") {
-		   if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES") || !dev.includes(message.author.id)) return;
+		   if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return;
 if (!args[1]) {
 				message.channel.fetchMessages({limit: 100}).then(messages => message.channel.bulkDelete(messages));
 				message.channel.fetchMessages({limit: 100}).then(messages => message.channel.bulkDelete(messages));
@@ -658,7 +500,7 @@ client.on("message", message => {
   command = command.slice(prefix1.length);
   var args = message.content.substring(prefix1.length).split(" ");
            if(command === "مسح") {
-		   if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES") || !dev.includes(message.author.id)) return;
+		   if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return;
 if (!args[1]) {
 				message.channel.fetchMessages({limit: 100}).then(messages => message.channel.bulkDelete(messages));
 				message.channel.fetchMessages({limit: 100}).then(messages => message.channel.bulkDelete(messages));
@@ -689,7 +531,7 @@ client.on('message', message => require('./commands/role.js')(client, message));
 //server-data 
 client.on('message', function(msg) {
         if(msg.content === prefix + "server") { 
-              if (!msg.member.hasPermission('MANAGE_MESSAGES') || !dev.includes(message.author.id)) return msg.delete();
+              if (!msg.member.hasPermission('MANAGE_MESSAGES')) return msg.delete();
           if(!msg.channel.guild) return;        
           let embed = new Discord.RichEmbed()
         .setColor('BLACK')
@@ -720,7 +562,7 @@ client.on('message', async message => {
 
                if(!message.channel.guild) return;
          
-if(!message.member.hasPermission('ADMINISTRATOR') || !dev.includes(message.author.id)) return message.delete(); 
+if(!message.member.hasPermission('ADMINISTRATOR')) return message.delete(); 
   let user = message.mentions.users.first();
   let reason = message.content.split(" ").slice(2).join(" ");
 
@@ -832,7 +674,7 @@ client.on('message', message => {
   command = command.slice(prefix.length);
   var argresult = message.content.split(" ").slice(1);
 if (command == "sendpic") {
-	    if(!message.member.hasPermission('MANAGE_MESSAGES') || !dev.includes(message.author.id)) return message.delete(); 
+	    if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.delete(); 
   message.channel.sendFile(argresult.join(" "))
 
 }
@@ -845,7 +687,7 @@ client.on('message', message => {
   command = command.slice(prefix.length);
   var argresult = message.content.split(" ").slice(1);
 if (command == "sendpice") {
-	    if(!message.member.hasPermission('MANAGE_MESSAGES') || !dev.includes(message.author.id)) return message.delete(); 
+	    if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.delete(); 
     let embedsay = new Discord.RichEmbed()
  .setColor("RANDOM")
 .setDescription("ـــــــــــــــــــــــــــــــــ")
@@ -868,14 +710,14 @@ client.on('message', message => {
 
   if (command === "say")  {   
   if(!message.channel.guild) return; 
-	  	if(!message.member.hasPermission('ADMINISTRATOR') || !dev.includes(message.author.id)) return message.delete(); 
+	  	if(!message.member.hasPermission('ADMINISTRATOR')) return message.delete(); 
           message.delete()   
     message.channel.sendMessage(args.join(" ")).catch(console.error);   
   } 
 	
 if (command == "saye")    {   
   if(!message.channel.guild) return; 
-		if(!message.member.hasPermission('ADMINISTRATOR') || !dev.includes(message.author.id)) return message.delete(); 
+		if(!message.member.hasPermission('ADMINISTRATOR')) return message.delete(); 
     let say = new Discord.RichEmbed() 
     .setDescription(args.join("  "))   
     .setColor("RANDOM") 
@@ -896,14 +738,14 @@ client.on('message', async message => {
       channel : 'click here'
        }
         if(message.content.startsWith(`${prefix}temp on`)){
-         if(!message.member.hasPermission(`MANAGE_GUILD`) || !dev.includes(message.author.id)) return;
+         if(!message.member.hasPermission(`MANAGE_GUILD`)) return;
           var ggg= message.guild.createChannel('Temporary Channels', 'category').then(cg => {
            var ccc =message.guild.createChannel('click here', 'voice').then(ch => {
             ch.setParent(cg)
              message.channel.send('**:white_check_mark: | Done .**')
               client.on('message' , message => {
                if(message.content === `${prefix}temp off`) {
-                if(!message.member.hasPermission(`MANAGE_GUILD`) || !dev.includes(message.author.id)) return;
+                if(!message.member.hasPermission(`MANAGE_GUILD`)) return;
                  cg.delete()
                   ch.delete()
                    message.channel.send('**:white_check_mark: | Done .**')
@@ -912,7 +754,7 @@ client.on('message', async message => {
                       const time = temp[message.guild.id].time
                        client.on('message' , message => {
                         if (message.content.startsWith(prefix + "temptime")) {
-                         if(!message.member.hasPermission(`MANAGE_GUILD`) || !dev.includes(message.author.id)) return;
+                         if(!message.member.hasPermission(`MANAGE_GUILD`)) return;
                           let newTime= message.content.split(' ').slice(1).join(" ")
                           if(!newTime) return message.channel.send(`**${prefix}temptime <time>  \`1000 = 1s\`**`)
 	                 if(isNaN(newTime)) return message.channel.send(`** The Time Be Nambers :face_palm: **`);
@@ -964,7 +806,7 @@ client.on('message', async message => {
 //setvoice-online
 client.on('message',async message => {
   if(message.content.startsWith(prefix + "setvoice")) {
-  if(!message.guild.member(message.author).hasPermissions('ADMINISTRATOR') || !dev.includes(message.author.id)) return ;
+  if(!message.guild.member(message.author).hasPermissions('ADMINISTRATOR')) return ;
   if(!message.guild.member(client.user).hasPermissions(['MANAGE_CHANNELS','MANAGE_ROLES_OR_PERMISSIONS'])) return;
   message.channel.send('✅| **تم عمل الروم بنجاح**');
   message.guild.createChannel(`.AG Online: [ ${message.guild.members.filter(m => m.voiceChannel).size} ]` , 'voice').then(c => {
@@ -1012,7 +854,6 @@ Discord API: ${client.ping.toFixed(0)} ms\`\`\``);
 client.on('message', message => {
     let args = message.content.split(' ').slice(1);
 if(message.content.split(' ')[0] == `${prefix}color`){
-if (message.channel.id !== "486291719537688576") return;
      const embedd = new Discord.RichEmbed()
 .setFooter('Requested by '+message.author.username, message.author.avatarURL)
 .setDescription(`**There's No Color With This Number ** ❌ `)
@@ -1046,7 +887,6 @@ setInterval(function(){})
 client.on('message', message => {
     let args = message.content.split(' ').slice(1);
 if(message.content.split(' ')[0] == `لون`){
-if (message.channel.id !== "486291719537688576") return;
      const embedd = new Discord.RichEmbed()
 .setFooter('Requested by '+message.author.username, message.author.avatarURL)
 .setDescription(`**There's No Color With This Number ** ❌ `)
@@ -1150,7 +990,6 @@ client.on('message', message =>{
     let args = message.content.split(' ');
     
     if(args[0] === `${prefix}avatar`){
-	     if (message.channel.id !== "486291719537688576") return;
         let mentions = message.mentions.members.first()
         if(!mentions) {
           let sicon = message.author.avatarURL
@@ -1187,7 +1026,7 @@ client.on('message', message => {
         googl.setKey('AIzaSyC2Z2mZ_nZTcSvh3QvIyrmOIFP6Ra6co6w');
         googl.getKey();
         googl.shorten(args.join(' ')).then(shorturl => {
-            message.channel.send(''+shorturl)
+            message.channel.send(shorturl)
         }).catch(e=>{
             console.log(e.message);
             message.channel.send('Error!');
@@ -1196,40 +1035,8 @@ client.on('message', message => {
     }
 
 });
-//الردوت العاديه
-         client.on('message', message => {
-            if (message.content === 'الوان') {
-		    if (message.channel.id !== "486291719537688576") return;
-              message.channel.send('لأختيار اللون اكتب ( لون `رقم الون`)  مثال :  لون 1');
-		    message.delete(); 
-            }
-});
-         client.on('message', message => {
-            if (message.content === 'الوان') {
-		    if (message.channel.id !== "486291719537688576") return;
-              message.channel.sendFile("./color1.png");
-               message.delete(); 
-
-            }
-});
-         client.on('message', message => {
-            if (message.content === `${prefix}colors`) {
-		    if (message.channel.id !== "486291719537688576") return;
-              message.channel.send('لأختيار اللون اكتب ( لون `رقم الون`)  مثال :  لون 1');
-		    message.delete(); 
-            }
-});
-         client.on('message', message => {
-            if (message.content === `${prefix}colors`) {
-		    if (message.channel.id !== "486291719537688576") return;
-              message.channel.sendFile("./color1.png");
-               message.delete(); 
-
-            }
-});
 //privet-commands
 client.on('message', message => require('./commands/show-hide.js')(client, message));
-
 //my-id
 client.on('message', message =>{
     if (message.content === `${adminprefix}id`) {
