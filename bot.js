@@ -1,8 +1,8 @@
 const Discord = require('discord.js');
 const { Client } = require('discord.js');
 const client = new Client();
-const prefix = process.env.prefix
-const adminprefix = process.env.adminprefix
+const prefix = 'e';
+const adminprefix = 'ee';
 const dev = [process.env.id1];
 const owner = [process.env.id1 , process.env.id2 , process.env.id3];
 const id = [process.env.id1, process.env.id2 , process.env.id3 , process.env.id4 , process.env.id5 , process.env.id6 , process.env.id7];
