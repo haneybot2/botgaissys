@@ -14,7 +14,7 @@ const queue = new Map();
 const prefix = process.env.prefix;
 const dev = process.env.id1;
 
-module.exports = (client, msg) => { 
+module.exports = async (client, msg) => { 
     if (msg.author.bot) return undefined;
     if (!msg.content.startsWith(prefix)) return undefined;
 	
