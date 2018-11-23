@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
-const { Util } = require('discord.js');
+const { Client, Util } = require('discord.js');
+const client = new Client();
 const getYoutubeID = require('get-youtube-id');
 const fetchVideoInfo = require('youtube-info');
 const YouTube = require('simple-youtube-api');
@@ -13,6 +14,8 @@ const youtube = new YouTube('AIzaSyAdORXg7UZUo7sePv97JyoDqtQVi3Ll0b8');
 const queue = new Map();
 const prefix = process.env.prefix;
 const dev = process.env.id1;
+client.commands = new Discord.Collection();
+client.aliases = new Discord.Collection();
 
 module.exports = async (client, msg) => { 
     if (msg.author.bot) return undefined;
