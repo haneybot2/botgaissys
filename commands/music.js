@@ -226,7 +226,7 @@ Object.keys(cmds).forEach(key => {
 	return msg.channel.send(':information_source: **No music paused to resume.**').then(message =>{message.delete(5000)});
     }
     return undefined;
-});
+}
 
 async function handleVideo(video, msg, voiceChannel, playlist = false) {
 	const serverQueue = queue.get(msg.guild.id);
