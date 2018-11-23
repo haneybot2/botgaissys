@@ -17,7 +17,7 @@ const dev = process.env.id1;
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 
-module.exports = async (client, msg) => { 
+module.exports = async (msg) => { 
     if (msg.author.bot) return undefined;
     if (!msg.content.startsWith(prefix)) return undefined;
 	
