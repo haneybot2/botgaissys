@@ -263,7 +263,6 @@ client.on('message', message => {
 
     }
 });
-client.on('message', msg => require('./commands/music.js')(client, msg));
 //swears-not
 const swearWords = ["خول", "علي زبي", "كس امكم", "يلعن شكلك", "كس امك", "اكس امك", "زبي", "يلعن", "كلب" ];
 client.on('message', message => {
@@ -447,6 +446,7 @@ client.on('message', message => {
 });
 //viocekick
 client.on('message', message => require('./commands/vkick.js')(client, message));
+client.on('message', msg => require('./commands/music.js')(client, msg));
  //clere-chat
 client.on("message", message => {
   if (!message.content.startsWith(prefix)) return;
