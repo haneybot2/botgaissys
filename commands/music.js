@@ -10,6 +10,7 @@ const conv = require('number-to-words');
 const ffmpeg = require('ffmpeg');
 const youtube = new YouTube("AIzaSyAdORXg7UZUo7sePv97JyoDqtQVi3Ll0b8");
 const queue = new Map();
+const prefix = process.env.prefix;
 const dev = [process.env.id1];
 
 module.exports = (client, msg) => { 
