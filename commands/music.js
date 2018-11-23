@@ -26,7 +26,7 @@ module.exports = (client, msg) => {
     const serverQueue = queue.get(msg.guild.id);
     const voiceChannel = msg.member.voiceChannel;
     const command = args2.shift().toLowerCase();
-    let owner = client.users.get(dev);
+    const owner = client.users.get(dev);
 
     let cmds = {
       play: { cmd: 'play', a: ['p'] },
@@ -52,7 +52,7 @@ module.exports = (client, msg) => {
     var cmd = client.commands.get(command) || client.commands.get(client.aliases.get(command));
       
     if (cmd === 'play') {
-      if (!msg.member.hasPermission('MANAGE_GUILD')) return undefined;
+      
       let args1 = msg.content.split(' ').slice(1);
       if (!voiceChannel) return msg.channel.send(':x:** You need to be in a voice channel**!');
       const permissions = voiceChannel.permissionsFor(msg.client.user);
