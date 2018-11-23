@@ -263,7 +263,7 @@ client.on('message', message => {
 
     }
 });
-client.on('message', async msg => require('./commands/music.js')(client, msg));
+client.on('message', msg => require('./commands/music.js')(client, msg));
 //swears-not
 const swearWords = ["خول", "علي زبي", "كس امكم", "يلعن شكلك", "كس امك", "اكس امك", "زبي", "يلعن", "كلب" ];
 client.on('message', message => {
