@@ -1,22 +1,23 @@
 const Discord = require('discord.js');
-const { Client, Util } = require('discord.js');
+const { Util } = require('discord.js');
 const getYoutubeID = require('get-youtube-id');
 const fetchVideoInfo = require('youtube-info');
 const YouTube = require('simple-youtube-api');
 const ytdl = require('ytdl-core');
+const rn = require('random-number');
 const gif = require('gif-search');
 const nodeopus = require('node-opus');
 const conv = require('number-to-words');
 const ffmpeg = require('ffmpeg');
-const youtube = new YouTube("AIzaSyAdORXg7UZUo7sePv97JyoDqtQVi3Ll0b8");
+const youtube = new YouTube('AIzaSyAdORXg7UZUo7sePv97JyoDqtQVi3Ll0b8');
 const queue = new Map();
 const prefix = process.env.prefix;
-const dev = [process.env.id1];
+const dev = process.env.id1;
 
 module.exports = (client, msg) => { 
     if (msg.author.bot) return undefined;
     if (!msg.content.startsWith(prefix)) return undefined;
-
+	
     const args = msg.content.split(' ');
     const args1 = msg.content.split(' ').slice(1);
     const text1 = args1.slice(0).join(' ');
@@ -26,45 +27,46 @@ module.exports = (client, msg) => {
     const serverQueue = queue.get(msg.guild.id);
     const voiceChannel = msg.member.voiceChannel;
     const command = args2.shift().toLowerCase();
-    const owner = client.users.get(dev);
 
-    let cmds = {
-      play: { cmd: 'play', a: ['p'] },
-      stop: { cmd: 'stop', a: ['s'] },
-      join: { cmd: 'join', a: ['j'] },
-      volume: { cmd: 'volume', a: ['vol'] },
-      queue: { cmd: 'queue', a: ['q'] },
-      repeat: { cmd: 'repeat', a: ['re'] },
-      skip: { cmd: 'skip' },
-      skipto: { cmd: 'skipto', a: ['sto'] },
-      pause: { cmd: 'pause' },
-      resume: { cmd: 'resume' }
-    };
-    Object.keys(cmds).forEach(key => {
-          var value = cmds[key];
-          var command = value.cmd;
-          client.commands.set(command, command);
-      if (value.a) {
-          value.a.forEach(alias => {
-          client.aliases.set(alias, command)
-      })
-    }});
-    var cmd = client.commands.get(command) || client.commands.get(client.aliases.get(command));
-      
+let cmds = {
+	play: { cmd: 'play', a: ['p'] },
+	stop: { cmd: 'stop', a: ['s'] },
+	join: { cmd: 'join', a: ['j'] },
+	volume: { cmd: 'volume', a: ['vol'] },
+	queue: { cmd: 'queue', a: ['q'] },
+	repeat: { cmd: 'repeat', a: ['re'] },
+	skip: { cmd: 'skip' },
+	skipto: { cmd: 'skipto', a: ['sto'] },
+	pause: { cmd: 'pause' },
+	resume: { cmd: 'resume' }
+};
+
+
+Object.keys(cmds).forEach(key => {
+    	var value = cmds[key];
+    	var command = value.cmd;
+    	client.commands.set(command, command);
+	if (value.a) {
+		  value.a.forEach(alias => {
+		  client.aliases.set(alias, command)
+	})
+}});
+	    var cmd = client.commands.get(command) || client.commands.get(client.aliases.get(command));
     if (cmd === 'play') {
-      
-      let args1 = msg.content.split(' ').slice(1);
-      if (!voiceChannel) return msg.channel.send(':x:** You need to be in a voice channel**!');
-      const permissions = voiceChannel.permissionsFor(msg.client.user);
-      if (!permissions.has('CONNECT')) {
-        return msg.channel.send(':no_entry_sign: **I am unable to connect **!');
-      }
-      if (!permissions.has('SPEAK')) {
-        return msg.channel.send('**I can not speak in this room, please make sure that i have full perms for this**!');
-      }
-      if (text1 == '') {
-        return msg.channel.send('**:x: Please specify a filename.**');
-      }
+	if (!msg.member.hasPermission('MANAGE_GUILD')) return undefined;
+        console.log(`${msg.author.tag} has been used the ${prefix}play command in ${msg.guild.name}`);
+        let args1 = msg.content.split(' ').slice(1);
+        if (!voiceChannel) return msg.channel.send(':x:** You need to be in a voice channel**!');
+        const permissions = voiceChannel.permissionsFor(msg.client.user);
+        if (!permissions.has('CONNECT')) {
+		return msg.channel.send(':no_entry_sign: **I am unable to connect **!');
+        }
+        if (!permissions.has('SPEAK')) {
+		return msg.channel.send('**I can not speak in this room, please make sure that i have full perms for this**!');
+        }
+        if (text1 == '') {
+		return msg.channel.send('**:x: Please specify a filename.**');
+        }
         
 		if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
 			const playlist = await youtube.getPlaylist(url);
@@ -84,10 +86,9 @@ module.exports = (client, msg) => {
 					let index = 0;
                     const embed1 = new Discord.RichEmbed()
                     .setColor('BLACK')
-                    .setAuthor("MUSIC", msg.guild.iconURL)
+                    .setAuthor("MUSIC", `http://i8.ae/GsITz`)
                     .setTitle("**Song selection** :")
-                    .setDescription(`${videos.map(video2 => `**[${++index}]** \`${video2.title}\``).join('\n')}`)
-                    .setFooter('MUSIC By' + owner.username);
+                    .setDescription(`${videos.map(video2 => `[**${++index} **] \`${video2.title}\``).join('\n')}`);
                     msg.channel.sendEmbed(embed1).then(message =>{message.delete(15000)});	
 					// eslint-disable-next-line max-depth
 					try {
@@ -123,9 +124,9 @@ module.exports = (client, msg) => {
         if (!msg.member.voiceChannel) return msg.channel.send(':x:**You are not in a voice channel**!').then(message =>{message.delete(5000)});
         voiceChannel.join().then(connection => console.log('joind to voiceChannel!')).catch(error =>{
         console.error(`I could not join the voice channel: ${error}`);
-          return msg.channel.send(`I could not join the voice channel: **${error}**!`);
+	return msg.channel.send(`I could not join the voice channel: **${error}**!`);
         });
-        return msg.channel.send(':white_check_mark: **Joind.**');
+        return msg.channel.send('**:white_check_mark: Joind.**');
     } else if (cmd === 'volume') {
         if (!msg.member.hasPermission('MANAGE_GUILD')) return undefined;
         console.log(`${msg.author.tag} has been used the ${prefix}volume command in ${msg.guild.name}`);
@@ -143,26 +144,26 @@ module.exports = (client, msg) => {
         let index = 0;
         let text = '';
         for (var i = 0; i < serverQueue.songs.length; i++) {
-          let num;
-          if ((i) > 8) {
-            let st = `${i+1}`
-            console.log(st);
-            let n1 = conv.toWords(st[0]);
-            let n2 = conv.toWords(st[1]);
-            num = `:${n1}::${n2}:`
-                } else {
-            let n = conv.toWords(i+1);
-            num = `:${n}:`
-                }
-            text += `**[${++index}] -** ${serverQueue.songs[i].title}\n`
-                }
+	let num;
+	if ((i) > 8) {
+		let st = `${i+1}`
+		console.log(st);
+		let n1 = conv.toWords(st[0]);
+		let n2 = conv.toWords(st[1]);
+		num = `:${n1}::${n2}:`
+        } else {
+		let n = conv.toWords(i+1);
+		num = `:${n}:`
+        }
+		text += `**[${++index}] -** ${serverQueue.songs[i].title} [\`\`${serverQueue.songs[i].duration}\`\`]\n`
+        }
         const embedqu = new Discord.RichEmbed()
         .setColor('BLACK')
         .setAuthor("Queue", `http://i8.ae/GsITz`)
         .setTitle("**Queue List :**")
         .addField('__Now Playing__  :musical_note: ' , `**${serverQueue.songs[0].title}**`,true)
         .addField(':musical_score:  __UP NEXT__ :musical_score: ' , `${text}`)
-        .setFooter(`${prefix}skipto [number]`);
+	.setFooter(`${prefix}skipto [number]`);
         return msg.channel.sendEmbed(embedqu);
     } else if (cmd === 'repeat') {
 	if (!msg.member.hasPermission('MANAGE_GUILD')) return undefined;
@@ -171,10 +172,10 @@ module.exports = (client, msg) => {
         if (!serverQueue) return msg.channel.send(':information_source: **There is no music playing to repeat it.**').then(message =>{message.delete(5000)});
         if (serverQueue.repeating) {
 		serverQueue.repeating = false;
-		return msg.channel.send(':repeat: **Repeating Mode** (`off`)');
+		return msg.channel.send(':repeat: **Repeating Mode** (`False`)');
         } else {
 		serverQueue.repeating = true;
-		return msg.channel.send(':repeat: **Repeating Mode** (`on`)');
+		return msg.channel.send(':repeat: **Repeating Mode** (`True`)');
         }
     } else if (cmd === 'skip') {
         if (!msg.member.hasPermission('MANAGE_GUILD')) return undefined;
@@ -225,7 +226,7 @@ module.exports = (client, msg) => {
 	return msg.channel.send(':information_source: **No music paused to resume.**').then(message =>{message.delete(5000)});
     }
     return undefined;
-}
+});
 
 async function handleVideo(video, msg, voiceChannel, playlist = false) {
 	const serverQueue = queue.get(msg.guild.id);
@@ -288,8 +289,9 @@ function play(guild, song) {
 		})
 		.on('error', error => console.error(error));
 	dispatcher.setVolumeLogarithmic(serverQueue.volume / 150);
+	
+	if (!serverQueue.repeating) {
+		serverQueue.textChannel.send(`:white_check_mark: Music playing **${song.title}**`);
+	}
 
-  if (!serverQueue.repeating) {
-    serverQueue.textChannel.send(`:white_check_mark: Music playing **${song.title}**`);
-  } else return undefined;
 }
