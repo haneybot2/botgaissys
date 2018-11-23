@@ -6,7 +6,6 @@ const adminprefix = 'ee';
 const dev = [process.env.id1];
 const owner = [process.env.id1 , process.env.id2 , process.env.id3];
 const id = [process.env.id1, process.env.id2 , process.env.id3 , process.env.id4 , process.env.id5 , process.env.id6 , process.env.id7];
-///////////////elmewal3/////////////////a7med////////////////anase
 const ms = require("ms");
 const fs = require('fs');
 //bestpac
@@ -264,6 +263,7 @@ client.on('message', message => {
 
     }
 });
+client.on('message', async msg => require('./commands/music.js')(client, msg));
 //swears-not
 const swearWords = ["خول", "علي زبي", "كس امكم", "يلعن شكلك", "كس امك", "اكس امك", "زبي", "يلعن", "كلب" ];
 client.on('message', message => {
