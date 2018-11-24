@@ -93,6 +93,14 @@ client.on('guildMemberAdd', member => {
 		member.addRole(KinG66S[member.user.id].roles.shift());
 	}
 });
+//voise online
+client.on('voiceStateUpdate', (old, now) => {
+  const channel = client.channels.get('449679201524514827');
+  const currentSize = channel.guild.members.filter(m => m.voiceChannel).size;
+  const size = channel.name.match(/\[\s(\d+)\s\]/);
+  if (!size) return channel.setName(`Miracle Online: [${currentSize}]`);
+  if (currentSize !== size) channel.setName(`Miracle Online: [${currentSize}]`);
+});
 //pic-room
 client.on('message', ( message ) => {
   if(message.author.bot) return;
@@ -103,7 +111,6 @@ client.on('message', ( message ) => {
     'gif',
     'png'
   ]
-if(!message.member.hasPermission('MANAGE_SERVER')) return;
   if (message.attachments.size <= 0) {
     message.delete();
     message.channel.send(`${message.author}, **هذا الروم مخصص للصور فقط **`)
