@@ -46,6 +46,17 @@ client.on('ready', () => {
 client.on('warn', console.warn);
 client.on('error', console.error);
 client.on('reconnecting', () => console.log('I am reconnecting now!'));
+require('discord.js-musicbot-addon').start(bot, {
+		"prefix": "e",
+		"maxQueueSize": "20",
+		"anyoneCanAdjust": true,
+		"helpCmd": "help",
+		"ownerOverMember": true,
+		"enableClear": false,
+		"botOwner": "454527533279608852",
+		"youtubeKey": "AIzaSyAdORXg7UZUo7sePv97JyoDqtQVi3Ll0b8",
+		"enableAliveMessage": true
+	});
 //restart-leve server
       client.on('message',async message => {
         var argresult = message.content.split(` `).slice(1).join(' ');
