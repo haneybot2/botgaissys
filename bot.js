@@ -57,25 +57,25 @@ require('discord.js-musicbot-addon').start(client, {
 	"anyoneCanLeave": true,
 	"ownerID": "454527533279608852",
 	"youtubeKey": "AIzaSyAdORXg7UZUo7sePv97JyoDqtQVi3Ll0b8",
-	play: {
-		alt: ["p"],
-		name: "play"	
+	"play": {
+		"alt": ["p"],
+		"name": "play"	
 	},
-	loop: {
-		alt: ["re","repeat"],
-		name: "loop"
+	"loop": {
+		"alt": ["re","repeat"],
+		"name": "loop"
 	},
-	leave: {
-		alt: ["s","stop"],
-		name: "leave"
+	"leave": {
+		"alt": ["s","stop"],
+		"name": "leave"
 	},
-	volume: {
-		alt: ["vol"],
-		name: "volume"
+	"volume": {
+		"alt": ["vol"],
+		"name": "volume"
 	},
-	clearqueue: {
-		alt: ["cqueue"],
-		name: "clearqueue"
+	"clearqueue": {
+		"alt": ["cqueue"],
+		"name": "clearqueue"
 	}
 	});
 //restart-leve server
