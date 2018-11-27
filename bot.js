@@ -46,7 +46,7 @@ client.on('ready', () => {
 client.on('warn', console.warn);
 client.on('error', console.error);
 client.on('reconnecting', () => console.log('I am reconnecting now!'));
-require('discord.js-musicbot-addon').start(bot, {
+require('discord.js-musicbot-addon').start(client, {
 		"prefix": "e",
 		"maxQueueSize": "20",
 		"anyoneCanAdjust": true,
