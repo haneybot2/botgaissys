@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "discord.js": "^11.3.2",
+    "discord.js-musicbot-addon": ">=1.6.3",
     "canvas": "1.6.10",
     "dateformat": "^3.0.3",
     "fs": "^0.0.2",
