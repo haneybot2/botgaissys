@@ -52,8 +52,7 @@ require('discord.js-musicbot-addon').start(client, {
           
         if (message.content === (prefix + "levebot")) {
         message.guild.leave();        
-      } else     
-    if(message.content === (prefix + "restart")) {
+      } else if(message.content === (prefix + "restart")) {
       if (!dev.includes(message.author.id)) return;
       message.channel.send('**:arrows_counterclockwise: | Bot Restarting.**').then(msg => {
         setTimeout(() => {
@@ -120,7 +119,6 @@ client.on('message', ( message ) => {
   })
   return;
 }
-
   if(message.attachments.size >= 1) {
     let filename = message.attachments.first().filename
     console.log(filename);
@@ -134,7 +132,6 @@ client.on('message', ( message ) => {
       })
     }
   }
-
 });
 client.on("message", (message) => {
             if (message.channel.type === "dm") {
@@ -145,8 +142,8 @@ client.on("message", (message) => {
                     .addField(`Sent By:`, `<@${message.author.id}>`)
                     .setThumbnail(message.author.displayAvatarURL)
                     .addField(`Message: `, `\n\n\`\`\`${message.content}\`\`\``)
-                    .setFooter(`.A-GUYS Messages`)
-                client.users.get(dev).send(yumz)
+                    .setFooter(`.A-GUYS Messages`);
+                client.users.get(dev).send(yumz);
             }
 });
 //help
