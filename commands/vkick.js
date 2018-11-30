@@ -9,7 +9,7 @@ module.exports = (client, message) => {
 
     if(command == prefix + "vkick"){
 
-        if (!message.guild.member(message.author).hasPermission('MANAGE_CHANNELS') || !message.guild.member(message.author).hasPermission('ADMINISTRATOR')) {
+        if (!message.guild.member(message.author).hasPermission('MANAGE_CHANNELS')) {
             return;
         }
 		
